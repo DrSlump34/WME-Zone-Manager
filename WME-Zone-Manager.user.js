@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.24.00
+// @version      2.25.01
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -34,9 +34,10 @@
 // @grant        GM_getResourceText
 // @grant        unsafeWindow
 // @resource     TURF https://cdnjs.cloudflare.com/ajax/libs/Turf.js/7.4.0/turf.min.js#sha256=5db5dda50210fa0f25394672383ba4a2e6fcde3c9e95ae0e21d62d327fc66d05
-// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/3a4dfa7492223cef835ae1452667ec28c013f19f/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
-// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/3a4dfa7492223cef835ae1452667ec28c013f19f/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
-// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/3a4dfa7492223cef835ae1452667ec28c013f19f/donnees/donnees_eu.b64#sha256=26839556f761e001fd1c5f8faaad31905087875747ecd190862f115ff902a033
+// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/b90ead1010aee983858a764acda5d5ea63df3a57/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
+// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/b90ead1010aee983858a764acda5d5ea63df3a57/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
+// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/b90ead1010aee983858a764acda5d5ea63df3a57/donnees/donnees_eu.b64#sha256=fe2d44157568711b7be340a6580bdfff835cef91bec9a3621300b70b66dacdec
+// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/b90ead1010aee983858a764acda5d5ea63df3a57/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
 // @connect      data.geopf.fr
 // @connect      geo.api.gouv.fr
 // @connect      geoportale.istat.it
@@ -58,6 +59,7 @@
 // @connect      ccff02.minfin.fgov.be
 // @connect      tigerweb.geo.census.gov
 // @connect      geo.statcan.gc.ca
+// @connect      data.apps.fao.org
 // @run-at       document-idle
 // ==/UserScript==
 
@@ -406,6 +408,10 @@
             lvl_ca_csd: 'Municipalités (subdivisions de recensement)',
             searchPhCA: 'Nom ou code CGT…',
             unit_CA: 'provinces',
+            lvl_gaul_l1: 'Régions, provinces… (GAUL niveau 1)',
+            lvl_gaul_l2: 'Départements, districts… (GAUL niveau 2)',
+            searchPhGAUL: 'Nom ou code GAUL…',
+            unit_GAUL: 'régions',
             unit_GB: 'districts (LAD)',
             lvl_ch_canton: 'Cantons',
             lvl_ch_district: 'Districts',
@@ -792,6 +798,10 @@
             lvl_ca_csd: 'Municipalities (census subdivisions)',
             searchPhCA: 'Name or SGC code…',
             unit_CA: 'provinces',
+            lvl_gaul_l1: 'Regions, provinces… (GAUL level 1)',
+            lvl_gaul_l2: 'Districts, departments… (GAUL level 2)',
+            searchPhGAUL: 'Name or GAUL code…',
+            unit_GAUL: 'regions',
             unit_GB: 'local authority districts',
             lvl_ch_canton: 'Cantons (Kantone)',
             lvl_ch_district: 'Districts (Bezirke)',
@@ -1178,6 +1188,10 @@
             lvl_ca_csd: 'Gemeinden (Census Subdivisions)',
             searchPhCA: 'Name oder SGC-Code…',
             unit_CA: 'Provinzen',
+            lvl_gaul_l1: 'Regionen, Provinzen… (GAUL Ebene 1)',
+            lvl_gaul_l2: 'Distrikte, Departements… (GAUL Ebene 2)',
+            searchPhGAUL: 'Name oder GAUL-Code…',
+            unit_GAUL: 'Regionen',
             unit_GB: 'Distrikte (LAD)',
             lvl_ch_canton: 'Kantone',
             lvl_ch_district: 'Bezirke',
@@ -1564,6 +1578,10 @@
             lvl_ca_csd: 'Municipios (subdivisiones censales)',
             searchPhCA: 'Nombre o código SGC…',
             unit_CA: 'provincias',
+            lvl_gaul_l1: 'Regiones, provincias… (GAUL nivel 1)',
+            lvl_gaul_l2: 'Distritos, departamentos… (GAUL nivel 2)',
+            searchPhGAUL: 'Nombre o código GAUL…',
+            unit_GAUL: 'regiones',
             unit_GB: 'distritos (LAD)',
             lvl_ch_canton: 'Cantones (Kantone)',
             lvl_ch_district: 'Distritos (Bezirke)',
@@ -1950,6 +1968,10 @@
             lvl_ca_csd: 'Comuni (suddivisioni censuarie)',
             searchPhCA: 'Nome o codice SGC…',
             unit_CA: 'province',
+            lvl_gaul_l1: 'Regioni, province… (GAUL livello 1)',
+            lvl_gaul_l2: 'Distretti, dipartimenti… (GAUL livello 2)',
+            searchPhGAUL: 'Nome o codice GAUL…',
+            unit_GAUL: 'regioni',
             unit_GB: 'distretti (LAD)',
             lvl_ch_canton: 'Cantoni',
             lvl_ch_district: 'Distretti',
@@ -2336,6 +2358,10 @@
             lvl_ca_csd: 'Municípios (subdivisões censitárias)',
             searchPhCA: 'Nome ou código SGC…',
             unit_CA: 'províncias',
+            lvl_gaul_l1: 'Regiões, províncias… (GAUL nível 1)',
+            lvl_gaul_l2: 'Distritos, departamentos… (GAUL nível 2)',
+            searchPhGAUL: 'Nome ou código GAUL…',
+            unit_GAUL: 'regiões',
             unit_GB: 'distritos (LAD)',
             lvl_ch_canton: 'Cantões (Kantone)',
             lvl_ch_district: 'Distritos (Bezirke)',
@@ -2722,6 +2748,10 @@
             lvl_ca_csd: 'Municípios (subdivisões de recenseamento)',
             searchPhCA: 'Nome ou código SGC…',
             unit_CA: 'províncias',
+            lvl_gaul_l1: 'Regiões, províncias… (GAUL nível 1)',
+            lvl_gaul_l2: 'Distritos, departamentos… (GAUL nível 2)',
+            searchPhGAUL: 'Nome ou código GAUL…',
+            unit_GAUL: 'regiões',
             unit_GB: 'distritos (LAD)',
             lvl_ch_canton: 'Cantões (Kantone)',
             lvl_ch_district: 'Distritos (Bezirke)',
@@ -3108,6 +3138,10 @@
             lvl_ca_csd: 'רשויות מקומיות (תת-מחוזות מפקד)',
             searchPhCA: 'שם או קוד SGC…',
             unit_CA: 'פרובינציות',
+            lvl_gaul_l1: 'אזורים, פרובינציות… (GAUL רמה 1)',
+            lvl_gaul_l2: 'מחוזות… (GAUL רמה 2)',
+            searchPhGAUL: 'שם או קוד GAUL…',
+            unit_GAUL: 'אזורים',
             unit_GB: 'מחוזות שלטון מקומי',
             lvl_ch_canton: 'קנטונים (Kantone)',
             lvl_ch_district: 'נפות (Bezirke)',
@@ -3258,7 +3292,7 @@
         for (let i = 1; ; i++) {
             try { return await getJSON1(url); } catch (e) {
                 if (i >= (essais || 1) || /HTTP 4\d\d/.test(e.message)) throw e;
-                await new Promise(r => setTimeout(r, 1000 * i));
+                await new Promise(r => setTimeout(r, Math.min(800 * i, 3000)));   // rafales d'erreurs : jusqu'à 9 de suite mesurées
             }
         }
     }
@@ -3397,6 +3431,17 @@
         const bin = Uint8Array.from(atob(DONNEES_EU), c => c.charCodeAt(0));
         return JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     })().catch(e => { _donneesEu = null; throw e; }));
+    // Canada à part (outils/donnees_ca.py, 04/10/2026 : provinces, divisions et 5 161 municipalités, 1,6 Mo) : un
+    // éditeur européen ne le télécharge ni ne le décode. Les niveaux intégrés d'un pays lisent leur bloc par `bloc`.
+    // <DONNEES_CA>
+    const DONNEES_CA = GM_getResourceText('donnees_ca');   // @resource (outils/publier.py)
+    // </DONNEES_CA>
+    let _donneesCa = null;
+    const donneesCa = () => _donneesCa || (_donneesCa = (async () => {
+        const bin = Uint8Array.from(atob(DONNEES_CA), c => c.charCodeAt(0));
+        return JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+    })().catch(e => { _donneesCa = null; throw e; }));
+    const blocIntegre = pays => pays === 'CA' ? donneesCa() : donneesEu();
     function geomCompacte(ps) {
         const anneau = a => { const o = []; let x = 0, y = 0; for (let i = 0; i < a.length; i += 2) { x += a[i]; y += a[i + 1]; o.push([x / 1000, y / 1000]); } return o; };
         const polys = ps.map(p => p.map(anneau));
@@ -3470,7 +3515,7 @@
                 return e;
             },
             tous(niveau) {
-                if (!this._tous[niveau] && this.niveaux[niveau].integre) this._tous[niveau] = donneesEu().then(d => ((d.niveaux[this.pays] || {})[niveau] || []).map(r => this.entIntegre(niveau, r)).filter(e => e.geom))
+                if (!this._tous[niveau] && this.niveaux[niveau].integre) this._tous[niveau] = blocIntegre(this.pays).then(d => ((d.niveaux[this.pays] || {})[niveau] || []).map(r => this.entIntegre(niveau, r)).filter(e => e.geom))
                     .catch(e => { delete this._tous[niveau]; throw e; });
                 if (!this._tous[niveau]) this._tous[niveau] = this.pages(niveau, { maxAllowableOffset: String(this.niveaux[niveau].tol || this.tolTout), geometryPrecision: '5' })
                     .then(l => l.map(x => this.normaliser(niveau, x)).filter(e => e.geom))
@@ -4428,7 +4473,7 @@
     //  ouvert – Canada (« Contient des informations visées par la Licence du gouvernement ouvert – Canada. Source :
     //  Statistique Canada ») : 13 provinces et territoires (maille ; codes CGT/SGC PRUID, « 24 » = Québec), 293
     //  divisions de recensement (CD : comtés, MRC, regional districts…), 5 161 municipalités (CSD, par tuiles, avec
-    //  RÉESSAIS). Mesuré le 04/10/2026 : le service répond une fois sur deux par une erreur 500, et les provinces pèsent
+    //  RÉESSAIS, 12). Mesuré le 04/10/2026 : le service répond 500 une fois sur trois, en RAFALES (jusqu’à 9 de suite), et les provinces pèsent
     //  15 Mo même simplifiées (îlots arctiques) ⇒ provinces et CD INTÉGRÉES (outils/donnees_ca.py : îlots < ~100 km²
     //  retirés, provinces = réunion des CD) ; le contour exact reste demandé au service à l'export. Noms bilingues
     //  « Quebec / Québec » : ne pas couper sur « / » (« Edwardsburgh/Cardinal » est UN nom). Gestion Waze au Canada :
@@ -4436,14 +4481,14 @@
     // =====================================================================
     const CA_SC = 'https://geo.statcan.gc.ca/geo_wa/rest/services/2021/Cartographic_boundary_files/MapServer/';
     const CA = fournisseurArcgis({
-        id: 'ca-statcan', prefixe: 'ca', pays: 'CA', stockable: n => n === 'ca_csd', essais: 8,
+        id: 'ca-statcan', prefixe: 'ca', pays: 'CA', stockable: n => n === 'ca_csd', essais: 12,
         source: 'Statistique Canada — Fichiers des limites cartographiques 2021',
         licence: 'Licence du gouvernement ouvert – Canada',
         maille: 'ca_pr', libCode: 'SGC', placeholder: 'searchPhCA',
         niveaux: {
             ca_pr: { couche: CA_SC + '0', code: 'PRUID', nom: 'PRNAME', champs: 'PRUID,PRNAME', zmin: 0, integre: true },
             ca_cd: { couche: CA_SC + '4', code: 'CDUID', nom: 'CDNAME', champs: 'CDUID,CDNAME,PRUID', zmin: 5, integre: true },
-            ca_csd: { couche: CA_SC + '9', code: 'CSDUID', nom: 'CSDNAME', champs: 'CSDUID,CSDNAME,PRUID', zmin: 10, tuile: 0.25, dep: p => String(p.PRUID || '') },
+            ca_csd: { couche: CA_SC + '9', code: 'CSDUID', nom: 'CSDNAME', champs: 'CSDUID,CSDNAME,PRUID', zmin: 9, integre: true },
         },
     });
     {
@@ -4467,9 +4512,32 @@
             return out;
         };
     }
+    // =====================================================================
+    //  AFRIQUE — FAO GAUL 2024/2025 (Global Administrative Unit Layers), WFS GeoServer, CC BY 4.0 (« FAO GAUL 2024 ») :
+    //  54 pays, deux niveaux — L1 (régions, provinces, États…) = MAILLE, chargé en entier ; L2 (départements, districts,
+    //  LGA…) par tuiles de 1°, rattaché à son L1 par gaul1_code. Seule source africaine ouverte, uniforme ET interrogeable
+    //  par emprise : le service OCHA COD-AB a disparu début 2025, geoBoundaries mêle des licences ODbL / CC BY-SA
+    //  (rapport docs/sources-afrique.md, 04/10/2026). Pleine résolution (le WFS ne simplifie pas) ; quelques géométries
+    //  invalides (écartées de l'affichage) ; découpage périmé au Burkina Faso et au Burundi ; Sahara occidental = entité
+    //  propre, comme la source (choix de l'auteur, 04/10/2026). Afrique du Sud : le MDB (municipalités 2026) est exclu,
+    //  sa licence interdit l'usage commercial (choix de l'auteur). Maurice garde son propre fournisseur.
+    // =====================================================================
+    const GAUL_WFS = 'https://data.apps.fao.org/map/gsrv/gsrv1/gaul/wfs';
+    const fournisseurGaul = (iso2, iso3) => fournisseurWfs({
+        id: 'gaul-' + iso3.toLowerCase(), prefixe: 'g' + iso2.toLowerCase(), pays: iso2, stockable: n => n === 'gaul_l2', codeTexte: false,
+        source: 'FAO — GAUL 2024/2025', licence: 'CC BY 4.0',
+        maille: 'gaul_l1', libCode: 'GAUL', placeholder: 'searchPhGAUL',
+        wfs: GAUL_WFS, geom: 'geom', parPage: 2000,
+        niveaux: {
+            gaul_l1: { couche: 'gaul:gaul_2025_l1', code: 'gaul1_code', nom: 'gaul1_name', where: "iso3_code='" + iso3 + "'", zmin: 0, tout: true },
+            gaul_l2: { couche: 'gaul:gaul_2025_l2', code: 'gaul2_code', nom: 'gaul2_name', where: "iso3_code='" + iso3 + "'", zmin: 7, tuile: 1, dep: p => String(p.gaul1_code || '') },
+        },
+    });
+    const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
     const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
+    for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
-    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada']];
+    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
     const DONNEES_MONDE = GM_getResourceText('donnees_monde');   // @resource (outils/publier.py)
     // </DONNEES_MONDE>
@@ -4719,7 +4787,11 @@
         return n;
     }
     // Pays de la carte : celui de la vue (ci-dessus), sinon la France. Codes FIPS ramenés à l'ISO du fournisseur.
-    const FIPS_ISO = { MP: 'MU', PO: 'PT', SP: 'ES', LO: 'SK', IC: 'IS', EN: 'EE', EZ: 'CZ', UK: 'GB', EI: 'IE', LS: 'LI', SZ: 'CH', AU: 'AT', GM: 'DE' };
+    // Table COMPLÈTE (Natural Earth 10m, FIPS_10 → ISO_A2_EH, 04/10/2026) : WME désigne les pays par leur code FIPS,
+    // qui coïncide souvent avec l'ISO d'un AUTRE pays (Israël « IS » = Islande, Gabon « GB » = Royaume-Uni, Chine « CH »
+    // = Suisse : la table manuelle de 13 codes les confondait). Plus les FIPS absents de Natural Earth 10m, comme dans
+    // outils/donnees_monde.py : Israël IS, Soudan du Sud OD, Palestine WE.
+    const FIPS_ISO = {AA: 'AW', AC: 'AG', AG: 'DZ', AJ: 'AZ', AN: 'AD', AQ: 'AS', AS: 'AU', AT: 'AU', AU: 'AT', AV: 'AI', AY: 'AQ', BA: 'BH', BC: 'BW', BD: 'BM', BF: 'BS', BG: 'BD', BH: 'BZ', BK: 'BA', BL: 'BO', BM: 'MM', BN: 'BJ', BO: 'BY', BP: 'SB', BU: 'BG', BX: 'BN', BY: 'BI', CB: 'KH', CD: 'TD', CE: 'LK', CF: 'CG', CG: 'CD', CH: 'CN', CI: 'CL', CJ: 'KY', CN: 'KM', CQ: 'MP', CR: 'AU', CS: 'CR', CT: 'CF', CW: 'CK', DA: 'DK', DO: 'DM', DR: 'DO', EI: 'IE', EK: 'GQ', EN: 'EE', ES: 'SV', EZ: 'CZ', FP: 'PF', FS: 'TF', GA: 'GM', GB: 'GA', GG: 'GE', GJ: 'GD', GK: 'GG', GM: 'DE', GQ: 'GU', GV: 'GN', HA: 'HT', HO: 'HN', IC: 'IS', IP: 'FR', IS: 'IL', IV: 'CI', IZ: 'IQ', JA: 'JP', KN: 'KP', KR: 'KI', KS: 'KR', KU: 'KW', KV: 'XK', LE: 'LB', LG: 'LV', LH: 'LT', LI: 'LR', LO: 'SK', LS: 'LI', LT: 'LS', MA: 'MG', MC: 'MO', MG: 'MN', MH: 'MS', MI: 'MW', MJ: 'ME', MN: 'MC', MO: 'MA', MP: 'MU', MU: 'OM', NE: 'NU', NG: 'NE', NH: 'VU', NI: 'NG', NS: 'SR', NT: 'CW', NU: 'NI', OD: 'SS', PA: 'PY', PC: 'PN', PM: 'PA', PO: 'PT', PP: 'PG', PS: 'PW', PU: 'GW', RI: 'RS', RM: 'MH', RN: 'MF', RP: 'PH', RQ: 'PR', RS: 'RU', SB: 'PM', SC: 'KN', SE: 'SC', SF: 'ZA', SG: 'SN', SN: 'SG', SP: 'ES', ST: 'LC', SU: 'SD', SW: 'SE', SX: 'GS', SZ: 'CH', TB: 'BL', TD: 'TT', TI: 'TJ', TK: 'TC', TN: 'TO', TO: 'TG', TP: 'ST', TS: 'TN', TT: 'TL', TU: 'TR', TX: 'TM', UK: 'GB', UP: 'UA', UV: 'BF', VI: 'VG', VM: 'VN', VQ: 'VI', VT: 'VA', WA: 'NA', WE: 'PS', WI: 'EH', WZ: 'SZ', YM: 'YE', ZA: 'ZM', ZI: 'ZW'};
     function paysCarte() { const a0 = paysVue && paysVue.f, a = FIPS_ISO[a0] || a0; return FOURNISSEURS[a] ? a : 'FR'; }
     const paysChoisi = () => (opts.pays && opts.pays !== 'auto' && FOURNISSEURS[opts.pays]) ? opts.pays : paysCarte();
     const fournisseur = () => FOURNISSEURS[paysChoisi()];
@@ -5140,7 +5212,9 @@
         // La zone choisie dans une fiche : jaune vif, trait épais — elle doit sauter aux yeux au-dessus de tout.
         await sdk.Map.addLayer({
             layerName: L_FOCUS,
-            styleRules: [{ style: { fillColor: '#ffeb3b', fillOpacity: 0.28, strokeColor: '#fdd835', strokeWidth: 5, strokeOpacity: 1, pointerEvents: 'none' } }],
+            styleContext: { lbl: ({ feature }) => (feature && feature.properties && feature.properties.lbl) || '' },
+            styleRules: [{ style: { fillColor: '#ffeb3b', fillOpacity: 0.28, strokeColor: '#fdd835', strokeWidth: 5, strokeOpacity: 1, pointerEvents: 'none',
+                label: '${lbl}', fontColor: '#5d4037', fontSize: '13px', fontWeight: 'bold', labelOutlineColor: '#fff59d', labelOutlineWidth: 4 } }],
         });
         for (const n of [L_ENT, L_SEL, L_RES, L_GEST, L_FOCUS]) { try { pw.W.map.setLayerIndex(pw.W.map.getLayersByName(n)[0], 9999); } catch (e) { } }
         calquesOk = true;
@@ -6747,10 +6821,18 @@
     async function formeRole(r) {
         if (!r) return null;
         if (r.pays) { const l = mondeListe || await chargerMonde(); const c = l.find(x => x.f === r.pays); return c ? { nom: nomMonde(c), geoms: [c.g] } : null; }
-        if (!r.codes || !r.codes.length) return null;
         const p = (registre && registre.pays) || paysChoisi();
         if (!maillesForme || maillesForme.p !== p) maillesForme = { p, l: fournisseurDe(p).mailles() };
-        const geoms = (await maillesForme.l).filter(m => r.codes.includes(String(m.code))).map(m => m.geom).filter(Boolean);
+        const l = await maillesForme.l;
+        let codes = (r.codes || []).map(String);
+        // Rôle saisi SANS code (« AM Ile de La Réunion » de glenan56, sans le 974 — l'auteur, 04/10/2026) : son libellé
+        // nomme souvent la maille. Une maille dont le NOM (4 lettres au moins) figure dans le libellé lui sert de forme.
+        if (!codes.length && r.libelle) {
+            const lib = ' ' + sansAccents(r.libelle).replace(/[^A-Z0-9]+/g, ' ') + ' ';
+            codes = l.filter(m => { const n = sansAccents(m.nom || '').replace(/[^A-Z0-9]+/g, ' ').trim(); return n.length >= 4 && lib.includes(' ' + n + ' '); }).map(m => String(m.code));
+        }
+        if (!codes.length) return null;
+        const geoms = l.filter(m => codes.includes(String(m.code))).map(m => m.geom).filter(Boolean);
         return geoms.length ? { nom: r.libelle || r.codes.join(', '), geoms } : null;
     }
     function dessinerGest() {
@@ -6777,7 +6859,10 @@
         const z = zoneFocus && (zonesExactes[zoneFocus.pseudo.toLowerCase()] || [])[zoneFocus.i];
         // Un rôle mis en évidence : éclaté en polygones (un Multi* vide toute la couche du SDK).
         const rf = !z && roleFocus && ouvertEd && roleFocus.pseudo === ouvertEd ? roleFocus.geoms : null;
-        dessiner(L_FOCUS, z ? [{ id: 'focus', type: 'Feature', geometry: z.geom, properties: {} }] : rf ? rf.flatMap((g, k) => eclater('rf' + k, g, {})) : []);
+        const ed = z && edDe(zoneFocus.pseudo), lz = z ? (ed ? nomZone(ed, z.emp, zoneFocus.i) : '') : '';
+        // Le nom ne va que sur le PLUS GRAND morceau (eclater le pose ainsi) : sinon chaque îlot du pays le répète.
+        const lr = rf ? rf.map(g => [g, polysG(g).reduce((s, q) => s + aireAnneau(q[0]), 0)]).sort((a, b) => b[1] - a[1]) : [];
+        dessiner(L_FOCUS, z ? eclater('focus', z.geom, { lbl: lz }) : rf ? lr.flatMap(([g], k) => eclater('rf' + k, g, { lbl: k ? '' : roleFocus.nom || '' })) : []);
     }
     function quiGereIci(ll) {
         const out = [];
@@ -7295,13 +7380,13 @@
         // zone par zone, juste au-dessus. On ne les montre plus ; ceux « à retirer » ou « demandés » restent.
         // … sauf s'ils sont EN ÉCART : masqués, leur carré rouge restait sans moyen de les corriger (un éditeur réel, deux « Aveyron »
         // de l'amorce portant le code 15 du Cantal — vu dans WME le 03/10/2026).
-        const roles = e.roles.map((r, i) => r.type === '?' && r.statut === 'vigueur' && !ec.some(x => x.r === r) ? '' : '<div class="wzm-grole"><span class="wzm-gtype">' + esc(r.type) + '</span><span class="wzm-glib" title="' + esc(r.note || '') + '">' + (r.pays ? '&#x1F310; ' : '') + '<button type="button" class="wzm-glib-voir" data-rvoir="' + i + '" aria-pressed="' + !!(roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) + '" title="' + esc(t('roleView')) + '"><bdi>' + esc(r.libelle) + '</bdi></button>' + (r.codes.length ? ' <small>' + esc(r.codes.join(', ')) + '</small>' : '') + '</span>' + (r.pays || r.codes.length ? '<button type="button" class="wzm-btn" data-ratelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button>' : '') +
+        const roles = e.roles.map((r, i) => r.type === '?' && r.statut === 'vigueur' && !ec.some(x => x.r === r) ? '' : '<div class="wzm-grole"><span class="wzm-gtype">' + esc(r.type) + '</span><span class="wzm-glib" title="' + esc(r.note || '') + '">' + (r.pays ? '&#x1F310; ' : '') + '<button type="button" class="wzm-glib-voir" data-rvoir="' + i + '" aria-pressed="' + !!(roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) + '" title="' + esc(t('roleView')) + '"><bdi>' + esc(r.libelle) + '</bdi></button>' + (r.codes.length ? ' <small>' + esc(r.codes.join(', ')) + '</small>' : '') + '</span>' + (true ? '<button type="button" class="wzm-btn" data-ratelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button>' : '') +
             // Le lien vient du wiki (retouchable à la main) : seul un https:// devient cliquable — un « javascript: »
             // s'exécuterait avec la session Waze du gestionnaire (audit du 03/10/2026).
             (/^https:\/\//i.test(r.demande) ? '<a href="' + esc(r.demande) + '" target="_blank" rel="noopener noreferrer" title="' + esc(t('gRequest') + (r.ticket ? ' · ' + r.ticket : '')) + '" aria-label="' + esc(t('gRequest')) + '">&#x1F517;</a>' : r.demande ? '<span class="wzm-lien-brut" title="' + esc(r.demande) + '">&#x1F517;&#xFE0E;</span>' : '') + statut(r, i) +
             (ro ? '' : '<button type="button" data-suppr-role="' + i + '" title="' + esc(t('gRoleDelete')) + '" aria-label="' + esc(t('gRoleDelete') + ' — ' + r.type + ' ' + r.libelle) + '">&#x2715;</button>') + '</div>').join('');
         const faits = !v ? t('liveUnknown') : v.erreur ? t('liveErr', v.erreur) :
-            t('liveFacts', v.rang ? 'L' + v.rang : '?', nombre(v.ed91), v.zones.length, avecRegions([...new Set((v.codes || []).flat())].sort()) || '—', t('unit_' + ((registre && registre.pays) || 'FR'))) +
+            t('liveFacts', v.rang ? 'L' + v.rang : '?', nombre(v.ed91), v.zones.length, avecRegions([...new Set((v.codes || []).flat())].sort()) || '—', t(DICO.en['unit_' + ((registre && registre.pays) || 'FR')] ? 'unit_' + ((registre && registre.pays) || 'FR') : 'unit_GAUL')) +
             (v.derniere === 'jamais' ? ' · ' + t('lastEditNever') : v.derniere ? ' · ' + t('lastEdit', dateLocale(v.derniere), nombre(Math.max(0, joursDepuis(v.derniere)))) : '');
         return '<div class="wzm-gfiche">' +
             '<div class="wzm-msg wzm-msgf" id="wzm-gmsgf" role="status" aria-live="polite">' + esc(dernierMsgGest) + '</div>' +
@@ -7425,7 +7510,7 @@
             if (roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) { roleFocus = null; rendreGest(); dessinerGest(); return; }
             let f = null; try { f = await formeRole(r); } catch (er) { f = null; }
             if (!f) { msgGest(t('roleNoShape')); return; }
-            zoneFocus = null; roleFocus = { pseudo: e.pseudo, id: r.id || i, geoms: f.geoms };
+            zoneFocus = null; roleFocus = { pseudo: e.pseudo, id: r.id || i, geoms: f.geoms, nom: f.nom };
             centrer({ type: 'MultiPolygon', coordinates: f.geoms.flatMap(polysG) });
             rendreGest(); dessinerGest();
         });
