@@ -1,0 +1,153 @@
+<p align="center"><img src="icon-256.png" width="160" alt=""></p>
+
+# WME Zone Manager
+
+[English](#english) · [Français](#français)
+
+## English
+
+**WME Zone Manager (WZM)** is a Waze Map Editor script for country leaders. It does two things:
+
+1. **Build an area from official boundaries** — municipalities, provinces, regions… shown on the WME map, click to combine them, widen by a few km, draw by hand, and copy the result **ready for the Waze area request form** (WKT that fits the form), or export it (GeoJSON, KML, Shapefile…).
+2. **Know who manages what** — a shared **registry of area managers** for your country: every editor with managed areas, their areas and their type (AM, SM, RM, CM, Temporary), compared with what Waze actually applies (areas, level, last edit, absences), with requests and removals decided among Champs.
+
+**Reserved to L6, Local Champs, Global Champs, Country Coordinators and Staff.** Other accounts only see a short refusal message.
+
+## Countries with official boundaries
+
+| Country | Levels | Source (licence) |
+|---|---|---|
+| France (incl. overseas) | regions, departments, arrondissements, EPCI, municipalities, Paris/Lyon/Marseille districts | IGN Admin Express (Licence Ouverte 2.0) |
+| Italy | regions, provinces, metropolitan cities, municipalities | ISTAT 2026 (CC BY 4.0) |
+| Spain | autonomous communities, provinces, municipalities | IGN España (CC BY 4.0) |
+| Portugal (incl. Azores, Madeira) | districts and islands, municipalities, parishes | DGT CAOP 2025 |
+| Belgium | regions, provinces, arrondissements, municipalities | SPF Finances (CC BY 4.0) |
+| Luxembourg | cantons, municipalities | ACT (CC0) |
+| Germany | states, districts, municipalities | BKG VG250 (dl-de/by-2-0) |
+| Austria | states, districts, municipalities | Statistik Austria (CC BY 4.0) |
+| Netherlands | provinces, municipalities | CBS / PDOK (CC BY 4.0) |
+| Switzerland and Liechtenstein | cantons, districts, municipalities | swisstopo (OGD) |
+| Ireland | counties, electoral divisions | Tailte Éireann (CC BY 4.0) |
+| United Kingdom | nations, regions, counties and unitary authorities, districts, wards | ONS (OGL v3) |
+| Czechia | regions, districts, municipalities | ČÚZK RÚIAN (CC BY 4.0) |
+| Slovakia | regions, districts, municipalities | ÚGKK ZBGIS (CC BY 4.0) |
+| Slovenia | statistical regions, municipalities, settlements | GURS (CC BY 4.0) |
+| Romania | counties, municipalities (UAT) | ANCPI (CC BY 4.0) |
+| Finland | regions, municipalities | Statistics Finland (CC BY 4.0) |
+| Estonia | counties, municipalities, settlements | Maa- ja Ruumiamet (open licence) |
+| Iceland | districts, municipalities | IS 50V (CC BY 4.0) |
+| Mauritius (incl. Rodrigues) | districts, villages and towns | official data, built into the script |
+
+That is **21 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
+
+## The area workshop
+
+- Pick a level, click entities on the map to add or remove them, search by name or code (INSEE, postcode, ISTAT…).
+- **Widen by N km**, **draw by hand**, merge everything into one area.
+- **Copy for the Waze form**: the WKT is simplified until it fits the form, small islands kept.
+- Export: WKT, GeoJSON, KML, Shapefile.
+- **Local data**: boundaries are kept in your browser; whole packages can be downloaded once (e.g. a Spanish province) so the map no longer waits for the network.
+
+## The managers registry
+
+- Lives in the **first post (a wiki) of a Discuss topic in your country's PRIVATE Champs category**. WZM refuses to read or write a registry anywhere else, so it never ends up public.
+- **First use: an assistant** creates the topic for you (category chosen in a list, title and welcome text suggested), **surveys the whole country at Waze** (every managed area, square by square), and fills the registry. Each area gets a **suggested type** from what it really covers (CM, RM, SM, AM, Temporary), which a Champ validates.
+- Then, for each editor: areas at Waze, departments/provinces covered, level, edits over 91 days, last edit, areas abroad 🌍, gaps between the registry and Waze, statuses (in force, requested, to remove, removed), "Who manages here?" on the map, and a ready-made removal email.
+- Other Champs only paste the topic link in WZM's Scripts tab. Discuss decides who can read and write; WZM never overwrites someone else's work (version check on save).
+- "Survey at Waze" 🔎 compares the registry with Waze later: editors missing from the registry, editors with no area left.
+
+## Good to know
+
+- WZM **never edits the map**. It reads Waze, the official boundary services above, and Discuss.
+- Starts at every zoom level. 8 languages: English, French, German, Spanish, Italian, Portuguese (Brazil and Portugal), Hebrew.
+- If the map moves to another country while a registry is shown, WZM asks before switching.
+- Issues and source: see this repository.
+
+## Install
+
+1. Install [Tampermonkey](https://www.tampermonkey.net/) (Chrome, Edge, Firefox). In Chrome, allow user scripts: Extensions › Tampermonkey › Details › *Allow user scripts*.
+2. Click **[Install WME Zone Manager](https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/main/WME-Zone-Manager.user.js)** and confirm in Tampermonkey.
+3. Reload WME: an orange button appears in the column of map buttons on the right.
+
+Do not copy and paste the file into Tampermonkey: it is large and the paste can be cut, which leaves a script that does not start.
+
+## Data and licences
+
+The official boundaries come from the services listed above, under their own licences (attribution shown in the script). Spain's provinces and the world borders (Natural Earth, public domain) are served from the `donnees/` folder of this repository as `@resource` files, pinned by commit and sha256.
+
+Script: MIT licence.
+
+---
+
+## Français
+
+**WME Zone Manager (WZM)** est un script pour le Waze Map Editor, destiné aux responsables d’un pays. Il fait deux choses :
+
+1. **Composer une zone à partir du découpage officiel** — communes, départements, provinces, régions… affichés sur la carte de WME ; on clique pour les réunir, on élargit de quelques km, on trace à la main, et on copie le résultat **prêt pour le formulaire de demande de zone de Waze** (un WKT qui tient dans le formulaire), ou on l’exporte (GeoJSON, KML, Shapefile…).
+2. **Savoir qui gère quoi** — un **registre des gestionnaires de zones** partagé pour votre pays : chaque éditeur qui gère des zones, ses zones et leur type (AM, SM, RM, CM, Temporaire), comparés à ce que Waze applique vraiment (zones, niveau, dernière édition, absences), avec les demandes et les retraits décidés entre Champs.
+
+**Réservé aux L6, Local Champs, Global Champs, Country Coordinators et Staff.** Les autres comptes ne voient qu’un court message de refus.
+
+## Pays dotés du découpage officiel
+
+| Pays | Niveaux | Source (licence) |
+|---|---|---|
+| France (outre-mer compris) | régions, départements, arrondissements, EPCI, communes, arrondissements de Paris, Lyon et Marseille | IGN Admin Express (Licence Ouverte 2.0) |
+| Italie | régions, provinces, villes métropolitaines, communes | ISTAT 2026 (CC BY 4.0) |
+| Espagne | communautés autonomes, provinces, communes | IGN España (CC BY 4.0) |
+| Portugal (Açores et Madère compris) | districts et îles, communes, paroisses | DGT CAOP 2025 |
+| Belgique | régions, provinces, arrondissements, communes | SPF Finances (CC BY 4.0) |
+| Luxembourg | cantons, communes | ACT (CC0) |
+| Allemagne | Länder, arrondissements, communes | BKG VG250 (dl-de/by-2-0) |
+| Autriche | Länder, districts, communes | Statistik Austria (CC BY 4.0) |
+| Pays-Bas | provinces, communes | CBS / PDOK (CC BY 4.0) |
+| Suisse et Liechtenstein | cantons, districts, communes | swisstopo (OGD) |
+| Irlande | comtés, divisions électorales | Tailte Éireann (CC BY 4.0) |
+| Royaume-Uni | nations, régions, comtés et autorités unitaires, districts, wards | ONS (OGL v3) |
+| Tchéquie | régions, districts, communes | ČÚZK RÚIAN (CC BY 4.0) |
+| Slovaquie | régions, districts, communes | ÚGKK ZBGIS (CC BY 4.0) |
+| Slovénie | régions statistiques, communes, localités | GURS (CC BY 4.0) |
+| Roumanie | départements (județe), communes (UAT) | ANCPI (CC BY 4.0) |
+| Finlande | régions, communes | Statistics Finland (CC BY 4.0) |
+| Estonie | comtés, communes, localités | Maa- ja Ruumiamet (licence ouverte) |
+| Islande | circonscriptions, communes | IS 50V (CC BY 4.0) |
+| Maurice (Rodrigues comprise) | districts, villages et villes | données officielles, intégrées au script |
+
+Soit **21 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
+
+## L’atelier de zones
+
+- Choisir un niveau, cliquer les entités sur la carte pour les ajouter ou les retirer, chercher par nom ou par code (INSEE, code postal, ISTAT…).
+- **Élargir de N km**, **tracer à la main**, tout réunir en une zone.
+- **Copier pour le formulaire Waze** : le WKT est simplifié jusqu’à tenir dans le formulaire, petites îles gardées.
+- Export : WKT, GeoJSON, KML, Shapefile.
+- **Données locales** : les contours sont gardés dans le navigateur ; des paquets entiers se téléchargent une fois (une province espagnole, par exemple), et la carte n’attend plus le réseau.
+
+## Le registre des gestionnaires
+
+- Il vit dans le **premier message (un wiki) d’un sujet Discuss, dans la catégorie PRIVÉE des Champs de votre pays**. WZM refuse de lire ou d’écrire un registre ailleurs : il ne finit jamais en public.
+- **Première utilisation : un assistant** crée le sujet pour vous (catégorie choisie dans une liste, titre et texte d’accueil proposés), **recense tout le pays chez Waze** (chaque zone gérée, carré par carré) et remplit le registre. Chaque zone reçoit un **type proposé** d’après ce qu’elle couvre vraiment (CM, RM, SM, AM, Temporaire), qu’un Champ valide.
+- Ensuite, pour chaque éditeur : ses zones chez Waze, les départements ou provinces couverts, son niveau, ses éditions sur 91 jours, sa dernière édition, ses zones à l’étranger 🌍, les écarts entre le registre et Waze, les statuts (en vigueur, demandé, à retirer, retiré), « Qui gère ici ? » sur la carte, et un courriel de retrait tout prêt.
+- Les autres Champs n’ont qu’à coller le lien du sujet dans l’onglet Scripts de WZM. C’est Discuss qui décide qui peut lire et écrire ; WZM n’écrase jamais le travail d’un autre (contrôle de version à l’enregistrement).
+- « Recenser chez Waze » 🔎 compare plus tard le registre à Waze : éditeurs absents du registre, éditeurs qui n’ont plus aucune zone.
+
+## Bon à savoir
+
+- WZM **ne modifie jamais la carte**. Il lit Waze, les services officiels de découpage ci-dessus et Discuss.
+- Démarre à tous les niveaux de zoom. 8 langues : anglais, français, allemand, espagnol, italien, portugais (Brésil et Portugal), hébreu.
+- Si la carte passe dans un autre pays alors qu’un registre est affiché, WZM demande avant de basculer.
+- Anomalies et code source : voir ce dépôt.
+
+## Installation
+
+1. Installer [Tampermonkey](https://www.tampermonkey.net/) (Chrome, Edge, Firefox). Dans Chrome, autoriser les scripts utilisateur : Extensions › Tampermonkey › Détails › *Autoriser les scripts utilisateur*.
+2. Cliquer **[Installer WME Zone Manager](https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/main/WME-Zone-Manager.user.js)** et confirmer dans Tampermonkey.
+3. Recharger WME : un bouton orange apparaît dans la colonne des boutons de carte, à droite.
+
+Ne pas copier-coller le fichier dans Tampermonkey : il est gros, le collage peut être coupé, et le script ne démarre plus.
+
+## Données et licences
+
+Les découpages officiels viennent des services cités plus haut, sous leurs propres licences (attribution affichée dans le script). Les provinces espagnoles et les frontières du monde (Natural Earth, domaine public) sont servies depuis le dossier `donnees/` de ce dépôt, en fichiers `@resource` figés par commit et empreinte sha256.
+
+Script : licence MIT.
