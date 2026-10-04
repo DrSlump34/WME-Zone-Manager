@@ -36,9 +36,11 @@
 | Finland | regions, municipalities | Statistics Finland (CC BY 4.0) |
 | Estonia | counties, municipalities, settlements | Maa- ja Ruumiamet (open licence) |
 | Iceland | districts, municipalities | IS 50V (CC BY 4.0) |
+| United States | states, counties, cities (incorporated places) | U.S. Census Bureau, TIGERweb (public domain) |
+| Canada | provinces and territories, census divisions, municipalities (census subdivisions) | Statistics Canada (Open Government Licence – Canada) |
 | Mauritius (incl. Rodrigues) | districts, villages and towns | official data, built into the script |
 
-That is **21 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
+That is **23 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
 
 ## The area workshop
 
@@ -121,9 +123,11 @@ Script: MIT licence.
 | Finlande | régions, communes | Statistics Finland (CC BY 4.0) |
 | Estonie | comtés, communes, localités | Maa- ja Ruumiamet (licence ouverte) |
 | Islande | circonscriptions, communes | IS 50V (CC BY 4.0) |
+| États-Unis | États, comtés, villes (incorporated places) | U.S. Census Bureau, TIGERweb (domaine public) |
+| Canada | provinces et territoires, divisions de recensement, municipalités (subdivisions de recensement) | Statistique Canada (Licence du gouvernement ouvert – Canada) |
 | Maurice (Rodrigues comprise) | districts, villages et villes | données officielles, intégrées au script |
 
-Soit **21 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
+Soit **23 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
 
 ## L’atelier de zones
 
