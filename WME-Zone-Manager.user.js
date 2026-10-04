@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.21.00
+// @version      2.21.02
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -241,6 +241,8 @@
             roleCountryLib: n => n + ' — tout le pays',
             roleCountryHelp: 'Un droit de CM demandé pour un pays ENTIER (en choisissant le pays dans le formulaire de Waze) ne crée aucune zone : Waze ne le montre qu’à son titulaire, et WZM ne peut ni le recenser ni le vérifier. Notez-le ici : il est rattaché au contour du pays (« Qui gère ici ? » le retrouve), et « Atelier » en tire la zone pour le redemander par polygone. Demandé avec un polygone, le droit apparaît comme une zone, que WZM voit et classe en CM.',
             whoCountry: 'CM sur tout le pays (noté dans le registre)',
+            roleView: 'Montrer ce rôle sur la carte',
+            roleNoShape: 'Ce rôle n’a pas de forme connue : aucun pays ni aucun code de découpage.',
             lgCountry: 'CM sur tout un pays : droit sans zone chez Waze, invisible au recensement, noté à la main dans la fiche.',
             notePh: 'Note (partagée avec le registre)…',
             gRemoveEditor: 'Retirer du registre',
@@ -614,6 +616,8 @@
             roleCountryLib: n => n + ' — whole country',
             roleCountryHelp: 'A CM right requested for a WHOLE country (by choosing the country in the Waze form) creates no area: Waze only shows it to its holder, and WZM can neither survey nor check it. Note it here: it is tied to the country outline (“Who manages here?” finds it), and “Workshop” turns it into an area to request it again as a polygon. Requested with a polygon, the right shows up as an area, which WZM sees and classifies as CM.',
             whoCountry: 'CM on the whole country (noted in the registry)',
+            roleView: 'Show this role on the map',
+            roleNoShape: 'This role has no known shape: no country and no boundary code.',
             lgCountry: 'CM on a whole country: a right with no area at Waze, invisible to the survey, noted by hand in the card.',
             notePh: 'Note (shared with the registry)…',
             gRemoveEditor: 'Remove from the registry',
@@ -987,6 +991,8 @@
             roleCountryLib: n => n + ' — ganzes Land',
             roleCountryHelp: 'Ein CM-Recht, das für ein GANZES Land beantragt wird (durch Auswahl des Landes im Waze-Formular), erzeugt kein Gebiet: Waze zeigt es nur seinem Inhaber, und WZM kann es weder erfassen noch prüfen. Notieren Sie es hier: Es wird an den Umriss des Landes gebunden („Wer verwaltet hier?“ findet es), und „Werkstatt“ macht daraus ein Gebiet, um es erneut als Polygon zu beantragen. Mit einem Polygon beantragt, erscheint das Recht als Gebiet, das WZM sieht und als CM einstuft.',
             whoCountry: 'CM für das ganze Land (im Register notiert)',
+            roleView: 'Diese Rolle auf der Karte zeigen',
+            roleNoShape: 'Diese Rolle hat keine bekannte Form: kein Land und kein Gebietscode.',
             lgCountry: 'CM für ein ganzes Land: Recht ohne Gebiet bei Waze, bei der Erfassung unsichtbar, von Hand in der Karte notiert.',
             notePh: 'Notiz (wird mit dem Register geteilt)…',
             gRemoveEditor: 'Aus dem Register entfernen',
@@ -1360,6 +1366,8 @@
             roleCountryLib: n => n + ' — todo el país',
             roleCountryHelp: 'Un derecho de CM solicitado para un país ENTERO (eligiendo el país en el formulario de Waze) no crea ninguna zona: Waze solo lo muestra a su titular, y WZM no puede ni censarlo ni verificarlo. Anótelo aquí: queda vinculado al contorno del país («¿Quién gestiona aquí?» lo encuentra), y «Taller» lo convierte en una zona para volver a solicitarlo como polígono. Solicitado con un polígono, el derecho aparece como una zona, que WZM ve y clasifica como CM.',
             whoCountry: 'CM sobre todo el país (anotado en el registro)',
+            roleView: 'Mostrar este rol en el mapa',
+            roleNoShape: 'Este rol no tiene forma conocida: ningún país ni código de división.',
             lgCountry: 'CM sobre todo un país: derecho sin zona en Waze, invisible en el censo, anotado a mano en la ficha.',
             notePh: 'Nota (compartida con el registro)…',
             gRemoveEditor: 'Quitar del registro',
@@ -1733,6 +1741,8 @@
             roleCountryLib: n => n + ' — tutto il paese',
             roleCountryHelp: 'Un diritto di CM richiesto per un paese INTERO (scegliendo il paese nel modulo di Waze) non crea alcuna zona: Waze lo mostra solo al titolare, e WZM non può né censirlo né verificarlo. Annotalo qui: viene legato al contorno del paese («Chi gestisce qui?» lo ritrova), e «Laboratorio» ne ricava la zona per richiederlo di nuovo come poligono. Richiesto con un poligono, il diritto appare come una zona, che WZM vede e classifica come CM.',
             whoCountry: 'CM su tutto il paese (annotato nel registro)',
+            roleView: 'Mostra questo ruolo sulla mappa',
+            roleNoShape: 'Questo ruolo non ha una forma nota: nessun paese né codice di confine.',
             lgCountry: 'CM su un intero paese: diritto senza zona su Waze, invisibile al censimento, annotato a mano nella scheda.',
             notePh: 'Nota (condivisa con il registro)…',
             gRemoveEditor: 'Togli dal registro',
@@ -2106,6 +2116,8 @@
             roleCountryLib: n => n + ' — país inteiro',
             roleCountryHelp: 'Um direito de CM pedido para um país INTEIRO (escolhendo o país no formulário do Waze) não cria nenhuma área: o Waze só o mostra ao titular, e o WZM não pode recenseá-lo nem verificá-lo. Anote-o aqui: ele fica ligado ao contorno do país (“Quem gerencia aqui?” o encontra), e “Oficina” transforma-o numa área para pedi-lo de novo como polígono. Pedido com um polígono, o direito aparece como uma área, que o WZM vê e classifica como CM.',
             whoCountry: 'CM sobre o país inteiro (anotado no registro)',
+            roleView: 'Mostrar esta função no mapa',
+            roleNoShape: 'Esta função não tem forma conhecida: nenhum país nem código de divisão.',
             lgCountry: 'CM sobre um país inteiro: direito sem área no Waze, invisível no recenseamento, anotado à mão na ficha.',
             notePh: 'Nota (compartilhada com o registro)…',
             gRemoveEditor: 'Tirar do registro',
@@ -2479,6 +2491,8 @@
             roleCountryLib: n => n + ' — país inteiro',
             roleCountryHelp: 'Um direito de CM pedido para um país INTEIRO (escolhendo o país no formulário do Waze) não cria nenhuma área: o Waze só o mostra ao titular, e o WZM não o pode recensear nem verificar. Anote-o aqui: fica ligado ao contorno do país («Quem gere aqui?» encontra-o), e «Oficina» transforma-o numa área para o pedir de novo como polígono. Pedido com um polígono, o direito aparece como uma área, que o WZM vê e classifica como CM.',
             whoCountry: 'CM sobre o país inteiro (anotado no registo)',
+            roleView: 'Mostrar esta função no mapa',
+            roleNoShape: 'Esta função não tem forma conhecida: nenhum país nem código de divisão.',
             lgCountry: 'CM sobre um país inteiro: direito sem área no Waze, invisível no recenseamento, anotado à mão na ficha.',
             notePh: 'Nota (partilhada com o registo)…',
             gRemoveEditor: 'Retirar do registo',
@@ -2852,6 +2866,8 @@
             roleCountryLib: n => n + ' — כל המדינה',
             roleCountryHelp: 'זכות CM שהתבקשה עבור מדינה שלמה (בבחירת המדינה בטופס של Waze) אינה יוצרת אזור: Waze מציג אותה רק לבעליה, ו-WZM אינו יכול לאתר או לבדוק אותה. רשום אותה כאן: היא נקשרת לקו המתאר של המדינה ("מי מנהל כאן?" מוצא אותה), ו"סדנה" הופכת אותה לאזור כדי לבקש אותה שוב כמצולע. בקשה עם מצולע מופיעה כאזור, ש-WZM רואה ומסווג כ-CM.',
             whoCountry: 'CM על כל המדינה (רשום ברשם)',
+            roleView: 'הצגת תפקיד זה במפה',
+            roleNoShape: 'לתפקיד זה אין צורה ידועה: אין מדינה ואין קוד חלוקה.',
             lgCountry: 'CM על מדינה שלמה: זכות ללא אזור ב-Waze, בלתי נראית בסקירה, נרשמת ידנית בכרטיס.',
             notePh: 'הערה (משותפת עם הרשם)…',
             gRemoveEditor: 'הסרה מהרשם',
@@ -5612,8 +5628,11 @@
 .wzm-gtype{flex-shrink:0;min-width:24px;padding:0 6px;border-radius:50px;background:#ede7f6;color:#4527a0;font-size:11px;font-weight:700;text-align:center}
 .wzm-glib{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .wzm-glib small{color:var(--wzm-grey)}
+.wzm-glib-voir{all:unset;cursor:pointer;text-decoration:underline dotted;text-underline-offset:2px}
+.wzm-glib-voir[aria-pressed="true"]{font-weight:600;color:var(--wzm-blue-btn)}
+.wzm-glib-voir:focus-visible{outline:2px solid var(--wzm-blue-btn);outline-offset:1px}
 .wzm-grole a{text-decoration:none}
-.wzm-grole button{width:20px;height:20px;min-height:0;padding:0;margin:0;border:none;border-radius:50%;background:transparent;color:var(--wzm-text2);cursor:pointer}
+.wzm-grole button:not(.wzm-glib-voir):not(.wzm-btn){width:20px;height:20px;min-height:0;padding:0;margin:0;border:none;border-radius:50%;background:transparent;color:var(--wzm-text2);cursor:pointer}
 .wzm-grole select{height:22px;padding:0 4px}
 .wzm-gnote{width:100%;box-sizing:border-box;min-height:44px;height:auto;margin:4px 0;font:12px 'Rubik','Open Sans',sans-serif}
 .wzm-qui{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
@@ -5945,7 +5964,7 @@
     // ni le lire ni l'écrire — par WZM comme par le forum ; un compte qui la voit reçoit can_edit du serveur.
     // WZM ne fait que REFLÉTER ce verdict (lecture seule), il ne le remplace pas (demande de l'auteur, 03/10/2026).
     const peutEcrire = () => !idSujet(urlRegistre()) || (regMeta.topic === idSujet(urlRegistre()) && regMeta.acces !== false && regMeta.peutModifier !== false);
-    let zonesExactes = {}, zoneFocus = null;     // pseudo → [géométries exactes, lues à l'ouverture de la fiche]
+    let zonesExactes = {}, zoneFocus = null, roleFocus = null;     // pseudo → [géométries exactes, lues à l'ouverture de la fiche]
 
     // ---------- Un registre PAR PAYS ----------
     // L'onglet Gestionnaires ne montre QUE le registre du pays de la carte (demande de l'auteur, 03/10/2026) : en
@@ -6518,6 +6537,19 @@
     let quiSurvol = '';
     // Le survol d'une liste de noms demandait un redessin complet par entrée/sortie : on n'en joue qu'un par image.
     let gestPrevu = false;
+    // Forme d'un rôle du registre : le registre ne garde que des codes, la forme se recompose — contour du pays pour un
+    // CM « pays entier », sinon réunion de ses mailles (départements, provinces… du pays du registre). Sans elle, un
+    // rôle noté à la main restait invisible sur la carte (demande de l'auteur, 04/10/2026).
+    let maillesForme = null;
+    async function formeRole(r) {
+        if (!r) return null;
+        if (r.pays) { const l = mondeListe || await chargerMonde(); const c = l.find(x => x.f === r.pays); return c ? { nom: nomMonde(c), geoms: [c.g] } : null; }
+        if (!r.codes || !r.codes.length) return null;
+        const p = (registre && registre.pays) || paysChoisi();
+        if (!maillesForme || maillesForme.p !== p) maillesForme = { p, l: fournisseurDe(p).mailles() };
+        const geoms = (await maillesForme.l).filter(m => r.codes.includes(String(m.code))).map(m => m.geom).filter(Boolean);
+        return geoms.length ? { nom: r.libelle || r.codes.join(', '), geoms } : null;
+    }
     function dessinerGest() {
         if (gestPrevu) return;
         gestPrevu = true;
@@ -6540,7 +6572,9 @@
         if (quiSurvol) feats.sort((a, b) => (a.id.startsWith('g-' + quiSurvol + '-') ? 1 : 0) - (b.id.startsWith('g-' + quiSurvol + '-') ? 1 : 0));
         dessiner(L_GEST, feats);
         const z = zoneFocus && (zonesExactes[zoneFocus.pseudo.toLowerCase()] || [])[zoneFocus.i];
-        dessiner(L_FOCUS, z ? [{ id: 'focus', type: 'Feature', geometry: z.geom, properties: {} }] : []);
+        // Un rôle mis en évidence : éclaté en polygones (un Multi* vide toute la couche du SDK).
+        const rf = !z && roleFocus && ouvertEd && roleFocus.pseudo === ouvertEd ? roleFocus.geoms : null;
+        dessiner(L_FOCUS, z ? [{ id: 'focus', type: 'Feature', geometry: z.geom, properties: {} }] : rf ? rf.flatMap((g, k) => eclater('rf' + k, g, {})) : []);
     }
     function quiGereIci(ll) {
         const out = [];
@@ -7023,7 +7057,7 @@
         // zone par zone, juste au-dessus. On ne les montre plus ; ceux « à retirer » ou « demandés » restent.
         // … sauf s'ils sont EN ÉCART : masqués, leur carré rouge restait sans moyen de les corriger (un éditeur réel, deux « Aveyron »
         // de l'amorce portant le code 15 du Cantal — vu dans WME le 03/10/2026).
-        const roles = e.roles.map((r, i) => r.type === '?' && r.statut === 'vigueur' && !ec.some(x => x.r === r) ? '' : '<div class="wzm-grole"><span class="wzm-gtype">' + esc(r.type) + '</span><span class="wzm-glib" title="' + esc(r.note || '') + '">' + (r.pays ? '&#x1F310; ' : '') + '<bdi>' + esc(r.libelle) + '</bdi>' + (r.pays ? ' <button type="button" class="wzm-btn" data-ratelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button>' : '') + (r.codes.length ? ' <small>' + esc(r.codes.join(', ')) + '</small>' : '') + '</span>' +
+        const roles = e.roles.map((r, i) => r.type === '?' && r.statut === 'vigueur' && !ec.some(x => x.r === r) ? '' : '<div class="wzm-grole"><span class="wzm-gtype">' + esc(r.type) + '</span><span class="wzm-glib" title="' + esc(r.note || '') + '">' + (r.pays ? '&#x1F310; ' : '') + '<button type="button" class="wzm-glib-voir" data-rvoir="' + i + '" aria-pressed="' + !!(roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) + '" title="' + esc(t('roleView')) + '"><bdi>' + esc(r.libelle) + '</bdi></button>' + (r.codes.length ? ' <small>' + esc(r.codes.join(', ')) + '</small>' : '') + '</span>' + (r.pays || r.codes.length ? '<button type="button" class="wzm-btn" data-ratelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button>' : '') +
             // Le lien vient du wiki (retouchable à la main) : seul un https:// devient cliquable — un « javascript: »
             // s'exécuterait avec la session Waze du gestionnaire (audit du 03/10/2026).
             (/^https:\/\//i.test(r.demande) ? '<a href="' + esc(r.demande) + '" target="_blank" rel="noopener noreferrer" title="' + esc(t('gRequest') + (r.ticket ? ' · ' + r.ticket : '')) + '" aria-label="' + esc(t('gRequest')) + '">&#x1F517;</a>' : r.demande ? '<span class="wzm-lien-brut" title="' + esc(r.demande) + '">&#x1F517;&#xFE0E;</span>' : '') + statut(r, i) +
@@ -7059,7 +7093,7 @@
         let focus = '';
         if (ae && p.contains(ae)) {
             if (ae.id) focus = '#' + ae.id;
-            else for (const a of ['data-ed', 'data-statut', 'data-zvalider', 'data-ztype', 'data-zvoir', 'data-zform', 'data-zwkt', 'data-zatelier', 'data-suppr-role', 'data-ouvrir', 'data-g']) if (ae.hasAttribute(a)) { focus = '[' + a + '="' + String(ae.getAttribute(a)).replace(/["\\]/g, '\\$&') + '"]'; break; }
+            else for (const a of ['data-ed', 'data-statut', 'data-zvalider', 'data-ztype', 'data-zvoir', 'data-rvoir', 'data-ratelier', 'data-zform', 'data-zwkt', 'data-zatelier', 'data-suppr-role', 'data-ouvrir', 'data-g']) if (ae.hasAttribute(a)) { focus = '[' + a + '="' + String(ae.getAttribute(a)).replace(/["\\]/g, '\\$&') + '"]'; break; }
         }
         // Le redessin remplace la liste : sans ceci, elle repartait en haut à chaque clic sur un éditeur
         // (signalé par l'auteur le 03/10/2026). On garde le défilement de la liste ET de la fenêtre.
@@ -7139,12 +7173,23 @@
         });
         sur('[data-g="roleZone"]', () => roleDepuisZone(e, q('#wzm-gtype').value));
         sur('[data-g="rolePays"]', () => rolePays(e, (q('#wzm-gpays') || {}).value));
-        sur('[data-ratelier]', ev => {
-            const r = e.roles[Number(ev.currentTarget.dataset.ratelier)], c = r && (mondeListe || []).find(x => x.f === r.pays);
-            if (!c) return;
-            const id = 'pays:' + c.f;
-            if (!selection.some(x => x.id === id)) { selection.push({ id, niveau: 'trace', code: '', nom: nomMonde(c), geom: c.g, source: 'monde', trace: true }); ecrireSelection(); dessinerEntites(); planifierApercu(); }
-            msgGest(t('zAdded', nomMonde(c)));
+        sur('[data-ratelier]', async ev => {
+            const r = e.roles[Number(ev.currentTarget.dataset.ratelier)];
+            let f = null; try { f = await formeRole(r); } catch (er) { f = null; }
+            if (!f) { msgGest(t('roleNoShape')); return; }
+            const id = 'role:' + e.pseudo + ':' + (r.id || r.libelle);
+            if (!selection.some(x => x.id === id)) { selection.push({ id, niveau: 'trace', code: '', nom: f.nom, geom: { type: 'MultiPolygon', coordinates: f.geoms.flatMap(polysG) }, source: 'registre', trace: true }); ecrireSelection(); dessinerEntites(); planifierApercu(); }
+            msgGest(t('zAdded', f.nom));
+        });
+        sur('[data-rvoir]', async ev => {
+            const i = Number(ev.currentTarget.dataset.rvoir), r = e.roles[i];
+            if (!r) return;
+            if (roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) { roleFocus = null; rendreGest(); dessinerGest(); return; }
+            let f = null; try { f = await formeRole(r); } catch (er) { f = null; }
+            if (!f) { msgGest(t('roleNoShape')); return; }
+            zoneFocus = null; roleFocus = { pseudo: e.pseudo, id: r.id || i, geoms: f.geoms };
+            centrer({ type: 'MultiPolygon', coordinates: f.geoms.flatMap(polysG) });
+            rendreGest(); dessinerGest();
         });
         sur('[data-g="relireUn"]', () => { delete zonesExactes[e.pseudo.toLowerCase()]; relireChezWaze(e.pseudo).then(() => chargerZonesExactes(e.pseudo)); });
         chargerZonesExactes(e.pseudo);
@@ -7152,6 +7197,7 @@
         sur('[data-zvoir]', ev => {
             const i = Number(ev.currentTarget.dataset.zvoir), z = zone(i);
             if (!z) return;
+            roleFocus = null;
             zoneFocus = (zoneFocus && zoneFocus.pseudo === e.pseudo && zoneFocus.i === i) ? null : { pseudo: e.pseudo, i };
             if (zoneFocus) centrer(z.geom);
             rendreGest(); dessinerGest();
