@@ -63,6 +63,15 @@ That is **21 countries**. The managers registry, the survey of managed areas and
 - If the map moves to another country while a registry is shown, WZM asks before switching.
 - Issues and source: see this repository.
 
+## Screenshots
+
+| | |
+|---|---|
+| ![Area workshop: four Tuscan provinces combined and widened by 5 km](captures/wzm-2.20.05-1-atelier.jpg) | ![Managers registry compared with Waze](captures/wzm-2.20.05-2-registre.jpg) |
+| *Area workshop: four provinces combined, widened by 5 km, ready for the Waze form* | *Managers registry, compared with what Waze applies (usernames blurred)* |
+| ![Editor card: its area at Waze, framed on the visible part of the map](captures/wzm-2.20.05-3-fiche-editeur.jpg) | ![Set-up assistant: a registry already exists in this category](captures/wzm-2.20.05-4-assistant.jpg) |
+| *Editor card: areas at Waze, provinces covered, suggested type* | *Set-up assistant: it finds the registry already in the category* |
+
 ## Install
 
 1. Install [Tampermonkey](https://www.tampermonkey.net/) (Chrome, Edge, Firefox). In Chrome, allow user scripts: Extensions › Tampermonkey › Details › *Allow user scripts*.
@@ -137,6 +146,15 @@ Soit **21 pays**. Le registre des gestionnaires, le recensement des zones géré
 - Démarre à tous les niveaux de zoom. 8 langues : anglais, français, allemand, espagnol, italien, portugais (Brésil et Portugal), hébreu.
 - Si la carte passe dans un autre pays alors qu’un registre est affiché, WZM demande avant de basculer.
 - Anomalies et code source : voir ce dépôt.
+
+## Captures
+
+| | |
+|---|---|
+| ![Atelier : quatre provinces toscanes réunies et élargies de 5 km](captures/wzm-2.20.05-1-atelier.jpg) | ![Registre des gestionnaires comparé à Waze](captures/wzm-2.20.05-2-registre.jpg) |
+| *Atelier : quatre provinces réunies, élargies de 5 km, prêtes pour le formulaire Waze* | *Registre des gestionnaires, comparé à ce que Waze applique (pseudos floutés)* |
+| ![Fiche d’un éditeur : sa zone chez Waze, cadrée sur la partie visible de la carte](captures/wzm-2.20.05-3-fiche-editeur.jpg) | ![Assistant : un registre existe déjà dans cette catégorie](captures/wzm-2.20.05-4-assistant.jpg) |
+| *Fiche d’un éditeur : zones chez Waze, provinces couvertes, type proposé* | *Assistant de mise en place : il trouve le registre déjà présent dans la catégorie* |
 
 ## Installation
 
