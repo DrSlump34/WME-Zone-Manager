@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.20.04
+// @version      2.20.05
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -425,6 +425,10 @@
             asHaveTopic: 'J’ai déjà un sujet',
             asPasteLbl: 'Lien du sujet Discuss (ou son numéro)',
             asUseTopic: 'Utiliser ce sujet',
+            asExistLoading: 'Recherche d’un registre déjà présent dans cette catégorie…',
+            asExists: (s, n) => 'Cette catégorie contient déjà un registre WZM de ce pays : « ' + s + ' » (' + n + ' éditeurs). Utilisez-le plutôt que d’en créer un second.',
+            asUseExisting: 'Utiliser ce registre',
+            asCreateAnyway: 'En créer un autre quand même',
             asCatHelp: 'Choisissez la catégorie privée des Champs de votre pays (souvent « local-champs »). La liste ne montre que les catégories où votre compte peut créer un sujet.',
             asCatNoCountry: (p) => 'Aucune catégorie privée des Champs de ' + p + ' n’est ouverte à votre compte. Si vous êtes Champ de ce pays, demandez l’accès à votre Country Coordinator ou au staff ; sinon, c’est un Champ de ce pays qui doit créer son registre.',
             asCatOwn: (p) => 'Catégories privées — ' + p,
@@ -788,6 +792,10 @@
             asHaveTopic: 'I already have a topic',
             asPasteLbl: 'Discuss topic link (or its number)',
             asUseTopic: 'Use this topic',
+            asExistLoading: 'Looking for a registry already in this category…',
+            asExists: (s, n) => 'This category already holds a WZM registry for this country: “' + s + '” (' + n + ' editors). Use it rather than creating a second one.',
+            asUseExisting: 'Use this registry',
+            asCreateAnyway: 'Create another one anyway',
             asCatHelp: 'Choose your country’s private Champs category (often “local-champs”). The list only shows categories where your account can create a topic.',
             asCatNoCountry: (p) => 'No private Champs category of ' + p + ' is open to your account. If you are a Champ of this country, ask your Country Coordinator or staff for access; otherwise a Champ of this country should create its registry.',
             asCatOwn: (p) => 'Private categories — ' + p,
@@ -1151,6 +1159,10 @@
             asHaveTopic: 'Ich habe bereits ein Thema',
             asPasteLbl: 'Link des Discuss-Themas (oder seine Nummer)',
             asUseTopic: 'Dieses Thema verwenden',
+            asExistLoading: 'Suche nach einem bereits vorhandenen Register in dieser Kategorie…',
+            asExists: (s, n) => 'Diese Kategorie enthält bereits ein WZM-Register für dieses Land: „' + s + '“ (' + n + ' Editoren). Verwenden Sie es, statt ein zweites anzulegen.',
+            asUseExisting: 'Dieses Register verwenden',
+            asCreateAnyway: 'Trotzdem ein weiteres anlegen',
             asCatHelp: 'Wählen Sie die private Champs-Kategorie Ihres Landes (oft „local-champs“). Die Liste zeigt nur Kategorien, in denen Ihr Konto ein Thema anlegen kann.',
             asCatNoCountry: (p) => 'Keine private Champs-Kategorie von ' + p + ' ist für Ihr Konto geöffnet. Wenn Sie Champ dieses Landes sind, bitten Sie Ihren Country Coordinator oder das Staff um Zugang; sonst sollte ein Champ dieses Landes das Register anlegen.',
             asCatOwn: (p) => 'Private Kategorien — ' + p,
@@ -1514,6 +1526,10 @@
             asHaveTopic: 'Ya tengo un tema',
             asPasteLbl: 'Enlace del tema de Discuss (o su número)',
             asUseTopic: 'Usar este tema',
+            asExistLoading: 'Buscando un registro ya presente en esta categoría…',
+            asExists: (s, n) => 'Esta categoría ya contiene un registro WZM de este país: «' + s + '» (' + n + ' editores). Úselo en lugar de crear un segundo.',
+            asUseExisting: 'Usar este registro',
+            asCreateAnyway: 'Crear otro de todos modos',
             asCatHelp: 'Elija la categoría privada de los Champs de su país (a menudo «local-champs»). La lista solo muestra las categorías donde su cuenta puede crear un tema.',
             asCatNoCountry: (p) => 'Ninguna categoría privada de los Champs de ' + p + ' está abierta a su cuenta. Si es Champ de este país, pida acceso a su Country Coordinator o al staff; si no, debe crear el registro un Champ de este país.',
             asCatOwn: (p) => 'Categorías privadas — ' + p,
@@ -1877,6 +1893,10 @@
             asHaveTopic: 'Ho già un argomento',
             asPasteLbl: 'Link dell’argomento Discuss (o il suo numero)',
             asUseTopic: 'Usa questo argomento',
+            asExistLoading: 'Ricerca di un registro già presente in questa categoria…',
+            asExists: (s, n) => 'Questa categoria contiene già un registro WZM di questo paese: «' + s + '» (' + n + ' editor). Usalo invece di crearne un secondo.',
+            asUseExisting: 'Usa questo registro',
+            asCreateAnyway: 'Creane comunque un altro',
             asCatHelp: 'Scegli la categoria privata dei Champs del tuo paese (spesso «local-champs»). L’elenco mostra solo le categorie in cui il tuo account può creare un argomento.',
             asCatNoCountry: (p) => 'Nessuna categoria privata dei Champs di ' + p + ' è aperta al tuo account. Se sei Champ di questo paese, chiedi l’accesso al tuo Country Coordinator o allo staff; altrimenti il registro va creato da un Champ di questo paese.',
             asCatOwn: (p) => 'Categorie private — ' + p,
@@ -2240,6 +2260,10 @@
             asHaveTopic: 'Já tenho um tópico',
             asPasteLbl: 'Link do tópico do Discuss (ou o número)',
             asUseTopic: 'Usar este tópico',
+            asExistLoading: 'Procurando um registro já presente nesta categoria…',
+            asExists: (s, n) => 'Esta categoria já contém um registro WZM deste país: “' + s + '” (' + n + ' editores). Use-o em vez de criar um segundo.',
+            asUseExisting: 'Usar este registro',
+            asCreateAnyway: 'Criar outro mesmo assim',
             asCatHelp: 'Escolha a categoria privada dos Champs do seu país (muitas vezes “local-champs”). A lista só mostra as categorias em que sua conta pode criar um tópico.',
             asCatNoCountry: (p) => 'Nenhuma categoria privada dos Champs de ' + p + ' está aberta para sua conta. Se você é Champ deste país, peça acesso ao seu Country Coordinator ou à equipe; senão, um Champ deste país deve criar o registro.',
             asCatOwn: (p) => 'Categorias privadas — ' + p,
@@ -2603,6 +2627,10 @@
             asHaveTopic: 'Já tenho um tópico',
             asPasteLbl: 'Ligação do tópico do Discuss (ou o número)',
             asUseTopic: 'Usar este tópico',
+            asExistLoading: 'A procurar um registo já presente nesta categoria…',
+            asExists: (s, n) => 'Esta categoria já contém um registo WZM deste país: «' + s + '» (' + n + ' editores). Use-o em vez de criar um segundo.',
+            asUseExisting: 'Usar este registo',
+            asCreateAnyway: 'Criar outro mesmo assim',
             asCatHelp: 'Escolha a categoria privada dos Champs do seu país (muitas vezes «local-champs»). A lista só mostra as categorias em que a sua conta pode criar um tópico.',
             asCatNoCountry: (p) => 'Nenhuma categoria privada dos Champs de ' + p + ' está aberta à sua conta. Se é Champ deste país, peça acesso ao seu Country Coordinator ou ao staff; caso contrário, deve ser um Champ deste país a criar o registo.',
             asCatOwn: (p) => 'Categorias privadas — ' + p,
@@ -2966,6 +2994,10 @@
             asHaveTopic: 'כבר יש לי נושא',
             asPasteLbl: 'קישור לנושא ב-Discuss (או המספר שלו)',
             asUseTopic: 'שימוש בנושא זה',
+            asExistLoading: 'מחפש רשם שכבר קיים בקטגוריה זו…',
+            asExists: (s, n) => 'קטגוריה זו כבר מכילה רשם WZM של מדינה זו: "' + s + '" (' + n + ' עורכים). השתמש בו במקום ליצור רשם שני.',
+            asUseExisting: 'שימוש ברשם זה',
+            asCreateAnyway: 'ליצור רשם נוסף בכל זאת',
             asCatHelp: 'בחר את הקטגוריה הפרטית של ה-Champs במדינה שלך (לרוב „local-champs”). הרשימה מציגה רק קטגוריות שבהן החשבון שלך יכול ליצור נושא.',
             asCatNoCountry: (p) => 'אף קטגוריה פרטית של ה-Champs של ' + p + ' אינה פתוחה לחשבון שלך. אם אתה Champ במדינה זו, בקש גישה מה-Country Coordinator או מהצוות; אחרת, Champ של מדינה זו צריך ליצור את הרשם.',
             asCatOwn: (p) => 'קטגוריות פרטיות — ' + p,
@@ -6583,6 +6615,36 @@
             asst.cat = p ? p.id : '';
         } catch (e) { if (asst) { asst.cats = []; asst.err = t('regErr', errTxt(e.message)); } }
         rendreGest();
+        asstChercherExistants();
+    }
+    // Registres WZM déjà présents dans une catégorie : Silvio, sans coller le lien reçu, a créé avec l'assistant un
+    // SECOND registre italien dans la catégorie privée qui contenait déjà le premier (vu le 04/10/2026). Avant de
+    // créer, on lit donc le 1er message des sujets de la catégorie (une catégorie de Champs en compte peu) et on
+    // retient ceux qui portent un registre de CE pays (un registre sans pays compte, par prudence).
+    async function registresDeCategorie(cat, pays, lireListe, lireRaw) {
+        lireListe = lireListe || (c => discussJSON('/discuss/c/' + c + '.json'));
+        lireRaw = lireRaw || (async id => { const s = await discussJSON('/discuss/t/' + id + '.json'); const p = s.post_stream.posts[0]; return (await discussJSON('/discuss/posts/' + p.id + '.json')).raw || ''; });
+        const l = await lireListe(cat);
+        const res = [];
+        for (const s of ((l && l.topic_list && l.topic_list.topics) || []).slice(0, 30)) {
+            let r = null;
+            try { r = extraireRegistre(await lireRaw(s.id)); } catch (e) { r = null; }
+            if (r && (!r.pays || r.pays === pays)) res.push({ id: s.id, titre: s.title || ('#' + s.id), n: r.editeurs.length, lien: 'https://www.waze.com/discuss/t/' + (s.slug ? s.slug + '/' : '') + s.id });
+        }
+        return res;
+    }
+    async function asstChercherExistants() {
+        if (!asst) return;
+        const cat = (asst.cats || []).find(c => c.id === Number(asst.cat));
+        asst.existants = null; asst.existCat = cat && cat.prive ? cat.id : null;
+        if (!asst.existCat) return;
+        rendreGest();
+        const pour = asst.existCat;
+        let res = [];
+        try { res = await registresDeCategorie(pour, paysReg); } catch (e) { res = []; }   // illisible : rien n'empêche de créer
+        if (!asst || asst.existCat !== pour) return;
+        asst.existants = res;
+        rendreGest();
     }
     async function asstCreerSujet() {
         if (!asst || occupe) return;
@@ -6703,12 +6765,17 @@
         } else if (a.etape === 'cat') {
             const cats = a.cats;
             const choisie = (cats || []).find(c => c.id === Number(a.cat));
+            // Un registre de ce pays déjà dans la catégorie : on propose de l'UTILISER (bouton plein), créer reste possible.
+            const enCours = !!(choisie && choisie.prive && (a.existCat !== choisie.id || !a.existants));
+            const ex = choisie && a.existCat === choisie.id && a.existants ? a.existants : [];
             corps = '<p>' + esc(t('asCatHelp')) + '</p>' + (!cats ? '<p class="wzm-aide">' + esc(t('asCatLoading')) + '</p>' :
                 !cats.some(c => c.prive) ? '<p class="wzm-ro">' + esc(t('asCatNone')) + '</p>' : !cats.some(c => c.prive && estDuPays(c, nomsDuPays())) ? '<p class="wzm-ro">' + esc(t('asCatNoCountry', paysRegNom || paysReg)) + '</p>' : '') +
                 (cats && cats.length ? '<label class="wzm-sec2" for="wzm-asst-cat">' + esc(t('asStepCat')) + '</label><select class="wzm-champ2" id="wzm-asst-cat" style="width:100%">' +
                     (choisie ? '' : '<option value="" selected>' + esc(t('asCatPick')) + '</option>') + (() => { const noms = nomsDuPays(); return [[c => c.prive && estDuPays(c, noms), t('asCatOwn', paysRegNom || paysReg)], [c => c.prive && !estDuPays(c, noms), t('asCatOtherPriv')], [c => !c.prive && estDuPays(c, noms), t('asCatPublic')]].map(([f, lib]) => { const l = cats.filter(f); return l.length ? '<optgroup label="' + esc(lib) + '">' + l.map(c => '<option value="' + c.id + '"' + (c.id === Number(a.cat) ? ' selected' : '') + '>' + esc(c.nom) + '</option>').join('') + '</optgroup>' : ''; }).join(''); })() + '</select>' : '') +
                 (choisie && !choisie.prive ? '<p class="wzm-ro">&#x26A0;&#xFE0F; ' + esc(t('asCatWarn')) + '</p>' : '') +
-                '<div class="wzm-ligne"><button type="button" class="wzm-btn" data-g="asstRetour">' + esc(t('asBack')) + '</button><button type="button" class="wzm-btn wzm-plein" data-g="asstTexte"' + (choisie && choisie.prive ? '' : ' disabled') + '>' + esc(t('asNext')) + '</button></div>';
+                (enCours ? '<p class="wzm-aide">' + esc(t('asExistLoading')) + '</p>' : '') +
+                ex.map(x => '<p class="wzm-ro">&#x26A0;&#xFE0F; ' + esc(t('asExists', x.titre, nombre(x.n))) + '</p><div class="wzm-ligne"><button type="button" class="wzm-btn wzm-plein" data-g="asstExistant" data-l="' + esc(x.lien) + '">' + esc(t('asUseExisting')) + '</button></div>').join('') +
+                '<div class="wzm-ligne"><button type="button" class="wzm-btn" data-g="asstRetour">' + esc(t('asBack')) + '</button><button type="button" class="wzm-btn' + (ex.length ? '' : ' wzm-plein') + '" data-g="asstTexte"' + (choisie && choisie.prive && !enCours ? '' : ' disabled') + '>' + esc(ex.length ? t('asCreateAnyway') : t('asNext')) + '</button></div>';
         } else if (a.etape === 'texte') {
             corps = '<p>' + esc(t('asTextHelp')) + '</p><label class="wzm-sec2" for="wzm-asst-titre">' + esc(t('asTitleLbl')) + '</label><input type="text" class="wzm-champ2" id="wzm-asst-titre" maxlength="200" style="width:100%" value="' + esc(a.titre) + '">' +
                 '<label class="wzm-sec2" for="wzm-asst-texte">' + esc(t('asTextLbl')) + '</label><textarea class="wzm-champ2 wzm-asst-texte" id="wzm-asst-texte">' + esc(a.texte) + '</textarea>' +
@@ -6755,9 +6822,10 @@
         sur('[data-g="asstCat"]', () => { asst.etape = 'cat'; if (!asst.cats) chargerCategories(); else rendreGest(); });
         sur('[data-g="asstTexte"]', () => { asst.etape = 'texte'; rendreGest(); });
         sur('[data-g="asstCreer"]', asstCreerSujet);
+        sur('[data-g="asstExistant"]', e => asstUtiliserLien(e.currentTarget.dataset.l || ''));
         sur('[data-g="asstLien"]', () => asstUtiliserLien((q('#wzm-asst-lien') || {}).value || ''));
         sur('[data-g="asstCopier"]', () => copier(urlRegistre()));
-        const c = q('#wzm-asst-cat'); if (c) c.addEventListener('change', () => { asst.cat = c.value ? Number(c.value) : ''; rendreGest(); });
+        const c = q('#wzm-asst-cat'); if (c) c.addEventListener('change', () => { asst.cat = c.value ? Number(c.value) : ''; rendreGest(); asstChercherExistants(); });
         const ti = q('#wzm-asst-titre'); if (ti) ti.addEventListener('input', () => { asst.titre = ti.value; });
         const tx = q('#wzm-asst-texte'); if (tx) tx.addEventListener('input', () => { asst.texte = tx.value; });
         sur('[data-g="recNouveau"]', () => lancerRecensement('nouveau'));
