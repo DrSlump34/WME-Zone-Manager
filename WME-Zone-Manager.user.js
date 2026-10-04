@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.25.01
+// @version      2.26.01
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -60,6 +60,8 @@
 // @connect      tigerweb.geo.census.gov
 // @connect      geo.statcan.gc.ca
 // @connect      data.apps.fao.org
+// @connect      services3.arcgis.com
+// @connect      services5.arcgis.com
 // @run-at       document-idle
 // ==/UserScript==
 
@@ -95,7 +97,9 @@
     const pw = (typeof unsafeWindow !== 'undefined') ? unsafeWindow : window;
     // Compteur de tout ce qui passe par GM_xmlhttpRequest (invisible depuis la page) : requêtes et caractères reçus.
     // Lisible dans la console par WZM_RESEAU, pour vérifier qu'une vue couverte par le stock ne demande rien.
-    const reseau = { n: 0, octets: 0 };
+    const reseau = { n: 0, octets: 0, envoyees: 0 };
+    // Avancement du chargement d'un découpage (onglet Zones) : « on ne sait pas si on attend ou pas » (l'auteur, 04/10/2026).
+    const avVue = { fait: 0, total: 0 };
     try { pw.WZM_RESEAU = reseau; } catch (e) { /* page inaccessible : compteur interne seulement */ }
     const URL_GH = 'https://github.com/DrSlump34/WME-Zone-Manager';
     const LOG = (...a) => console.log('[WZM]', ...a);
@@ -410,6 +414,19 @@
             unit_CA: 'provinces',
             lvl_gaul_l1: 'Régions, provinces… (GAUL niveau 1)',
             lvl_gaul_l2: 'Départements, districts… (GAUL niveau 2)',
+            loadProg: (s, v, n) => 'Chargement… ' + s + ' s · ' + v + ' reçus · ' + n + ' requête(s)',
+            loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
+            loadDraw: 'Préparation de l’affichage…',
+            loadPending: n => n + ' en cours',
+            lvl_ng_state: 'États (Nigeria)',
+            lvl_ng_lga: 'Collectivités locales (LGA)',
+            searchPhNG: 'Nom ou code (LA, 25019)…',
+            unit_NG: 'États',
+            lvl_rw_province: 'Provinces (Rwanda)',
+            lvl_rw_district: 'Districts',
+            lvl_rw_sector: 'Secteurs (imirenge)',
+            searchPhRW: 'Nom ou code…',
+            unit_RW: 'districts',
             searchPhGAUL: 'Nom ou code GAUL…',
             unit_GAUL: 'régions',
             unit_GB: 'districts (LAD)',
@@ -800,6 +817,19 @@
             unit_CA: 'provinces',
             lvl_gaul_l1: 'Regions, provinces… (GAUL level 1)',
             lvl_gaul_l2: 'Districts, departments… (GAUL level 2)',
+            loadProg: (s, v, n) => 'Loading… ' + s + ' s · ' + v + ' received · ' + n + ' request(s)',
+            loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
+            loadDraw: 'Preparing the display…',
+            loadPending: n => n + ' pending',
+            lvl_ng_state: 'States (Nigeria)',
+            lvl_ng_lga: 'Local government areas (LGA)',
+            searchPhNG: 'Name or code (LA, 25019)…',
+            unit_NG: 'states',
+            lvl_rw_province: 'Provinces (Rwanda)',
+            lvl_rw_district: 'Districts',
+            lvl_rw_sector: 'Sectors (imirenge)',
+            searchPhRW: 'Name or code…',
+            unit_RW: 'districts',
             searchPhGAUL: 'Name or GAUL code…',
             unit_GAUL: 'regions',
             unit_GB: 'local authority districts',
@@ -1190,6 +1220,19 @@
             unit_CA: 'Provinzen',
             lvl_gaul_l1: 'Regionen, Provinzen… (GAUL Ebene 1)',
             lvl_gaul_l2: 'Distrikte, Departements… (GAUL Ebene 2)',
+            loadProg: (s, v, n) => 'Wird geladen… ' + s + ' s · ' + v + ' empfangen · ' + n + ' Anfrage(n)',
+            loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
+            loadDraw: 'Anzeige wird vorbereitet…',
+            loadPending: n => n + ' laufend',
+            lvl_ng_state: 'Bundesstaaten (Nigeria)',
+            lvl_ng_lga: 'Kommunalbezirke (LGA)',
+            searchPhNG: 'Name oder Code (LA, 25019)…',
+            unit_NG: 'Bundesstaaten',
+            lvl_rw_province: 'Provinzen (Ruanda)',
+            lvl_rw_district: 'Distrikte',
+            lvl_rw_sector: 'Sektoren (imirenge)',
+            searchPhRW: 'Name oder Code…',
+            unit_RW: 'Distrikte',
             searchPhGAUL: 'Name oder GAUL-Code…',
             unit_GAUL: 'Regionen',
             unit_GB: 'Distrikte (LAD)',
@@ -1580,6 +1623,19 @@
             unit_CA: 'provincias',
             lvl_gaul_l1: 'Regiones, provincias… (GAUL nivel 1)',
             lvl_gaul_l2: 'Distritos, departamentos… (GAUL nivel 2)',
+            loadProg: (s, v, n) => 'Cargando… ' + s + ' s · ' + v + ' recibidos · ' + n + ' petición(es)',
+            loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
+            loadDraw: 'Preparando la visualización…',
+            loadPending: n => n + ' en curso',
+            lvl_ng_state: 'Estados (Nigeria)',
+            lvl_ng_lga: 'Gobiernos locales (LGA)',
+            searchPhNG: 'Nombre o código (LA, 25019)…',
+            unit_NG: 'estados',
+            lvl_rw_province: 'Provincias (Ruanda)',
+            lvl_rw_district: 'Distritos',
+            lvl_rw_sector: 'Sectores (imirenge)',
+            searchPhRW: 'Nombre o código…',
+            unit_RW: 'distritos',
             searchPhGAUL: 'Nombre o código GAUL…',
             unit_GAUL: 'regiones',
             unit_GB: 'distritos (LAD)',
@@ -1970,6 +2026,19 @@
             unit_CA: 'province',
             lvl_gaul_l1: 'Regioni, province… (GAUL livello 1)',
             lvl_gaul_l2: 'Distretti, dipartimenti… (GAUL livello 2)',
+            loadProg: (s, v, n) => 'Caricamento… ' + s + ' s · ' + v + ' ricevuti · ' + n + ' richiesta/e',
+            loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
+            loadDraw: 'Preparazione della visualizzazione…',
+            loadPending: n => n + ' in corso',
+            lvl_ng_state: 'Stati (Nigeria)',
+            lvl_ng_lga: 'Governi locali (LGA)',
+            searchPhNG: 'Nome o codice (LA, 25019)…',
+            unit_NG: 'stati',
+            lvl_rw_province: 'Province (Ruanda)',
+            lvl_rw_district: 'Distretti',
+            lvl_rw_sector: 'Settori (imirenge)',
+            searchPhRW: 'Nome o codice…',
+            unit_RW: 'distretti',
             searchPhGAUL: 'Nome o codice GAUL…',
             unit_GAUL: 'regioni',
             unit_GB: 'distretti (LAD)',
@@ -2360,6 +2429,19 @@
             unit_CA: 'províncias',
             lvl_gaul_l1: 'Regiões, províncias… (GAUL nível 1)',
             lvl_gaul_l2: 'Distritos, departamentos… (GAUL nível 2)',
+            loadProg: (s, v, n) => 'Carregando… ' + s + ' s · ' + v + ' recebidos · ' + n + ' requisição(ões)',
+            loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
+            loadDraw: 'Preparando a exibição…',
+            loadPending: n => n + ' em andamento',
+            lvl_ng_state: 'Estados (Nigéria)',
+            lvl_ng_lga: 'Governos locais (LGA)',
+            searchPhNG: 'Nome ou código (LA, 25019)…',
+            unit_NG: 'estados',
+            lvl_rw_province: 'Províncias (Ruanda)',
+            lvl_rw_district: 'Distritos',
+            lvl_rw_sector: 'Setores (imirenge)',
+            searchPhRW: 'Nome ou código…',
+            unit_RW: 'distritos',
             searchPhGAUL: 'Nome ou código GAUL…',
             unit_GAUL: 'regiões',
             unit_GB: 'distritos (LAD)',
@@ -2750,6 +2832,19 @@
             unit_CA: 'províncias',
             lvl_gaul_l1: 'Regiões, províncias… (GAUL nível 1)',
             lvl_gaul_l2: 'Distritos, departamentos… (GAUL nível 2)',
+            loadProg: (s, v, n) => 'A carregar… ' + s + ' s · ' + v + ' recebidos · ' + n + ' pedido(s)',
+            loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
+            loadDraw: 'A preparar a apresentação…',
+            loadPending: n => n + ' em curso',
+            lvl_ng_state: 'Estados (Nigéria)',
+            lvl_ng_lga: 'Governos locais (LGA)',
+            searchPhNG: 'Nome ou código (LA, 25019)…',
+            unit_NG: 'estados',
+            lvl_rw_province: 'Províncias (Ruanda)',
+            lvl_rw_district: 'Distritos',
+            lvl_rw_sector: 'Setores (imirenge)',
+            searchPhRW: 'Nome ou código…',
+            unit_RW: 'distritos',
             searchPhGAUL: 'Nome ou código GAUL…',
             unit_GAUL: 'regiões',
             unit_GB: 'distritos (LAD)',
@@ -3140,6 +3235,19 @@
             unit_CA: 'פרובינציות',
             lvl_gaul_l1: 'אזורים, פרובינציות… (GAUL רמה 1)',
             lvl_gaul_l2: 'מחוזות… (GAUL רמה 2)',
+            loadProg: (s, v, n) => 'טוען… ' + s + ' ש׳ · ' + v + ' התקבלו · ' + n + ' בקשות',
+            loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
+            loadDraw: 'מכין את התצוגה…',
+            loadPending: n => n + ' בתהליך',
+            lvl_ng_state: 'מדינות (ניגריה)',
+            lvl_ng_lga: 'רשויות מקומיות (LGA)',
+            searchPhNG: 'שם או קוד (LA, 25019)…',
+            unit_NG: 'מדינות',
+            lvl_rw_province: 'פרובינציות (רואנדה)',
+            lvl_rw_district: 'מחוזות',
+            lvl_rw_sector: 'סקטורים (imirenge)',
+            searchPhRW: 'שם או קוד…',
+            unit_RW: 'מחוזות',
             searchPhGAUL: 'שם או קוד GAUL…',
             unit_GAUL: 'אזורים',
             unit_GB: 'מחוזות שלטון מקומי',
@@ -3279,10 +3387,11 @@
     // =====================================================================
     function getTexte(url, charset) {
         return new Promise((ok, ko) => {
+            reseau.envoyees++;
             GM_xmlhttpRequest({
                 method: 'GET', url, timeout: 60000, overrideMimeType: 'text/plain; charset=' + (charset || 'utf-8'),
                 onload: r => { reseau.n++; reseau.octets += (r.responseText || '').length; if (r.status < 200 || r.status >= 300) ko(new Error('HTTP ' + r.status)); else ok(r.responseText); },
-                onerror: () => ko(new Error('réseau')), ontimeout: () => ko(new Error('délai dépassé')),
+                onerror: () => { reseau.n++; ko(new Error('réseau')); }, ontimeout: () => { reseau.n++; ko(new Error('délai dépassé')); },
             });
         });
     }
@@ -3297,6 +3406,7 @@
         }
     }
     function getJSON1(url) {
+        reseau.envoyees++;
         return new Promise((ok, ko) => {
             GM_xmlhttpRequest({
                 method: 'GET', url, timeout: 60000,
@@ -3305,7 +3415,7 @@
                     if (r.status < 200 || r.status >= 300) { ko(new Error('HTTP ' + r.status)); return; }
                     try { ok(JSON.parse(r.responseText)); } catch (e) { ko(new Error('réponse illisible')); }
                 },
-                onerror: () => ko(new Error('réseau')), ontimeout: () => ko(new Error('délai dépassé')),
+                onerror: () => { reseau.n++; ko(new Error('réseau')); }, ontimeout: () => { reseau.n++; ko(new Error('délai dépassé')); },
             });
         });
     }
@@ -3548,10 +3658,11 @@
                     const cle = ix + ':' + iy; if (c.faites.has(cle)) continue;
                     const tb = [ix * T, iy * T, (ix + 1) * T, (iy + 1) * T];
                     if (this.emprisePays && !coupe(this.emprisePays, tb)) { c.faites.set(cle, Promise.resolve()); continue; }
+                    avVue.total++;
                     const pr = this.pages(niveau, { geometry: tb.join(','), geometryType: 'esriGeometryEnvelope', inSR: '4326', spatialRel: 'esriSpatialRelIntersects',
                         maxAllowableOffset: String(this.tolVue), geometryPrecision: '6' })
                         .then(l => this.rattacher(niveau, l.map(x => this.normaliser(niveau, x)).filter(e => e.geom)))
-                        .then(l => { for (const e of l) if (!c.ents.has(e.id)) c.ents.set(e.id, e); })
+                        .then(l => { avVue.fait++; for (const e of l) if (!c.ents.has(e.id)) c.ents.set(e.id, e); })
                         .catch(err => { c.faites.delete(cle); throw err; });
                     c.faites.set(cle, pr);
                 }
@@ -4536,6 +4647,39 @@
     const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
     const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
+    // =====================================================================
+    //  NIGERIA — GRID3 (avec l'OSGOF), ArcGIS Online, CC BY 4.0 : 37 États (36 + FCT ; maille, code postal « LA »),
+    //  774 collectivités locales (LGA, par tuiles, rattachées par statecode). Limites « opérationnelles » (vaccination),
+    //  plus fines et plus récentes que GAUL (2025). 10/10 réponses, ~0,5 s (rapport docs/sources-afrique.md, 04/10/2026).
+    //  Remplace GAUL pour ce pays. WME : code FIPS « NI ».
+    // =====================================================================
+    const NG_GRID3 = 'https://services3.arcgis.com/BU6Aadhn6tbBEdyk/arcgis/rest/services/';
+    FOURNISSEURS.NG = fournisseurArcgis({
+        id: 'ng-grid3', prefixe: 'ng', pays: 'NG', stockable: n => n === 'ng_lga',
+        source: 'GRID3 Nigeria — State and LGA boundaries', licence: 'CC BY 4.0',
+        maille: 'ng_state', libCode: '', placeholder: 'searchPhNG',
+        niveaux: {
+            ng_state: { couche: NG_GRID3 + 'NGA_State_Boundaries_V2/FeatureServer/0', code: 'statecode', nom: 'statename', champs: 'statecode,statename', zmin: 0, tout: true },
+            ng_lga: { couche: NG_GRID3 + 'NGA_LGA_Boundaries_2/FeatureServer/0', code: 'lgacode', nom: 'lganame', champs: 'lgacode,lganame,statecode', zmin: 7, tuile: 1, dep: p => String(p.statecode || '') },
+        },
+    });
+    // =====================================================================
+    //  RWANDA — NISR (Institut national de la statistique), ArcGIS Online, « Public access and no constraints » :
+    //  5 provinces (RÉUNION des districts, même couche regroupée par province_id), 30 districts (maille), 416 secteurs
+    //  (2022, par tuiles). ⚠️ La couche « District Boundary (Open data) » est VIDE ; c'est « Distrct_Boundary » (sic)
+    //  qui répond. Remplace GAUL pour ce pays. WME : code FIPS « RW ».
+    // =====================================================================
+    const RW_NISR = 'https://services5.arcgis.com/deNm5epdmeZgcm16/arcgis/rest/services/';
+    FOURNISSEURS.RW = fournisseurArcgis({
+        id: 'rw-nisr', prefixe: 'rw', pays: 'RW', stockable: n => n === 'rw_sector',
+        source: 'NISR Rwanda — District and Sector boundaries (2022)', licence: 'Public access, no constraints',
+        maille: 'rw_district', libCode: '', placeholder: 'searchPhRW',
+        niveaux: {
+            rw_province: { couche: RW_NISR + 'Distrct_Boundary/FeatureServer/0', code: 'province_id', nom: 'province', champs: 'province_id,province', zmin: 0, tout: true, dessus: true },
+            rw_district: { couche: RW_NISR + 'Distrct_Boundary/FeatureServer/0', code: 'district_id', nom: 'district', champs: 'district_id,district,province_id', zmin: 0, tout: true, dep: p => String(p.province_id || '') },
+            rw_sector: { couche: RW_NISR + 'Sector_Boundary_2022/FeatureServer/1', code: 'sector_id', nom: 'sector', champs: 'sector_id,sector,district_id', zmin: 9, tuile: 0.25, dep: p => String(p.district_id || '') },
+        },
+    });
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
     const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
@@ -5345,6 +5489,7 @@
         const z = await sdk.Map.getZoomLevel(), zmin = fournisseur().niveaux[niv].zmin;
         if (z < zmin) { vue.clear(); dessinerEntites(); etat(t('zoomNeeded', zmin)); return; }
         etat(t('loading'));
+        const finAv = suivreChargement(gen);
         try {
             const f = fournisseur(), bb = await sdk.Map.getMapExtent();
             // Le stock local d'abord : ce qui y est déjà s'affiche sans attendre le réseau ; une vue couverte par des
@@ -5365,6 +5510,7 @@
             // couverture utilisent toujours e.geom, exacte. Mise en cache par entité et par zoom.
             const tol = 156543.03 / Math.pow(2, z) * 0.8 / 111320;
             const afaire = r.ents.filter(e => !e.geomAff || e.tolAff !== tol);
+            avVue.phase = 'aff';
             if (afaire.length) {
                 const simples = await calcul('simplifier', afaire.map(e => e.geom), tol);
                 afaire.forEach((e, i) => { e.geomAff = simples[i]; e.tolAff = tol; });
@@ -5373,8 +5519,33 @@
             vue.clear();
             for (const e of r.ents) vue.set(e.id, e);
             dessinerEntites();
+            finAv();
             etat((r.trop ? t('tooMany', MAX_ENTITES) : t('shown', nombre(vue.size))) + (r.local ? ' ' + t('locFromStock') : ''));
-        } catch (e) { if (gen === genVue) etat(t('errNet', errTxt(e.message))); }
+        } catch (e) { finAv(); if (gen === genVue) etat(t('errNet', errTxt(e.message))); }
+    }
+    // Pendant le chargement : temps, volume reçu et requêtes, rafraîchis 3 fois par seconde ; barre RÉELLE quand le
+    // fournisseur charge par tuiles (« tuiles 12 / 24 »), animée sinon ; puis « préparation de l'affichage ».
+    function suivreChargement(gen) {
+        const debut = Date.now(), oct0 = reseau.octets, n0 = reseau.n, e0 = reseau.envoyees;
+        Object.assign(avVue, { fait: 0, total: 0, phase: '' });
+        const barre = () => ov && ov.querySelector('#wzm-zbarre');
+        const tic = () => {
+            if (gen !== genVue) return;
+            const b = barre(), s = Math.floor((Date.now() - debut) / 1000), o = reseau.octets - oct0;
+            const v = o >= 1048576 ? nombre(o / 1048576, 1) + ' Mo' : nombre(Math.round(o / 1024)) + ' Ko';
+            if (avVue.phase === 'aff') etat(t('loadDraw'));
+            else { const encours = (reseau.envoyees - e0) - (reseau.n - n0); etat(t('loadProg', s, v, reseau.n - n0) + (encours > 0 ? ' · ' + t('loadPending', encours) : '') + (avVue.total ? ' · ' + t('loadTiles', avVue.fait, avVue.total) : '')); }
+            if (b) {
+                b.hidden = false;
+                const det = avVue.total > 0 && avVue.phase !== 'aff';
+                b.classList.toggle('wzm-indet', !det);
+                b.firstElementChild.style.width = det ? Math.max(3, Math.round(100 * avVue.fait / avVue.total)) + '%' : '';
+                if (det) b.setAttribute('aria-valuenow', String(Math.round(100 * avVue.fait / avVue.total))); else b.removeAttribute('aria-valuenow');
+            }
+        };
+        const id = setInterval(tic, 330);
+        setTimeout(tic, 0);
+        return () => { clearInterval(id); const b = barre(); if (b && gen === genVue) b.hidden = true; };
     }
     function etat(txt) { const el = ov && ov.querySelector('#wzm-etat'); if (el) el.textContent = txt; }
 
@@ -5843,6 +6014,10 @@
 .wzm-barre{height:8px;margin:6px 0 2px;border-radius:50px;background:#e3eaf2;overflow:hidden}
 .wzm-barre>i{display:block;height:100%;width:3%;border-radius:50px;background:var(--wzm-blue-btn);transition:width .3s}
 .wzm-barre-txt{font-size:11px;color:var(--wzm-blue-dk);min-height:15px}
+.wzm-barre[hidden]{display:none}
+.wzm-barre.wzm-indet>i{width:30%;animation:wzm-va 1.2s ease-in-out infinite}
+@keyframes wzm-va{0%{margin-left:-30%}100%{margin-left:100%}}
+@media (prefers-reduced-motion:reduce){.wzm-barre.wzm-indet>i{animation:none;width:100%;opacity:.4}}
 .wzm-onglets{display:flex;gap:2px;padding:6px 10px 0;border-bottom:1px solid var(--wzm-border);background:var(--wzm-bg)}
 .wzm-onglet{height:auto;min-height:0;margin:0;padding:5px 12px;border:1px solid transparent;border-bottom:none;border-radius:8px 8px 0 0;background:transparent;color:var(--wzm-text2);font:600 12px 'Rubik','Open Sans',sans-serif;cursor:pointer}
 .wzm-onglet[aria-selected="true"]{background:#fff;border-color:var(--wzm-border);color:var(--wzm-blue-dk);margin-bottom:-1px}
@@ -6055,6 +6230,7 @@
             '<div class="wzm-ligne"><label for="wzm-niveau">' + esc(t('lvlLabel')) + '</label><select class="wzm-champ2" id="wzm-niveau"><option value="">' + esc(t('lvlNone')) + '</option>' +
             '</select></div>' +
             '<div class="wzm-etat" id="wzm-etat" role="status"></div>' +
+            '<div class="wzm-barre wzm-indet" id="wzm-zbarre" hidden role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="' + esc(t('loading')) + '"><i></i></div>' +
             '<div class="wzm-modes" role="radiogroup" aria-label="' + esc(t('step1')) + '">' + mode('carte', '&#x1F5B1;&#xFE0F;', t('modeMap')) + mode('cherche', '&#x1F50D;', t('modeSearch')) + mode('trace', '&#x270F;&#xFE0F;', t('modeDraw')) + '</div>' +
             '<div class="wzm-choix" data-pour="carte"><p class="wzm-aide" id="wzm-aide-carte"></p></div>' +
             '<div class="wzm-choix" data-pour="cherche"><input type="search" class="wzm-champ2" id="wzm-q" placeholder="' + esc(t('searchPh')) + '" aria-label="' + esc(t('searchPh')) + '" autocomplete="off" spellcheck="false"><ul class="wzm-sugg" id="wzm-sugg" hidden></ul></div>' +

@@ -38,7 +38,9 @@
 | Iceland | districts, municipalities | IS 50V (CC BY 4.0) |
 | United States | states, counties, cities (incorporated places) | U.S. Census Bureau, TIGERweb (public domain) |
 | Canada | provinces and territories, census divisions, municipalities (census subdivisions) | Statistics Canada (Open Government Licence – Canada) |
-| Africa (54 countries, incl. Western Sahara as a separate unit) | regions or provinces, districts or departments | FAO GAUL 2024/2025 (CC BY 4.0) |
+| Nigeria | states, local government areas (LGA) | GRID3 Nigeria (CC BY 4.0) |
+| Rwanda | provinces, districts, sectors | NISR Rwanda (public access, no constraints) |
+| Africa (52 other countries, incl. Western Sahara as a separate unit) | regions or provinces, districts or departments | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Mauritius (incl. Rodrigues) | districts, villages and towns | official data, built into the script |
 
 That is **77 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
@@ -126,7 +128,9 @@ Script: MIT licence.
 | Islande | circonscriptions, communes | IS 50V (CC BY 4.0) |
 | États-Unis | États, comtés, villes (incorporated places) | U.S. Census Bureau, TIGERweb (domaine public) |
 | Canada | provinces et territoires, divisions de recensement, municipalités (subdivisions de recensement) | Statistique Canada (Licence du gouvernement ouvert – Canada) |
-| Afrique (54 pays, Sahara occidental comme entité à part) | régions ou provinces, districts ou départements | FAO GAUL 2024/2025 (CC BY 4.0) |
+| Nigeria | États, collectivités locales (LGA) | GRID3 Nigeria (CC BY 4.0) |
+| Rwanda | provinces, districts, secteurs | NISR Rwanda (accès public, sans restriction) |
+| Afrique (52 autres pays, Sahara occidental comme entité à part) | régions ou provinces, districts ou départements | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Maurice (Rodrigues comprise) | districts, villages et villes | données officielles, intégrées au script |
 
 Soit **77 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
