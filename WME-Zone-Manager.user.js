@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.23.01
+// @version      2.24.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -396,6 +396,7 @@
             searchPhGB: 'Nom ou code GSS…',
             unit_IE: 'comtés',
             lvl_us_state: 'États (États-Unis)',
+            lvl_us_region: 'Régions Waze (USA)',
             lvl_us_county: 'Comtés (counties)',
             lvl_us_place: 'Villes (incorporated places)',
             searchPhUS: 'Nom, code FIPS ou abréviation (TX)…',
@@ -458,7 +459,7 @@
             asCatLoading: 'Lecture des catégories de Discuss…',
             asCatNone: 'Aucune catégorie privée ne vous est ouverte : demandez à un Country Coordinator ou à un modérateur de votre pays de vous y donner accès.',
             asStepCat: 'Catégorie du sujet',
-            asCatPublic: 'Catégories publiques (déconseillé)',
+            asCatPublic: 'Catégories publiques (refusées)',
             asCatWarn: 'Cette catégorie est PUBLIQUE  WZM n’y crée pas de registre, qui contient des pseudos et des notes sur les éditeurs. Choisissez la catégorie privée des Champs.',
             asBack: 'Retour',
             asNext: 'Continuer',
@@ -781,6 +782,7 @@
             searchPhGB: 'Name or GSS code…',
             unit_IE: 'counties',
             lvl_us_state: 'States (United States)',
+            lvl_us_region: 'Waze regions (USA)',
             lvl_us_county: 'Counties',
             lvl_us_place: 'Cities (incorporated places)',
             searchPhUS: 'Name, FIPS code or abbreviation (TX)…',
@@ -843,7 +845,7 @@
             asCatLoading: 'Reading Discuss categories…',
             asCatNone: 'No private category is open to you: ask a Country Coordinator or a moderator of your country to give you access.',
             asStepCat: 'Topic category',
-            asCatPublic: 'Public categories (not advised)',
+            asCatPublic: 'Public categories (refused)',
             asCatWarn: 'This category is PUBLIC: WZM does not create a registry there, as it holds usernames and notes about editors. Choose the private Champs category.',
             asBack: 'Back',
             asNext: 'Continue',
@@ -1166,6 +1168,7 @@
             searchPhGB: 'Name oder GSS-Code…',
             unit_IE: 'Grafschaften',
             lvl_us_state: 'Bundesstaaten (USA)',
+            lvl_us_region: 'Waze-Regionen (USA)',
             lvl_us_county: 'Countys',
             lvl_us_place: 'Städte (incorporated places)',
             searchPhUS: 'Name, FIPS-Code oder Kürzel (TX)…',
@@ -1228,7 +1231,7 @@
             asCatLoading: 'Discuss-Kategorien werden gelesen…',
             asCatNone: 'Ihnen steht keine private Kategorie offen: Bitten Sie einen Country Coordinator oder einen Moderator Ihres Landes um Zugang.',
             asStepCat: 'Kategorie des Themas',
-            asCatPublic: 'Öffentliche Kategorien (nicht empfohlen)',
+            asCatPublic: 'Öffentliche Kategorien (abgelehnt)',
             asCatWarn: 'Diese Kategorie ist ÖFFENTLICH: WZM legt dort kein Register an, denn es enthält Benutzernamen und Notizen zu Editoren. Wählen Sie die private Champs-Kategorie.',
             asBack: 'Zurück',
             asNext: 'Weiter',
@@ -1551,6 +1554,7 @@
             searchPhGB: 'Nombre o código GSS…',
             unit_IE: 'condados',
             lvl_us_state: 'Estados (Estados Unidos)',
+            lvl_us_region: 'Regiones Waze (EE. UU.)',
             lvl_us_county: 'Condados (counties)',
             lvl_us_place: 'Ciudades (incorporated places)',
             searchPhUS: 'Nombre, código FIPS o abreviatura (TX)…',
@@ -1613,7 +1617,7 @@
             asCatLoading: 'Leyendo las categorías de Discuss…',
             asCatNone: 'No tiene acceso a ninguna categoría privada: pida acceso a un Country Coordinator o a un moderador de su país.',
             asStepCat: 'Categoría del tema',
-            asCatPublic: 'Categorías públicas (desaconsejado)',
+            asCatPublic: 'Categorías públicas (rechazadas)',
             asCatWarn: 'Esta categoría es PÚBLICA: WZM no crea allí el registro, que contiene nombres de usuario y notas sobre los editores. Elija la categoría privada de los Champs.',
             asBack: 'Volver',
             asNext: 'Continuar',
@@ -1936,6 +1940,7 @@
             searchPhGB: 'Nome o codice GSS…',
             unit_IE: 'contee',
             lvl_us_state: 'Stati (Stati Uniti)',
+            lvl_us_region: 'Regioni Waze (USA)',
             lvl_us_county: 'Contee (counties)',
             lvl_us_place: 'Città (incorporated places)',
             searchPhUS: 'Nome, codice FIPS o sigla (TX)…',
@@ -1998,7 +2003,7 @@
             asCatLoading: 'Lettura delle categorie di Discuss…',
             asCatNone: 'Nessuna categoria privata ti è aperta: chiedi l’accesso a un Country Coordinator o a un moderatore del tuo paese.',
             asStepCat: 'Categoria dell’argomento',
-            asCatPublic: 'Categorie pubbliche (sconsigliato)',
+            asCatPublic: 'Categorie pubbliche (rifiutate)',
             asCatWarn: 'Questa categoria è PUBBLICA: WZM non vi crea il registro, che contiene nomi utente e note sugli editor. Scegli la categoria privata dei Champs.',
             asBack: 'Indietro',
             asNext: 'Continua',
@@ -2321,6 +2326,7 @@
             searchPhGB: 'Nome ou código GSS…',
             unit_IE: 'condados',
             lvl_us_state: 'Estados (Estados Unidos)',
+            lvl_us_region: 'Regiões Waze (EUA)',
             lvl_us_county: 'Condados (counties)',
             lvl_us_place: 'Cidades (incorporated places)',
             searchPhUS: 'Nome, código FIPS ou sigla (TX)…',
@@ -2383,7 +2389,7 @@
             asCatLoading: 'Lendo as categorias do Discuss…',
             asCatNone: 'Nenhuma categoria privada está aberta para você: peça acesso a um Country Coordinator ou a um moderador do seu país.',
             asStepCat: 'Categoria do tópico',
-            asCatPublic: 'Categorias públicas (não recomendado)',
+            asCatPublic: 'Categorias públicas (recusadas)',
             asCatWarn: 'Esta categoria é PÚBLICA: o WZM não cria o registro nela, pois ele contém nomes de usuário e notas sobre os editores. Escolha a categoria privada dos Champs.',
             asBack: 'Voltar',
             asNext: 'Continuar',
@@ -2706,6 +2712,7 @@
             searchPhGB: 'Nome ou código GSS…',
             unit_IE: 'condados',
             lvl_us_state: 'Estados (Estados Unidos)',
+            lvl_us_region: 'Regiões Waze (EUA)',
             lvl_us_county: 'Condados (counties)',
             lvl_us_place: 'Cidades (incorporated places)',
             searchPhUS: 'Nome, código FIPS ou sigla (TX)…',
@@ -2768,7 +2775,7 @@
             asCatLoading: 'A ler as categorias do Discuss…',
             asCatNone: 'Nenhuma categoria privada lhe está aberta: peça acesso a um Country Coordinator ou a um moderador do seu país.',
             asStepCat: 'Categoria do tópico',
-            asCatPublic: 'Categorias públicas (desaconselhado)',
+            asCatPublic: 'Categorias públicas (recusadas)',
             asCatWarn: 'Esta categoria é PÚBLICA: o WZM não cria lá o registo, que contém nomes de utilizador e notas sobre os editores. Escolha a categoria privada dos Champs.',
             asBack: 'Voltar',
             asNext: 'Continuar',
@@ -3091,6 +3098,7 @@
             searchPhGB: 'שם או קוד GSS…',
             unit_IE: 'מחוזות',
             lvl_us_state: 'מדינות (ארצות הברית)',
+            lvl_us_region: 'אזורי Waze (ארה״ב)',
             lvl_us_county: 'מחוזות (counties)',
             lvl_us_place: 'ערים (incorporated places)',
             searchPhUS: 'שם, קוד FIPS או קיצור (TX)…',
@@ -3153,7 +3161,7 @@
             asCatLoading: 'קורא את הקטגוריות של Discuss…',
             asCatNone: 'אין לך גישה לאף קטגוריה פרטית: בקש גישה מ-Country Coordinator או ממנחה במדינה שלך.',
             asStepCat: 'קטגוריית הנושא',
-            asCatPublic: 'קטגוריות ציבוריות (לא מומלץ)',
+            asCatPublic: 'קטגוריות ציבוריות (נדחות)',
             asCatWarn: 'הקטגוריה הזו ציבורית: WZM לא יוצר בה רשם, כי הוא מכיל שמות משתמש והערות על עורכים. בחר את הקטגוריה הפרטית של ה-Champs.',
             asBack: 'חזרה',
             asNext: 'המשך',
@@ -3549,7 +3557,7 @@
                 const codes = idx.filter(r => r.code === tx || r.cle.includes(q)).slice(0, 25).map(r => r.code);
                 return codes.length ? this.parCodes(niveau, codes) : [];
             },
-            async mailles() { return (await this.tous(this.maille)).map(e => ({ code: e.code, geom: e.geom })); },
+            async mailles() { return (await this.tous(this.maille)).map(e => ({ code: e.code, nom: e.nom, geom: e.geom })); },
         }, cfg);
         return f;
     }
@@ -3665,7 +3673,7 @@
             const q = sansAccents(String(texte).trim());
             return (await this.du(niveau)).filter(f => sansAccents(f.properties.n).includes(q) || f.properties.c === q).slice(0, 25).map(f => this.normaliser(f));
         },
-        async mailles() { return (await this.du('district')).map(f => ({ code: f.properties.c, geom: f.geometry })); },
+        async mailles() { return (await this.du('district')).map(f => ({ code: f.properties.c, nom: f.properties.n, geom: f.geometry })); },
     };
 
     // =====================================================================
@@ -3770,7 +3778,7 @@
             const codes = (/^\d{2,6}$/.test(tx) ? idx.filter(r => String(r.p[n.code]) === tx) : idx.filter(r => r.cle.includes(q))).slice(0, 25).map(r => String(r.p[n.code]));
             return this.parCodes(niveau, codes);
         },
-        async mailles() { return (await this.distritos()).map(e => ({ code: e.code, geom: e.geom })); },
+        async mailles() { return (await this.distritos()).map(e => ({ code: e.code, nom: e.nom, geom: e.geom })); },
     };
 
     // =====================================================================
@@ -3881,7 +3889,7 @@
             }
             return (await this.entites(niveau)).filter(e => sansAccents(e.nom).includes(q) || e.code === tx.padStart(2, '0')).slice(0, 25);
         },
-        async mailles() { return (await this.donnees()).ents.map(e => ({ code: e.code, geom: e.geom })); },
+        async mailles() { return (await this.donnees()).ents.map(e => ({ code: e.code, nom: e.nom, geom: e.geom })); },
         // Paquets : une province = son contour exact + tous ses municipios (~68 Ko chacun en moyenne, mesuré).
         async paquets() {
             const d = await this.donnees();
@@ -3911,7 +3919,7 @@
         async geomPaquet(p) { if (p.tout) return null; const d = await this.donnees(); const e = d.ents.find(x => x.code === p.codes[0]); return e && e.geom; },
     };
     Object.assign(FR, { stockable: () => true, pays: 'FR', maille: 'departement', libCode: 'INSEE', placeholder: 'searchPh',
-        async mailles() { return (await getJSON1Essais(this, this.url('departement', { count: 200 }))).features.map(f => ({ code: f.properties.code_insee, geom: f.geometry })); } });
+        async mailles() { return (await getJSON1Essais(this, this.url('departement', { count: 200 }))).features.map(f => ({ code: f.properties.code_insee, nom: f.properties.nom_officiel, geom: f.geometry })); } });
     // =====================================================================
     //  BELGIQUE — SPF Finances (AGDP, cadastre), unités administratives INSPIRE, ArcGIS REST, CC BY 4.0 ;
     //  millésime 2026-01-01 : 3 régions, 11 « provinces » (les 10 + la Région de Bruxelles-Capitale, code 04000, qui
@@ -4174,7 +4182,7 @@
                 const codes = (await this.index(niveau)).filter(r => r.code === tx || r.cle.includes(q)).slice(0, 25).map(r => r.code);
                 return codes.length ? this.parCodes(niveau, codes) : [];
             },
-            async mailles() { return (await this.tous(this.maille)).map(e => ({ code: e.code, geom: e.geom })); },
+            async mailles() { return (await this.tous(this.maille)).map(e => ({ code: e.code, nom: e.nom, geom: e.geom })); },
         }, cfg);
     }
     const CH = fournisseurGeoAdmin({
@@ -4197,7 +4205,7 @@
         maille: 'li_gemeinde', libCode: '', placeholder: 'searchPhLI',
         emprisePays: [9.45, 47.04, 9.65, 47.28],
         niveaux: { li_gemeinde: { zmin: 0 } },
-        async mailles() { const codes = (await this.index('li_gemeinde')).map(r => r.code); return (await this.parCodes('li_gemeinde', codes)).map(e => ({ code: e.code, geom: e.geom })); },
+        async mailles() { const codes = (await this.index('li_gemeinde')).map(r => r.code); return (await this.parCodes('li_gemeinde', codes)).map(e => ({ code: e.code, nom: e.nom, geom: e.geom })); },
     });
     // Nom servi en CAPITALES (Irlande) : remis en casse de titre pour l'affichage (« DÚN LAOGHAIRE » → « Dún Laoghaire »).
     const casseTitre = x => String(x || '').toLowerCase().replace(/(^|[\s\-'(])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
@@ -4390,12 +4398,24 @@
     //  ⚠️ Aleutians West et les territoires du Pacifique chevauchent l'antiméridien. WME : serveur « NA » (env=usa).
     // =====================================================================
     const US_TIGER = 'https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2025/';
+    // Régions Waze des États-Unis (Wazeopedia, USA/Regional_Coordinator, lu le 04/10/2026) : ce ne sont PAS les Census
+    // Regions. 11 régions × États = les 56 entités de la couche États. Un rôle RM aux USA = une de ces régions.
+    const REGIONS_WAZE = { US: {
+        GLR: ['Great Lakes', 'IL IN MI OH WI'], MAR: ['Mid Atlantic', 'DC MD VA WV'], NER: ['New England', 'CT ME MA NH RI VT'],
+        NOR: ['Northeast', 'DE NJ NY PA'], NWR: ['Northwest', 'AK ID MT OR WA WY'], PLN: ['Plains', 'IA KS MN MO NE ND SD'],
+        SAT: ['South Atlantic', 'KY NC SC TN'], SCR: ['South Central', 'AR LA MS OK TX'], SER: ['Southeast', 'AL FL GA'],
+        SWR: ['Southwest', 'AZ CA CO HI NV NM UT'], ATR: ['Territories', 'AS GU MP PR VI'],
+    } };
+    // Régions Waze d'une liste de codes de maille (États) : « CO, WY » → « SWR, NWR ».
+    const regionsDe = (pays, codes) => { const R = REGIONS_WAZE[pays]; if (!R) return []; const s = new Set(codes.map(String)); return Object.keys(R).filter(k => R[k][1].split(' ').some(x => s.has(x))); };
     const US = fournisseurArcgis({
         id: 'us-census', prefixe: 'us', pays: 'US', stockable: n => n === 'us_county' || n === 'us_place',
         source: 'U.S. Census Bureau — TIGERweb (cartographic boundaries 500K)',
         licence: 'Public domain',
         maille: 'us_state', libCode: 'FIPS', placeholder: 'searchPhUS',
         niveaux: {
+            // Régions Waze : niveau DÉRIVÉ des États (réunion), sans couche du Census ; rattachement = ses États.
+            us_region: { derive: true, code: 'code', nom: 'nom', zmin: 0, tout: true },
             us_state: { couche: US_TIGER + 'State_County/MapServer/7', code: 'STUSAB', nom: 'NAME', alt: 'GEOID', champs: 'GEOID,STATE,STUSAB,NAME', zmin: 0, tout: true },
             us_county: { couche: US_TIGER + 'State_County/MapServer/11', code: 'GEOID', nom: 'NAME', champs: 'GEOID,STATE,NAME', zmin: 7, tuile: 1,
                 dep: { niveau: 'us_state', cle: 'STATE', champ: 'STUSAB' } },
@@ -4426,6 +4446,27 @@
             ca_csd: { couche: CA_SC + '9', code: 'CSDUID', nom: 'CSDNAME', champs: 'CSDUID,CSDNAME,PRUID', zmin: 10, tuile: 0.25, dep: p => String(p.PRUID || '') },
         },
     });
+    {
+        // Régions Waze : réunion des États (affichage, recherche) ; contour EXACT = celui des États, à l'export.
+        const tousBase = US.tous.bind(US), precisesBase = US.precises.bind(US);
+        US.tous = function (niveau) {
+            if (niveau !== 'us_region') return tousBase(niveau);
+            return this._tous.us_region || (this._tous.us_region = tousBase('us_state').then(st => Object.entries(REGIONS_WAZE.US).map(([code, [nom, l]]) => {
+                const codes = l.split(' '), ps = st.filter(e => codes.includes(e.code));
+                const geom = { type: 'MultiPolygon', coordinates: ps.flatMap(e => polysG(e.geom)) };
+                return { id: 'us:us_region:' + code, niveau: 'us_region', code, nom: code + ' — ' + nom, dep: codes.join(', '), geom, bb: emprise(geom), source: this.id, _p: { code, nom } };
+            })).catch(e => { delete this._tous.us_region; throw e; }));
+        };
+        US.precises = async function (niveau, codes) {
+            if (niveau !== 'us_region') return precisesBase(niveau, codes);
+            const out = [];
+            for (const r of (await this.tous('us_region')).filter(x => codes.includes(x.code))) {
+                const st = await precisesBase('us_state', r.dep.split(', '));
+                out.push(Object.assign({}, r, { geom: { type: 'MultiPolygon', coordinates: st.flatMap(e => polysG(e.geom)) } }));
+            }
+            return out;
+        };
+    }
     const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
     const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada']];
@@ -6784,11 +6825,39 @@
             default: return t('ec_' + x.k);
         }
     }
+    // Recherche « pseudo, zone ou département » : elle ne regardait que les codes des RÔLES — or un registre créé par
+    // recensement n'a encore que des zones Waze — et jamais les NOMS : Silvio cherchait « Firenze » (04/10/2026).
+    // Désormais : pseudo, libellé des rôles, nom donné aux zones, codes des rôles ET des zones Waze, et le nom de ces
+    // codes (départements, provinces… du pays du registre, chargés une fois).
+    // Aux USA, les États d'un éditeur suivis de leurs régions Waze : « CO, WY (SWR, NWR) ».
+    const avecRegions = codes => { const p = (registre && registre.pays) || '', r = regionsDe(p, codes); return codes.join(', ') + (r.length ? ' (' + r.join(', ') + ')' : ''); };
+    let nomsMaillesCache = null;
+    function nomsMailles() {
+        const p = (registre && registre.pays) || paysChoisi();
+        if (nomsMaillesCache && nomsMaillesCache.p === p) return nomsMaillesCache.m;
+        const c = nomsMaillesCache = { p, m: null };
+        Promise.resolve().then(() => fournisseurDe(p).mailles())
+            .then(l => { c.m = new Map(l.map(x => [String(x.code), sansAccents(x.nom || '')])); if (nomsMaillesCache === c && chercheGest.trim()) rendreGest(); })
+            .catch(() => { if (nomsMaillesCache === c) nomsMaillesCache = null; });
+        return null;
+    }
+    function correspondRecherche(e, q) {
+        const Q = sansAccents(q), qU = q.toUpperCase();
+        if (e.pseudo.toLowerCase().includes(q) || e.roles.some(r => r.libelle.toLowerCase().includes(q))) return true;
+        if (Object.values(e.zones || {}).some(z => z && z.nom && sansAccents(z.nom).includes(Q))) return true;
+        const v = vivant.eds[e.pseudo.toLowerCase()];
+        const codes = new Set(e.roles.flatMap(r => r.codes).concat(v && v.codes ? v.codes.flat() : []).map(String));
+        if (codes.has(qU)) return true;
+        if (regionsDe((registre && registre.pays) || '', [...codes]).includes(qU)) return true;   // « SCR » : États de la région
+        const m = nomsMailles();
+        if (m) for (const c of codes) { const n = m.get(c); if (n && n.includes(Q)) return true; }
+        return false;
+    }
     function editeursFiltres() {
         if (!registre) return [];
         const q = chercheGest.trim().toLowerCase();
         return registre.editeurs.filter(e => {
-            if (q && !e.pseudo.toLowerCase().includes(q) && !e.roles.some(r => r.libelle.toLowerCase().includes(q) || r.codes.includes(q.toUpperCase()))) return false;
+            if (q && !correspondRecherche(e, q)) return false;
             return passeFiltre(e, filtreGest);
         });
     }
@@ -7232,7 +7301,7 @@
             (/^https:\/\//i.test(r.demande) ? '<a href="' + esc(r.demande) + '" target="_blank" rel="noopener noreferrer" title="' + esc(t('gRequest') + (r.ticket ? ' · ' + r.ticket : '')) + '" aria-label="' + esc(t('gRequest')) + '">&#x1F517;</a>' : r.demande ? '<span class="wzm-lien-brut" title="' + esc(r.demande) + '">&#x1F517;&#xFE0E;</span>' : '') + statut(r, i) +
             (ro ? '' : '<button type="button" data-suppr-role="' + i + '" title="' + esc(t('gRoleDelete')) + '" aria-label="' + esc(t('gRoleDelete') + ' — ' + r.type + ' ' + r.libelle) + '">&#x2715;</button>') + '</div>').join('');
         const faits = !v ? t('liveUnknown') : v.erreur ? t('liveErr', v.erreur) :
-            t('liveFacts', v.rang ? 'L' + v.rang : '?', nombre(v.ed91), v.zones.length, [...new Set((v.codes || []).flat())].sort().join(', ') || '—', t('unit_' + ((registre && registre.pays) || 'FR'))) +
+            t('liveFacts', v.rang ? 'L' + v.rang : '?', nombre(v.ed91), v.zones.length, avecRegions([...new Set((v.codes || []).flat())].sort()) || '—', t('unit_' + ((registre && registre.pays) || 'FR'))) +
             (v.derniere === 'jamais' ? ' · ' + t('lastEditNever') : v.derniere ? ' · ' + t('lastEdit', dateLocale(v.derniere), nombre(Math.max(0, joursDepuis(v.derniere)))) : '');
         return '<div class="wzm-gfiche">' +
             '<div class="wzm-msg wzm-msgf" id="wzm-gmsgf" role="status" aria-live="polite">' + esc(dernierMsgGest) + '</div>' +
