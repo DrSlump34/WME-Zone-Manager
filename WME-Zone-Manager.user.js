@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.20.03
+// @version      2.20.04
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -5412,14 +5412,14 @@
 .wzm-sugg small{color:var(--wzm-grey)}
 .wzm-sugg .wzm-vide{padding:4px 9px;color:var(--wzm-text2);font-size:11px}
 .wzm-chips{display:flex;flex-wrap:wrap;gap:4px;max-height:150px;overflow:auto;margin:4px 0}
-.wzm-chip-c{all:unset;cursor:pointer;display:inline}
+.wzm-chip-c{all:unset;cursor:pointer;display:inline;white-space:nowrap}
 .wzm-chip-c:focus-visible{outline:2px solid var(--wzm-blue-btn);outline-offset:1px}
 .wzm-chip{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding-block:2px;padding-inline:9px 4px;border-radius:50px;background:#fff3e0;border:1px solid #ffcc80;font-size:11px}
 .wzm-chip.trace{border-style:dashed}
 .wzm-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
 .wzm-chip small{color:#8d6e63}
-.wzm-chip button{width:18px;height:18px;min-height:0;padding:0;margin:0;border:none;border-radius:50%;background:transparent;color:#8d6e63;font-size:11px;cursor:pointer;line-height:1}
-.wzm-chip button:hover{background:#ffe0b2}
+.wzm-chip button:not(.wzm-chip-c){width:18px;height:18px;min-height:0;padding:0;margin:0;border:none;border-radius:50%;background:transparent;color:#8d6e63;font-size:11px;cursor:pointer;line-height:1}
+.wzm-chip button:not(.wzm-chip-c):hover{background:#ffe0b2}
 .wzm-asst{display:flex;flex-direction:column;gap:2px}
 .wzm-asst-tete{display:flex;align-items:center;gap:6px;margin-bottom:4px}
 .wzm-asst-tete small{flex:1;color:var(--wzm-grey)}
