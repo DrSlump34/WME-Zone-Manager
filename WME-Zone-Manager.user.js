@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.21.02
+// @version      2.21.03
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -6627,14 +6627,19 @@
         const q = chercheGest.trim().toLowerCase();
         return registre.editeurs.filter(e => {
             if (q && !e.pseudo.toLowerCase().includes(q) && !e.roles.some(r => r.libelle.toLowerCase().includes(q) || r.codes.includes(q.toUpperCase()))) return false;
-            if (filtreGest === 'tous') return true;
-            const ec = ecartsDe(e).map(x => x.k);
-            if (filtreGest === 'ecarts') return ec.length > 0;
-            if (filtreGest === 'retraits') return e.roles.some(r => r.statut === 'aretirer');
-            if (filtreGest === 'inactifs') return ec.includes('inactif');
-            if (filtreGest === 'nondoc') return ec.includes('nonDocumentee');
-            return true;
+            return passeFiltre(e, filtreGest);
         });
+    }
+    // Un éditeur passe-t-il le filtre ? Partagé par la liste et par les nombres du menu des filtres : Silvio ne voyait
+    // la liste changer qu'avec « Inattivi » (les autres donnaient les 160, ou rien), sans comprendre pourquoi (04/10/2026).
+    function passeFiltre(e, f, ec) {
+        if (f === 'tous') return true;
+        if (f === 'retraits') return e.roles.some(r => r.statut === 'aretirer');
+        ec = ec || ecartsDe(e).map(x => x.k);
+        if (f === 'ecarts') return ec.length > 0;
+        if (f === 'inactifs') return ec.includes('inactif');
+        if (f === 'nondoc') return ec.includes('nonDocumentee');
+        return true;
     }
     // ---------- Assistant de première utilisation du registre (2.19.00) ----------
     // Demande de l'auteur (04/10/2026) : guider le Champ qui crée le registre de SON pays — quoi faire, où, quoi
@@ -6957,6 +6962,8 @@
         const vq = vivant.q ? t('liveWhen', new Date(vivant.q).toLocaleString(_lang)) : t('liveNever');
         const filtres = [['tous', 'fAll'], ['ecarts', 'fGaps'], ['retraits', 'fRemovals'], ['inactifs', 'fInactive'], ['nondoc', 'fUndoc']];
         const nRetraits = registre ? registre.editeurs.filter(e => e.roles.some(r => r.statut === 'aretirer')).length : 0;
+        const nFiltre = {};
+        if (registre) for (const e of registre.editeurs) { const ec = ecartsDe(e).map(x => x.k); for (const [k] of filtres) if (passeFiltre(e, k, ec)) nFiltre[k] = (nFiltre[k] || 0) + 1; }
         return '<p class="wzm-intro">' + esc(t('gestIntro')) + '</p>' +
             '<div class="wzm-etape"><span class="wzm-num">&#x1F4D2;</span>' + esc(t('gRegistry')) + '</div>' +
             '<div class="wzm-ligne wzm-ligne-etat"><span class="wzm-etat">' + esc(etatReg) + '</span><span class="wzm-ronds">' +
@@ -6975,7 +6982,7 @@
                 (modeQui ? '<p class="wzm-aide">' + esc(t('whoHint')) + '</p>' + (quiIci ? '<div class="wzm-qui">' + (quiIci.length ? quiIci.map((x, k) => '<button type="button" class="wzm-chip' + (x.inscrit ? '' : ' trace') + '" data-ouvrir="' + esc(x.pseudo) + '" data-survol="' + esc(x.pseudo) + '"><span>' + (quiIci.length > 1 ? '<i class="wzm-coul" style="background:' + COULEURS_QUI[k % COULEURS_QUI.length] + '"></i>' : '') + '<bdi>' + esc(x.pseudo) + '</bdi>' + (x.rang ? ' <small>L' + x.rang + '</small>' : '') + (x.pays ? ' <span title="' + esc(t('whoCountry')) + '">&#x1F310;</span>' : '') + '</span></button>').join(' ') : '<span class="wzm-vide2">' + esc(t('whoNobody')) + '</span>') + '</div>' : '') : '') +
                 '<div class="wzm-etape"><span class="wzm-num">&#x1F465;</span>' + esc(t('gEditors', registre.editeurs.length)) + '</div>' +
                 '<div class="wzm-ligne"><input type="search" class="wzm-champ2" id="wzm-gq" aria-label="' + esc(t('gSearchPh')) + '" placeholder="' + esc(t('gSearchPh')) + '" value="' + esc(chercheGest) + '" style="flex:1;min-width:0">' +
-                '<select class="wzm-champ2" id="wzm-gfiltre" aria-label="' + esc(t('fLabel')) + '">' + filtres.map(([k, l]) => '<option value="' + k + '"' + (filtreGest === k ? ' selected' : '') + '>' + esc(t(l)) + '</option>').join('') + '</select></div>' +
+                '<select class="wzm-champ2" id="wzm-gfiltre" aria-label="' + esc(t('fLabel')) + '">' + filtres.map(([k, l]) => '<option value="' + k + '"' + (filtreGest === k ? ' selected' : '') + '>' + esc(t(l)) + ' (' + nombre(nFiltre[k] || 0) + ')</option>').join('') + '</select></div>' +
                 '<details class="wzm-legende"><summary>' + esc(t('lgTitle')) + '</summary><ul>' +
                     '<li><span class="wzm-pt rouge"></span><span class="wzm-pt orange"></span><span class="wzm-pt gris"></span><span class="wzm-pt vert"></span> ' + esc(t('lgDots')) + '</li>' +
                     '<li><span class="wzm-jours v">12\u00a0' + t('daysShort') + '</span> <span class="wzm-jours o">45\u00a0' + t('daysShort') + '</span> <span class="wzm-jours r">130\u00a0' + t('daysShort') + '</span> ' + esc(t('lgDays')) + '</li>' +
