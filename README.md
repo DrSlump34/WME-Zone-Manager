@@ -55,6 +55,7 @@ That is **21 countries**. The managers registry, the survey of managed areas and
 - Then, for each editor: areas at Waze, departments/provinces covered, level, edits over 91 days, last edit, areas abroad 🌍, gaps between the registry and Waze, statuses (in force, requested, to remove, removed), "Who manages here?" on the map, and a ready-made removal email.
 - Other Champs only paste the topic link in WZM's Scripts tab. Discuss decides who can read and write; WZM never overwrites someone else's work (version check on save).
 - "Survey at Waze" 🔎 compares the registry with Waze later: editors missing from the registry, editors with no area left.
+- **CM on a whole country** 🌐: a CM right requested by choosing a country (not a polygon) creates no area at Waze and is invisible to everyone but its holder. Note it by hand in the editor’s card: it is tied to the country outline, found by “Who manages here?”, and “Workshop” turns it into an area to request it again as a polygon.
 
 ## Good to know
 
@@ -139,6 +140,7 @@ Soit **21 pays**. Le registre des gestionnaires, le recensement des zones géré
 - Ensuite, pour chaque éditeur : ses zones chez Waze, les départements ou provinces couverts, son niveau, ses éditions sur 91 jours, sa dernière édition, ses zones à l’étranger 🌍, les écarts entre le registre et Waze, les statuts (en vigueur, demandé, à retirer, retiré), « Qui gère ici ? » sur la carte, et un courriel de retrait tout prêt.
 - Les autres Champs n’ont qu’à coller le lien du sujet dans l’onglet Scripts de WZM. C’est Discuss qui décide qui peut lire et écrire ; WZM n’écrase jamais le travail d’un autre (contrôle de version à l’enregistrement).
 - « Recenser chez Waze » 🔎 compare plus tard le registre à Waze : éditeurs absents du registre, éditeurs qui n’ont plus aucune zone.
+- **CM sur tout un pays** 🌐 : un droit de CM demandé en choisissant un pays (et non avec un polygone) ne crée aucune zone chez Waze et n’est visible que de son titulaire. Il se note à la main dans la fiche de l’éditeur : rattaché au contour du pays, il est retrouvé par « Qui gère ici ? », et « Atelier » en tire la zone pour le redemander par polygone.
 
 ## Bon à savoir
 
