@@ -74,7 +74,7 @@ That is **91 countries**. The managers registry, the survey of managed areas and
 - Then, for each editor: areas at Waze, departments/provinces covered, level, edits over 91 days, last edit, areas abroad 🌍, gaps between the registry and Waze, statuses (in force, requested, to remove, removed), "Who manages here?" on the map, and a ready-made removal email.
 - Other Champs only paste the topic link in WZM's Scripts tab. Discuss decides who can read and write; WZM never overwrites someone else's work (version check on save).
 - "Survey at Waze" 🔎 compares the registry with Waze later: editors missing from the registry, editors with no area left.
-- **CM on a whole country** 🌐: a CM right requested by choosing a country (not a polygon) creates no area at Waze and is invisible to everyone but its holder. Note it by hand in the editor’s card: it is tied to the country outline, found by “Who manages here?”, and “Workshop” turns it into an area to request it again as a polygon.
+- **CM on a whole country** 🌐: a CM right requested by choosing a country (not a polygon) creates no area at Waze and is invisible to everyone but its holder. Note it by hand in the editor’s card: it is tied to the country outline, found by “Who manages here?”.
 - **Community titles**: on top of its type (AM, SM, RM, CM…), every area and every role can carry the titles **LC, GC, CC, CPC, Booster**, combined (“CM + LC + CPC”). They show as badges next to the username and can filter the list.
 - **Wide view** ⤢: the editor list on the left, the card on the right; the editor header stays pinned, sections fold.
 
