@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.31.00
+// @version      2.32.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -34,10 +34,11 @@
 // @grant        GM_getResourceText
 // @grant        unsafeWindow
 // @resource     TURF https://cdnjs.cloudflare.com/ajax/libs/Turf.js/7.4.0/turf.min.js#sha256=5db5dda50210fa0f25394672383ba4a2e6fcde3c9e95ae0e21d62d327fc66d05
-// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/f2fc806a4d41140c79eb3bf3ad3f886268e019e4/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
-// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/f2fc806a4d41140c79eb3bf3ad3f886268e019e4/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
-// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/f2fc806a4d41140c79eb3bf3ad3f886268e019e4/donnees/donnees_eu.b64#sha256=d32a80b9de9d6277e275d9ad4422db6c008734b7257fa07a226328044f94684d
-// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/f2fc806a4d41140c79eb3bf3ad3f886268e019e4/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
+// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
+// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
+// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_eu.b64#sha256=d32a80b9de9d6277e275d9ad4422db6c008734b7257fa07a226328044f94684d
+// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
+// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_am.b64#sha256=5663b1888fe65c990b39df5565e7fe383e2a46738c7d025ce734a83e078904e5
 // @connect      data.geopf.fr
 // @connect      geo.api.gouv.fr
 // @connect      geoportale.istat.it
@@ -56,6 +57,9 @@
 // @connect      services.arcgis.com
 // @connect      services2.arcgis.com
 // @connect      geo.abs.gov.au
+// @connect      wms.ign.gob.ar
+// @connect      servicodados.ibge.gov.br
+// @connect      gaia.inegi.org.mx
 // @connect      services1.arcgis.com
 // @connect      services-eu1.arcgis.com
 // @connect      api3.geo.admin.ch
@@ -425,6 +429,28 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            lvl_br_uf: 'États (UF)',
+            lvl_br_municipio: 'Communes (municípios)',
+            searchPhBR: 'Nom ou code IBGE…',
+            unit_BR: 'états (UF)',
+            lvl_mx_entidad: 'États (entidades federativas)',
+            lvl_mx_municipio: 'Communes (municipios)',
+            searchPhMX: 'Nom ou code INEGI…',
+            unit_MX: 'états (entidades)',
+            lvl_ar_provincia: 'Provinces',
+            lvl_ar_departamento: 'Départements (departamentos, partidos)',
+            lvl_ar_municipio: 'Communes (municipios)',
+            searchPhAR: 'Nom ou code…',
+            unit_AR: 'provinces',
+            lvl_cl_region: 'Régions',
+            lvl_cl_provincia: 'Provinces',
+            lvl_cl_comuna: 'Communes (comunas)',
+            searchPhCL: 'Nom ou code CUT…',
+            unit_CL: 'régions',
+            lvl_co_departamento: 'Départements',
+            lvl_co_municipio: 'Communes (municipios)',
+            searchPhCO: 'Nom ou code DIVIPOLA…',
+            unit_CO: 'départements',
             lvl_pl_wojewodztwo: 'Voïvodies (województwa)',
             lvl_pl_powiat: 'Districts (powiaty)',
             lvl_pl_gmina: 'Communes (gminy)',
@@ -871,6 +897,28 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            lvl_br_uf: 'States (UF)',
+            lvl_br_municipio: 'Municipalities (municípios)',
+            searchPhBR: 'Name or IBGE code…',
+            unit_BR: 'states (UF)',
+            lvl_mx_entidad: 'States (entidades federativas)',
+            lvl_mx_municipio: 'Municipalities (municipios)',
+            searchPhMX: 'Name or INEGI code…',
+            unit_MX: 'states (entidades)',
+            lvl_ar_provincia: 'Provinces',
+            lvl_ar_departamento: 'Departments (departamentos, partidos)',
+            lvl_ar_municipio: 'Municipalities (municipios)',
+            searchPhAR: 'Name or code…',
+            unit_AR: 'provinces',
+            lvl_cl_region: 'Regions',
+            lvl_cl_provincia: 'Provinces',
+            lvl_cl_comuna: 'Communes (comunas)',
+            searchPhCL: 'Name or CUT code…',
+            unit_CL: 'regions',
+            lvl_co_departamento: 'Departments',
+            lvl_co_municipio: 'Municipalities (municipios)',
+            searchPhCO: 'Name or DIVIPOLA code…',
+            unit_CO: 'departments',
             lvl_pl_wojewodztwo: 'Voivodeships (województwa)',
             lvl_pl_powiat: 'Counties (powiaty)',
             lvl_pl_gmina: 'Municipalities (gminy)',
@@ -1317,6 +1365,28 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            lvl_br_uf: 'Bundesstaaten (UF)',
+            lvl_br_municipio: 'Gemeinden (Municípios)',
+            searchPhBR: 'Name oder IBGE-Code…',
+            unit_BR: 'Bundesstaaten (UF)',
+            lvl_mx_entidad: 'Bundesstaaten (Entidades)',
+            lvl_mx_municipio: 'Gemeinden (Municipios)',
+            searchPhMX: 'Name oder INEGI-Code…',
+            unit_MX: 'Bundesstaaten (Entidades)',
+            lvl_ar_provincia: 'Provinzen',
+            lvl_ar_departamento: 'Departamentos (Partidos)',
+            lvl_ar_municipio: 'Gemeinden (Municipios)',
+            searchPhAR: 'Name oder Code…',
+            unit_AR: 'Provinzen',
+            lvl_cl_region: 'Regionen',
+            lvl_cl_provincia: 'Provinzen',
+            lvl_cl_comuna: 'Gemeinden (Comunas)',
+            searchPhCL: 'Name oder CUT-Code…',
+            unit_CL: 'Regionen',
+            lvl_co_departamento: 'Departamentos',
+            lvl_co_municipio: 'Gemeinden (Municipios)',
+            searchPhCO: 'Name oder DIVIPOLA-Code…',
+            unit_CO: 'Departamentos',
             lvl_pl_wojewodztwo: 'Woiwodschaften',
             lvl_pl_powiat: 'Kreise (Powiaty)',
             lvl_pl_gmina: 'Gemeinden (Gminy)',
@@ -1763,6 +1833,28 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            lvl_br_uf: 'Estados (UF)',
+            lvl_br_municipio: 'Municipios (municípios)',
+            searchPhBR: 'Nombre o código IBGE…',
+            unit_BR: 'estados (UF)',
+            lvl_mx_entidad: 'Entidades federativas',
+            lvl_mx_municipio: 'Municipios',
+            searchPhMX: 'Nombre o clave INEGI…',
+            unit_MX: 'entidades federativas',
+            lvl_ar_provincia: 'Provincias',
+            lvl_ar_departamento: 'Departamentos y partidos',
+            lvl_ar_municipio: 'Municipios',
+            searchPhAR: 'Nombre o código…',
+            unit_AR: 'provincias',
+            lvl_cl_region: 'Regiones',
+            lvl_cl_provincia: 'Provincias',
+            lvl_cl_comuna: 'Comunas',
+            searchPhCL: 'Nombre o código CUT…',
+            unit_CL: 'regiones',
+            lvl_co_departamento: 'Departamentos',
+            lvl_co_municipio: 'Municipios',
+            searchPhCO: 'Nombre o código DIVIPOLA…',
+            unit_CO: 'departamentos',
             lvl_pl_wojewodztwo: 'Voivodatos (województwa)',
             lvl_pl_powiat: 'Distritos (powiaty)',
             lvl_pl_gmina: 'Municipios (gminy)',
@@ -2209,6 +2301,28 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            lvl_br_uf: 'Stati (UF)',
+            lvl_br_municipio: 'Comuni (municípios)',
+            searchPhBR: 'Nome o codice IBGE…',
+            unit_BR: 'stati (UF)',
+            lvl_mx_entidad: 'Stati (entidades federativas)',
+            lvl_mx_municipio: 'Comuni (municipios)',
+            searchPhMX: 'Nome o codice INEGI…',
+            unit_MX: 'stati (entidades)',
+            lvl_ar_provincia: 'Province',
+            lvl_ar_departamento: 'Dipartimenti (departamentos, partidos)',
+            lvl_ar_municipio: 'Comuni (municipios)',
+            searchPhAR: 'Nome o codice…',
+            unit_AR: 'province',
+            lvl_cl_region: 'Regioni',
+            lvl_cl_provincia: 'Province',
+            lvl_cl_comuna: 'Comuni (comunas)',
+            searchPhCL: 'Nome o codice CUT…',
+            unit_CL: 'regioni',
+            lvl_co_departamento: 'Dipartimenti',
+            lvl_co_municipio: 'Comuni (municipios)',
+            searchPhCO: 'Nome o codice DIVIPOLA…',
+            unit_CO: 'dipartimenti',
             lvl_pl_wojewodztwo: 'Voivodati (województwa)',
             lvl_pl_powiat: 'Distretti (powiaty)',
             lvl_pl_gmina: 'Comuni (gminy)',
@@ -2655,6 +2769,28 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            lvl_br_uf: 'Estados (UF)',
+            lvl_br_municipio: 'Municípios',
+            searchPhBR: 'Nome ou código IBGE…',
+            unit_BR: 'estados (UF)',
+            lvl_mx_entidad: 'Estados (entidades federativas)',
+            lvl_mx_municipio: 'Municípios (municipios)',
+            searchPhMX: 'Nome ou código INEGI…',
+            unit_MX: 'estados (entidades)',
+            lvl_ar_provincia: 'Províncias',
+            lvl_ar_departamento: 'Departamentos (partidos)',
+            lvl_ar_municipio: 'Municípios (municipios)',
+            searchPhAR: 'Nome ou código…',
+            unit_AR: 'províncias',
+            lvl_cl_region: 'Regiões',
+            lvl_cl_provincia: 'Províncias',
+            lvl_cl_comuna: 'Comunas',
+            searchPhCL: 'Nome ou código CUT…',
+            unit_CL: 'regiões',
+            lvl_co_departamento: 'Departamentos',
+            lvl_co_municipio: 'Municípios (municipios)',
+            searchPhCO: 'Nome ou código DIVIPOLA…',
+            unit_CO: 'departamentos',
             lvl_pl_wojewodztwo: 'Voivodias (województwa)',
             lvl_pl_powiat: 'Distritos (powiaty)',
             lvl_pl_gmina: 'Municípios (gminy)',
@@ -3101,6 +3237,28 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            lvl_br_uf: 'Estados (UF)',
+            lvl_br_municipio: 'Municípios',
+            searchPhBR: 'Nome ou código IBGE…',
+            unit_BR: 'estados (UF)',
+            lvl_mx_entidad: 'Estados (entidades federativas)',
+            lvl_mx_municipio: 'Municípios (municipios)',
+            searchPhMX: 'Nome ou código INEGI…',
+            unit_MX: 'estados (entidades)',
+            lvl_ar_provincia: 'Províncias',
+            lvl_ar_departamento: 'Departamentos (partidos)',
+            lvl_ar_municipio: 'Municípios (municipios)',
+            searchPhAR: 'Nome ou código…',
+            unit_AR: 'províncias',
+            lvl_cl_region: 'Regiões',
+            lvl_cl_provincia: 'Províncias',
+            lvl_cl_comuna: 'Comunas',
+            searchPhCL: 'Nome ou código CUT…',
+            unit_CL: 'regiões',
+            lvl_co_departamento: 'Departamentos',
+            lvl_co_municipio: 'Municípios (municipios)',
+            searchPhCO: 'Nome ou código DIVIPOLA…',
+            unit_CO: 'departamentos',
             lvl_pl_wojewodztwo: 'Voivodias (województwa)',
             lvl_pl_powiat: 'Distritos (powiaty)',
             lvl_pl_gmina: 'Municípios (gminy)',
@@ -3547,6 +3705,28 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            lvl_br_uf: 'מדינות (UF)',
+            lvl_br_municipio: 'רשויות מקומיות (municípios)',
+            searchPhBR: 'שם או קוד IBGE…',
+            unit_BR: 'מדינות (UF)',
+            lvl_mx_entidad: 'מדינות (entidades)',
+            lvl_mx_municipio: 'רשויות מקומיות (municipios)',
+            searchPhMX: 'שם או קוד INEGI…',
+            unit_MX: 'מדינות (entidades)',
+            lvl_ar_provincia: 'פרובינציות',
+            lvl_ar_departamento: 'מחוזות (departamentos)',
+            lvl_ar_municipio: 'רשויות מקומיות (municipios)',
+            searchPhAR: 'שם או קוד…',
+            unit_AR: 'פרובינציות',
+            lvl_cl_region: 'אזורים',
+            lvl_cl_provincia: 'פרובינציות',
+            lvl_cl_comuna: 'קומונות (comunas)',
+            searchPhCL: 'שם או קוד CUT…',
+            unit_CL: 'אזורים',
+            lvl_co_departamento: 'מחוזות (departamentos)',
+            lvl_co_municipio: 'רשויות מקומיות (municipios)',
+            searchPhCO: 'שם או קוד DIVIPOLA…',
+            unit_CO: 'מחוזות',
             lvl_pl_wojewodztwo: 'פרובינציות (województwa)',
             lvl_pl_powiat: 'מחוזות (powiaty)',
             lvl_pl_gmina: 'רשויות מקומיות (gminy)',
@@ -3904,7 +4084,17 @@
         const bin = Uint8Array.from(atob(DONNEES_CA), c => c.charCodeAt(0));
         return JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     })().catch(e => { _donneesCa = null; throw e; }));
-    const blocIntegre = pays => pays === 'CA' ? donneesCa() : donneesEu();
+    // Amérique latine à part (outils/donnees_eu.py, 06/10/2026 : Brésil, Mexique, Chili, Colombie, Argentine).
+    // <DONNEES_AM>
+    const DONNEES_AM = GM_getResourceText('donnees_am');   // @resource (outils/publier.py)
+    // </DONNEES_AM>
+    let _donneesAm = null;
+    const donneesAm = () => _donneesAm || (_donneesAm = (async () => {
+        const bin = Uint8Array.from(atob(DONNEES_AM), c => c.charCodeAt(0));
+        return JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+    })().catch(e => { _donneesAm = null; throw e; }));
+    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO']);
+    const blocIntegre = pays => pays === 'CA' ? donneesCa() : BLOC_AM.has(pays) ? donneesAm() : donneesEu();
     function geomCompacte(ps) {
         const anneau = a => { const o = []; let x = 0, y = 0; for (let i = 0; i < a.length; i += 2) { x += a[i]; y += a[i + 1]; o.push([x / 1000, y / 1000]); } return o; };
         const polys = ps.map(p => p.map(anneau));
@@ -5105,6 +5295,110 @@
         },
     });
     // =====================================================================
+    //  AMÉRIQUE LATINE (06/10/2026) — rapport de sources : Brésil, Mexique, Argentine, Chili, Colombie.
+    //  Export « exact » des pays tout intégrés (Brésil, Mexique) : le contour est redemandé à l'API officielle, unité
+    //  par unité (comme la Norvège).
+    // =====================================================================
+    function precisesParApi(urlDe) {
+        return async function (niveau, codes) {
+            const parCode = new Map((await this.tous(niveau)).map(e => [e.code, e])), out = [];
+            for (const c of codes.map(String)) {
+                const e = parCode.get(c); if (!e) continue;
+                const j = await getJSON(urlDe(niveau, c), 3);
+                const ft = j && (j.features ? j.features[0] : j);
+                const geom = nettoyerGeom(ft && (ft.geometry || ft));
+                if (geom) out.push(Object.assign({}, e, { geom, bb: emprise(geom) }));
+            }
+            return out;
+        };
+    }
+    // =====================================================================
+    //  CHILI — INE, DPA censale 2017 mise à jour 2025, ArcGIS Online officiel, CC BY-SA 4.0 : 16 regiones (maille) et
+    //  56 provincias INTÉGRÉES (réunion des comunas, îles comprises : la couche « sin islas » retire Chiloé),
+    //  346 comunas en direct (le serveur simplifie). Code CUT ENTIER non complété (1101 = 01101) : région = 2 premiers
+    //  chiffres, province = 3, sur 5 chiffres. WME : code FIPS « CI » (⚠️ ISO « CI » = Côte d'Ivoire).
+    // =====================================================================
+    const cut5 = p => String(p.CUT || '').padStart(5, '0');
+    // « San José De Maipo » ⇒ « San José de Maipo » : les petits mots espagnols restent en minuscules (sauf en tête).
+    const casseTitreEs = x => casseTitre(x).replace(/(?<=\S) (De|Del|Y|E)(?= )/g, (m, a) => ' ' + a.toLowerCase());
+    const CL = fournisseurArcgis({
+        id: 'cl-ine', prefixe: 'cl', pays: 'CL', stockable: () => false, codeTexte: false,
+        source: 'INE Chile — División Político Administrativa', licence: 'CC BY-SA 4.0',
+        maille: 'cl_region', libCode: 'CUT', placeholder: 'searchPhCL', emprisePays: [-109.5, -56.1, -66.4, -17.4],
+        niveaux: {
+            cl_region: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            cl_provincia: { couche: '', code: '', nom: '', zmin: 5, integre: true, exactIntegre: true },
+            cl_comuna: { couche: 'https://services5.arcgis.com/hUyD8u3TeZLKPe4T/arcgis/rest/services/Limites_DPA_Censal_C17_2025/FeatureServer/14',
+                code: 'CUT', nom: p => casseTitreEs(p.NOM_COMUNA), nomIndex: 'NOM_COMUNA', champs: 'CUT,NOM_COMUNA', zmin: 8, tuile: 0.5, dep: p => cut5(p).slice(0, 2) },
+        },
+    });
+    // =====================================================================
+    //  COLOMBIE — DANE, Marco Geoestadístico Nacional 2024, CC BY 4.0, servi par une copie ArcGIS PUBLIQUE de l'UPRA
+    //  (agence du ministère de l'Agriculture : le serveur du DANE est injoignable, celui de l'IGAC instable, mesuré le
+    //  05/10/2026) : 33 departamentos (maille) INTÉGRÉS par réunion des municipios 2024 (la couche des départements
+    //  date de 2020), 1 121 municipios en direct. Codes DIVIPOLA. WME : code FIPS « CO ».
+    // =====================================================================
+    const CO = fournisseurArcgis({
+        id: 'co-dane', prefixe: 'co', pays: 'CO', stockable: () => false,
+        source: 'DANE — MGN 2024 (via UPRA)', licence: 'CC BY 4.0',
+        maille: 'co_departamento', libCode: 'DIVIPOLA', placeholder: 'searchPhCO', emprisePays: [-82.0, -4.3, -66.8, 13.6],
+        niveaux: {
+            co_departamento: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            co_municipio: { couche: 'https://services.arcgis.com/wLfHepIACaM0pwj9/arcgis/rest/services/MGN_MPIO_POLITICO_2024/FeatureServer/0',
+                code: 'MPIO_CDPMP', nom: p => casseTitreEs(p.MPIO_CNMBR), nomIndex: 'MPIO_CNMBR', champs: 'MPIO_CDPMP,MPIO_CNMBR,DPTO_CCDGO', zmin: 7, tuile: 0.5, dep: p => String(p.DPTO_CCDGO || '') },
+        },
+    });
+    // =====================================================================
+    //  ARGENTINE — IGN (Instituto Geográfico Nacional), WFS GeoServer (« Política de licenciamiento » : citer l'IGN,
+    //  redistribution libre et gratuite) : 24 provincias (maille) INTÉGRÉES par réunion des départements (le WFS ne
+    //  simplifie pas : plus de 55 Mo), SANS l'Antarctique ni les îles de l'Atlantique Sud (les Malouines sont un autre
+    //  pays dans WME) ; 529 departamentos / partidos / comunas et 2 114 municipios en direct. La province est dans
+    //  les 2 premiers chiffres du code (in1). Les municipios ne couvrent pas tout le territoire. WME : code FIPS « AR ».
+    // =====================================================================
+    const AR = fournisseurWfs({
+        id: 'ar-ign', prefixe: 'ar', pays: 'AR', stockable: n => n === 'ar_municipio',
+        source: 'Instituto Geográfico Nacional (IGN)', licence: 'IGN — uso libre con cita de la fuente',
+        maille: 'ar_provincia', libCode: 'INDEC', placeholder: 'searchPhAR',
+        wfs: 'https://wms.ign.gob.ar/geoserver/wfs', geom: 'geom', emprisePays: [-73.6, -55.1, -53.6, -21.7],
+        niveaux: {
+            ar_provincia: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            ar_departamento: { couche: 'ign:departamento', code: 'in1', nom: 'nam', zmin: 7, tuile: 0.5, dep: p => String(p.in1 || '').slice(0, 2) },
+            ar_municipio: { couche: 'ign:municipio', code: 'in1', nom: 'nam', zmin: 9, tuile: 0.25, dep: p => String(p.in1 || '').slice(0, 2) },
+        },
+    });
+    // =====================================================================
+    //  BRÉSIL — IBGE, API « malhas » v3 (qualidade=minima, simplifiée par l'IBGE) + noms de l'API « localidades » ;
+    //  données publiques (Lei 12.527/2011), crédit IBGE. L'API ne cherche que par code : 27 UF (maille) et 5 571
+    //  municípios INTÉGRÉS (outils/donnees_eu.py ; Boa Esperança do Norte, 5101837, absente de l'API, prise au WFS
+    //  2025). L'export redemande le contour en qualidade=maxima. Commune → UF : 2 premiers chiffres. WME : FIPS « BR ».
+    // =====================================================================
+    const BR = fournisseurArcgis({
+        id: 'br-ibge', prefixe: 'br', pays: 'BR', stockable: () => false,
+        source: 'IBGE — Malhas territoriais', licence: 'dados públicos (Lei 12.527/2011), fonte IBGE',
+        maille: 'br_uf', libCode: 'IBGE', placeholder: 'searchPhBR', emprisePays: [-74.1, -33.8, -28.6, 5.3],
+        niveaux: {
+            br_uf: { couche: '', code: '', nom: '', zmin: 0, integre: true, api: 'estados' },
+            br_municipio: { couche: '', code: '', nom: '', zmin: 6, integre: true, api: 'municipios' },
+        },
+        precises: precisesParApi(function (niveau, c) { return 'https://servicodados.ibge.gov.br/api/v3/malhas/' + (niveau === 'br_uf' ? 'estados' : 'municipios') + '/' + c + '?formato=application/vnd.geo%2Bjson&qualidade=maxima'; }),
+    });
+    // =====================================================================
+    //  MEXIQUE — INEGI, Marco Geoestadístico (décembre 2025), « Términos de libre uso » (usage commercial permis,
+    //  crédit INEGI). Le WFS exige une authentification (401) et l'API wscatgeo ne cherche que par clé, sans
+    //  simplifier (107 Mo pour les communes) : 32 entidades (maille) et 2 478 municipios INTÉGRÉS ; l'export redemande
+    //  le contour à l'API. Code cvegeo = entité (2) + commune (3). WME : code FIPS « MX ».
+    // =====================================================================
+    const MX = fournisseurArcgis({
+        id: 'mx-inegi', prefixe: 'mx', pays: 'MX', stockable: () => false,
+        source: 'INEGI — Marco Geoestadístico', licence: 'INEGI, términos de libre uso',
+        maille: 'mx_entidad', libCode: 'INEGI', placeholder: 'searchPhMX', emprisePays: [-118.5, 14.4, -86.6, 32.8],
+        niveaux: {
+            mx_entidad: { couche: '', code: '', nom: '', zmin: 0, integre: true },
+            mx_municipio: { couche: '', code: '', nom: '', zmin: 6, integre: true },
+        },
+        precises: precisesParApi(function (niveau, c) { return 'https://gaia.inegi.org.mx/wscatgeo/v2/geo/' + (niveau === 'mx_entidad' ? 'mgee/' + c : 'mgem/' + c.slice(0, 2) + '/' + c.slice(2)); }),
+    });
+    // =====================================================================
     //  ROUMANIE — ANCPI : 42 județe INTÉGRÉS (data.gov.ro, 2024, CC BY 4.0 ; publiés seulement en Shapefile Stereo70,
     //  convertis par outils/donnees_eu.py : leur export reste ce contour simplifié), 3 186 UAT en direct (ArcGIS
     //  d'ANCPI, CC BY 4.0, le serveur simplifie), rattachées à leur județ par point intérieur. Noms en CAPITALES
@@ -5222,7 +5516,7 @@
         },
     });
     const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
-    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
+    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, BR, MX, AR, CL, CO, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
     // =====================================================================
     //  NIGERIA — GRID3 (avec l'OSGOF), ArcGIS Online, CC BY 4.0 : 37 États (36 + FCT ; maille, code postal « LA »),
@@ -5258,7 +5552,7 @@
         },
     });
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
-    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['AU', 'Australia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
+    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
     const DONNEES_MONDE = GM_getResourceText('donnees_monde');   // @resource (outils/publier.py)
     // </DONNEES_MONDE>

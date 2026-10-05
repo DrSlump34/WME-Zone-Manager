@@ -39,6 +39,11 @@
 | Poland | voivodeships, counties (powiaty), municipalities (gminy), TERYT codes | GUGiK PRG via a public Esri Polska layer (free by law) |
 | Australia | states and territories, local government areas (LGA), suburbs and localities | ABS ASGS Edition 3 (CC BY 4.0) |
 | New Zealand | regions, territorial authorities, wards | Stats NZ (CC BY 4.0) |
+| Brazil | states (UF), municipalities (municípios) — built in, exact outline from IBGE on export | IBGE (public data, Law 12.527/2011) |
+| Mexico | states (entidades), municipalities — built in, exact outline from INEGI on export | INEGI (free use terms) |
+| Chile | regions, provinces (built in), communes (comunas) | INE Chile (CC BY-SA 4.0) |
+| Colombia | departments (built in), municipalities | DANE MGN 2024 via UPRA (CC BY 4.0) |
+| Argentina | provinces (built in), departments (partidos), municipalities | IGN Argentina (free use, source credited) |
 | Slovakia | regions, districts, municipalities | ÚGKK ZBGIS (CC BY 4.0) |
 | Slovenia | statistical regions, municipalities, settlements | GURS (CC BY 4.0) |
 | Romania | counties, municipalities (UAT) | ANCPI (CC BY 4.0) |
@@ -52,7 +57,7 @@
 | Africa (52 other countries, incl. Western Sahara as a separate unit) | regions or provinces, districts or departments | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Mauritius (incl. Rodrigues) | districts, villages and towns | official data, built into the script |
 
-That is **86 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
+That is **91 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
 
 ## The area workshop
 
@@ -138,6 +143,11 @@ Script: MIT licence.
 | Pologne | voïvodies, districts (powiaty), communes (gminy), codes TERYT | GUGiK PRG via une couche publique d’Esri Polska (libre par la loi) |
 | Australie | états et territoires, collectivités locales (LGA), localités | ABS ASGS Edition 3 (CC BY 4.0) |
 | Nouvelle-Zélande | régions, autorités territoriales, circonscriptions (wards) | Stats NZ (CC BY 4.0) |
+| Brésil | États (UF), communes (municípios) — intégrés, contour exact demandé à l’IBGE pour l’export | IBGE (données publiques, loi 12.527/2011) |
+| Mexique | États (entidades), communes — intégrés, contour exact demandé à l’INEGI pour l’export | INEGI (libre usage) |
+| Chili | régions, provinces (intégrées), communes (comunas) | INE Chile (CC BY-SA 4.0) |
+| Colombie | départements (intégrés), communes (municipios) | DANE MGN 2024 via l’UPRA (CC BY 4.0) |
+| Argentine | provinces (intégrées), départements (partidos), communes (municipios) | IGN Argentine (usage libre, source citée) |
 | Slovaquie | régions, districts, communes | ÚGKK ZBGIS (CC BY 4.0) |
 | Slovénie | régions statistiques, communes, localités | GURS (CC BY 4.0) |
 | Roumanie | départements (județe), communes (UAT) | ANCPI (CC BY 4.0) |
@@ -151,7 +161,7 @@ Script: MIT licence.
 | Afrique (52 autres pays, Sahara occidental comme entité à part) | régions ou provinces, districts ou départements | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Maurice (Rodrigues comprise) | districts, villages et villes | données officielles, intégrées au script |
 
-Soit **86 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
+Soit **91 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
 
 ## L’atelier de zones
 
