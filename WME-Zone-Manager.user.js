@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.32.00
+// @version      2.34.06
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -429,6 +429,14 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            titlesMore: 'Titres communautaires (LC, GC, CC, CPC, Booster) : passer en version large pour les modifier',
+            wideOn: 'Version large : liste à gauche, fiche à droite',
+            wideOff: 'Version compacte',
+            gPickEditor: 'Choisissez un éditeur dans la liste pour voir sa fiche ici.',
+            zTitles: 'Titres communautaires',
+            titleTip: x => 'Titre communautaire : ' + x + ' (cliquer pour l’ajouter ou l’enlever)',
+            fTitle: x => 'Titre ' + x,
+            chTitle: (p, z, x, on) => p + ' · ' + z + ' : titre ' + x + (on ? ' ajouté' : ' retiré'),
             lvl_br_uf: 'États (UF)',
             lvl_br_municipio: 'Communes (municípios)',
             searchPhBR: 'Nom ou code IBGE…',
@@ -897,6 +905,14 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            titlesMore: 'Community titles (LC, GC, CC, CPC, Booster): switch to the wide view to edit them',
+            wideOn: 'Wide view: list on the left, card on the right',
+            wideOff: 'Compact view',
+            gPickEditor: 'Pick an editor in the list to see their card here.',
+            zTitles: 'Community titles',
+            titleTip: x => 'Community title: ' + x + ' (click to add or remove)',
+            fTitle: x => 'Title ' + x,
+            chTitle: (p, z, x, on) => p + ' · ' + z + ': title ' + x + (on ? ' added' : ' removed'),
             lvl_br_uf: 'States (UF)',
             lvl_br_municipio: 'Municipalities (municípios)',
             searchPhBR: 'Name or IBGE code…',
@@ -1365,6 +1381,14 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            titlesMore: 'Community-Titel (LC, GC, CC, CPC, Booster): zur breiten Ansicht wechseln, um sie zu bearbeiten',
+            wideOn: 'Breite Ansicht: Liste links, Karte rechts',
+            wideOff: 'Kompakte Ansicht',
+            gPickEditor: 'Wählen Sie links einen Editor, um seine Karte hier zu sehen.',
+            zTitles: 'Community-Titel',
+            titleTip: x => 'Community-Titel: ' + x + ' (klicken zum Hinzufügen oder Entfernen)',
+            fTitle: x => 'Titel ' + x,
+            chTitle: (p, z, x, on) => p + ' · ' + z + ': Titel ' + x + (on ? ' hinzugefügt' : ' entfernt'),
             lvl_br_uf: 'Bundesstaaten (UF)',
             lvl_br_municipio: 'Gemeinden (Municípios)',
             searchPhBR: 'Name oder IBGE-Code…',
@@ -1833,6 +1857,14 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            titlesMore: 'Títulos comunitarios (LC, GC, CC, CPC, Booster): pasar a la vista amplia para editarlos',
+            wideOn: 'Vista amplia: lista a la izquierda, ficha a la derecha',
+            wideOff: 'Vista compacta',
+            gPickEditor: 'Elija un editor en la lista para ver su ficha aquí.',
+            zTitles: 'Títulos comunitarios',
+            titleTip: x => 'Título comunitario: ' + x + ' (clic para añadir o quitar)',
+            fTitle: x => 'Título ' + x,
+            chTitle: (p, z, x, on) => p + ' · ' + z + ': título ' + x + (on ? ' añadido' : ' retirado'),
             lvl_br_uf: 'Estados (UF)',
             lvl_br_municipio: 'Municipios (municípios)',
             searchPhBR: 'Nombre o código IBGE…',
@@ -2301,6 +2333,14 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            titlesMore: 'Titoli della comunità (LC, GC, CC, CPC, Booster): passa alla vista larga per modificarli',
+            wideOn: 'Vista larga: elenco a sinistra, scheda a destra',
+            wideOff: 'Vista compatta',
+            gPickEditor: 'Scegli un editor nell’elenco per vederne la scheda qui.',
+            zTitles: 'Titoli della comunità',
+            titleTip: x => 'Titolo della comunità: ' + x + ' (clic per aggiungere o togliere)',
+            fTitle: x => 'Titolo ' + x,
+            chTitle: (p, z, x, on) => p + ' · ' + z + ': titolo ' + x + (on ? ' aggiunto' : ' rimosso'),
             lvl_br_uf: 'Stati (UF)',
             lvl_br_municipio: 'Comuni (municípios)',
             searchPhBR: 'Nome o codice IBGE…',
@@ -2769,6 +2809,14 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            titlesMore: 'Títulos da comunidade (LC, GC, CC, CPC, Booster): mude para a visão ampla para editá-los',
+            wideOn: 'Visão ampla: lista à esquerda, ficha à direita',
+            wideOff: 'Visão compacta',
+            gPickEditor: 'Escolha um editor na lista para ver a ficha aqui.',
+            zTitles: 'Títulos da comunidade',
+            titleTip: x => 'Título da comunidade: ' + x + ' (clique para adicionar ou remover)',
+            fTitle: x => 'Título ' + x,
+            chTitle: (p, z, x, on) => p + ' · ' + z + ': título ' + x + (on ? ' adicionado' : ' removido'),
             lvl_br_uf: 'Estados (UF)',
             lvl_br_municipio: 'Municípios',
             searchPhBR: 'Nome ou código IBGE…',
@@ -3237,6 +3285,14 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            titlesMore: 'Títulos da comunidade (LC, GC, CC, CPC, Booster): mude para a vista larga para os editar',
+            wideOn: 'Vista larga: lista à esquerda, ficha à direita',
+            wideOff: 'Vista compacta',
+            gPickEditor: 'Escolha um editor na lista para ver a ficha aqui.',
+            zTitles: 'Títulos da comunidade',
+            titleTip: x => 'Título da comunidade: ' + x + ' (clique para adicionar ou remover)',
+            fTitle: x => 'Título ' + x,
+            chTitle: (p, z, x, on) => p + ' · ' + z + ': título ' + x + (on ? ' acrescentado' : ' retirado'),
             lvl_br_uf: 'Estados (UF)',
             lvl_br_municipio: 'Municípios',
             searchPhBR: 'Nome ou código IBGE…',
@@ -3705,6 +3761,14 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            titlesMore: 'תארים קהילתיים (LC, GC, CC, CPC, Booster): עברו לתצוגה הרחבה כדי לערוך אותם',
+            wideOn: 'תצוגה רחבה: רשימה משמאל, כרטיס מימין',
+            wideOff: 'תצוגה מצומצמת',
+            gPickEditor: 'בחרו עורך ברשימה כדי לראות כאן את הכרטיס שלו.',
+            zTitles: 'תארים קהילתיים',
+            titleTip: x => 'תואר קהילתי: ' + x + ' (לחיצה להוספה או להסרה)',
+            fTitle: x => 'תואר ' + x,
+            chTitle: (p, z, x, on) => p + ' · ' + z + ': התואר ' + x + (on ? ' נוסף' : ' הוסר'),
             lvl_br_uf: 'מדינות (UF)',
             lvl_br_municipio: 'רשויות מקומיות (municípios)',
             searchPhBR: 'שם או קוד IBGE…',
@@ -6854,6 +6918,12 @@
 .wzm-msg{min-height:15px;margin:6px 0 0;font-size:11px;color:var(--wzm-blue-dk);line-height:1.5}
 .wzm-src{font-size:10px;color:var(--wzm-grey);margin-top:6px}
 #wzm-ov.large{width:460px}
+#wzm-ov.tres-large{width:1100px}
+.wzm-hdr-btn[hidden]{display:none}
+.wzm-gdeux{display:flex;gap:10px;align-items:stretch}
+.wzm-gdeux .wzm-gliste{flex:0 0 380px;max-height:calc(100vh - 360px);min-height:260px}
+.wzm-gpanneau{flex:1;min-width:0;max-height:calc(100vh - 360px);min-height:260px;overflow:auto;border:1px solid var(--wzm-border);border-radius:8px;margin:4px 0;padding:8px 10px}
+.wzm-gpan-tete{position:sticky;top:-8px;z-index:1;margin:-8px -10px 6px;padding:8px 10px;background:#fff;border-bottom:1px solid var(--wzm-border);font-size:13px}
 .wzm-sale details summary{cursor:pointer}
 .wzm-sale ul{margin:4px 0 4px 18px;padding:0;font-weight:400}
 .wzm-sale.conflit{color:#b71c1c}
@@ -6904,6 +6974,13 @@
 /* La fiche ouverte se détache nettement de la liste (« difficile de voir la frontière », l'auteur, 03/10/2026). */
 .wzm-ged.ouvert{margin:6px 4px;background:#f3f8fe;border:1px solid #90caf9;border-inline-start:4px solid var(--wzm-blue-btn);border-radius:8px;box-shadow:0 2px 6px rgba(21,101,192,.15)}
 .wzm-ged.ouvert>.wzm-gtete{background:#e3f2fd;border-radius:6px 6px 0 0;border-bottom:1px solid #bbdefb}
+.wzm-gliste .wzm-ged.ouvert>.wzm-gtete{position:sticky;top:0;z-index:2}
+.wzm-gfiche .wzm-sec2{margin-top:10px;padding-top:7px;border-top:1px solid #e3e8ee}
+.wzm-plier>summary{cursor:pointer;list-style:none}
+.wzm-plier>summary::-webkit-details-marker{display:none}
+.wzm-plier>summary::before{content:'\\25BE';display:inline-block;width:12px;transition:transform .15s}
+.wzm-plier:not([open])>summary::before{transform:rotate(-90deg)}
+.wzm-plier>summary:focus-visible{outline:2px solid var(--wzm-blue);outline-offset:2px}
 .wzm-ged.ouvert>.wzm-gtete b{color:var(--wzm-blue-dk)}
 .wzm-ged.ouvert+.wzm-ged{border-top:1px solid var(--wzm-border)}
 .wzm-gtete{display:flex;align-items:center;gap:6px;width:100%;height:auto;min-height:0;margin:0;padding:5px 9px;border:none;background:transparent;text-align:start;font:12px 'Rubik','Open Sans',sans-serif;color:var(--wzm-text);cursor:pointer}
@@ -6950,15 +7027,31 @@
 .wzm-gfaits a{color:var(--wzm-blue-dk)}
 .wzm-gecarts{list-style:none;margin:0 0 6px;padding:0;font-size:11px}
 .wzm-gecarts li{display:flex;align-items:center;gap:4px;margin:2px 0}
-.wzm-grole{display:flex;align-items:center;gap:6px;margin:3px 0}
+.wzm-grole{display:flex;align-items:center;flex-wrap:wrap;gap:4px 6px;margin:3px 0}
+.wzm-titre{display:inline-block;margin-left:4px;padding:0 5px;border-radius:50px;font-size:10px;font-weight:700;line-height:15px;vertical-align:1px;background:#eceff1;color:#37474f;flex-shrink:0}
+.wzm-titre-lc{background:#e3f2fd;color:#0d47a1}.wzm-titre-gc{background:#ede7f6;color:#4527a0}.wzm-titre-cc{background:#fff3e0;color:#bf360c}.wzm-titre-cpc{background:#e8f5e9;color:#1b5e20}.wzm-titre-booster{background:#fce4ec;color:#880e4f}
+.wzm-titres{display:inline-flex;flex-wrap:wrap;gap:2px;margin:0 4px}
+.wzm-ttog{display:inline-block;margin:0;padding:0 5px;min-height:0;height:auto;width:auto;border:none;border-radius:50px;font-size:10px;font-weight:700;line-height:15px;cursor:pointer;opacity:.3}
+.wzm-ttog:hover{opacity:.6}
+.wzm-ttog[aria-pressed="true"]{opacity:1}
+.wzm-tplus{margin:0 0 0 2px;padding:0 6px;min-height:0;height:auto;width:auto;border:1px solid var(--wzm-border);border-radius:50px;background:#fff;color:var(--wzm-text2);font-size:11px;font-weight:700;line-height:14px;cursor:pointer}
+.wzm-tplus:hover{background:#e3f2fd}
+.wzm-tplus.on{border-color:#5e35b1;background:#5e35b1;color:#fff}
+.wzm-tplus.on:hover{filter:brightness(.95)}
+.wzm-ttog:disabled{cursor:default}
+.wzm-ttog:focus-visible{outline:2px solid var(--wzm-blue);outline-offset:1px}
 .wzm-gtype{flex-shrink:0;min-width:24px;padding:0 6px;border-radius:50px;background:#ede7f6;color:#4527a0;font-size:11px;font-weight:700;text-align:center}
-.wzm-glib{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wzm-glib{flex:1 1 130px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wzm-grole .wzm-glib{flex:1 1 calc(100% - 90px)}
+.wzm-grole .wzm-gtype{order:0}.wzm-grole .wzm-glib{order:1}.wzm-grole .wzm-tplus,.wzm-grole .wzm-titres{order:2}
+.wzm-grole select[data-statut]{order:3}.wzm-grole [data-suppr-role]{order:4}.wzm-grole>a,.wzm-grole .wzm-lien-brut{order:5}
+.wzm-grole [data-ratelier]{order:6;margin-inline-start:auto}
 .wzm-glib small{color:var(--wzm-grey)}
 .wzm-glib-voir{all:unset;cursor:pointer;text-decoration:underline dotted;text-underline-offset:2px}
 .wzm-glib-voir[aria-pressed="true"]{font-weight:600;color:var(--wzm-blue-btn)}
 .wzm-glib-voir:focus-visible{outline:2px solid var(--wzm-blue-btn);outline-offset:1px}
 .wzm-grole a{text-decoration:none}
-.wzm-grole button:not(.wzm-glib-voir):not(.wzm-btn){width:20px;height:20px;min-height:0;padding:0;margin:0;border:none;border-radius:50%;background:transparent;color:var(--wzm-text2);cursor:pointer}
+.wzm-grole button:not(.wzm-glib-voir):not(.wzm-btn):not(.wzm-ttog):not(.wzm-tplus){width:20px;height:20px;min-height:0;padding:0;margin:0;border:none;border-radius:50%;background:transparent;color:var(--wzm-text2);cursor:pointer}
 .wzm-grole select{height:22px;padding:0 4px}
 .wzm-gnote{width:100%;box-sizing:border-box;min-height:44px;height:auto;margin:4px 0;font:12px 'Rubik','Open Sans',sans-serif}
 .wzm-qui{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
@@ -7096,7 +7189,7 @@
         const etape = (n, lbl) => '<div class="wzm-etape"><span class="wzm-num">' + n + '</span>' + esc(lbl) + '</div>';
         const onglet = (k, ico, lbl) => '<button type="button" class="wzm-onglet" role="tab" data-tab="' + k + '" aria-selected="' + ((opts.onglet || 'zones') === k) + '">' + ico + ' ' + esc(lbl) + '</button>';
         return '<div id="wzm-hdr"><span class="wzm-hdr-title"><span class="wzm-hdr-ico">' + icone(16) + '</span>' + SCRIPT_NAME + ' <span class="wzm-hdr-v">v' + esc(VERSION) + '</span></span>' +
-            '<span class="wzm-hdr-btns"><button type="button" class="wzm-hdr-btn" data-act="replier"></button>' +
+            '<span class="wzm-hdr-btns"><button type="button" class="wzm-hdr-btn" data-act="large" hidden></button><button type="button" class="wzm-hdr-btn" data-act="replier"></button>' +
             '<button type="button" class="wzm-hdr-btn" data-act="close" title="' + esc(t('close')) + '" aria-label="' + esc(t('close')) + '">&#x2715;</button></span></div>' +
             '<div class="wzm-onglets" role="tablist">' + onglet('zones', '&#x1F9E9;', t('tabZones')) + onglet('gest', '&#x1F465;', t('tabGest')) + '</div>' +
             '<div id="wzm-corps"><div data-onglet="zones"><p class="wzm-intro">' + esc(t('winIntro')) + '</p>' +
@@ -7138,6 +7231,9 @@
             dessinerGest();
         }));
         q('[data-act="replier"]').addEventListener('click', () => { ov.classList.toggle('replie'); majFenetre(); });
+        // Version LARGE de l'onglet Gestionnaires : liste à gauche, fiche à droite (« il commence à y avoir beaucoup de
+        // choses à voir », l'auteur, 06/10/2026). Retenue d'une session à l'autre.
+        q('[data-act="large"]').addEventListener('click', () => { opts.gestLarge = !opts.gestLarge; ecrireOpts(); majFenetre(); rendreGest(); });
         ov.querySelectorAll('.wzm-mode').forEach(b => b.addEventListener('click', () => { opts.mode = b.dataset.mode; ecrireOpts(); majFenetre(); if (opts.mode === 'cherche') q('#wzm-q').focus(); }));
         const nv = q('#wzm-niveau'); majNiveaux();
         nv.addEventListener('change', () => { opts.niveau = nv.value; ecrireOpts(); majFenetre(); chargerVue(); if (opts.mode === 'cherche') chercher(); });
@@ -7214,6 +7310,11 @@
         br.title = t(rep ? 'expand' : 'collapse'); br.setAttribute('aria-label', br.title); br.setAttribute('aria-expanded', String(!rep));
         const og = opts.onglet || 'zones';
         ov.classList.toggle('large', og === 'gest');
+        ov.classList.toggle('tres-large', og === 'gest' && !!opts.gestLarge);
+        const bl = q('[data-act="large"]');
+        bl.hidden = og !== 'gest';
+        bl.innerHTML = opts.gestLarge ? '&#x2921;' : '&#x2922;';
+        bl.title = opts.gestLarge ? t('wideOff') : t('wideOn'); bl.setAttribute('aria-label', bl.title); bl.setAttribute('aria-pressed', String(!!opts.gestLarge));
         if (ouvert()) placer();   // la largeur vient peut-être de changer : la fenêtre reste à gauche des boutons
         ov.querySelectorAll('.wzm-onglet').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === og)));
         ov.querySelectorAll('[data-onglet]').forEach(x => { x.hidden = x.dataset.onglet !== og; });
@@ -7260,7 +7361,20 @@
     const TYPES = ['AM', 'SM', 'RM', 'CM', '?'];
     // Nature d'une zone Waze, à préciser zone par zone quand aucune demande ne l'explique (demande de l'auteur,
     // 03/10/2026). Rangée dans le registre : editeurs[i].zones = { <empreinte>: { type, maj } }.
-    const TYPES_ZONE = ['AM', 'SM', 'RM', 'CM', 'CC', 'Booster', 'Mentorat', 'MapRaid', 'Temporaire'];
+    const TYPES_ZONE = ['AM', 'SM', 'RM', 'CM', 'Mentorat', 'MapRaid', 'Temporaire'];
+    // Titres COMMUNAUTAIRES, cumulables et saisis à la main, sur une zone comme sur un rôle (demande de l'auteur,
+    // 06/10/2026 : « une zone pourra avoir le cumul CM/LC/CPC ») : editeurs[i].zones[emp].titres, editeurs[i].roles[j].titres.
+    // CC et Booster étaient des TYPES de zone (un seul par zone) : un registre qui les porte encore est converti à la
+    // lecture (type ⇒ titre).
+    const TITRES = ['LC', 'GC', 'CC', 'CPC', 'Booster'];
+    const TITRES_ANCIENS_TYPES = ['CC', 'Booster'];
+    const titresValides = l => TITRES.filter(x => (Array.isArray(l) ? l : []).includes(x));
+    // Tous les titres d'un éditeur (zones, et rôles non retirés), dans l'ordre de TITRES.
+    const titresDe = e => TITRES.filter(x => Object.values(e.zones || {}).some(z => (z.titres || []).includes(x)) || e.roles.some(r => r.statut !== 'retire' && (r.titres || []).includes(x)));
+    const badgesTitres = l => l.map(x => '<span class="wzm-titre wzm-titre-' + x.toLowerCase() + '" title="' + esc(t('titleTip', x)) + '">' + esc(x) + '</span>').join('');
+    // Pastilles à cocher d'une zone (q = 'z') ou d'un rôle (q = 'r') : un bouton par titre, aria-pressed.
+    const htmlTitres = (q, i, l, ro) => !opts.gestLarge ? '<button type="button" class="wzm-tplus' + (l.length ? ' on' : '') + '" data-titres-large="1" title="' + esc((l.length ? l.join(' · ') + ' — ' : '') + t('titlesMore')) + '" aria-label="' + esc((l.length ? l.join(', ') + '. ' : '') + t('titlesMore')) + '">&#x2026;</button>' :
+        '<span class="wzm-titres" role="group" aria-label="' + esc(t('zTitles')) + '">' + TITRES.map(x => '<button type="button" class="wzm-ttog wzm-titre-' + x.toLowerCase() + '" data-' + q + 'titre="' + i + ':' + x + '" aria-pressed="' + l.includes(x) + '" title="' + esc(t('titleTip', x)) + '"' + ro + '>' + esc(x) + '</button>').join('') + '</span>';
     // Waze ne donne aucun identifiant de zone : l'empreinte est un FNV-1a du contour arrondi à 3 décimales (~100 m),
     // calculée sur la géométrie EXACTE. Une zone redessinée chez Waze change d'empreinte et redevient « sans type » :
     // c'est voulu, ce n'est plus la même zone.
@@ -7400,6 +7514,7 @@
                 type: TYPES.includes(x.type) ? x.type : '?', libelle: txt(x.libelle), codes: (Array.isArray(x.codes) ? x.codes : []).map(txt).filter(Boolean),
                 statut: STATUTS.includes(x.statut) ? x.statut : 'vigueur', demande: txt(x.demande), note: txt(x.note),
                 pays: typeof x.pays === 'string' && /^[A-Z]{2}$/.test(x.pays) ? x.pays : undefined,
+                titres: titresValides(x.titres).length ? titresValides(x.titres) : undefined,
             }));
             const ed = Object.assign({}, e, { pseudo: txt(e.pseudo).trim(), roles, note: txt(e.note) });
             if (e.zones && typeof e.zones === 'object') {
@@ -7407,7 +7522,8 @@
                 for (const [k, v] of Object.entries(e.zones)) {
                     if (!v || typeof v !== 'object') continue;
                     const ty = TYPES_ZONE.includes(v.type) ? v.type : '', nom = txt(v.nom).trim().slice(0, 60);
-                    if (ty || nom) z[k] = Object.assign(ty ? { type: ty } : {}, ty && v.propose === true ? { propose: true } : {}, nom ? { nom } : {}, typeof v.ref === 'string' && v.ref.length <= 60 ? { ref: v.ref } : {}, { maj: txt(v.maj) });
+                    const ti = titresValides((Array.isArray(v.titres) ? v.titres : []).concat(TITRES_ANCIENS_TYPES.includes(v.type) ? [v.type] : []));
+                    if (ty || nom || ti.length) z[k] = Object.assign(ty ? { type: ty } : {}, ty && v.propose === true ? { propose: true } : {}, nom ? { nom } : {}, ti.length ? { titres: ti } : {}, typeof v.ref === 'string' && v.ref.length <= 60 ? { ref: v.ref } : {}, { maj: txt(v.maj) });
                 }
                 if (Object.keys(z).length) ed.zones = z; else delete ed.zones;
             } else delete ed.zones;
@@ -7814,7 +7930,7 @@
         // demandé n'a pas à l'être. Les empreintes manquent dans un cache antérieur à 2.01.07 : on attend la relecture.
         if (v.emp) {
             const aRetirer = new Set(e.roles.filter(r => r.statut === 'aretirer').flatMap(r => r.codes));
-            const sansType = v.emp.filter((emp, i) => (x => !x || x.propose)(typeDeZone(e, emp, v.codes[i])) && !(v.codes[i] || []).some(c => aRetirer.has(c))).length;
+            const sansType = v.emp.filter((emp, i) => (x => !x || x.propose)(typeDeZone(e, emp, v.codes[i])) && !((e.zones && e.zones[emp] && e.zones[emp].titres) || []).length && !(v.codes[i] || []).some(c => aRetirer.has(c))).length;
             if (sansType) out.push({ k: 'nonDocumentee', n: sansType });
         }
         // Absent : détient une zone et n'a pas édité depuis plus de 90 jours (demande de l'auteur, 03/10/2026).
@@ -8001,6 +8117,7 @@
     function passeFiltre(e, f, ec) {
         if (f === 'tous') return true;
         if (f === 'retraits') return e.roles.some(r => r.statut === 'aretirer');
+        if (f.startsWith('t:')) return titresDe(e).includes(f.slice(2));
         ec = ec || ecartsDe(e).map(x => x.k);
         if (f === 'ecarts') return ec.length > 0;
         if (f === 'inactifs') return ec.includes('inactif');
@@ -8326,7 +8443,7 @@
                 '<div class="wzm-ligne"><button type="button" class="wzm-btn" data-g="importOui">' + esc(t('regImportYes')) + '</button><button type="button" class="wzm-btn" data-g="importNon">' + esc(t('regImportNo')) + '</button></div></div>' : '') +
             (regMeta.acces === false ? '<div class="wzm-ro">&#x1F512; ' + esc(t('roNoAccess')) + '</div>' : !peutEcrire() ? '<div class="wzm-ro">&#x1F512; ' + esc(t('roReadOnly')) + '</div>' : '');
         const vq = vivant.q ? t('liveWhen', new Date(vivant.q).toLocaleString(_lang)) : t('liveNever');
-        const filtres = [['tous', 'fAll'], ['ecarts', 'fGaps'], ['retraits', 'fRemovals'], ['inactifs', 'fInactive'], ['nondoc', 'fUndoc']];
+        const filtres = [['tous', 'fAll'], ['ecarts', 'fGaps'], ['retraits', 'fRemovals'], ['inactifs', 'fInactive'], ['nondoc', 'fUndoc']].concat(TITRES.map(x => ['t:' + x, x]));
         const nRetraits = registre ? registre.editeurs.filter(e => e.roles.some(r => r.statut === 'aretirer')).length : 0;
         const nFiltre = {};
         if (registre) for (const e of registre.editeurs) { const ec = ecartsDe(e).map(x => x.k); for (const [k] of filtres) if (passeFiltre(e, k, ec)) nFiltre[k] = (nFiltre[k] || 0) + 1; }
@@ -8348,14 +8465,15 @@
                 (modeQui ? '<p class="wzm-aide">' + esc(t('whoHint')) + '</p>' + (quiIci ? '<div class="wzm-qui">' + (quiIci.length ? quiIci.map((x, k) => '<button type="button" class="wzm-chip' + (x.inscrit ? '' : ' trace') + '" data-ouvrir="' + esc(x.pseudo) + '" data-survol="' + esc(x.pseudo) + '"><span>' + (quiIci.length > 1 ? '<i class="wzm-coul" style="background:' + COULEURS_QUI[k % COULEURS_QUI.length] + '"></i>' : '') + '<bdi>' + esc(x.pseudo) + '</bdi>' + (x.rang ? ' <small>L' + x.rang + '</small>' : '') + (x.pays ? ' <span title="' + esc(t('whoCountry')) + '">&#x1F310;</span>' : '') + '</span></button>').join(' ') : '<span class="wzm-vide2">' + esc(t('whoNobody')) + '</span>') + '</div>' : '') : '') +
                 '<div class="wzm-etape"><span class="wzm-num">&#x1F465;</span>' + esc(t('gEditors', registre.editeurs.length)) + '</div>' +
                 '<div class="wzm-ligne"><input type="search" class="wzm-champ2" id="wzm-gq" aria-label="' + esc(t('gSearchPh')) + '" placeholder="' + esc(t('gSearchPh')) + '" value="' + esc(chercheGest) + '" style="flex:1;min-width:0">' +
-                '<select class="wzm-champ2" id="wzm-gfiltre" aria-label="' + esc(t('fLabel')) + '">' + filtres.map(([k, l]) => '<option value="' + k + '"' + (filtreGest === k ? ' selected' : '') + '>' + esc(t(l)) + ' (' + nombre(nFiltre[k] || 0) + ')</option>').join('') + '</select></div>' +
+                '<select class="wzm-champ2" id="wzm-gfiltre" aria-label="' + esc(t('fLabel')) + '">' + filtres.map(([k, l]) => '<option value="' + k + '"' + (filtreGest === k ? ' selected' : '') + '>' + esc(k.startsWith('t:') ? t('fTitle', l) : t(l)) + ' (' + nombre(nFiltre[k] || 0) + ')</option>').join('') + '</select></div>' +
                 '<details class="wzm-legende"><summary>' + esc(t('lgTitle')) + '</summary><ul>' +
                     '<li><span class="wzm-pt rouge"></span><span class="wzm-pt orange"></span><span class="wzm-pt gris"></span><span class="wzm-pt vert"></span> ' + esc(t('lgDots')) + '</li>' +
                     '<li><span class="wzm-jours v">12\u00a0' + t('daysShort') + '</span> <span class="wzm-jours o">45\u00a0' + t('daysShort') + '</span> <span class="wzm-jours r">130\u00a0' + t('daysShort') + '</span> ' + esc(t('lgDays')) + '</li>' +
                     '<li>&#x1F30D; ' + esc(t('lgGlobe')) + '</li><li>&#x1F310; ' + esc(t('lgCountry')) + '</li></ul></details>' +
                 (() => {
                     const l = editeursFiltres();
-                    return '<div class="wzm-gliste" id="wzm-gliste">' + (l.length ? l.slice(0, 400).map(htmlLigneEd).join('') : '<p class="wzm-vide2 wzm-gvide">' + esc(t('gNone')) + '</p>') + '</div>' +
+                    const liste = '<div class="wzm-gliste" id="wzm-gliste">' + (l.length ? l.slice(0, 400).map(htmlLigneEd).join('') : '<p class="wzm-vide2 wzm-gvide">' + esc(t('gNone')) + '</p>') + '</div>';
+                    return (gestLarge() ? '<div class="wzm-gdeux">' + liste + htmlPanneauEd() + '</div>' : liste) +
                         (l.length > 400 ? '<p class="wzm-aide">' + esc(t('gTruncated', 400, l.length)) + '</p>' : '');
                 })() +
                 (peutEcrire() ? '<label class="wzm-sec2" for="wzm-gnouveau">' + esc(t('gAddLabel')) + '</label><div class="wzm-ligne"><input type="text" class="wzm-champ2" id="wzm-gnouveau" placeholder="' + esc(t('gAddPh')) + '" style="flex:1;min-width:0"><button type="button" class="wzm-btn" data-g="ajouter">' + esc(t('gAdd')) + '</button></div>' : '') +
@@ -8365,6 +8483,14 @@
                 '</div><div class="wzm-ligne"><label for="wzm-cc">' + esc(t('contactCc')) + '</label><input type="text" class="wzm-champ2" id="wzm-cc" value="' + esc(((registre.contact || {}).cc || []).join(', ')) + '" style="flex:1"' + (peutEcrire() ? '' : ' disabled') + '></div></details>'
                 : '') +
             '<div class="wzm-msg" id="wzm-gmsg" role="status" aria-live="polite">' + esc(dernierMsgGest) + '</div>';
+    }
+    const gestLarge = () => !!opts.gestLarge && (opts.onglet || 'zones') === 'gest';
+    // Panneau de droite (version large) : l'en-tête de l'éditeur ouvert, puis sa fiche ; sinon une invitation.
+    function htmlPanneauEd() {
+        const e = ouvertEd && edDe(ouvertEd);
+        if (!e) return '<div class="wzm-gpanneau" id="wzm-gpanneau"><p class="wzm-vide2">' + esc(t('gPickEditor')) + '</p></div>';
+        const v = vivant.eds[e.pseudo.toLowerCase()];
+        return '<div class="wzm-gpanneau" id="wzm-gpanneau"><div class="wzm-gpan-tete"><b><bdi>' + esc(e.pseudo) + '</bdi></b>' + (v && v.rang ? ' <small>L' + v.rang + '</small>' : '') + badgesTitres(titresDe(e)) + '</div>' + htmlFiche(e, ecartsDe(e), v) + '</div>';
     }
     function htmlLigneEd(e) {
         const ec = ecartsDe(e);
@@ -8382,13 +8508,13 @@
         }
         const ouvre = ouvertEd === e.pseudo;
         return '<div class="wzm-ged' + (ouvre ? ' ouvert' : '') + '"><button type="button" class="wzm-gtete" data-ed="' + esc(e.pseudo) + '" aria-expanded="' + ouvre + '"><b><bdi>' + esc(e.pseudo) + '</bdi></b>' +
-            (v && v.rang ? ' <small>L' + v.rang + '</small>' : '') + '<span class="wzm-groles">' + esc(resumeRoles(e)) + '</span>' + (ec.length ? '<span class="wzm-sr">' + esc(ec.map(texteEcart).join(' ')) + '</span>' : '') + '<span class="wzm-col-pts" aria-hidden="true">' + pts + '</span><span class="wzm-col-etr">' + globe + '</span><span class="wzm-col-jours">' + jours + '</span></button>' + (ouvre ? htmlFiche(e, ec, v) : '') + '</div>';
+            (v && v.rang ? ' <small>L' + v.rang + '</small>' : '') + badgesTitres(titresDe(e)) + '<span class="wzm-groles">' + esc(resumeRoles(e)) + '</span>' + (ec.length ? '<span class="wzm-sr">' + esc(ec.map(texteEcart).join(' ')) + '</span>' : '') + '<span class="wzm-col-pts" aria-hidden="true">' + pts + '</span><span class="wzm-col-etr">' + globe + '</span><span class="wzm-col-jours">' + jours + '</span></button>' + (ouvre && !gestLarge() ? htmlFiche(e, ec, v) : '') + '</div>';
     }
     function htmlZonesEd(e, v) {
         const exactes = zonesExactes[e.pseudo.toLowerCase()];
         if (!exactes) return '<div class="wzm-gzones"><span class="wzm-vide2">' + esc(t('loadingZones')) + '</span></div>';
         if (!exactes.length) return '';
-        return '<div class="wzm-sec2">' + esc(t('gZones', exactes.length)) + '</div><div class="wzm-gzones">' + exactes.map((z, i) => {
+        return '<details class="wzm-plier" data-plier="zones"' + ((opts.plie || {}).zones ? '' : ' open') + '><summary class="wzm-sec2">' + esc(t('gZones', exactes.length)) + '</summary><div class="wzm-gzones">' + exactes.map((z, i) => {
             const actif = zoneFocus && zoneFocus.pseudo === e.pseudo && zoneFocus.i === i;
             const ty = typeDeZone(e, z.emp, z.codes), ro = peutEcrire() ? '' : ' disabled';
             const choix = '<select class="wzm-champ2 wzm-ztype' + (ty ? (ty.deduit ? ' deduit' : ty.propose ? ' propose' : '') : ' vide') + '" data-ztype="' + i + '" aria-label="' + esc(t('zType')) + '" title="' + esc(ty && ty.deduit ? t('zTypeDeduced') : ty && ty.propose ? t('zProposed') : t('zType')) + '"' + ro + '>' +
@@ -8397,11 +8523,11 @@
                 (ty && ty.propose && !ro ? '<button type="button" class="wzm-rond wzm-rond-p" data-zvalider="' + i + '" title="' + esc(t('zValidate')) + '" aria-label="' + esc(t('zValidate') + ' — ' + nomZone(e, z.emp, i)) + '">&#x2713;</button>' : '');
             return '<div class="wzm-gzone' + (actif ? ' actif' : '') + '"><button type="button" class="wzm-gzlib" data-zvoir="' + i + '" aria-pressed="' + actif + '" title="' + esc(t('zView')) + '">' +
                 '&#x1F441;&#xFE0F; <bdi>' + esc(nomZone(e, z.emp, i)) + '</bdi> <small>' + ((z.codes || []).length ? esc(z.codes.join(', ')) : horsDepartements(z.geom) === 'com' ? esc(t('overseasCom')) : '<span class="wzm-etr-txt">&#x1F30D; ' + esc(t('abroad')) + '</span>') + ' · ' + nombre(z.aire / 1e6, z.aire < 1e7 ? 1 : 0) + ' km²</small></button>' +
-                '<div class="wzm-gzact">' + choix + (peutEcrire() ? '<button type="button" class="wzm-rond wzm-rond-p" data-znom="' + i + '" title="' + esc(t('zRename')) + '" aria-label="' + esc(t('zRename') + ' — ' + nomZone(e, z.emp, i)) + '">&#x270F;&#xFE0F;</button>' : '') +
+                '<div class="wzm-gzact">' + choix + htmlTitres('z', i, (e.zones && e.zones[z.emp] && e.zones[z.emp].titres) || [], ro) + (peutEcrire() ? '<button type="button" class="wzm-rond wzm-rond-p" data-znom="' + i + '" title="' + esc(t('zRename')) + '" aria-label="' + esc(t('zRename') + ' — ' + nomZone(e, z.emp, i)) + '">&#x270F;&#xFE0F;</button>' : '') +
                 '<button type="button" class="wzm-btn" data-zform="' + i + '" title="' + esc(t('formReady')) + '">&#x1F4CB; ' + esc(t('zForm')) + '</button>' +
                 '<button type="button" class="wzm-btn" data-zwkt="' + i + '" title="' + esc(t('copyWktTip')) + '">WKT</button>' +
                 '<button type="button" class="wzm-btn" data-zatelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button></div></div>';
-        }).join('') + '</div>';
+        }).join('') + '</div></details>';
     }
     // Les zones EXACTES de l'éditeur, relues chez Waze à l'ouverture de la fiche : le cache n'en garde qu'une
     // version simplifiée (~50 m), bonne pour l'affichage, pas pour un WKT qu'on va transmettre.
@@ -8430,7 +8556,7 @@
         // zone par zone, juste au-dessus. On ne les montre plus ; ceux « à retirer » ou « demandés » restent.
         // … sauf s'ils sont EN ÉCART : masqués, leur carré rouge restait sans moyen de les corriger (un éditeur réel, deux « Aveyron »
         // de l'amorce portant le code 15 du Cantal — vu dans WME le 03/10/2026).
-        const roles = e.roles.map((r, i) => r.type === '?' && r.statut === 'vigueur' && !ec.some(x => x.r === r) ? '' : '<div class="wzm-grole"><span class="wzm-gtype">' + esc(r.type) + '</span><span class="wzm-glib" title="' + esc(r.note || '') + '">' + (r.pays ? '&#x1F310; ' : '') + '<button type="button" class="wzm-glib-voir" data-rvoir="' + i + '" aria-pressed="' + !!(roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) + '" title="' + esc(t('roleView')) + '"><bdi>' + esc(r.libelle) + '</bdi></button>' + (r.codes.length ? ' <small>' + esc(r.codes.join(', ')) + '</small>' : '') + '</span>' + (true ? '<button type="button" class="wzm-btn" data-ratelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button>' : '') +
+        const roles = e.roles.map((r, i) => r.type === '?' && r.statut === 'vigueur' && !ec.some(x => x.r === r) ? '' : '<div class="wzm-grole"><span class="wzm-gtype">' + esc(r.type) + '</span><span class="wzm-glib" title="' + esc(r.note || '') + '">' + (r.pays ? '&#x1F310; ' : '') + '<button type="button" class="wzm-glib-voir" data-rvoir="' + i + '" aria-pressed="' + !!(roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) + '" title="' + esc(t('roleView')) + '"><bdi' + (r.pays ? ' data-court="' + esc(FIPS_ISO[r.pays] || r.pays) + '"' : '') + '>' + esc(libRole(r)) + '</bdi></button>' + (r.codes.length ? ' <small>' + esc(r.codes.join(', ')) + '</small>' : '') + '</span>' + htmlTitres('r', i, r.titres || [], ro) + (!r.pays ? '<button type="button" class="wzm-btn" data-ratelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button>' : '') +
             // Le lien vient du wiki (retouchable à la main) : seul un https:// devient cliquable — un « javascript: »
             // s'exécuterait avec la session Waze du gestionnaire (audit du 03/10/2026).
             (/^https:\/\//i.test(r.demande) ? '<a href="' + esc(r.demande) + '" target="_blank" rel="noopener noreferrer" title="' + esc(t('gRequest') + (r.ticket ? ' · ' + r.ticket : '')) + '" aria-label="' + esc(t('gRequest')) + '">&#x1F517;</a>' : r.demande ? '<span class="wzm-lien-brut" title="' + esc(r.demande) + '">&#x1F517;&#xFE0E;</span>' : '') + statut(r, i) +
@@ -8443,7 +8569,7 @@
             '<div class="wzm-gfaits">' + esc(faits) + ' <a href="https://www.waze.com/discuss/u/' + encodeURIComponent(e.pseudo) + '" target="_blank" rel="noopener">Discuss</a> · <a href="https://www.waze.com/user/editor/' + encodeURIComponent(e.pseudo) + '" target="_blank" rel="noopener">' + esc(t('profile')) + '</a></div>' +
             (ec.length ? '<ul class="wzm-gecarts">' + ec.map(x => '<li><span class="wzm-pt ' + (PASTILLE[x.k] || 'gris') + '"></span>' + esc(texteEcart(x)) + '</li>').join('') + '</ul>' : '') +
             htmlZonesEd(e, v) +
-            (roles ? '<div class="wzm-sec2">' + esc(t('gRoles')) + '</div>' + roles : '') +
+            (roles ? '<details class="wzm-plier" data-plier="roles"' + ((opts.plie || {}).roles ? '' : ' open') + '><summary class="wzm-sec2">' + esc(t('gRoles')) + '</summary>' + roles + '</details>' : '') +
             (ro ? '<div class="wzm-ligne"><button type="button" class="wzm-btn" data-g="relireUn">' + esc(t('liveReloadOne')) + '</button></div>' +
                 (e.note ? '<p class="wzm-aide">' + esc(e.note) + '</p>' : '') + '</div>' : '') +
             (ro ? '' : '<div class="wzm-sec2">' + esc(t('roleNew')) + '</div>' +
@@ -8466,13 +8592,25 @@
         let focus = '';
         if (ae && p.contains(ae)) {
             if (ae.id) focus = '#' + ae.id;
-            else for (const a of ['data-ed', 'data-statut', 'data-zvalider', 'data-ztype', 'data-zvoir', 'data-rvoir', 'data-ratelier', 'data-zform', 'data-zwkt', 'data-zatelier', 'data-suppr-role', 'data-ouvrir', 'data-g']) if (ae.hasAttribute(a)) { focus = '[' + a + '="' + String(ae.getAttribute(a)).replace(/["\\]/g, '\\$&') + '"]'; break; }
+            else for (const a of ['data-ed', 'data-statut', 'data-zvalider', 'data-ztype', 'data-ztitre', 'data-rtitre', 'data-zvoir', 'data-rvoir', 'data-ratelier', 'data-zform', 'data-zwkt', 'data-zatelier', 'data-suppr-role', 'data-ouvrir', 'data-g']) if (ae.hasAttribute(a)) { focus = '[' + a + '="' + String(ae.getAttribute(a)).replace(/["\\]/g, '\\$&') + '"]'; break; }
         }
         // Le redessin remplace la liste : sans ceci, elle repartait en haut à chaque clic sur un éditeur
         // (signalé par l'auteur le 03/10/2026). On garde le défilement de la liste ET de la fenêtre.
         const liste0 = p.querySelector('#wzm-gliste'), corps = ov.querySelector('#wzm-corps');
         const defListe = liste0 ? liste0.scrollTop : 0, defCorps = corps ? corps.scrollTop : 0;
+        const pan0 = p.querySelector('#wzm-gpanneau'), defPan = pan0 && !ficheAMontrer ? pan0.scrollTop : 0;
         p.innerHTML = bandeauPays() + htmlGest();
+        const pan = p.querySelector('#wzm-gpanneau');
+        if (pan) pan.scrollTop = defPan;
+        // Un nom de pays qui ne tient pas sur sa ligne (« Burkina Faso — tout le pays ») : son code à 2 lettres, avec le
+        // nom entier en infobulle (demande de l'auteur, 06/10/2026). Mesuré APRÈS le rendu.
+        p.querySelectorAll('.wzm-glib bdi[data-court]').forEach(b => {
+            const g = b.closest('.wzm-glib'), deborde = () => g.scrollWidth > g.clientWidth + 1;
+            if (!g.clientWidth || !deborde()) return;
+            const plein = b.textContent; b.closest('button').title = plein;
+            b.textContent = t('roleCountryLib', b.dataset.court);
+            if (deborde()) b.textContent = b.dataset.court;
+        });
         const liste = p.querySelector('#wzm-gliste');
         if (liste) liste.scrollTop = defListe;
         if (corps) corps.scrollTop = defCorps;
@@ -8588,10 +8726,32 @@
             const x = Object.assign({}, e.zones[z.emp] || {}, { maj: new Date().toISOString().slice(0, 10) });
             if (sel.value) x.type = sel.value; else delete x.type;
             delete x.propose;
-            if (x.type || x.nom) e.zones[z.emp] = x; else delete e.zones[z.emp];
+            if (x.type || x.nom || (x.titres || []).length) e.zones[z.emp] = x; else delete e.zones[z.emp];
             if (!Object.keys(e.zones).length) delete e.zones;
             changer(e.pseudo + ' · ' + nomZone(e, z.emp, i, tEn) + ' → ' + (sel.value || tEn('zTypeNone')));
         }));
+        // Titre communautaire allumé / éteint sur une zone ou un rôle (cumulables : CM + LC + CPC…).
+        p.querySelectorAll('details[data-plier]').forEach(d => d.addEventListener('toggle', () => { opts.plie = Object.assign({}, opts.plie, { [d.dataset.plier]: !d.open }); ecrireOpts(); }));
+        sur('[data-titres-large]', () => { opts.gestLarge = true; ecrireOpts(); majFenetre(); rendreGest(); });
+        const basculer = (l, x) => { const s = new Set(l || []); if (s.has(x)) s.delete(x); else s.add(x); return TITRES.filter(y => s.has(y)); };
+        sur('[data-ztitre]', ev => {
+            if (!garde()) return;
+            const [si, x] = ev.currentTarget.dataset.ztitre.split(':'), i = Number(si), z = zone(i); if (!z || !TITRES.includes(x)) return;
+            e.zones = e.zones || {};
+            const zz = Object.assign({}, e.zones[z.emp] || {}, { maj: new Date().toISOString().slice(0, 10) });
+            const l = basculer(zz.titres, x), on = l.includes(x);
+            if (l.length) zz.titres = l; else delete zz.titres;
+            if (zz.type || zz.nom || (zz.titres || []).length) e.zones[z.emp] = zz; else delete e.zones[z.emp];
+            if (!Object.keys(e.zones).length) delete e.zones;
+            changer(tEn('chTitle', e.pseudo, nomZone(e, z.emp, i, tEn), x, on));
+        });
+        sur('[data-rtitre]', ev => {
+            if (!garde()) return;
+            const [si, x] = ev.currentTarget.dataset.rtitre.split(':'), r = e.roles[Number(si)]; if (!r || !TITRES.includes(x)) return;
+            const l = basculer(r.titres, x), on = l.includes(x);
+            if (l.length) r.titres = l; else delete r.titres;
+            changer(tEn('chTitle', e.pseudo, r.type + ' ' + r.libelle, x, on));
+        });
         sur('[data-znom]', ev => {
             const i = Number(ev.currentTarget.dataset.znom), z = zone(i); if (!z) return;
             const lib = ev.currentTarget.closest('.wzm-gzone').querySelector('.wzm-gzlib');
@@ -8609,7 +8769,7 @@
                 e.zones = e.zones || {};
                 const x = Object.assign({}, e.zones[z.emp] || {}, { maj: new Date().toISOString().slice(0, 10) });
                 if (nom) x.nom = nom; else delete x.nom;
-                if (x.type || x.nom) e.zones[z.emp] = x; else delete e.zones[z.emp];
+                if (x.type || x.nom || (x.titres || []).length) e.zones[z.emp] = x; else delete e.zones[z.emp];
                 if (!Object.keys(e.zones).length) delete e.zones;
                 changer(e.pseudo + ' · ' + tEn('zoneN', i + 1) + ' = “' + (nom || '—') + '”');
             };
@@ -8670,6 +8830,9 @@
         const l = (mondeListe || []).map(x => [x.f, nomMonde(x)]).sort((a, b) => a[1].localeCompare(b[1], _lang));
         return (l.length ? l : [[defaut, paysRegNom || defaut]]).map(([f, n]) => '<option value="' + esc(f) + '"' + (f === defaut ? ' selected' : '') + '>' + esc(n) + '</option>').join('');
     }
+    // Un rôle « pays entier » est enregistré en ANGLAIS (le registre est partagé entre communautés) : on l'affiche dans
+    // la langue de l'utilisateur, « Maroc — tout le pays » plutôt que « Morocco — whole country » (l'auteur, 06/10/2026).
+    const libRole = r => { if (!r.pays) return r.libelle; const c = (mondeListe || []).find(x => x.f === r.pays); return c ? t('roleCountryLib', nomMonde(c)) : r.libelle; };
     function rolePays(e, f) {
         const c = (mondeListe || []).find(x => x.f === f);
         if (!c || e.roles.some(r => r.pays === f && r.statut !== 'retire')) return;
