@@ -30,6 +30,12 @@
 | Ireland | counties, electoral divisions | Tailte Éireann (CC BY 4.0) |
 | United Kingdom | nations, regions, counties and unitary authorities, districts, wards | ONS (OGL v3) |
 | Czechia | regions, districts, municipalities | ČÚZK RÚIAN (CC BY 4.0) |
+| Bulgaria | provinces, municipalities, land areas (EKATTE), city districts — Cyrillic and Latin names | AGKK INSPIRE (no conditions apply) |
+| Cyprus | districts, municipalities and communities, quarters (pre-2024 units) | DLS INSPIRE (no conditions apply) |
+| Latvia | municipalities and state cities, parishes and towns (ATVK) — built in | VZD INSPIRE 2024 (CC0) |
+| Lithuania | counties, municipalities, elderships — built in | Registrų centras (CC BY 4.0) |
+| Norway | counties (fylker), municipalities (kommuner) — built in, exact outline from the API on export | Kartverket (CC BY 4.0) |
+| Sweden | counties (län, built in), municipalities (kommuner) | Lantmäteriet via a public Esri Sverige layer (CC0) |
 | Slovakia | regions, districts, municipalities | ÚGKK ZBGIS (CC BY 4.0) |
 | Slovenia | statistical regions, municipalities, settlements | GURS (CC BY 4.0) |
 | Romania | counties, municipalities (UAT) | ANCPI (CC BY 4.0) |
@@ -43,7 +49,7 @@
 | Africa (52 other countries, incl. Western Sahara as a separate unit) | regions or provinces, districts or departments | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Mauritius (incl. Rodrigues) | districts, villages and towns | official data, built into the script |
 
-That is **77 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
+That is **83 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
 
 ## The area workshop
 
@@ -120,6 +126,12 @@ Script: MIT licence.
 | Irlande | comtés, divisions électorales | Tailte Éireann (CC BY 4.0) |
 | Royaume-Uni | nations, régions, comtés et autorités unitaires, districts, wards | ONS (OGL v3) |
 | Tchéquie | régions, districts, communes | ČÚZK RÚIAN (CC BY 4.0) |
+| Bulgarie | régions, communes, finages (EKATTE), arrondissements urbains — noms cyrilliques et latins | AGKK INSPIRE (sans condition) |
+| Chypre | districts, communes et communautés, quartiers (unités d’avant 2024) | DLS INSPIRE (sans condition) |
+| Lettonie | municipalités et villes d’État, paroisses et villes (ATVK) — intégrés | VZD INSPIRE 2024 (CC0) |
+| Lituanie | comtés, municipalités, seniūnijos — intégrés | Registrų centras (CC BY 4.0) |
+| Norvège | comtés (fylker), communes (kommuner) — intégrés, contour exact demandé à l’API pour l’export | Kartverket (CC BY 4.0) |
+| Suède | comtés (län, intégrés), communes (kommuner) | Lantmäteriet via une couche publique d’Esri Sverige (CC0) |
 | Slovaquie | régions, districts, communes | ÚGKK ZBGIS (CC BY 4.0) |
 | Slovénie | régions statistiques, communes, localités | GURS (CC BY 4.0) |
 | Roumanie | départements (județe), communes (UAT) | ANCPI (CC BY 4.0) |
@@ -133,7 +145,7 @@ Script: MIT licence.
 | Afrique (52 autres pays, Sahara occidental comme entité à part) | régions ou provinces, districts ou départements | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Maurice (Rodrigues comprise) | districts, villages et villes | données officielles, intégrées au script |
 
-Soit **77 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
+Soit **83 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
 
 ## L’atelier de zones
 

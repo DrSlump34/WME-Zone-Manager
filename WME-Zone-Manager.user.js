@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.26.01
+// @version      2.30.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -34,10 +34,10 @@
 // @grant        GM_getResourceText
 // @grant        unsafeWindow
 // @resource     TURF https://cdnjs.cloudflare.com/ajax/libs/Turf.js/7.4.0/turf.min.js#sha256=5db5dda50210fa0f25394672383ba4a2e6fcde3c9e95ae0e21d62d327fc66d05
-// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/b90ead1010aee983858a764acda5d5ea63df3a57/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
-// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/b90ead1010aee983858a764acda5d5ea63df3a57/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
-// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/b90ead1010aee983858a764acda5d5ea63df3a57/donnees/donnees_eu.b64#sha256=fe2d44157568711b7be340a6580bdfff835cef91bec9a3621300b70b66dacdec
-// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/b90ead1010aee983858a764acda5d5ea63df3a57/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
+// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/f2fc806a4d41140c79eb3bf3ad3f886268e019e4/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
+// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/f2fc806a4d41140c79eb3bf3ad3f886268e019e4/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
+// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/f2fc806a4d41140c79eb3bf3ad3f886268e019e4/donnees/donnees_eu.b64#sha256=d32a80b9de9d6277e275d9ad4422db6c008734b7257fa07a226328044f94684d
+// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/f2fc806a4d41140c79eb3bf3ad3f886268e019e4/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
 // @connect      data.geopf.fr
 // @connect      geo.api.gouv.fr
 // @connect      geoportale.istat.it
@@ -49,6 +49,10 @@
 // @connect      ipi.eprostor.gov.si
 // @connect      geo.stat.fi
 // @connect      ags.cuzk.gov.cz
+// @connect      inspire.cadastre.bg
+// @connect      eservices.dls.moi.gov.cy
+// @connect      api.kartverket.no
+// @connect      services9.arcgis.com
 // @connect      services1.arcgis.com
 // @connect      services-eu1.arcgis.com
 // @connect      api3.geo.admin.ch
@@ -418,6 +422,34 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            lvl_se_lan: 'Comtés (län)',
+            lvl_se_kommun: 'Communes (kommuner)',
+            searchPhSE: 'Nom ou code de commune…',
+            unit_SE: 'comtés (län)',
+            lvl_no_fylke: 'Comtés (fylker)',
+            lvl_no_kommune: 'Communes (kommuner)',
+            searchPhNO: 'Nom ou numéro de commune…',
+            unit_NO: 'comtés (fylker)',
+            lvl_lt_apskritis: 'Comtés (apskritys)',
+            lvl_lt_savivaldybe: 'Municipalités (savivaldybės)',
+            lvl_lt_seniunija: 'Seniūnijos (sous-communes)',
+            searchPhLT: 'Nom ou code…',
+            unit_LT: 'comtés (apskritys)',
+            lvl_lv_novads: 'Municipalités et villes d’État (novadi)',
+            lvl_lv_pagasts: 'Paroisses et villes (pagasti)',
+            searchPhLV: 'Nom ou code ATVK…',
+            unit_LV: 'municipalités (novadi)',
+            lvl_bg_oblast: 'Régions (oblasti)',
+            lvl_bg_obshtina: 'Communes (obshtini)',
+            lvl_bg_zemlishte: 'Finages (zemlishta, EKATTE)',
+            lvl_bg_rayon: 'Arrondissements urbains (rayoni)',
+            searchPhBG: 'Nom (cyrillique ou latin) ou code…',
+            unit_BG: 'régions (oblasti)',
+            lvl_cy_district: 'Districts (eparchies)',
+            lvl_cy_koinotita: 'Communes et communautés',
+            lvl_cy_enoria: 'Quartiers et paroisses',
+            searchPhCY: 'Nom ou code…',
+            unit_CY: 'districts',
             lvl_ng_state: 'États (Nigeria)',
             lvl_ng_lga: 'Collectivités locales (LGA)',
             searchPhNG: 'Nom ou code (LA, 25019)…',
@@ -821,6 +853,34 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            lvl_se_lan: 'Counties (län)',
+            lvl_se_kommun: 'Municipalities (kommuner)',
+            searchPhSE: 'Name or municipality code…',
+            unit_SE: 'counties (län)',
+            lvl_no_fylke: 'Counties (fylker)',
+            lvl_no_kommune: 'Municipalities (kommuner)',
+            searchPhNO: 'Name or municipality number…',
+            unit_NO: 'counties (fylker)',
+            lvl_lt_apskritis: 'Counties (apskritys)',
+            lvl_lt_savivaldybe: 'Municipalities (savivaldybės)',
+            lvl_lt_seniunija: 'Elderships (seniūnijos)',
+            searchPhLT: 'Name or code…',
+            unit_LT: 'counties (apskritys)',
+            lvl_lv_novads: 'Municipalities and state cities (novadi)',
+            lvl_lv_pagasts: 'Parishes and towns (pagasti)',
+            searchPhLV: 'Name or ATVK code…',
+            unit_LV: 'municipalities (novadi)',
+            lvl_bg_oblast: 'Provinces (oblasti)',
+            lvl_bg_obshtina: 'Municipalities (obshtini)',
+            lvl_bg_zemlishte: 'Land areas (zemlishta, EKATTE)',
+            lvl_bg_rayon: 'City districts (rayoni)',
+            searchPhBG: 'Name (Cyrillic or Latin) or code…',
+            unit_BG: 'provinces (oblasti)',
+            lvl_cy_district: 'Districts (eparchies)',
+            lvl_cy_koinotita: 'Municipalities and communities',
+            lvl_cy_enoria: 'Quarters and parishes',
+            searchPhCY: 'Name or code…',
+            unit_CY: 'districts',
             lvl_ng_state: 'States (Nigeria)',
             lvl_ng_lga: 'Local government areas (LGA)',
             searchPhNG: 'Name or code (LA, 25019)…',
@@ -1224,6 +1284,34 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            lvl_se_lan: 'Provinzen (Län)',
+            lvl_se_kommun: 'Gemeinden (Kommuner)',
+            searchPhSE: 'Name oder Gemeindecode…',
+            unit_SE: 'Provinzen (Län)',
+            lvl_no_fylke: 'Provinzen (Fylker)',
+            lvl_no_kommune: 'Kommunen (Kommuner)',
+            searchPhNO: 'Name oder Kommunennummer…',
+            unit_NO: 'Provinzen (Fylker)',
+            lvl_lt_apskritis: 'Bezirke (apskritys)',
+            lvl_lt_savivaldybe: 'Gemeinden (savivaldybės)',
+            lvl_lt_seniunija: 'Amtsbezirke (seniūnijos)',
+            searchPhLT: 'Name oder Code…',
+            unit_LT: 'Bezirke (Apskritys)',
+            lvl_lv_novads: 'Bezirke und Staatsstädte (novadi)',
+            lvl_lv_pagasts: 'Gemeinden und Städte (pagasti)',
+            searchPhLV: 'Name oder ATVK-Code…',
+            unit_LV: 'Bezirke (Novadi)',
+            lvl_bg_oblast: 'Bezirke (oblasti)',
+            lvl_bg_obshtina: 'Gemeinden (obshtini)',
+            lvl_bg_zemlishte: 'Gemarkungen (zemlishta, EKATTE)',
+            lvl_bg_rayon: 'Stadtbezirke (rayoni)',
+            searchPhBG: 'Name (kyrillisch oder lateinisch) oder Code…',
+            unit_BG: 'Bezirke (Oblasti)',
+            lvl_cy_district: 'Bezirke (Eparchien)',
+            lvl_cy_koinotita: 'Gemeinden',
+            lvl_cy_enoria: 'Viertel und Pfarreien',
+            searchPhCY: 'Name oder Code…',
+            unit_CY: 'Bezirke',
             lvl_ng_state: 'Bundesstaaten (Nigeria)',
             lvl_ng_lga: 'Kommunalbezirke (LGA)',
             searchPhNG: 'Name oder Code (LA, 25019)…',
@@ -1627,6 +1715,34 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            lvl_se_lan: 'Provincias (län)',
+            lvl_se_kommun: 'Municipios (kommuner)',
+            searchPhSE: 'Nombre o código de municipio…',
+            unit_SE: 'provincias (län)',
+            lvl_no_fylke: 'Provincias (fylker)',
+            lvl_no_kommune: 'Municipios (kommuner)',
+            searchPhNO: 'Nombre o número de municipio…',
+            unit_NO: 'provincias (fylker)',
+            lvl_lt_apskritis: 'Condados (apskritys)',
+            lvl_lt_savivaldybe: 'Municipios (savivaldybės)',
+            lvl_lt_seniunija: 'Seniūnijos (subdistritos)',
+            searchPhLT: 'Nombre o código…',
+            unit_LT: 'condados (apskritys)',
+            lvl_lv_novads: 'Municipios y ciudades estatales (novadi)',
+            lvl_lv_pagasts: 'Parroquias y ciudades (pagasti)',
+            searchPhLV: 'Nombre o código ATVK…',
+            unit_LV: 'municipios (novadi)',
+            lvl_bg_oblast: 'Provincias (oblasti)',
+            lvl_bg_obshtina: 'Municipios (obshtini)',
+            lvl_bg_zemlishte: 'Términos (zemlishta, EKATTE)',
+            lvl_bg_rayon: 'Distritos urbanos (rayoni)',
+            searchPhBG: 'Nombre (cirílico o latino) o código…',
+            unit_BG: 'provincias (oblasti)',
+            lvl_cy_district: 'Distritos (eparquías)',
+            lvl_cy_koinotita: 'Municipios y comunidades',
+            lvl_cy_enoria: 'Barrios y parroquias',
+            searchPhCY: 'Nombre o código…',
+            unit_CY: 'distritos',
             lvl_ng_state: 'Estados (Nigeria)',
             lvl_ng_lga: 'Gobiernos locales (LGA)',
             searchPhNG: 'Nombre o código (LA, 25019)…',
@@ -2030,6 +2146,34 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            lvl_se_lan: 'Contee (län)',
+            lvl_se_kommun: 'Comuni (kommuner)',
+            searchPhSE: 'Nome o codice del comune…',
+            unit_SE: 'contee (län)',
+            lvl_no_fylke: 'Contee (fylker)',
+            lvl_no_kommune: 'Comuni (kommuner)',
+            searchPhNO: 'Nome o numero del comune…',
+            unit_NO: 'contee (fylker)',
+            lvl_lt_apskritis: 'Contee (apskritys)',
+            lvl_lt_savivaldybe: 'Comuni (savivaldybės)',
+            lvl_lt_seniunija: 'Seniūnijos (circoscrizioni)',
+            searchPhLT: 'Nome o codice…',
+            unit_LT: 'contee (apskritys)',
+            lvl_lv_novads: 'Comuni e città statali (novadi)',
+            lvl_lv_pagasts: 'Parrocchie e città (pagasti)',
+            searchPhLV: 'Nome o codice ATVK…',
+            unit_LV: 'comuni (novadi)',
+            lvl_bg_oblast: 'Province (oblasti)',
+            lvl_bg_obshtina: 'Comuni (obshtini)',
+            lvl_bg_zemlishte: 'Territori catastali (zemlishta, EKATTE)',
+            lvl_bg_rayon: 'Circoscrizioni urbane (rayoni)',
+            searchPhBG: 'Nome (cirillico o latino) o codice…',
+            unit_BG: 'province (oblasti)',
+            lvl_cy_district: 'Distretti (eparchie)',
+            lvl_cy_koinotita: 'Comuni e comunità',
+            lvl_cy_enoria: 'Quartieri e parrocchie',
+            searchPhCY: 'Nome o codice…',
+            unit_CY: 'distretti',
             lvl_ng_state: 'Stati (Nigeria)',
             lvl_ng_lga: 'Governi locali (LGA)',
             searchPhNG: 'Nome o codice (LA, 25019)…',
@@ -2433,6 +2577,34 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            lvl_se_lan: 'Condados (län)',
+            lvl_se_kommun: 'Municípios (kommuner)',
+            searchPhSE: 'Nome ou código do município…',
+            unit_SE: 'condados (län)',
+            lvl_no_fylke: 'Condados (fylker)',
+            lvl_no_kommune: 'Municípios (kommuner)',
+            searchPhNO: 'Nome ou número do município…',
+            unit_NO: 'condados (fylker)',
+            lvl_lt_apskritis: 'Condados (apskritys)',
+            lvl_lt_savivaldybe: 'Municípios (savivaldybės)',
+            lvl_lt_seniunija: 'Seniūnijos (subdistritos)',
+            searchPhLT: 'Nome ou código…',
+            unit_LT: 'condados (apskritys)',
+            lvl_lv_novads: 'Municípios e cidades estatais (novadi)',
+            lvl_lv_pagasts: 'Paróquias e cidades (pagasti)',
+            searchPhLV: 'Nome ou código ATVK…',
+            unit_LV: 'municípios (novadi)',
+            lvl_bg_oblast: 'Províncias (oblasti)',
+            lvl_bg_obshtina: 'Municípios (obshtini)',
+            lvl_bg_zemlishte: 'Áreas cadastrais (zemlishta, EKATTE)',
+            lvl_bg_rayon: 'Distritos urbanos (rayoni)',
+            searchPhBG: 'Nome (cirílico ou latino) ou código…',
+            unit_BG: 'províncias (oblasti)',
+            lvl_cy_district: 'Distritos (eparquias)',
+            lvl_cy_koinotita: 'Municípios e comunidades',
+            lvl_cy_enoria: 'Bairros e paróquias',
+            searchPhCY: 'Nome ou código…',
+            unit_CY: 'distritos',
             lvl_ng_state: 'Estados (Nigéria)',
             lvl_ng_lga: 'Governos locais (LGA)',
             searchPhNG: 'Nome ou código (LA, 25019)…',
@@ -2836,6 +3008,34 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            lvl_se_lan: 'Condados (län)',
+            lvl_se_kommun: 'Municípios (kommuner)',
+            searchPhSE: 'Nome ou código do município…',
+            unit_SE: 'condados (län)',
+            lvl_no_fylke: 'Condados (fylker)',
+            lvl_no_kommune: 'Municípios (kommuner)',
+            searchPhNO: 'Nome ou número do município…',
+            unit_NO: 'condados (fylker)',
+            lvl_lt_apskritis: 'Condados (apskritys)',
+            lvl_lt_savivaldybe: 'Municípios (savivaldybės)',
+            lvl_lt_seniunija: 'Seniūnijos (subdistritos)',
+            searchPhLT: 'Nome ou código…',
+            unit_LT: 'condados (apskritys)',
+            lvl_lv_novads: 'Municípios e cidades estatais (novadi)',
+            lvl_lv_pagasts: 'Paróquias e cidades (pagasti)',
+            searchPhLV: 'Nome ou código ATVK…',
+            unit_LV: 'municípios (novadi)',
+            lvl_bg_oblast: 'Províncias (oblasti)',
+            lvl_bg_obshtina: 'Municípios (obshtini)',
+            lvl_bg_zemlishte: 'Áreas cadastrais (zemlishta, EKATTE)',
+            lvl_bg_rayon: 'Distritos urbanos (rayoni)',
+            searchPhBG: 'Nome (cirílico ou latino) ou código…',
+            unit_BG: 'províncias (oblasti)',
+            lvl_cy_district: 'Distritos (eparquias)',
+            lvl_cy_koinotita: 'Municípios e comunidades',
+            lvl_cy_enoria: 'Bairros e paróquias',
+            searchPhCY: 'Nome ou código…',
+            unit_CY: 'distritos',
             lvl_ng_state: 'Estados (Nigéria)',
             lvl_ng_lga: 'Governos locais (LGA)',
             searchPhNG: 'Nome ou código (LA, 25019)…',
@@ -3239,6 +3439,34 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            lvl_se_lan: 'מחוזות (län)',
+            lvl_se_kommun: 'רשויות מקומיות (kommuner)',
+            searchPhSE: 'שם או קוד רשות…',
+            unit_SE: 'מחוזות (län)',
+            lvl_no_fylke: 'מחוזות (fylker)',
+            lvl_no_kommune: 'רשויות מקומיות (kommuner)',
+            searchPhNO: 'שם או מספר רשות…',
+            unit_NO: 'מחוזות (fylker)',
+            lvl_lt_apskritis: 'מחוזות (apskritys)',
+            lvl_lt_savivaldybe: 'רשויות מקומיות (savivaldybės)',
+            lvl_lt_seniunija: 'תת-רשויות (seniūnijos)',
+            searchPhLT: 'שם או קוד…',
+            unit_LT: 'מחוזות (apskritys)',
+            lvl_lv_novads: 'רשויות וערי מדינה (novadi)',
+            lvl_lv_pagasts: 'קהילות וערים (pagasti)',
+            searchPhLV: 'שם או קוד ATVK…',
+            unit_LV: 'רשויות (novadi)',
+            lvl_bg_oblast: 'מחוזות (oblasti)',
+            lvl_bg_obshtina: 'רשויות מקומיות (obshtini)',
+            lvl_bg_zemlishte: 'שטחי קדסטר (zemlishta, EKATTE)',
+            lvl_bg_rayon: 'רובעים עירוניים (rayoni)',
+            searchPhBG: 'שם (קירילי או לטיני) או קוד…',
+            unit_BG: 'מחוזות (oblasti)',
+            lvl_cy_district: 'מחוזות',
+            lvl_cy_koinotita: 'רשויות וקהילות',
+            lvl_cy_enoria: 'שכונות וקהילות',
+            searchPhCY: 'שם או קוד…',
+            unit_CY: 'מחוזות',
             lvl_ng_state: 'מדינות (ניגריה)',
             lvl_ng_lga: 'רשויות מקומיות (LGA)',
             searchPhNG: 'שם או קוד (LA, 25019)…',
@@ -3532,7 +3760,9 @@
     //  dep?: { niveau, cle, champ } (rattachement : la valeur `champ` de l'entité du niveau `niveau` qui porte la
     //  même `cle`), alt? (2e nom pour la recherche) }.
     // =====================================================================
-    const sansAccents = x => String(x).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+    // Les lettres À PART ENTIÈRE ne se décomposent pas (ø, æ, ł, ð, þ, ß…) : « tromso » ne trouvait pas Tromsø (05/10/2026).
+    const LETTRES_PLATES = { ø: 'o', æ: 'ae', œ: 'oe', ł: 'l', đ: 'd', ð: 'd', þ: 'th', ß: 'ss', ı: 'i', ħ: 'h' };
+    const sansAccents = x => String(x).toLowerCase().replace(/[øæœłđðþßıħ]/g, c => LETTRES_PLATES[c]).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
     const sqlTexte = s => "'" + String(s).replace(/'/g, "''") + "'";
     // Niveaux INTÉGRÉS de pays dont le service ne simplifie pas (outils/donnees_eu.py) : géométries codées en entiers
     // au millième de degré, 1er point absolu puis écarts (`geomCompacte` les décode).
@@ -3562,6 +3792,9 @@
         const coupe = (a, b) => !(a[2] < b[0] || a[0] > b[2] || a[3] < b[1] || a[1] > b[3]);
         const f = Object.assign({
             generique: true,
+            // Une erreur 5xx isolée d'un service (ArcGIS Online, GRID3 Nigeria : HTTP 500 puis 200, mesuré le 05/10/2026)
+            // ne doit pas faire échouer un chargement : 3 essais (les 4xx restent définitives, cf. getJSON).
+            essais: 3,
             tolTout: 0.001,    // ~100 m : niveaux chargés en entier (régions, provinces), pour l'affichage et la couverture
             tolVue: 0.0001,    // ~10 m : niveaux fins, par tuiles (invisible à l'écran ; le stock les garde à ~5 m)
             url(niveau, params) {
@@ -3678,8 +3911,9 @@
                 if (n.indexIntegre && !this._idx[niveau]) this._idx[niveau] = donneesEu().then(d => (d.index[this.pays + ':' + niveau] || []).map(([c, nm, dp, bb]) => ({ code: String(c), nom: nm, dep: dp, bb, cle: sansAccents(nm) })));
                 // Nom calculé par une fonction (Irlande : casse + irlandais) : l'index lit le champ brut `nomIndex`.
                 const champNom = typeof n.nom === 'string' ? n.nom : n.nomIndex;
-                if (!this._idx[niveau]) this._idx[niveau] = this.pages(niveau, { returnGeometry: 'false', outFields: [n.code, champNom, n.alt].filter(Boolean).join(','), f: 'json' })
-                    .then(l => l.map(x => { const a = x.attributes || x.properties || {}; return { code: String(a[n.code]), cle: sansAccents((a[champNom] || '') + ' ' + (n.alt ? a[n.alt] || '' : '')) }; }))
+                // Nom servi À PART (Bulgarie, Chypre : table INSPIRE jointe par `preparer`) : la clé se calcule (`cleIndex`).
+                if (!this._idx[niveau]) this._idx[niveau] = this.pages(niveau, { returnGeometry: 'false', outFields: [n.code, champNom, n.alt, n.champsIndex].filter(Boolean).join(','), f: 'json' })
+                    .then(l => l.map(x => { const a = x.attributes || x.properties || {}; return { code: String(a[n.code]), cle: sansAccents(n.cleIndex ? n.cleIndex(a, this) : (a[champNom] || '') + ' ' + (n.alt ? a[n.alt] || '' : '')) }; }))
                     .catch(e => { delete this._idx[niveau]; throw e; });
                 return this._idx[niveau];
             },
@@ -3742,7 +3976,7 @@
                     const q = new URLSearchParams({ service: 'WFS', version: '2.0.0', request: 'GetFeature', typeNames: couche, outputFormat: 'application/json', srsName: 'EPSG:4326', count: String(pas), startIndex: String(o), sortBy: n.code });
                     if (filtres.length) q.set('CQL_FILTER', filtres.map(x => '(' + x + ')').join(' AND '));
                     if (sans) q.set('propertyName', params.outFields);
-                    const j = await getJSON(wfs + '?' + q.toString());
+                    const j = await getJSON(wfs + '?' + q.toString(), this.essais);
                     const l = j.features || [];
                     out.push(...(sans ? l.map(ft => ({ attributes: ft.properties })) : l));
                     if (l.length < pas) break;
@@ -4432,6 +4666,89 @@
         },
     });
     // =====================================================================
+    //  NOMS SERVIS À PART (schéma INSPIRE d'ArcGIS, « auAdmUnitS_name ») : une table (rid → nom) jointe à chaque
+    //  unité par son IFCID, chargée une fois. Belgique (plus haut, à sa façon), Bulgarie, Chypre.
+    // =====================================================================
+    async function nomsInspire(table, rid, champ, mise) {
+        const m = new Map();
+        for (let o = 0; o < 50000; o += 1000) {
+            const j = await getJSON(table + '/query?' + new URLSearchParams({ where: '1=1', outFields: rid + ',' + champ, orderByFields: rid, resultOffset: String(o), resultRecordCount: '1000', returnGeometry: 'false', f: 'json' }), 3);
+            const l = j.features || [];
+            for (const x of l) { const a = x.attributes, k = String(a[rid]); if (a[champ] && !m.has(k)) m.set(k, mise(String(a[champ]).trim())); }
+            if (l.length < 1000 && !j.exceededTransferLimit) break;
+        }
+        if (!m.size) throw new Error('noms introuvables : ' + table);
+        return m;
+    }
+    // Translittération OFFICIELLE du bulgare (loi sur la translittération, 2009 ; « -ия » final ⇒ « -ia ») : un éditeur
+    // qui ne lit pas le cyrillique cherche « Plovdiv » et trouve « Пловдив ».
+    const BG_LAT = { а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ж: 'zh', з: 'z', и: 'i', й: 'y', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'sht', ъ: 'a', ь: 'y', ю: 'yu', я: 'ya' };
+    function bgLatin(s) {
+        return String(s).replace(/ия(?![а-яА-Я])/g, 'ia').replace(/ИЯ(?![а-яА-Я])/g, 'IA').replace(/[а-яА-Я]/g, c => {
+            const l = BG_LAT[c.toLowerCase()];
+            if (l == null) return c;
+            return c === c.toLowerCase() ? l : l.charAt(0).toUpperCase() + l.slice(1);
+        });
+    }
+    // =====================================================================
+    //  BULGARIE — AGKK (Агенция по геодезия, картография и кадастър), unités administratives INSPIRE, ArcGIS REST,
+    //  « no conditions apply » : 28 oblasti (maille), 265 obshtini, 4 616 zemlishta (finages EKATTE, par tuiles),
+    //  35 rayoni (Sofia, Plovdiv, Varna). Le serveur simplifie. Les NOMS sont à part (table 16, cyrillique seul,
+    //  « област Бургас ») : joints avec leur translittération latine, « област Бургас / oblast Burgas ». Aucun lien
+    //  de parenté n'est rempli (upperlevelunit vide, mesuré le 05/10/2026) : une obshtina porte sa région dans son
+    //  code (BGS01 ⇒ BGS) ; finage et rayon sont rattachés à leur oblast (la maille) par point intérieur. WME : code FIPS « BU ».
+    //  (Le WFS du NSI a les mêmes oblasti et obshtini, noms latins compris, mais sans simplification : 14 et 40 Mo.)
+    // =====================================================================
+    const BG_AU = 'https://inspire.cadastre.bg/arcgis/rest/services/Administrative_Unit/MapServer/';
+    const BG = fournisseurArcgis({
+        id: 'bg-agkk', prefixe: 'bg', pays: 'BG', stockable: n => n === 'bg_zemlishte',
+        source: 'АГКК / AGKK — INSPIRE Administrative Units',
+        licence: 'no conditions apply (INSPIRE)',
+        maille: 'bg_oblast', libCode: '', placeholder: 'searchPhBG', parPage: 1000,
+        emprisePays: [22.3, 41.2, 28.7, 44.3],
+        async preparer() { this._noms = await nomsInspire(BG_AU + '16', 'rid', 'name', s => s + ' / ' + bgLatin(s)); },
+        niveaux: (() => {
+            const nom = (p, f) => f._noms.get(String(p.ifcid)) || String(p.nationalcode);
+            const cleIndex = (a, f) => (f._noms.get(String(a.ifcid)) || '');
+            const champs = 'ifcid,nationalcode';
+            return {
+                bg_oblast: { couche: BG_AU + '4', code: 'nationalcode', nom, zmin: 0, tout: true, champs },
+                bg_obshtina: { couche: BG_AU + '3', code: 'nationalcode', nom, zmin: 6, tout: true, tol: 0.0005, champs, dep: p => String(p.nationalcode || '').slice(0, 3) },
+                bg_zemlishte: { couche: BG_AU + '2', code: 'nationalcode', nom, zmin: 11, tuile: 0.1, champs, champsIndex: 'ifcid', cleIndex, parInterieur: 'bg_oblast' },
+                bg_rayon: { couche: BG_AU + '1', code: 'nationalcode', nom, zmin: 10, tout: true, champs, parInterieur: 'bg_oblast' },
+            };
+        })(),
+    });
+    // =====================================================================
+    //  CHYPRE — Department of Lands and Surveys (DLS), unités administratives INSPIRE, ArcGIS REST, « no conditions
+    //  apply » : 6 districts (maille ; Kyrenia et une partie de Famagouste et de Nicosie sous contrôle turc, décrits
+    //  selon la République), 615 communes et communautés, 744 quartiers et paroisses (mesuré le 05/10/2026). Noms à
+    //  part (table 12, translittérés en capitales : « DIMOS STROVOLOU » ⇒ « Dimos Strovolou »), parent désigné par
+    //  son IFCID (upperLevelUnit), comme en Belgique. ⚠️ Antérieur à la réforme locale de 2024 (fusion en 20
+    //  municipalités) : ce sont les anciennes entités, devenues des circonscriptions municipales. WME : code FIPS « CY ».
+    // =====================================================================
+    const CY_AU = 'https://eservices.dls.moi.gov.cy/inspire/rest/services/INSPIRE/AU_AdmUnits/MapServer/';
+    const CY = fournisseurArcgis({
+        id: 'cy-dls', prefixe: 'cy', pays: 'CY', stockable: n => n === 'cy_enoria',
+        source: 'Department of Lands and Surveys — INSPIRE Administrative Units',
+        licence: 'no conditions apply (INSPIRE)',
+        maille: 'cy_district', libCode: '', placeholder: 'searchPhCY', parPage: 1000,
+        emprisePays: [32.2, 34.5, 34.7, 35.8],
+        async preparer() { this._noms = await nomsInspire(CY_AU + '12', 'RID', 'name', casseTitre); },
+        niveaux: (() => {
+            const nom = (p, f) => f._noms.get(String(p.IFCID)) || String(p.nationalCode);
+            const cleIndex = (a, f) => (f._noms.get(String(a.IFCID)) || '');
+            const champs = 'IFCID,nationalCode,upperLevelUnit';
+            return {
+                cy_district: { couche: CY_AU + '9', code: 'nationalCode', nom, zmin: 0, tout: true, champs },
+                cy_koinotita: { couche: CY_AU + '8', code: 'nationalCode', nom, zmin: 8, tout: true, tol: 0.0005, champs,
+                    dep: { niveau: 'cy_district', cle: 'upperLevelUnit', cleParent: 'IFCID', champ: 'nationalCode' } },
+                cy_enoria: { couche: CY_AU + '7', code: 'nationalCode', nom, zmin: 11, tuile: 0.1, champs, champsIndex: 'IFCID', cleIndex,
+                    dep: [{ niveau: 'cy_koinotita', cle: 'upperLevelUnit', cleParent: 'IFCID' }, { niveau: 'cy_district', cle: 'upperLevelUnit', cleParent: 'IFCID', champ: 'nationalCode' }] },
+            };
+        })(),
+    });
+    // =====================================================================
     //  FINLANDE — Statistics Finland (Tilastokeskus), régions statistiques 2026 généralisées au 1:1 000 000, WFS
     //  GeoServer, CC BY 4.0 : 19 maakunnat (maille), 308 kunnat (2,3 et 2,8 Mo d'un bloc). Noms finnois et suédois
     //  joints quand ils diffèrent (« Helsinki / Helsingfors ») ; une commune rattachée à sa région par point intérieur.
@@ -4525,6 +4842,81 @@
             if (params.geometry) { const [x0, y0, x1, y1] = params.geometry.split(',').map(Number); q.set('bbox', [y0, x0, y1, x1].join(',') + ',urn:ogc:def:crs:EPSG::4326'); }
             const j = await getJSON(SK_WFS + '?' + q.toString());
             return j.features || [];
+        },
+    });
+    // =====================================================================
+    //  LITUANIE — VĮ Registrų centras, registre des adresses (Adresų registras), CC BY 4.0, mis à jour chaque jour :
+    //  10 apskritys (maille ; régions de référence, sans rôle administratif depuis 2010), 60 savivaldybės, 533
+    //  seniūnijos. Publiés en GeoJSON national (LKS94), sans service par emprise : TOUT est INTÉGRÉ
+    //  (outils/donnees_eu.py, millésime du 01/10/2026), export compris (contour simplifié, ~150 m pour les seniūnijos).
+    //  Noms officiels abrégés et au génitif (« Vilniaus m. sav. », « Ventos sen. »). WME : code FIPS « LH ».
+    // =====================================================================
+    const LT = fournisseurArcgis({
+        id: 'lt-rc', prefixe: 'lt', pays: 'LT', stockable: () => false,
+        source: 'VĮ Registrų centras — Adresų registras', licence: 'CC BY 4.0',
+        maille: 'lt_apskritis', libCode: '', placeholder: 'searchPhLT', emprisePays: [20.9, 53.8, 26.9, 56.5],
+        niveaux: {
+            lt_apskritis: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            lt_savivaldybe: { couche: '', code: '', nom: '', zmin: 6, integre: true, exactIntegre: true },
+            lt_seniunija: { couche: '', code: '', nom: '', zmin: 9, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  LETTONIE — VZD (Valsts zemes dienests), unités administratives INSPIRE (GML, état au 24/02/2024 : après la
+    //  réforme de 2021), CC0 (fiche data.gov.lv) : 43 territoires (36 novadi + 7 valstspilsētas : maille), 585 pagasti
+    //  et villes de novads, codes ATVK. Sans service ouvert : TOUT est INTÉGRÉ (outils/donnees_eu.py), export
+    //  compris (contour simplifié). Abréviations développées (« pag. » ⇒ « pagasts »). WME : code FIPS « LG ».
+    // =====================================================================
+    const LV = fournisseurArcgis({
+        id: 'lv-vzd', prefixe: 'lv', pays: 'LV', stockable: () => false,
+        source: 'VZD — INSPIRE Administrative Units (2024)', licence: 'CC0 1.0',
+        maille: 'lv_novads', libCode: 'ATVK', placeholder: 'searchPhLV', emprisePays: [20.9, 55.6, 28.3, 58.1],
+        niveaux: {
+            lv_novads: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            lv_pagasts: { couche: '', code: '', nom: '', zmin: 8, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  NORVÈGE — Kartverket, API « kommuneinfo », CC BY 4.0 : 15 fylker (maille) et 357 kommuner (après la réforme
+    //  de 2024). L'API ne cherche que par code ou par point, et le WFS ne sert que du GML : les deux niveaux sont
+    //  INTÉGRÉS (outils/donnees_eu.py, 05/10/2026). L'EXPORT, lui, redemande à l'API le contour exact de chaque unité.
+    //  Une kommune porte son fylke dans ses 2 premiers chiffres (vérifié sur les 357). WME : code FIPS « NO ».
+    // =====================================================================
+    const NO_API = 'https://api.kartverket.no/kommuneinfo/v1/';
+    const NO = fournisseurArcgis({
+        id: 'no-kartverket', prefixe: 'no', pays: 'NO', stockable: () => false,
+        source: 'Kartverket — kommuneinfo', licence: 'CC BY 4.0',
+        maille: 'no_fylke', libCode: '', placeholder: 'searchPhNO', emprisePays: [4.0, 57.9, 31.2, 71.3],
+        niveaux: {
+            no_fylke: { couche: '', code: '', nom: '', zmin: 0, integre: true, api: 'fylker' },
+            no_kommune: { couche: '', code: '', nom: '', zmin: 6, integre: true, api: 'kommuner' },
+        },
+        async precises(niveau, codes) {
+            const parCode = new Map((await this.tous(niveau)).map(e => [e.code, e])), out = [];
+            for (const c of codes.map(String)) {
+                const e = parCode.get(c); if (!e) continue;
+                const j = await getJSON(NO_API + this.niveaux[niveau].api + '/' + encodeURIComponent(c) + '/omrade?utkoordsys=4258');
+                const geom = nettoyerGeom(j && j.omrade);
+                if (geom) out.push(Object.assign({}, e, { geom, bb: emprise(geom) }));
+            }
+            return out;
+        },
+    });
+    // =====================================================================
+    //  SUÈDE — Lantmäteriet, carte d'ensemble (1:100 000 à 1:500 000), CC0, servie par une couche ArcGIS PUBLIQUE
+    //  d'Esri Sverige (« Kommungränser Sverige », mise à jour 08/2025) : Lantmäteriet ne sert ses limites qu'avec un
+    //  compte (Geotorget) et SCB ne publie qu'un fichier très simplifié (~34 sommets par commune). 290 kommuner en
+    //  direct (le serveur simplifie), 21 län INTÉGRÉS par réunion des kommuner (la couche n'en a pas). Le län d'une
+    //  kommun est dans son code (0862 ⇒ 08). WME : code FIPS « SW ». ⚠️ Copie tierce : si elle disparaît, le pays tombe.
+    // =====================================================================
+    const SE_KOM = 'https://services9.arcgis.com/BH6j7VrWdIXhhNYw/arcgis/rest/services/Kommungr%C3%A4nser_Lantm%C3%A4teriet/FeatureServer/0';
+    const SE = fournisseurArcgis({
+        id: 'se-lm', prefixe: 'se', pays: 'SE', stockable: () => false,
+        source: 'Lantmäteriet — Kommungränser (via Esri Sverige)', licence: 'CC0 1.0',
+        maille: 'se_lan', libCode: '', placeholder: 'searchPhSE', emprisePays: [10.9, 55.3, 24.2, 69.1],
+        niveaux: {
+            se_lan: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            se_kommun: { couche: SE_KOM, code: 'KOM_KOD', nom: 'KOMMUNNAMN', champs: 'KOM_KOD,KOMMUNNAMN,LAN_KOD', zmin: 6, tout: true, tol: 0.0005, dep: p => String(p.LAN_KOD || '') },
         },
     });
     // =====================================================================
@@ -4645,7 +5037,7 @@
         },
     });
     const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
-    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
+    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
     // =====================================================================
     //  NIGERIA — GRID3 (avec l'OSGOF), ArcGIS Online, CC BY 4.0 : 37 États (36 + FCT ; maille, code postal « LA »),
@@ -4681,7 +5073,7 @@
         },
     });
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
-    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
+    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
     const DONNEES_MONDE = GM_getResourceText('donnees_monde');   // @resource (outils/publier.py)
     // </DONNEES_MONDE>
@@ -5529,8 +5921,12 @@
         const debut = Date.now(), oct0 = reseau.octets, n0 = reseau.n, e0 = reseau.envoyees;
         Object.assign(avVue, { fait: 0, total: 0, phase: '' });
         const barre = () => ov && ov.querySelector('#wzm-zbarre');
+        // ⚠️ Un tic EN RETARD (onglet en arrière-plan : setTimeout bridé à 1 s et plus) arrivait APRÈS la fin d'un
+        // chargement instantané (niveau intégré) et réécrivait « Préparation de l'affichage… » par-dessus « 60
+        // entité(s) dans la vue », pour toujours (mesuré dans WME le 06/10/2026, Estonie et Norvège). Fini = fini.
+        let fini = false;
         const tic = () => {
-            if (gen !== genVue) return;
+            if (fini || gen !== genVue) return;
             const b = barre(), s = Math.floor((Date.now() - debut) / 1000), o = reseau.octets - oct0;
             const v = o >= 1048576 ? nombre(o / 1048576, 1) + ' Mo' : nombre(Math.round(o / 1024)) + ' Ko';
             if (avVue.phase === 'aff') etat(t('loadDraw'));
@@ -5543,9 +5939,8 @@
                 if (det) b.setAttribute('aria-valuenow', String(Math.round(100 * avVue.fait / avVue.total))); else b.removeAttribute('aria-valuenow');
             }
         };
-        const id = setInterval(tic, 330);
-        setTimeout(tic, 0);
-        return () => { clearInterval(id); const b = barre(); if (b && gen === genVue) b.hidden = true; };
+        const id = setInterval(tic, 330), id0 = setTimeout(tic, 0);
+        return () => { fini = true; clearInterval(id); clearTimeout(id0); const b = barre(); if (b && gen === genVue) b.hidden = true; };
     }
     function etat(txt) { const el = ov && ov.querySelector('#wzm-etat'); if (el) el.textContent = txt; }
 
