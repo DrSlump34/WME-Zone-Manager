@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.30.00
+// @version      2.31.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -53,6 +53,9 @@
 // @connect      eservices.dls.moi.gov.cy
 // @connect      api.kartverket.no
 // @connect      services9.arcgis.com
+// @connect      services.arcgis.com
+// @connect      services2.arcgis.com
+// @connect      geo.abs.gov.au
 // @connect      services1.arcgis.com
 // @connect      services-eu1.arcgis.com
 // @connect      api3.geo.admin.ch
@@ -422,6 +425,21 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            lvl_pl_wojewodztwo: 'Voïvodies (województwa)',
+            lvl_pl_powiat: 'Districts (powiaty)',
+            lvl_pl_gmina: 'Communes (gminy)',
+            searchPhPL: 'Nom ou code TERYT…',
+            unit_PL: 'voïvodies (województwa)',
+            lvl_au_ste: 'États et territoires',
+            lvl_au_lga: 'Collectivités locales (LGA)',
+            lvl_au_sal: 'Localités (suburbs and localities)',
+            searchPhAU: 'Nom ou code ABS…',
+            unit_AU: 'états et territoires',
+            lvl_nz_region: 'Régions (regional councils)',
+            lvl_nz_ta: 'Autorités territoriales (districts et villes)',
+            lvl_nz_ward: 'Circonscriptions (wards)',
+            searchPhNZ: 'Nom ou code…',
+            unit_NZ: 'régions',
             lvl_se_lan: 'Comtés (län)',
             lvl_se_kommun: 'Communes (kommuner)',
             searchPhSE: 'Nom ou code de commune…',
@@ -853,6 +871,21 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            lvl_pl_wojewodztwo: 'Voivodeships (województwa)',
+            lvl_pl_powiat: 'Counties (powiaty)',
+            lvl_pl_gmina: 'Municipalities (gminy)',
+            searchPhPL: 'Name or TERYT code…',
+            unit_PL: 'voivodeships (województwa)',
+            lvl_au_ste: 'States and territories',
+            lvl_au_lga: 'Local government areas (LGA)',
+            lvl_au_sal: 'Suburbs and localities',
+            searchPhAU: 'Name or ABS code…',
+            unit_AU: 'states and territories',
+            lvl_nz_region: 'Regions (regional councils)',
+            lvl_nz_ta: 'Territorial authorities (districts and cities)',
+            lvl_nz_ward: 'Wards',
+            searchPhNZ: 'Name or code…',
+            unit_NZ: 'regions',
             lvl_se_lan: 'Counties (län)',
             lvl_se_kommun: 'Municipalities (kommuner)',
             searchPhSE: 'Name or municipality code…',
@@ -1284,6 +1317,21 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            lvl_pl_wojewodztwo: 'Woiwodschaften',
+            lvl_pl_powiat: 'Kreise (Powiaty)',
+            lvl_pl_gmina: 'Gemeinden (Gminy)',
+            searchPhPL: 'Name oder TERYT-Code…',
+            unit_PL: 'Woiwodschaften',
+            lvl_au_ste: 'Bundesstaaten und Territorien',
+            lvl_au_lga: 'Kommunen (LGA)',
+            lvl_au_sal: 'Orte und Vororte',
+            searchPhAU: 'Name oder ABS-Code…',
+            unit_AU: 'Bundesstaaten und Territorien',
+            lvl_nz_region: 'Regionen (Regional Councils)',
+            lvl_nz_ta: 'Distrikte und Städte',
+            lvl_nz_ward: 'Wahlbezirke (Wards)',
+            searchPhNZ: 'Name oder Code…',
+            unit_NZ: 'Regionen',
             lvl_se_lan: 'Provinzen (Län)',
             lvl_se_kommun: 'Gemeinden (Kommuner)',
             searchPhSE: 'Name oder Gemeindecode…',
@@ -1715,6 +1763,21 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            lvl_pl_wojewodztwo: 'Voivodatos (województwa)',
+            lvl_pl_powiat: 'Distritos (powiaty)',
+            lvl_pl_gmina: 'Municipios (gminy)',
+            searchPhPL: 'Nombre o código TERYT…',
+            unit_PL: 'voivodatos (województwa)',
+            lvl_au_ste: 'Estados y territorios',
+            lvl_au_lga: 'Gobiernos locales (LGA)',
+            lvl_au_sal: 'Localidades y suburbios',
+            searchPhAU: 'Nombre o código ABS…',
+            unit_AU: 'estados y territorios',
+            lvl_nz_region: 'Regiones (regional councils)',
+            lvl_nz_ta: 'Autoridades territoriales (distritos y ciudades)',
+            lvl_nz_ward: 'Circunscripciones (wards)',
+            searchPhNZ: 'Nombre o código…',
+            unit_NZ: 'regiones',
             lvl_se_lan: 'Provincias (län)',
             lvl_se_kommun: 'Municipios (kommuner)',
             searchPhSE: 'Nombre o código de municipio…',
@@ -2146,6 +2209,21 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            lvl_pl_wojewodztwo: 'Voivodati (województwa)',
+            lvl_pl_powiat: 'Distretti (powiaty)',
+            lvl_pl_gmina: 'Comuni (gminy)',
+            searchPhPL: 'Nome o codice TERYT…',
+            unit_PL: 'voivodati (województwa)',
+            lvl_au_ste: 'Stati e territori',
+            lvl_au_lga: 'Enti locali (LGA)',
+            lvl_au_sal: 'Località e sobborghi',
+            searchPhAU: 'Nome o codice ABS…',
+            unit_AU: 'stati e territori',
+            lvl_nz_region: 'Regioni (regional councils)',
+            lvl_nz_ta: 'Autorità territoriali (distretti e città)',
+            lvl_nz_ward: 'Circoscrizioni (wards)',
+            searchPhNZ: 'Nome o codice…',
+            unit_NZ: 'regioni',
             lvl_se_lan: 'Contee (län)',
             lvl_se_kommun: 'Comuni (kommuner)',
             searchPhSE: 'Nome o codice del comune…',
@@ -2577,6 +2655,21 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            lvl_pl_wojewodztwo: 'Voivodias (województwa)',
+            lvl_pl_powiat: 'Distritos (powiaty)',
+            lvl_pl_gmina: 'Municípios (gminy)',
+            searchPhPL: 'Nome ou código TERYT…',
+            unit_PL: 'voivodias (województwa)',
+            lvl_au_ste: 'Estados e territórios',
+            lvl_au_lga: 'Governos locais (LGA)',
+            lvl_au_sal: 'Localidades e subúrbios',
+            searchPhAU: 'Nome ou código ABS…',
+            unit_AU: 'estados e territórios',
+            lvl_nz_region: 'Regiões (regional councils)',
+            lvl_nz_ta: 'Autoridades territoriais (distritos e cidades)',
+            lvl_nz_ward: 'Circunscrições (wards)',
+            searchPhNZ: 'Nome ou código…',
+            unit_NZ: 'regiões',
             lvl_se_lan: 'Condados (län)',
             lvl_se_kommun: 'Municípios (kommuner)',
             searchPhSE: 'Nome ou código do município…',
@@ -3008,6 +3101,21 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            lvl_pl_wojewodztwo: 'Voivodias (województwa)',
+            lvl_pl_powiat: 'Distritos (powiaty)',
+            lvl_pl_gmina: 'Municípios (gminy)',
+            searchPhPL: 'Nome ou código TERYT…',
+            unit_PL: 'voivodias (województwa)',
+            lvl_au_ste: 'Estados e territórios',
+            lvl_au_lga: 'Governos locais (LGA)',
+            lvl_au_sal: 'Localidades e subúrbios',
+            searchPhAU: 'Nome ou código ABS…',
+            unit_AU: 'estados e territórios',
+            lvl_nz_region: 'Regiões (regional councils)',
+            lvl_nz_ta: 'Autoridades territoriais (distritos e cidades)',
+            lvl_nz_ward: 'Circunscrições (wards)',
+            searchPhNZ: 'Nome ou código…',
+            unit_NZ: 'regiões',
             lvl_se_lan: 'Condados (län)',
             lvl_se_kommun: 'Municípios (kommuner)',
             searchPhSE: 'Nome ou código do município…',
@@ -3439,6 +3547,21 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            lvl_pl_wojewodztwo: 'פרובינציות (województwa)',
+            lvl_pl_powiat: 'מחוזות (powiaty)',
+            lvl_pl_gmina: 'רשויות מקומיות (gminy)',
+            searchPhPL: 'שם או קוד TERYT…',
+            unit_PL: 'פרובינציות (województwa)',
+            lvl_au_ste: 'מדינות וטריטוריות',
+            lvl_au_lga: 'רשויות מקומיות (LGA)',
+            lvl_au_sal: 'יישובים ופרברים',
+            searchPhAU: 'שם או קוד ABS…',
+            unit_AU: 'מדינות וטריטוריות',
+            lvl_nz_region: 'אזורים (regional councils)',
+            lvl_nz_ta: 'רשויות טריטוריאליות',
+            lvl_nz_ward: 'אזורי בחירה (wards)',
+            searchPhNZ: 'שם או קוד…',
+            unit_NZ: 'אזורים',
             lvl_se_lan: 'מחוזות (län)',
             lvl_se_kommun: 'רשויות מקומיות (kommuner)',
             searchPhSE: 'שם או קוד רשות…',
@@ -4920,6 +5043,68 @@
         },
     });
     // =====================================================================
+    //  POLOGNE — GUGiK, Państwowy Rejestr Granic (PRG), données libres par la loi (art. 40a ust. 2 PGiK), servies par
+    //  une copie ArcGIS PUBLIQUE d'Esri Polska (le WFS de GUGiK ne rend que du GML, sans simplification, parfois
+    //  tronqué ; l'API ULDK ne rend qu'un objet à la fois ; mesuré le 05/10/2026) : 16 województwa (maille), 380
+    //  powiaty, 2 479 gminy (par tuiles). Codes TERYT (JPT_KOD_JE) : le województwo est dans les 2 premiers chiffres.
+    //  WME : code FIPS « PL ». ⚠️ Copie tierce (millésime 2026 dans le nom des services) : si elle disparaît, le pays tombe.
+    // =====================================================================
+    const PL_EPL = 'https://services.arcgis.com/zg6BBB0wvjzrRBLk/arcgis/rest/services/';
+    const PL = fournisseurArcgis({
+        id: 'pl-prg', prefixe: 'pl', pays: 'PL', stockable: n => n === 'pl_gmina',
+        source: 'GUGiK — PRG (via Esri Polska)', licence: 'dane bezpłatne (art. 40a PGiK)',
+        maille: 'pl_wojewodztwo', libCode: 'TERYT', placeholder: 'searchPhPL', emprisePays: [14.1, 49.0, 24.2, 54.9],
+        niveaux: {
+            pl_wojewodztwo: { couche: PL_EPL + 'Granice_wojew%C3%B3dztw/FeatureServer/0', code: 'JPT_KOD_JE', nom: 'JPT_NAZWA_', champs: 'JPT_KOD_JE,JPT_NAZWA_', zmin: 0, tout: true, tol: 0.003 },
+            pl_powiat: { couche: PL_EPL + 'Granice_powiat%C3%B3w_2026/FeatureServer/0', code: 'JPT_KOD_JE', nom: 'JPT_NAZWA_', champs: 'JPT_KOD_JE,JPT_NAZWA_', zmin: 6, tout: true, tol: 0.001,
+                dep: p => String(p.JPT_KOD_JE || '').slice(0, 2) },
+            pl_gmina: { couche: PL_EPL + 'Granice_gmin_2026/FeatureServer/0', code: 'JPT_KOD_JE', nom: 'JPT_NAZWA_', champs: 'JPT_KOD_JE,JPT_NAZWA_', zmin: 9, tuile: 0.25,
+                dep: p => String(p.JPT_KOD_JE || '').slice(0, 2) },
+        },
+    });
+    // =====================================================================
+    //  AUSTRALIE — ABS (Australian Bureau of Statistics), ASGS Edition 3, ArcGIS Server, CC BY 4.0 : 9 états et
+    //  territoires (maille ; « Z Outside Australia » écarté), 567 LGA 2025 (par tuiles), 15 353 localités (SAL 2021,
+    //  par tuiles). Le serveur simplifie. Les LGA sans polygone (« No usual address », « Migratory ») tombent d'eux-mêmes.
+    //  Limites approchées par Mesh Blocks (pas les limites légales). Champs en minuscules en 2021, en MAJUSCULES en
+    //  2025. Le parent de chaque niveau est l'état (STATE_CODE). WME : code FIPS « AS ».
+    // =====================================================================
+    const AU_ABS = 'https://geo.abs.gov.au/arcgis/rest/services/';
+    const AU = fournisseurArcgis({
+        id: 'au-abs', prefixe: 'au', pays: 'AU', stockable: n => n === 'au_sal',
+        source: 'Australian Bureau of Statistics — ASGS Edition 3', licence: 'CC BY 4.0',
+        maille: 'au_ste', libCode: 'ABS', placeholder: 'searchPhAU', emprisePays: [96.0, -55.2, 168.2, -9.0],
+        niveaux: {
+            au_ste: { couche: AU_ABS + 'ASGS2021/STE/MapServer/0', code: 'state_code_2021', nom: 'state_name_2021', champs: 'state_code_2021,state_name_2021', where: "state_code_2021 <> 'Z'", zmin: 0, tout: true, tol: 0.005 },
+            au_lga: { couche: AU_ABS + 'ASGS2025/LGA/MapServer/0', code: 'LGA_CODE_2025', nom: 'LGA_NAME_2025', champs: 'LGA_CODE_2025,LGA_NAME_2025,STATE_CODE_2021', zmin: 7, tuile: 1,
+                dep: p => String(p.STATE_CODE_2021 || '') },
+            au_sal: { couche: AU_ABS + 'ASGS2021/SAL/MapServer/0', code: 'sal_code_2021', nom: 'sal_name_2021', champs: 'sal_code_2021,sal_name_2021,state_code_2021', zmin: 11, tuile: 0.25,
+                dep: p => String(p.state_code_2021 || '') },
+        },
+    });
+    // =====================================================================
+    //  NOUVELLE-ZÉLANDE — Stats NZ (Tatauranga Aotearoa), compte ArcGIS Online OFFICIEL, CC BY 4.0 : 16 regional
+    //  councils 2025 (maille), 67 territorial authorities 2026, wards 2026 (par tuiles). ⛔ Les codes 99 / 999 et les wards
+    //  « Area Outside Ward » (99999, mais aussi 04599, 04999…) sont d'immenses polygones marins qui ralentissent le serveur (12,8 s contre 0,7 s) : écartés.
+    //  Une TA peut déborder sur deux régions (pas de code parent) : rattachée par point intérieur. Les polygones des
+    //  régions comprennent la mer territoriale. Noms et services portent l'ANNÉE (à suivre). ⛔ Pas le miroir d'Eagle
+    //  Technology (licence « use in combination with ArcGIS software »). WME : code FIPS « NZ ».
+    // =====================================================================
+    const NZ_STATS = 'https://services2.arcgis.com/vKb0s8tBIA3bdocZ/arcgis/rest/services/';
+    const NZ = fournisseurArcgis({
+        id: 'nz-stats', prefixe: 'nz', pays: 'NZ', stockable: n => n === 'nz_ward',
+        source: 'Stats NZ — Tatauranga Aotearoa', licence: 'CC BY 4.0',
+        maille: 'nz_region', libCode: '', placeholder: 'searchPhNZ', emprisePays: [165.8, -47.5, 179.0, -34.0],
+        niveaux: {
+            nz_region: { couche: NZ_STATS + 'Regional_Council_2025/FeatureServer/0', code: 'REGC2025_V1_00', nom: 'REGC2025_V1_00_NAME', alt: 'REGC2025_V1_00_NAME_ASCII',
+                champs: 'REGC2025_V1_00,REGC2025_V1_00_NAME,REGC2025_V1_00_NAME_ASCII', where: "REGC2025_V1_00 <> '99'", zmin: 0, tout: true, tol: 0.003 },
+            nz_ta: { couche: NZ_STATS + 'Territorial_Authority_2026/FeatureServer/0', code: 'TA2026_V1_00', nom: 'TA2026_V1_00_NAME', alt: 'TA2026_V1_00_NAME_ASCII',
+                champs: 'TA2026_V1_00,TA2026_V1_00_NAME,TA2026_V1_00_NAME_ASCII', where: "TA2026_V1_00 <> '999'", zmin: 6, tout: true, tol: 0.001, parInterieur: 'nz_region' },
+            nz_ward: { couche: NZ_STATS + 'Ward_2026/FeatureServer/0', code: 'WARD2026_V1_00', nom: 'WARD2026_V1_00_NAME', alt: 'WARD2026_V1_00_NAME_ASCII',
+                champs: 'WARD2026_V1_00,WARD2026_V1_00_NAME,WARD2026_V1_00_NAME_ASCII', where: "WARD2026_V1_00_NAME <> 'Area Outside Ward'", zmin: 9, tuile: 0.5, parInterieur: 'nz_region' },
+        },
+    });
+    // =====================================================================
     //  ROUMANIE — ANCPI : 42 județe INTÉGRÉS (data.gov.ro, 2024, CC BY 4.0 ; publiés seulement en Shapefile Stereo70,
     //  convertis par outils/donnees_eu.py : leur export reste ce contour simplifié), 3 186 UAT en direct (ArcGIS
     //  d'ANCPI, CC BY 4.0, le serveur simplifie), rattachées à leur județ par point intérieur. Noms en CAPITALES
@@ -5037,7 +5222,7 @@
         },
     });
     const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
-    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
+    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
     // =====================================================================
     //  NIGERIA — GRID3 (avec l'OSGOF), ArcGIS Online, CC BY 4.0 : 37 États (36 + FCT ; maille, code postal « LA »),
@@ -5073,7 +5258,7 @@
         },
     });
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
-    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
+    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['AU', 'Australia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
     const DONNEES_MONDE = GM_getResourceText('donnees_monde');   // @resource (outils/publier.py)
     // </DONNEES_MONDE>
