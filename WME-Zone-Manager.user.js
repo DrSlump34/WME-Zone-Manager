@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.36.00
+// @version      2.37.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -34,11 +34,13 @@
 // @grant        GM_getResourceText
 // @grant        unsafeWindow
 // @resource     TURF https://cdnjs.cloudflare.com/ajax/libs/Turf.js/7.4.0/turf.min.js#sha256=5db5dda50210fa0f25394672383ba4a2e6fcde3c9e95ae0e21d62d327fc66d05
-// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
-// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
-// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_eu.b64#sha256=f58a9e5b57f8b4d211a435f81452b929c3dd630a7a8b002dcdbfc11cf4c52a09
-// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
-// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_am.b64#sha256=f1d64372d390ae42b8af814ca18870d762a0339950ea3fadc4505b83dbc54e0e
+// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
+// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
+// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_eu.b64#sha256=fee96a30c249937347d6f96013f165e1529bf9735728feef281d1d34bdc0b906
+// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
+// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_am.b64#sha256=bcad58f9e7a216336580b28344c43dec1a9ca3a1fb79ee5e198af30fc122f1d2
+// @resource     donnees_as    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_as.b64#sha256=b2d520048c4baf1e7aabe30150e415f0a13843a39a0cf4dea5ca42fd56dd38f3
+// @resource     donnees_ua    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_ua.b64#sha256=2277e17d3191ed755dbd112d90e962ded0094aba9e53ceb0341906ee06019dc8
 // @connect      data.geopf.fr
 // @connect      geo.api.gouv.fr
 // @connect      geoportale.istat.it
@@ -433,6 +435,45 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            lvl_ua_oblast: 'Oblasts',
+            lvl_ua_raion: 'Raïons',
+            lvl_ua_hromada: 'Hromadas (communes)',
+            unit_UA: 'oblasts',
+            lvl_tr_il: 'Provinces (il)',
+            lvl_tr_ilce: 'Districts (ilçe)',
+            unit_TR: 'provinces (il)',
+            lvl_my_negeri: 'États (negeri)',
+            lvl_my_daerah: 'Districts (daerah)',
+            unit_MY: 'États (negeri)',
+            lvl_py_departamento: 'Départements',
+            lvl_py_distrito: 'Districts (distritos)',
+            unit_PY: 'départements',
+            lvl_bo_departamento: 'Départements',
+            lvl_bo_provincia: 'Provinces',
+            lvl_bo_municipio: 'Communes (municipios)',
+            unit_BO: 'départements',
+            lvl_ve_estado: 'États',
+            lvl_ve_municipio: 'Communes (municipios)',
+            lvl_ve_parroquia: 'Paroisses (parroquias)',
+            unit_VE: 'États',
+            lvl_vn_tinh: 'Provinces (tỉnh)',
+            unit_VN: 'provinces',
+            lvl_ph_region: 'Régions',
+            lvl_ph_province: 'Provinces',
+            lvl_ph_munisipyo: 'Villes et municipalités',
+            unit_PH: 'régions',
+            lvl_mk_region: 'Régions statistiques',
+            lvl_mk_opstina: 'Municipalités (opštini)',
+            unit_MK: 'régions',
+            searchPhUA: 'Nom ou code…',
+            searchPhTR: 'Nom ou code…',
+            searchPhMY: 'Nom ou code…',
+            searchPhPY: 'Nom ou code…',
+            searchPhBO: 'Nom ou code…',
+            searchPhVE: 'Nom ou code…',
+            searchPhVN: 'Nom ou code…',
+            searchPhPH: 'Nom ou code…',
+            searchPhMK: 'Nom ou code…',
             gPerms: (a, b, p) => 'Droits par niveau (' + p + ')\u00a0: ' + a + '/' + b,
             permLoading: 'Lecture des seuils du pays…',
             permAbsent: (p) => 'Centrez la carte sur ' + p + ' pour lire ses seuils.',
@@ -984,6 +1025,45 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            lvl_ua_oblast: 'Oblasts',
+            lvl_ua_raion: 'Raions',
+            lvl_ua_hromada: 'Hromadas',
+            unit_UA: 'oblasts',
+            lvl_tr_il: 'Provinces (il)',
+            lvl_tr_ilce: 'Districts (ilçe)',
+            unit_TR: 'provinces (il)',
+            lvl_my_negeri: 'States (negeri)',
+            lvl_my_daerah: 'Districts (daerah)',
+            unit_MY: 'states (negeri)',
+            lvl_py_departamento: 'Departments',
+            lvl_py_distrito: 'Districts (distritos)',
+            unit_PY: 'departments',
+            lvl_bo_departamento: 'Departments',
+            lvl_bo_provincia: 'Provinces',
+            lvl_bo_municipio: 'Municipalities',
+            unit_BO: 'departments',
+            lvl_ve_estado: 'States',
+            lvl_ve_municipio: 'Municipalities',
+            lvl_ve_parroquia: 'Parishes (parroquias)',
+            unit_VE: 'states',
+            lvl_vn_tinh: 'Provinces (tỉnh)',
+            unit_VN: 'provinces',
+            lvl_ph_region: 'Regions',
+            lvl_ph_province: 'Provinces',
+            lvl_ph_munisipyo: 'Cities and municipalities',
+            unit_PH: 'regions',
+            lvl_mk_region: 'Statistical regions',
+            lvl_mk_opstina: 'Municipalities (opštini)',
+            unit_MK: 'regions',
+            searchPhUA: 'Name or code…',
+            searchPhTR: 'Name or code…',
+            searchPhMY: 'Name or code…',
+            searchPhPY: 'Name or code…',
+            searchPhBO: 'Name or code…',
+            searchPhVE: 'Name or code…',
+            searchPhVN: 'Name or code…',
+            searchPhPH: 'Name or code…',
+            searchPhMK: 'Name or code…',
             gPerms: (a, b, p) => 'Permissions by level (' + p + '): ' + a + '/' + b,
             permLoading: 'Reading the country’s thresholds…',
             permAbsent: (p) => 'Centre the map on ' + p + ' to read its thresholds.',
@@ -1535,6 +1615,45 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            lvl_ua_oblast: 'Oblaste',
+            lvl_ua_raion: 'Rajone',
+            lvl_ua_hromada: 'Hromadas (Gemeinden)',
+            unit_UA: 'Oblaste',
+            lvl_tr_il: 'Provinzen (il)',
+            lvl_tr_ilce: 'Landkreise (ilçe)',
+            unit_TR: 'Provinzen',
+            lvl_my_negeri: 'Bundesstaaten (negeri)',
+            lvl_my_daerah: 'Distrikte (daerah)',
+            unit_MY: 'Bundesstaaten',
+            lvl_py_departamento: 'Departamentos',
+            lvl_py_distrito: 'Distrikte',
+            unit_PY: 'Departamentos',
+            lvl_bo_departamento: 'Departamentos',
+            lvl_bo_provincia: 'Provinzen',
+            lvl_bo_municipio: 'Gemeinden',
+            unit_BO: 'Departamentos',
+            lvl_ve_estado: 'Bundesstaaten',
+            lvl_ve_municipio: 'Gemeinden',
+            lvl_ve_parroquia: 'Pfarrbezirke (parroquias)',
+            unit_VE: 'Bundesstaaten',
+            lvl_vn_tinh: 'Provinzen (tỉnh)',
+            unit_VN: 'Provinzen',
+            lvl_ph_region: 'Regionen',
+            lvl_ph_province: 'Provinzen',
+            lvl_ph_munisipyo: 'Städte und Gemeinden',
+            unit_PH: 'Regionen',
+            lvl_mk_region: 'Statistische Regionen',
+            lvl_mk_opstina: 'Gemeinden (opštini)',
+            unit_MK: 'Regionen',
+            searchPhUA: 'Name oder Code…',
+            searchPhTR: 'Name oder Code…',
+            searchPhMY: 'Name oder Code…',
+            searchPhPY: 'Name oder Code…',
+            searchPhBO: 'Name oder Code…',
+            searchPhVE: 'Name oder Code…',
+            searchPhVN: 'Name oder Code…',
+            searchPhPH: 'Name oder Code…',
+            searchPhMK: 'Name oder Code…',
             gPerms: (a, b, p) => 'Rechte nach Stufe (' + p + '): ' + a + '/' + b,
             permLoading: 'Schwellen des Landes werden gelesen…',
             permAbsent: (p) => 'Karte auf ' + p + ' zentrieren, um die Schwellen zu lesen.',
@@ -2086,6 +2205,45 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            lvl_ua_oblast: 'Óblasts',
+            lvl_ua_raion: 'Raiones',
+            lvl_ua_hromada: 'Hromadas (municipios)',
+            unit_UA: 'óblasts',
+            lvl_tr_il: 'Provincias (il)',
+            lvl_tr_ilce: 'Distritos (ilçe)',
+            unit_TR: 'provincias',
+            lvl_my_negeri: 'Estados (negeri)',
+            lvl_my_daerah: 'Distritos (daerah)',
+            unit_MY: 'estados',
+            lvl_py_departamento: 'Departamentos',
+            lvl_py_distrito: 'Distritos',
+            unit_PY: 'departamentos',
+            lvl_bo_departamento: 'Departamentos',
+            lvl_bo_provincia: 'Provincias',
+            lvl_bo_municipio: 'Municipios',
+            unit_BO: 'departamentos',
+            lvl_ve_estado: 'Estados',
+            lvl_ve_municipio: 'Municipios',
+            lvl_ve_parroquia: 'Parroquias',
+            unit_VE: 'estados',
+            lvl_vn_tinh: 'Provincias (tỉnh)',
+            unit_VN: 'provincias',
+            lvl_ph_region: 'Regiones',
+            lvl_ph_province: 'Provincias',
+            lvl_ph_munisipyo: 'Ciudades y municipios',
+            unit_PH: 'regiones',
+            lvl_mk_region: 'Regiones estadísticas',
+            lvl_mk_opstina: 'Municipios (opštini)',
+            unit_MK: 'regiones',
+            searchPhUA: 'Nombre o código…',
+            searchPhTR: 'Nombre o código…',
+            searchPhMY: 'Nombre o código…',
+            searchPhPY: 'Nombre o código…',
+            searchPhBO: 'Nombre o código…',
+            searchPhVE: 'Nombre o código…',
+            searchPhVN: 'Nombre o código…',
+            searchPhPH: 'Nombre o código…',
+            searchPhMK: 'Nombre o código…',
             gPerms: (a, b, p) => 'Permisos por nivel (' + p + '): ' + a + '/' + b,
             permLoading: 'Leyendo los umbrales del país…',
             permAbsent: (p) => 'Centra el mapa en ' + p + ' para leer sus umbrales.',
@@ -2637,6 +2795,45 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            lvl_ua_oblast: 'Oblast',
+            lvl_ua_raion: 'Rajon',
+            lvl_ua_hromada: 'Hromady (comuni)',
+            unit_UA: 'oblast',
+            lvl_tr_il: 'Province (il)',
+            lvl_tr_ilce: 'Distretti (ilçe)',
+            unit_TR: 'province',
+            lvl_my_negeri: 'Stati (negeri)',
+            lvl_my_daerah: 'Distretti (daerah)',
+            unit_MY: 'stati',
+            lvl_py_departamento: 'Dipartimenti',
+            lvl_py_distrito: 'Distretti',
+            unit_PY: 'dipartimenti',
+            lvl_bo_departamento: 'Dipartimenti',
+            lvl_bo_provincia: 'Province',
+            lvl_bo_municipio: 'Comuni',
+            unit_BO: 'dipartimenti',
+            lvl_ve_estado: 'Stati',
+            lvl_ve_municipio: 'Comuni',
+            lvl_ve_parroquia: 'Parrocchie (parroquias)',
+            unit_VE: 'stati',
+            lvl_vn_tinh: 'Province (tỉnh)',
+            unit_VN: 'province',
+            lvl_ph_region: 'Regioni',
+            lvl_ph_province: 'Province',
+            lvl_ph_munisipyo: 'Città e comuni',
+            unit_PH: 'regioni',
+            lvl_mk_region: 'Regioni statistiche',
+            lvl_mk_opstina: 'Comuni (opštini)',
+            unit_MK: 'regioni',
+            searchPhUA: 'Nome o codice…',
+            searchPhTR: 'Nome o codice…',
+            searchPhMY: 'Nome o codice…',
+            searchPhPY: 'Nome o codice…',
+            searchPhBO: 'Nome o codice…',
+            searchPhVE: 'Nome o codice…',
+            searchPhVN: 'Nome o codice…',
+            searchPhPH: 'Nome o codice…',
+            searchPhMK: 'Nome o codice…',
             gPerms: (a, b, p) => 'Permessi per livello (' + p + '): ' + a + '/' + b,
             permLoading: 'Lettura delle soglie del paese…',
             permAbsent: (p) => 'Centra la mappa su ' + p + ' per leggerne le soglie.',
@@ -3188,6 +3385,45 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            lvl_ua_oblast: 'Óblasts',
+            lvl_ua_raion: 'Raiões',
+            lvl_ua_hromada: 'Hromadas (municípios)',
+            unit_UA: 'óblasts',
+            lvl_tr_il: 'Províncias (il)',
+            lvl_tr_ilce: 'Distritos (ilçe)',
+            unit_TR: 'províncias',
+            lvl_my_negeri: 'Estados (negeri)',
+            lvl_my_daerah: 'Distritos (daerah)',
+            unit_MY: 'estados',
+            lvl_py_departamento: 'Departamentos',
+            lvl_py_distrito: 'Distritos',
+            unit_PY: 'departamentos',
+            lvl_bo_departamento: 'Departamentos',
+            lvl_bo_provincia: 'Províncias',
+            lvl_bo_municipio: 'Municípios',
+            unit_BO: 'departamentos',
+            lvl_ve_estado: 'Estados',
+            lvl_ve_municipio: 'Municípios',
+            lvl_ve_parroquia: 'Paróquias (parroquias)',
+            unit_VE: 'estados',
+            lvl_vn_tinh: 'Províncias (tỉnh)',
+            unit_VN: 'províncias',
+            lvl_ph_region: 'Regiões',
+            lvl_ph_province: 'Províncias',
+            lvl_ph_munisipyo: 'Cidades e municípios',
+            unit_PH: 'regiões',
+            lvl_mk_region: 'Regiões estatísticas',
+            lvl_mk_opstina: 'Municípios (opštini)',
+            unit_MK: 'regiões',
+            searchPhUA: 'Nome ou código…',
+            searchPhTR: 'Nome ou código…',
+            searchPhMY: 'Nome ou código…',
+            searchPhPY: 'Nome ou código…',
+            searchPhBO: 'Nome ou código…',
+            searchPhVE: 'Nome ou código…',
+            searchPhVN: 'Nome ou código…',
+            searchPhPH: 'Nome ou código…',
+            searchPhMK: 'Nome ou código…',
             gPerms: (a, b, p) => 'Permissões por nível (' + p + '): ' + a + '/' + b,
             permLoading: 'Lendo os limites do país…',
             permAbsent: (p) => 'Centralize o mapa em ' + p + ' para ler seus limites.',
@@ -3739,6 +3975,45 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            lvl_ua_oblast: 'Óblasts',
+            lvl_ua_raion: 'Raiões',
+            lvl_ua_hromada: 'Hromadas (municípios)',
+            unit_UA: 'óblasts',
+            lvl_tr_il: 'Províncias (il)',
+            lvl_tr_ilce: 'Distritos (ilçe)',
+            unit_TR: 'províncias',
+            lvl_my_negeri: 'Estados (negeri)',
+            lvl_my_daerah: 'Distritos (daerah)',
+            unit_MY: 'estados',
+            lvl_py_departamento: 'Departamentos',
+            lvl_py_distrito: 'Distritos',
+            unit_PY: 'departamentos',
+            lvl_bo_departamento: 'Departamentos',
+            lvl_bo_provincia: 'Províncias',
+            lvl_bo_municipio: 'Municípios',
+            unit_BO: 'departamentos',
+            lvl_ve_estado: 'Estados',
+            lvl_ve_municipio: 'Municípios',
+            lvl_ve_parroquia: 'Freguesias (parroquias)',
+            unit_VE: 'estados',
+            lvl_vn_tinh: 'Províncias (tỉnh)',
+            unit_VN: 'províncias',
+            lvl_ph_region: 'Regiões',
+            lvl_ph_province: 'Províncias',
+            lvl_ph_munisipyo: 'Cidades e municípios',
+            unit_PH: 'regiões',
+            lvl_mk_region: 'Regiões estatísticas',
+            lvl_mk_opstina: 'Municípios (opštini)',
+            unit_MK: 'regiões',
+            searchPhUA: 'Nome ou código…',
+            searchPhTR: 'Nome ou código…',
+            searchPhMY: 'Nome ou código…',
+            searchPhPY: 'Nome ou código…',
+            searchPhBO: 'Nome ou código…',
+            searchPhVE: 'Nome ou código…',
+            searchPhVN: 'Nome ou código…',
+            searchPhPH: 'Nome ou código…',
+            searchPhMK: 'Nome ou código…',
             gPerms: (a, b, p) => 'Permissões por nível (' + p + '): ' + a + '/' + b,
             permLoading: 'A ler os limiares do país…',
             permAbsent: (p) => 'Centre o mapa em ' + p + ' para ler os seus limiares.',
@@ -4290,6 +4565,45 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            lvl_ua_oblast: 'מחוזות (אובלסטים)',
+            lvl_ua_raion: 'נפות (ראיונים)',
+            lvl_ua_hromada: 'קהילות (הרומדות)',
+            unit_UA: 'מחוזות',
+            lvl_tr_il: 'פרובינציות (il)',
+            lvl_tr_ilce: 'מחוזות (ilçe)',
+            unit_TR: 'פרובינציות',
+            lvl_my_negeri: 'מדינות (negeri)',
+            lvl_my_daerah: 'מחוזות (daerah)',
+            unit_MY: 'מדינות',
+            lvl_py_departamento: 'מחוזות (דפרטמנטוס)',
+            lvl_py_distrito: 'נפות (דיסטריטוס)',
+            unit_PY: 'מחוזות',
+            lvl_bo_departamento: 'מחוזות (דפרטמנטוס)',
+            lvl_bo_provincia: 'פרובינציות',
+            lvl_bo_municipio: 'רשויות',
+            unit_BO: 'מחוזות',
+            lvl_ve_estado: 'מדינות',
+            lvl_ve_municipio: 'רשויות',
+            lvl_ve_parroquia: 'קהילות (פארוקיאס)',
+            unit_VE: 'מדינות',
+            lvl_vn_tinh: 'פרובינציות (tỉnh)',
+            unit_VN: 'פרובינציות',
+            lvl_ph_region: 'אזורים',
+            lvl_ph_province: 'פרובינציות',
+            lvl_ph_munisipyo: 'ערים ורשויות',
+            unit_PH: 'אזורים',
+            lvl_mk_region: 'אזורים סטטיסטיים',
+            lvl_mk_opstina: 'רשויות (opštini)',
+            unit_MK: 'אזורים',
+            searchPhUA: 'שם או קוד…',
+            searchPhTR: 'שם או קוד…',
+            searchPhMY: 'שם או קוד…',
+            searchPhPY: 'שם או קוד…',
+            searchPhBO: 'שם או קוד…',
+            searchPhVE: 'שם או קוד…',
+            searchPhVN: 'שם או קוד…',
+            searchPhPH: 'שם או קוד…',
+            searchPhMK: 'שם או קוד…',
             gPerms: (a, b, p) => 'הרשאות לפי דרגה (' + p + '): ' + a + '/' + b,
             permLoading: 'קורא את ספי המדינה…',
             permAbsent: (p) => 'מרכזו את המפה על ' + p + ' כדי לקרוא את הספים.',
@@ -4761,8 +5075,19 @@
         const bin = Uint8Array.from(atob(DONNEES_AM), c => c.charCodeAt(0));
         return JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     })().catch(e => { _donneesAm = null; throw e; }));
-    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO', 'UY']);
-    const blocIntegre = pays => pays === 'CA' ? donneesCa() : BLOC_AM.has(pays) ? donneesAm() : donneesEu();
+    // Asie (Turquie, Malaisie, Viêt Nam, Philippines) et Ukraine seule (la plus lourde), 06/10/2026 : fichiers OCHA/HDX.
+    // <DONNEES_AS>
+    const DONNEES_AS = GM_getResourceText('donnees_as');   // @resource (outils/publier.py)
+    // </DONNEES_AS>
+    // <DONNEES_UA>
+    const DONNEES_UA = GM_getResourceText('donnees_ua');   // @resource (outils/publier.py)
+    // </DONNEES_UA>
+    const decoderBloc = async b64 => JSON.parse(await new Response(new Blob([Uint8Array.from(atob(b64), c => c.charCodeAt(0))]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+    let _donneesAs = null, _donneesUa = null;
+    const donneesAs = () => _donneesAs || (_donneesAs = decoderBloc(DONNEES_AS).catch(e => { _donneesAs = null; throw e; }));
+    const donneesUa = () => _donneesUa || (_donneesUa = decoderBloc(DONNEES_UA).catch(e => { _donneesUa = null; throw e; }));
+    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO', 'UY', 'PY', 'BO', 'VE']), BLOC_AS = new Set(['TR', 'MY', 'VN', 'PH']);
+    const blocIntegre = pays => pays === 'CA' ? donneesCa() : pays === 'UA' ? donneesUa() : BLOC_AM.has(pays) ? donneesAm() : BLOC_AS.has(pays) ? donneesAs() : donneesEu();
     function geomCompacte(ps) {
         const anneau = a => { const o = []; let x = 0, y = 0; for (let i = 0; i < a.length; i += 2) { x += a[i]; y += a[i + 1]; o.push([x / 1000, y / 1000]); } return o; };
         const polys = ps.map(p => p.map(anneau));
@@ -6239,6 +6564,129 @@
         },
     });
     // =====================================================================
+    //  UKRAINE — OCHA/HDX COD-AB v05 (entreprise d'État Kartographia, limites au 01/09/2025), CC BY-IGO : 27 oblasts (Crimée,
+    //  Kyiv et Sébastopol compris), 139 raïons, 1 769 hromadas, TOUT INTÉGRÉ (bloc DONNEES_UA). Noms ukrainiens + latins.
+    //  Pcodes OCHA (UA0102003), pas les KATOTTH. Le service officiel (map.land.gov.ua) ne répond pas. WME : FIPS « UP ».
+    // =====================================================================
+    const UA = fournisseurArcgis({
+        id: 'ua-cod', prefixe: 'ua', pays: 'UA', stockable: () => false,
+        source: 'OCHA COD-AB (Kartographia)', licence: 'CC BY-IGO',
+        maille: 'ua_oblast', libCode: '', placeholder: 'searchPhUA', emprisePays: [22.1, 44.3, 40.3, 52.4],
+        niveaux: {
+            ua_oblast: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            ua_raion: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+            ua_hromada: { couche: '', code: '', nom: '', zmin: 9, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  TURQUIE — OCHA/HDX COD-AB (HGM, 2022), CC BY-IGO : 81 il et 973 ilçe, intégrés. L'API MEGSİS du cadastre est
+    //  officielle mais sans licence ⇒ écartée. WME : FIPS « TU ».
+    // =====================================================================
+    const TR = fournisseurArcgis({
+        id: 'tr-cod', prefixe: 'tr', pays: 'TR', stockable: () => false,
+        source: 'OCHA COD-AB (HGM)', licence: 'CC BY-IGO',
+        maille: 'tr_il', libCode: '', placeholder: 'searchPhTR', emprisePays: [25.6, 35.8, 44.9, 42.2],
+        niveaux: {
+            tr_il: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            tr_ilce: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  MALAISIE — DOSM, dépôt officiel GitHub data-open, CC BY 4.0 : 16 negeri et 160 daerah, intégrés (codes de rang
+    //  DOSM, pas JUPEM ; les mukim ne sont pas ouverts). WME : FIPS « MY ».
+    // =====================================================================
+    const MY = fournisseurArcgis({
+        id: 'my-cod', prefixe: 'my', pays: 'MY', stockable: () => false,
+        source: 'DOSM — data-open (GitHub)', licence: 'CC BY 4.0',
+        maille: 'my_negeri', libCode: 'DOSM', placeholder: 'searchPhMY', emprisePays: [99.6, 0.8, 119.3, 7.4],
+        niveaux: {
+            my_negeri: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            my_daerah: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  PARAGUAY — OCHA/HDX COD-AB (INE, Cartografía Censal 2022), CC BY-IGO : 18 départements (Asunción comprise) et 263
+    //  distritos, intégrés (l'INE ne publie qu'en RAR, aucun service). WME : FIPS « PA ».
+    // =====================================================================
+    const PY = fournisseurArcgis({
+        id: 'py-cod', prefixe: 'py', pays: 'PY', stockable: () => false,
+        source: 'OCHA COD-AB (INE Paraguay, 2022)', licence: 'CC BY-IGO',
+        maille: 'py_departamento', libCode: '', placeholder: 'searchPhPY', emprisePays: [-62.7, -27.7, -54.2, -19.2],
+        niveaux: {
+            py_departamento: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            py_distrito: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  BOLIVIE — OCHA/HDX COD-AB (Ministerio de Desarrollo Rural y Tierras), CC BY-IGO : 9 départements, 112 provincias,
+    //  339 municipios, intégrés (GeoBolivia hors ligne, géoportail de l'INE fermé). WME : FIPS « BL ».
+    // =====================================================================
+    const BO = fournisseurArcgis({
+        id: 'bo-cod', prefixe: 'bo', pays: 'BO', stockable: () => false,
+        source: 'OCHA COD-AB (MDRyT)', licence: 'CC BY-IGO',
+        maille: 'bo_departamento', libCode: '', placeholder: 'searchPhBO', emprisePays: [-69.7, -22.9, -57.4, -9.6],
+        niveaux: {
+            bo_departamento: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            bo_provincia: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+            bo_municipio: { couche: '', code: '', nom: '', zmin: 8, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  VENEZUELA — OCHA/HDX COD-AB (INE), CC BY-IGO : 25 estados, 335 municipios, 1 135 parroquias, intégrés (l'IGVSB
+    //  ne publie aucun service). WME : FIPS « VE ».
+    // =====================================================================
+    const VE = fournisseurArcgis({
+        id: 've-cod', prefixe: 've', pays: 'VE', stockable: () => false,
+        source: 'OCHA COD-AB (INE Venezuela)', licence: 'CC BY-IGO',
+        maille: 've_estado', libCode: '', placeholder: 'searchPhVE', emprisePays: [-73.4, 0.6, -59.8, 12.3],
+        niveaux: {
+            ve_estado: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            ve_municipio: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+            ve_parroquia: { couche: '', code: '', nom: '', zmin: 9, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  VIÊT NAM — OCHA/HDX COD-AB v02 (GSO, limites du 01/07/2025), CC BY-IGO : les 34 provinces de la réforme de 2025,
+    //  intégrées. Plus de districts depuis 2025, et les communes 2025 ne sont pas ouvertes : rien en dessous. WME : « VM ».
+    // =====================================================================
+    const VN = fournisseurArcgis({
+        id: 'vn-cod', prefixe: 'vn', pays: 'VN', stockable: () => false,
+        source: 'OCHA COD-AB v02 (GSO, 2025)', licence: 'CC BY-IGO',
+        maille: 'vn_tinh', libCode: '', placeholder: 'searchPhVN', emprisePays: [102.1, 8.2, 109.5, 23.4],
+        niveaux: {
+            vn_tinh: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  PHILIPPINES — OCHA/HDX COD-AB v03 (NAMRIA, PSA), CC BY-IGO : 17 régions, 88 provinces, 1 642 villes et
+    //  municipalités, intégrées, SANS les barangays. ⚠️ Limites de 2018 et anciens codes : Negros Island Region (2024),
+    //  scission de Maguindanao (2022) et Sulu hors BARMM (2024) n'y sont pas. NAMRIA (401) et PSA (403) fermés. WME : « RP ».
+    // =====================================================================
+    const PH = fournisseurArcgis({
+        id: 'ph-cod', prefixe: 'ph', pays: 'PH', stockable: () => false,
+        source: 'OCHA COD-AB v03 (NAMRIA, PSA)', licence: 'CC BY-IGO',
+        maille: 'ph_region', libCode: '', placeholder: 'searchPhPH', emprisePays: [116.9, 4.6, 126.6, 21.1],
+        niveaux: {
+            ph_region: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            ph_province: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+            ph_munisipyo: { couche: '', code: '', nom: '', zmin: 8, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  MACÉDOINE DU NORD — OCHA/HDX COD-AB 2025 (« EuroGeographics and NTES »), CC BY-IGO : 8 régions statistiques et
+    //  80 opštini, intégrées (le cadastre refuse TLS). Les 10 municipalités de Skopje partagent le code de la ville :
+    //  PCODEX les distingue. Noms macédoniens + anglais. WME : FIPS « MK ».
+    // =====================================================================
+    const MK = fournisseurArcgis({
+        id: 'mk-cod', prefixe: 'mk', pays: 'MK', stockable: () => false,
+        source: 'OCHA COD-AB 2025 (EuroGeographics, NTES)', licence: 'CC BY-IGO',
+        maille: 'mk_region', libCode: '', placeholder: 'searchPhMK', emprisePays: [20.4, 40.8, 23.1, 42.4],
+        niveaux: {
+            mk_region: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            mk_opstina: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
     //  ROUMANIE — ANCPI : 42 județe INTÉGRÉS (data.gov.ro, 2024, CC BY 4.0 ; publiés seulement en Shapefile Stereo70,
     //  convertis par outils/donnees_eu.py : leur export reste ce contour simplifié), 3 186 UAT en direct (ArcGIS
     //  d'ANCPI, CC BY 4.0, le serveur simplifie), rattachées à leur județ par point intérieur. Noms en CAPITALES
@@ -6356,7 +6804,7 @@
         },
     });
     const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
-    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GR, HU, MT, IL, JP, DK, PR, BR, MX, AR, CL, CO, UY, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
+    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GR, HU, MT, IL, JP, DK, PR, UA, TR, MY, VN, PH, MK, BR, MX, AR, CL, CO, UY, PY, BO, VE, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
     // =====================================================================
     //  NIGERIA — GRID3 (avec l'OSGOF), ArcGIS Online, CC BY 4.0 : 37 États (36 + FCT ; maille, code postal « LA »),
@@ -6392,7 +6840,7 @@
         },
     });
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
-    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['GR', 'Ελλάδα'], ['HU', 'Magyarország'], ['MT', 'Malta'], ['IL', 'ישראל / Israel'], ['JP', '日本 / Japan'], ['DK', 'Danmark'], ['PR', 'Puerto Rico'], ['UY', 'Uruguay'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
+    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['GR', 'Ελλάδα'], ['HU', 'Magyarország'], ['MT', 'Malta'], ['IL', 'ישראל / Israel'], ['JP', '日本 / Japan'], ['DK', 'Danmark'], ['PR', 'Puerto Rico'], ['UY', 'Uruguay'], ['UA', 'Україна / Ukraine'], ['TR', 'Türkiye'], ['MY', 'Malaysia'], ['PY', 'Paraguay'], ['BO', 'Bolivia'], ['VE', 'Venezuela'], ['VN', 'Việt Nam'], ['PH', 'Pilipinas / Philippines'], ['MK', 'Северна Македонија / North Macedonia'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
     const DONNEES_MONDE = GM_getResourceText('donnees_monde');   // @resource (outils/publier.py)
     // </DONNEES_MONDE>
