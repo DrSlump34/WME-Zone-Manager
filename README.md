@@ -84,6 +84,7 @@ That is **99 countries**. The managers registry, the survey of managed areas and
 - "Survey at Waze" 🔎 compares the registry with Waze later: editors missing from the registry, editors with no area left.
 - **CM on a whole country** 🌐: a CM right requested by choosing a country (not a polygon) creates no area at Waze and is invisible to everyone but its holder. Note it by hand in the editor’s card: it is tied to the country outline, found by “Who manages here?”.
 - **Community titles**: on top of its type (AM, SM, RM, CM…), every area and every role can carry the titles **LC, GC, CC, CPC, Booster**, combined (“CM + LC + CPC”). They show as badges next to the username and can filter the list.
+- **Permissions by level**: each editor's card lists the 32 features Waze unlocks by level (cameras, lanes, junction boxes, closures, new cities…), with the level required in the registry's country and whether the editor has it. The thresholds are read live from WME, for any country; they depend on the level only.
 - **Wide view** ⤢: the editor list on the left, the card on the right; the editor header stays pinned, sections fold.
 
 ## Good to know
@@ -198,6 +199,7 @@ Soit **99 pays**. Le registre des gestionnaires, le recensement des zones géré
 - « Recenser chez Waze » 🔎 compare plus tard le registre à Waze : éditeurs absents du registre, éditeurs qui n’ont plus aucune zone.
 - **CM sur tout un pays** 🌐 : un droit de CM demandé en choisissant un pays (et non avec un polygone) ne crée aucune zone chez Waze et n’est visible que de son titulaire. Il se note à la main dans la fiche de l’éditeur : rattaché au contour du pays, il est retrouvé par « Qui gère ici ? ».
 - **Titres communautaires** : en plus de son type (AM, SM, RM, CM…), chaque zone et chaque rôle peut porter les titres **LC, GC, CC, CPC, Booster**, cumulables (« CM + LC + CPC »). Ils s’affichent en badges à côté du pseudo et servent de filtre dans la liste.
+- **Droits par niveau** : la fiche de chaque éditeur liste les 32 fonctions que Waze débloque selon le niveau (radars, voies, carrefours complexes, fermetures, nouvelles villes…), avec le niveau requis dans le pays du registre et si l’éditeur l’a. Les seuils sont lus en direct dans WME, pour n’importe quel pays ; ils ne dépendent que du niveau.
 - **Version large** ⤢ : la liste des éditeurs à gauche, la fiche à droite ; en-tête de l’éditeur figé, sections repliables.
 
 ## Bon à savoir

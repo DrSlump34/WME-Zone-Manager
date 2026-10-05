@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.35.00
+// @version      2.36.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -433,6 +433,44 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            gPerms: (a, b, p) => 'Droits par niveau (' + p + ')\u00a0: ' + a + '/' + b,
+            permLoading: 'Lecture des seuils du pays…',
+            permAbsent: (p) => 'Centrez la carte sur ' + p + ' pour lire ses seuils.',
+            permHelp: 'Seuils fixés par Waze pour chaque fonction, par pays : ils dépendent du seul niveau, sans exception individuelle.',
+            permLevel: 'Niveau requis',
+            permOff: 'Fonction désactivée dans ce pays',
+            perm_allowEditingStreetsRank: 'Noms de rue',
+            perm_allowEditingTurnGuidanceRank: 'Instructions de guidage',
+            perm_allowRoadClosureRank: 'Fermetures en temps réel',
+            perm_forceHouseNumberRank: 'Numéros de maison',
+            perm_allowNewCitiesRank: 'Nouvelles villes',
+            perm_allowLanesRank: 'Voies',
+            perm_updateJunctionBoxRank: 'Carrefours complexes (JB)',
+            perm_allowEditingPathsRank: 'Chemins des carrefours complexes',
+            perm_allowEditingLanesOnJBPathsRank: 'Voies sur les chemins de JB',
+            perm_allowRestrictedDrivingAreaRank: 'Zones à accès restreint',
+            perm_allowEditingSegmentSuggestionsRank: 'Propositions de segments',
+            perm_allowEditingEscalatedSegmentSuggestionsRank: 'Propositions remontées',
+            perm_allowEditingMTERank: 'Événements (MTE)',
+            perm_allowEditingSchedulesRank: 'Horaires',
+            perm_venueImageUploadMinRank: 'Photos de lieux',
+            perm_allowCamerasRank: 'Radars',
+            perm_allowAverageSpeedCamerasRank: 'Radars de vitesse moyenne',
+            perm_allowRailroadCrossingsRank: 'Passages à niveau',
+            perm_allowEditingTrafficLightsRank: 'Feux de circulation',
+            perm_allowEditingPermanentHazardsRank: 'Dangers permanents',
+            perm_allowEditingSpeedBumpsRank: 'Ralentisseurs',
+            perm_allowEditingTollBoothRank: 'Péages',
+            perm_allowEditingDangerousCurveRank: 'Virages dangereux',
+            perm_allowEditingDangerousIntersectionRank: 'Intersections dangereuses',
+            perm_allowEditingDangerousMergeRank: 'Insertions dangereuses',
+            perm_allowEditingSchoolZonesRank: 'Zones scolaires',
+            perm_allowEditingLaneEndingRank: 'Fins de voie',
+            perm_allowEditingRaisedCrosswalkRank: 'Passages piétons surélevés',
+            perm_allowEditingHighwayCrosswalkRank: 'Passages piétons sur voie rapide',
+            perm_allowEditingShoulderEndingRank: 'Fins de bande d’arrêt d’urgence',
+            perm_allowEditingNarrowBridgeRank: 'Ponts étroits',
+            perm_allowHeadlightsReminderRank: 'Rappel des phares',
             lvl_jp_ken: 'Préfectures',
             lvl_jp_shikuchoson: 'Municipalités',
             searchPhJP: 'Nom (japonais) ou code…',
@@ -946,6 +984,44 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            gPerms: (a, b, p) => 'Permissions by level (' + p + '): ' + a + '/' + b,
+            permLoading: 'Reading the country’s thresholds…',
+            permAbsent: (p) => 'Centre the map on ' + p + ' to read its thresholds.',
+            permHelp: 'Thresholds set by Waze for each feature, per country: they depend on the level only, with no individual exception.',
+            permLevel: 'Required level',
+            permOff: 'Feature disabled in this country',
+            perm_allowEditingStreetsRank: 'Street names',
+            perm_allowEditingTurnGuidanceRank: 'Turn guidance',
+            perm_allowRoadClosureRank: 'Real-time closures',
+            perm_forceHouseNumberRank: 'House numbers',
+            perm_allowNewCitiesRank: 'New cities',
+            perm_allowLanesRank: 'Lanes',
+            perm_updateJunctionBoxRank: 'Junction boxes',
+            perm_allowEditingPathsRank: 'Junction-box paths',
+            perm_allowEditingLanesOnJBPathsRank: 'Lanes on junction-box paths',
+            perm_allowRestrictedDrivingAreaRank: 'Restricted driving areas',
+            perm_allowEditingSegmentSuggestionsRank: 'Segment suggestions',
+            perm_allowEditingEscalatedSegmentSuggestionsRank: 'Escalated suggestions',
+            perm_allowEditingMTERank: 'Events (MTE)',
+            perm_allowEditingSchedulesRank: 'Opening hours',
+            perm_venueImageUploadMinRank: 'Place photos',
+            perm_allowCamerasRank: 'Speed cameras',
+            perm_allowAverageSpeedCamerasRank: 'Average speed cameras',
+            perm_allowRailroadCrossingsRank: 'Railroad crossings',
+            perm_allowEditingTrafficLightsRank: 'Traffic lights',
+            perm_allowEditingPermanentHazardsRank: 'Permanent hazards',
+            perm_allowEditingSpeedBumpsRank: 'Speed bumps',
+            perm_allowEditingTollBoothRank: 'Toll booths',
+            perm_allowEditingDangerousCurveRank: 'Dangerous curves',
+            perm_allowEditingDangerousIntersectionRank: 'Dangerous intersections',
+            perm_allowEditingDangerousMergeRank: 'Dangerous merges',
+            perm_allowEditingSchoolZonesRank: 'School zones',
+            perm_allowEditingLaneEndingRank: 'Lane endings',
+            perm_allowEditingRaisedCrosswalkRank: 'Raised crosswalks',
+            perm_allowEditingHighwayCrosswalkRank: 'Highway crosswalks',
+            perm_allowEditingShoulderEndingRank: 'Shoulder endings',
+            perm_allowEditingNarrowBridgeRank: 'Narrow bridges',
+            perm_allowHeadlightsReminderRank: 'Headlights reminder',
             lvl_jp_ken: 'Prefectures',
             lvl_jp_shikuchoson: 'Municipalities',
             searchPhJP: 'Name (Japanese) or code…',
@@ -1459,6 +1535,44 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            gPerms: (a, b, p) => 'Rechte nach Stufe (' + p + '): ' + a + '/' + b,
+            permLoading: 'Schwellen des Landes werden gelesen…',
+            permAbsent: (p) => 'Karte auf ' + p + ' zentrieren, um die Schwellen zu lesen.',
+            permHelp: 'Von Waze je Funktion und Land festgelegte Schwellen: Sie hängen nur von der Stufe ab, ohne individuelle Ausnahme.',
+            permLevel: 'Erforderliche Stufe',
+            permOff: 'Funktion in diesem Land deaktiviert',
+            perm_allowEditingStreetsRank: 'Straßennamen',
+            perm_allowEditingTurnGuidanceRank: 'Abbiegehinweise',
+            perm_allowRoadClosureRank: 'Echtzeit-Sperrungen',
+            perm_forceHouseNumberRank: 'Hausnummern',
+            perm_allowNewCitiesRank: 'Neue Orte',
+            perm_allowLanesRank: 'Fahrspuren',
+            perm_updateJunctionBoxRank: 'Kreuzungsboxen (JB)',
+            perm_allowEditingPathsRank: 'Pfade der Kreuzungsboxen',
+            perm_allowEditingLanesOnJBPathsRank: 'Fahrspuren auf JB-Pfaden',
+            perm_allowRestrictedDrivingAreaRank: 'Gebiete mit Fahrbeschränkung',
+            perm_allowEditingSegmentSuggestionsRank: 'Segmentvorschläge',
+            perm_allowEditingEscalatedSegmentSuggestionsRank: 'Eskalierte Vorschläge',
+            perm_allowEditingMTERank: 'Ereignisse (MTE)',
+            perm_allowEditingSchedulesRank: 'Öffnungszeiten',
+            perm_venueImageUploadMinRank: 'Ortsfotos',
+            perm_allowCamerasRank: 'Blitzer',
+            perm_allowAverageSpeedCamerasRank: 'Abschnittskontrollen',
+            perm_allowRailroadCrossingsRank: 'Bahnübergänge',
+            perm_allowEditingTrafficLightsRank: 'Ampeln',
+            perm_allowEditingPermanentHazardsRank: 'Dauerhafte Gefahren',
+            perm_allowEditingSpeedBumpsRank: 'Bodenschwellen',
+            perm_allowEditingTollBoothRank: 'Mautstellen',
+            perm_allowEditingDangerousCurveRank: 'Gefährliche Kurven',
+            perm_allowEditingDangerousIntersectionRank: 'Gefährliche Kreuzungen',
+            perm_allowEditingDangerousMergeRank: 'Gefährliche Einmündungen',
+            perm_allowEditingSchoolZonesRank: 'Schulzonen',
+            perm_allowEditingLaneEndingRank: 'Fahrstreifenende',
+            perm_allowEditingRaisedCrosswalkRank: 'Erhöhte Fußgängerüberwege',
+            perm_allowEditingHighwayCrosswalkRank: 'Fußgängerüberwege auf Schnellstraßen',
+            perm_allowEditingShoulderEndingRank: 'Ende des Seitenstreifens',
+            perm_allowEditingNarrowBridgeRank: 'Schmale Brücken',
+            perm_allowHeadlightsReminderRank: 'Licht-Erinnerung',
             lvl_jp_ken: 'Präfekturen',
             lvl_jp_shikuchoson: 'Gemeinden',
             searchPhJP: 'Name (japanisch) oder Code…',
@@ -1972,6 +2086,44 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            gPerms: (a, b, p) => 'Permisos por nivel (' + p + '): ' + a + '/' + b,
+            permLoading: 'Leyendo los umbrales del país…',
+            permAbsent: (p) => 'Centra el mapa en ' + p + ' para leer sus umbrales.',
+            permHelp: 'Umbrales fijados por Waze para cada función, por país: dependen solo del nivel, sin excepción individual.',
+            permLevel: 'Nivel requerido',
+            permOff: 'Función desactivada en este país',
+            perm_allowEditingStreetsRank: 'Nombres de calle',
+            perm_allowEditingTurnGuidanceRank: 'Indicaciones de giro',
+            perm_allowRoadClosureRank: 'Cierres en tiempo real',
+            perm_forceHouseNumberRank: 'Números de portal',
+            perm_allowNewCitiesRank: 'Ciudades nuevas',
+            perm_allowLanesRank: 'Carriles',
+            perm_updateJunctionBoxRank: 'Cruces complejos (JB)',
+            perm_allowEditingPathsRank: 'Recorridos de cruces complejos',
+            perm_allowEditingLanesOnJBPathsRank: 'Carriles en recorridos de JB',
+            perm_allowRestrictedDrivingAreaRank: 'Zonas de acceso restringido',
+            perm_allowEditingSegmentSuggestionsRank: 'Sugerencias de segmentos',
+            perm_allowEditingEscalatedSegmentSuggestionsRank: 'Sugerencias escaladas',
+            perm_allowEditingMTERank: 'Eventos (MTE)',
+            perm_allowEditingSchedulesRank: 'Horarios',
+            perm_venueImageUploadMinRank: 'Fotos de lugares',
+            perm_allowCamerasRank: 'Radares',
+            perm_allowAverageSpeedCamerasRank: 'Radares de tramo',
+            perm_allowRailroadCrossingsRank: 'Pasos a nivel',
+            perm_allowEditingTrafficLightsRank: 'Semáforos',
+            perm_allowEditingPermanentHazardsRank: 'Peligros permanentes',
+            perm_allowEditingSpeedBumpsRank: 'Badenes',
+            perm_allowEditingTollBoothRank: 'Peajes',
+            perm_allowEditingDangerousCurveRank: 'Curvas peligrosas',
+            perm_allowEditingDangerousIntersectionRank: 'Cruces peligrosos',
+            perm_allowEditingDangerousMergeRank: 'Incorporaciones peligrosas',
+            perm_allowEditingSchoolZonesRank: 'Zonas escolares',
+            perm_allowEditingLaneEndingRank: 'Fin de carril',
+            perm_allowEditingRaisedCrosswalkRank: 'Pasos de peatones elevados',
+            perm_allowEditingHighwayCrosswalkRank: 'Pasos de peatones en autovía',
+            perm_allowEditingShoulderEndingRank: 'Fin de arcén',
+            perm_allowEditingNarrowBridgeRank: 'Puentes estrechos',
+            perm_allowHeadlightsReminderRank: 'Recordatorio de luces',
             lvl_jp_ken: 'Prefecturas',
             lvl_jp_shikuchoson: 'Municipios',
             searchPhJP: 'Nombre (japonés) o código…',
@@ -2485,6 +2637,44 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            gPerms: (a, b, p) => 'Permessi per livello (' + p + '): ' + a + '/' + b,
+            permLoading: 'Lettura delle soglie del paese…',
+            permAbsent: (p) => 'Centra la mappa su ' + p + ' per leggerne le soglie.',
+            permHelp: 'Soglie fissate da Waze per ogni funzione, per paese: dipendono solo dal livello, senza eccezioni individuali.',
+            permLevel: 'Livello richiesto',
+            permOff: 'Funzione disattivata in questo paese',
+            perm_allowEditingStreetsRank: 'Nomi delle strade',
+            perm_allowEditingTurnGuidanceRank: 'Indicazioni di svolta',
+            perm_allowRoadClosureRank: 'Chiusure in tempo reale',
+            perm_forceHouseNumberRank: 'Numeri civici',
+            perm_allowNewCitiesRank: 'Nuove città',
+            perm_allowLanesRank: 'Corsie',
+            perm_updateJunctionBoxRank: 'Incroci complessi (JB)',
+            perm_allowEditingPathsRank: 'Percorsi degli incroci complessi',
+            perm_allowEditingLanesOnJBPathsRank: 'Corsie nei percorsi degli incroci complessi',
+            perm_allowRestrictedDrivingAreaRank: 'Zone a traffico limitato',
+            perm_allowEditingSegmentSuggestionsRank: 'Suggerimenti di segmenti',
+            perm_allowEditingEscalatedSegmentSuggestionsRank: 'Suggerimenti inoltrati',
+            perm_allowEditingMTERank: 'Eventi (MTE)',
+            perm_allowEditingSchedulesRank: 'Orari',
+            perm_venueImageUploadMinRank: 'Foto dei luoghi',
+            perm_allowCamerasRank: 'Autovelox',
+            perm_allowAverageSpeedCamerasRank: 'Tutor',
+            perm_allowRailroadCrossingsRank: 'Passaggi a livello',
+            perm_allowEditingTrafficLightsRank: 'Semafori',
+            perm_allowEditingPermanentHazardsRank: 'Pericoli permanenti',
+            perm_allowEditingSpeedBumpsRank: 'Dossi',
+            perm_allowEditingTollBoothRank: 'Caselli',
+            perm_allowEditingDangerousCurveRank: 'Curve pericolose',
+            perm_allowEditingDangerousIntersectionRank: 'Incroci pericolosi',
+            perm_allowEditingDangerousMergeRank: 'Immissioni pericolose',
+            perm_allowEditingSchoolZonesRank: 'Zone scolastiche',
+            perm_allowEditingLaneEndingRank: 'Fine corsia',
+            perm_allowEditingRaisedCrosswalkRank: 'Attraversamenti rialzati',
+            perm_allowEditingHighwayCrosswalkRank: 'Attraversamenti su strade veloci',
+            perm_allowEditingShoulderEndingRank: 'Fine corsia d’emergenza',
+            perm_allowEditingNarrowBridgeRank: 'Ponti stretti',
+            perm_allowHeadlightsReminderRank: 'Promemoria fari',
             lvl_jp_ken: 'Prefetture',
             lvl_jp_shikuchoson: 'Comuni',
             searchPhJP: 'Nome (giapponese) o codice…',
@@ -2998,6 +3188,44 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            gPerms: (a, b, p) => 'Permissões por nível (' + p + '): ' + a + '/' + b,
+            permLoading: 'Lendo os limites do país…',
+            permAbsent: (p) => 'Centralize o mapa em ' + p + ' para ler seus limites.',
+            permHelp: 'Limites definidos pelo Waze para cada função, por país: dependem só do nível, sem exceção individual.',
+            permLevel: 'Nível exigido',
+            permOff: 'Função desativada neste país',
+            perm_allowEditingStreetsRank: 'Nomes de rua',
+            perm_allowEditingTurnGuidanceRank: 'Instruções de conversão',
+            perm_allowRoadClosureRank: 'Interdições em tempo real',
+            perm_forceHouseNumberRank: 'Números de casa',
+            perm_allowNewCitiesRank: 'Novas cidades',
+            perm_allowLanesRank: 'Faixas',
+            perm_updateJunctionBoxRank: 'Cruzamentos complexos (JB)',
+            perm_allowEditingPathsRank: 'Caminhos de cruzamentos complexos',
+            perm_allowEditingLanesOnJBPathsRank: 'Faixas em caminhos de JB',
+            perm_allowRestrictedDrivingAreaRank: 'Áreas de acesso restrito',
+            perm_allowEditingSegmentSuggestionsRank: 'Sugestões de segmentos',
+            perm_allowEditingEscalatedSegmentSuggestionsRank: 'Sugestões escaladas',
+            perm_allowEditingMTERank: 'Eventos (MTE)',
+            perm_allowEditingSchedulesRank: 'Horários',
+            perm_venueImageUploadMinRank: 'Fotos de locais',
+            perm_allowCamerasRank: 'Radares',
+            perm_allowAverageSpeedCamerasRank: 'Radares de velocidade média',
+            perm_allowRailroadCrossingsRank: 'Passagens de nível',
+            perm_allowEditingTrafficLightsRank: 'Semáforos',
+            perm_allowEditingPermanentHazardsRank: 'Perigos permanentes',
+            perm_allowEditingSpeedBumpsRank: 'Lombadas',
+            perm_allowEditingTollBoothRank: 'Pedágios',
+            perm_allowEditingDangerousCurveRank: 'Curvas perigosas',
+            perm_allowEditingDangerousIntersectionRank: 'Cruzamentos perigosos',
+            perm_allowEditingDangerousMergeRank: 'Convergências perigosas',
+            perm_allowEditingSchoolZonesRank: 'Zonas escolares',
+            perm_allowEditingLaneEndingRank: 'Fim de faixa',
+            perm_allowEditingRaisedCrosswalkRank: 'Faixas de pedestres elevadas',
+            perm_allowEditingHighwayCrosswalkRank: 'Faixas de pedestres em rodovias',
+            perm_allowEditingShoulderEndingRank: 'Fim de acostamento',
+            perm_allowEditingNarrowBridgeRank: 'Pontes estreitas',
+            perm_allowHeadlightsReminderRank: 'Lembrete de faróis',
             lvl_jp_ken: 'Prefeituras',
             lvl_jp_shikuchoson: 'Municípios',
             searchPhJP: 'Nome (japonês) ou código…',
@@ -3511,6 +3739,44 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            gPerms: (a, b, p) => 'Permissões por nível (' + p + '): ' + a + '/' + b,
+            permLoading: 'A ler os limiares do país…',
+            permAbsent: (p) => 'Centre o mapa em ' + p + ' para ler os seus limiares.',
+            permHelp: 'Limiares definidos pelo Waze para cada função, por país: dependem apenas do nível, sem exceção individual.',
+            permLevel: 'Nível exigido',
+            permOff: 'Função desativada neste país',
+            perm_allowEditingStreetsRank: 'Nomes de rua',
+            perm_allowEditingTurnGuidanceRank: 'Indicações de viragem',
+            perm_allowRoadClosureRank: 'Cortes em tempo real',
+            perm_forceHouseNumberRank: 'Números de porta',
+            perm_allowNewCitiesRank: 'Novas localidades',
+            perm_allowLanesRank: 'Vias',
+            perm_updateJunctionBoxRank: 'Cruzamentos complexos (JB)',
+            perm_allowEditingPathsRank: 'Percursos de cruzamentos complexos',
+            perm_allowEditingLanesOnJBPathsRank: 'Vias em percursos de JB',
+            perm_allowRestrictedDrivingAreaRank: 'Zonas de acesso restrito',
+            perm_allowEditingSegmentSuggestionsRank: 'Sugestões de segmentos',
+            perm_allowEditingEscalatedSegmentSuggestionsRank: 'Sugestões encaminhadas',
+            perm_allowEditingMTERank: 'Eventos (MTE)',
+            perm_allowEditingSchedulesRank: 'Horários',
+            perm_venueImageUploadMinRank: 'Fotografias de locais',
+            perm_allowCamerasRank: 'Radares',
+            perm_allowAverageSpeedCamerasRank: 'Radares de velocidade média',
+            perm_allowRailroadCrossingsRank: 'Passagens de nível',
+            perm_allowEditingTrafficLightsRank: 'Semáforos',
+            perm_allowEditingPermanentHazardsRank: 'Perigos permanentes',
+            perm_allowEditingSpeedBumpsRank: 'Lombas',
+            perm_allowEditingTollBoothRank: 'Portagens',
+            perm_allowEditingDangerousCurveRank: 'Curvas perigosas',
+            perm_allowEditingDangerousIntersectionRank: 'Cruzamentos perigosos',
+            perm_allowEditingDangerousMergeRank: 'Confluências perigosas',
+            perm_allowEditingSchoolZonesRank: 'Zonas escolares',
+            perm_allowEditingLaneEndingRank: 'Fim de via',
+            perm_allowEditingRaisedCrosswalkRank: 'Passadeiras elevadas',
+            perm_allowEditingHighwayCrosswalkRank: 'Passadeiras em vias rápidas',
+            perm_allowEditingShoulderEndingRank: 'Fim de berma',
+            perm_allowEditingNarrowBridgeRank: 'Pontes estreitas',
+            perm_allowHeadlightsReminderRank: 'Lembrete de faróis',
             lvl_jp_ken: 'Prefeituras',
             lvl_jp_shikuchoson: 'Municípios',
             searchPhJP: 'Nome (japonês) ou código…',
@@ -4024,6 +4290,44 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            gPerms: (a, b, p) => 'הרשאות לפי דרגה (' + p + '): ' + a + '/' + b,
+            permLoading: 'קורא את ספי המדינה…',
+            permAbsent: (p) => 'מרכזו את המפה על ' + p + ' כדי לקרוא את הספים.',
+            permHelp: 'ספים שנקבעו על ידי Waze לכל פונקציה, לפי מדינה: הם תלויים בדרגה בלבד, ללא חריגה אישית.',
+            permLevel: 'דרגה נדרשת',
+            permOff: 'הפונקציה מושבתת במדינה זו',
+            perm_allowEditingStreetsRank: 'שמות רחובות',
+            perm_allowEditingTurnGuidanceRank: 'הנחיות פנייה',
+            perm_allowRoadClosureRank: 'חסימות בזמן אמת',
+            perm_forceHouseNumberRank: 'מספרי בתים',
+            perm_allowNewCitiesRank: 'ערים חדשות',
+            perm_allowLanesRank: 'נתיבים',
+            perm_updateJunctionBoxRank: 'צמתים מורכבים (JB)',
+            perm_allowEditingPathsRank: 'מסלולי צמתים מורכבים',
+            perm_allowEditingLanesOnJBPathsRank: 'נתיבים במסלולי JB',
+            perm_allowRestrictedDrivingAreaRank: 'אזורים מוגבלי נסיעה',
+            perm_allowEditingSegmentSuggestionsRank: 'הצעות למקטעים',
+            perm_allowEditingEscalatedSegmentSuggestionsRank: 'הצעות שהועברו',
+            perm_allowEditingMTERank: 'אירועים (MTE)',
+            perm_allowEditingSchedulesRank: 'שעות פעילות',
+            perm_venueImageUploadMinRank: 'תמונות מקומות',
+            perm_allowCamerasRank: 'מצלמות מהירות',
+            perm_allowAverageSpeedCamerasRank: 'מצלמות מהירות ממוצעת',
+            perm_allowRailroadCrossingsRank: 'מפגשי מסילת ברזל',
+            perm_allowEditingTrafficLightsRank: 'רמזורים',
+            perm_allowEditingPermanentHazardsRank: 'סכנות קבועות',
+            perm_allowEditingSpeedBumpsRank: 'פסי האטה',
+            perm_allowEditingTollBoothRank: 'תאי אגרה',
+            perm_allowEditingDangerousCurveRank: 'עיקולים מסוכנים',
+            perm_allowEditingDangerousIntersectionRank: 'צמתים מסוכנים',
+            perm_allowEditingDangerousMergeRank: 'השתלבויות מסוכנות',
+            perm_allowEditingSchoolZonesRank: 'אזורי בתי ספר',
+            perm_allowEditingLaneEndingRank: 'סוף נתיב',
+            perm_allowEditingRaisedCrosswalkRank: 'מעברי חציה מוגבהים',
+            perm_allowEditingHighwayCrosswalkRank: 'מעברי חציה בכביש מהיר',
+            perm_allowEditingShoulderEndingRank: 'סוף שוליים',
+            perm_allowEditingNarrowBridgeRank: 'גשרים צרים',
+            perm_allowHeadlightsReminderRank: 'תזכורת אורות',
             lvl_jp_ken: 'מחוזות (פרפקטורות)',
             lvl_jp_shikuchoson: 'רשויות',
             searchPhJP: 'שם (יפנית) או קוד…',
@@ -7414,6 +7718,11 @@
 .wzm-ro{font-size:11px;font-weight:600;color:#6a1b9a;background:#f3e5f5;border-radius:8px;padding:4px 8px;margin:4px 0}
 .wzm-sec2{font-size:11px;font-weight:700;color:var(--wzm-text2);text-transform:uppercase;letter-spacing:.05em;margin:8px 0 3px}
 .wzm-gzones{display:flex;flex-direction:column;gap:3px}
+.wzm-perms{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:1px 8px;font-size:11px;margin:2px 0 4px}
+.wzm-perm{display:contents;color:#7a828c}
+.wzm-perm.ok{color:#1e7d34}
+.wzm-perm.off span:first-child{text-decoration:line-through}
+.wzm-perm span:nth-child(2){text-align:right;font-variant-numeric:tabular-nums}
 .wzm-gzone{display:flex;flex-direction:column;align-items:stretch;gap:2px;padding:3px 4px;border-radius:8px;border-bottom:1px solid var(--wzm-border)}
 .wzm-gzone:last-child{border-bottom:none}
 .wzm-gzact{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
@@ -8964,6 +9273,52 @@
         const v = vivant.eds[e.pseudo.toLowerCase()];
         return '<div class="wzm-gpanneau" id="wzm-gpanneau"><div class="wzm-gpan-tete"><b><bdi>' + esc(e.pseudo) + '</bdi></b>' + (v && v.rang ? ' <small>L' + v.rang + '</small>' : '') + badgesTitres(titresDe(e)) + '</div>' + htmlFiche(e, ecartsDe(e), v) + '</div>';
     }
+    // =====================================================================
+    //  DROITS PAR NIVEAU — demande de Silvio (06/10/2026) : la fenêtre « Tes permissions » de WME, pour chaque éditeur.
+    //  Waze fixe, PAR PAYS, le niveau minimal de chaque fonction (allowLanesRank, updateJunctionBoxRank…) : ils dépendent
+    //  du seul niveau, sans activation individuelle possible (confirmé par l'auteur). WME les sert avec le pays dans
+    //  Features (même origine, objet « countries », niveaux de 0 à 5) : seuil + 1 = niveau WME. Un seuil null = fonction
+    //  désactivée dans le pays. Même table que le classeur public d'@iredisni (relevé quotidien), lue ici en direct.
+    // =====================================================================
+    const PERMS = ['allowEditingStreetsRank', 'allowEditingTurnGuidanceRank', 'allowRoadClosureRank', 'forceHouseNumberRank', 'allowNewCitiesRank', 'allowLanesRank', 'updateJunctionBoxRank', 'allowEditingPathsRank', 'allowEditingLanesOnJBPathsRank', 'allowRestrictedDrivingAreaRank', 'allowEditingSegmentSuggestionsRank', 'allowEditingEscalatedSegmentSuggestionsRank', 'allowEditingMTERank', 'allowEditingSchedulesRank', 'venueImageUploadMinRank', 'allowCamerasRank', 'allowAverageSpeedCamerasRank', 'allowRailroadCrossingsRank', 'allowEditingTrafficLightsRank', 'allowEditingPermanentHazardsRank', 'allowEditingSpeedBumpsRank', 'allowEditingTollBoothRank', 'allowEditingDangerousCurveRank', 'allowEditingDangerousIntersectionRank', 'allowEditingDangerousMergeRank', 'allowEditingSchoolZonesRank', 'allowEditingLaneEndingRank', 'allowEditingRaisedCrosswalkRank', 'allowEditingHighwayCrosswalkRank', 'allowEditingShoulderEndingRank', 'allowEditingNarrowBridgeRank', 'allowHeadlightsReminderRank'];
+    const seuilsPays = {};
+    // [fonction, niveau requis (1-6) ou null, débloquée ?] pour un niveau d'éditeur (1-6) ; fonctions absentes du pays omises.
+    const permsDe = (rangs, niveau) => PERMS.filter(k => rangs && k in rangs).map(k => {
+        const r = rangs[k] == null ? null : Number(rangs[k]) + 1;
+        return [k, r, r != null && Number(niveau) >= r];
+    });
+    async function chargerSeuils(iso) {
+        if (!iso || seuilsPays[iso]) return;
+        seuilsPays[iso] = { etat: 'charge' };
+        try {
+            // Une petite emprise DANS le pays suffit : le centre de la carte, sinon un sommet de la 1re maille du pays.
+            const pts = [];
+            try { const c = await sdk.Map.getMapCenter(); if (c) pts.push([c.lon, c.lat]); } catch (e) { }
+            try { const m = await fournisseurDe(iso).mailles(); let x = m[0] && m[0].geom && m[0].geom.coordinates; while (Array.isArray(x) && Array.isArray(x[0])) x = x[0]; if (x) pts.push(x); } catch (e) { }
+            let pays = null;
+            for (const [lon, lat] of pts) {
+                const r = await pw.fetch('/' + SERVEUR() + '/app/Features?bbox=' + [lon - 0.01, lat - 0.01, lon + 0.01, lat + 0.01].map(n => n.toFixed(5)).join(',') + '&language=en', { credentials: 'same-origin' });
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                const j = await r.json();
+                pays = ((j.countries && j.countries.objects) || []).find(c => (FIPS_ISO[c.abbr] || c.abbr) === iso);
+                if (pays) break;
+            }
+            seuilsPays[iso] = pays ? { etat: 'ok', rangs: pays } : { etat: 'absent' };
+        } catch (err) { seuilsPays[iso] = { etat: 'erreur', msg: err.message }; }
+        rendreGest();
+    }
+    function htmlPermsEd(v) {
+        const iso = paysReg, s = seuilsPays[iso], nom = paysRegNom || iso;
+        if (!iso) return '';
+        const ouvert = (opts.plie || {}).perms === false ? ' open' : '';
+        if (!s || s.etat === 'charge') return '<details class="wzm-plier" data-plier="perms"' + ouvert + '><summary class="wzm-sec2">' + esc(t('permLoading')) + '</summary></details>';
+        if (s.etat !== 'ok') return '<details class="wzm-plier" data-plier="perms"' + ouvert + '><summary class="wzm-sec2">' + esc(t('gPerms', '?', '?', nom)) + '</summary><p class="wzm-aide">' + esc(s.etat === 'absent' ? t('permAbsent', nom) : t('liveErr', s.msg)) + '</p></details>';
+        const l = permsDe(s.rangs, v && v.rang), n = l.filter(x => x[2]).length;
+        return '<details class="wzm-plier" data-plier="perms"' + ouvert + '><summary class="wzm-sec2">' + esc(t('gPerms', v && v.rang ? n : '?', l.length, nom)) + '</summary>' +
+            '<p class="wzm-aide">' + esc(t('permHelp')) + '</p><div class="wzm-perms">' + l.map(([k, r, ok]) =>
+                '<div class="wzm-perm' + (r == null ? ' off' : ok ? ' ok' : '') + '"><span>' + esc(t('perm_' + k)) + '</span><span title="' + esc(r == null ? t('permOff') : t('permLevel')) + '">' + (r == null ? '—' : 'L' + r) + '</span><span aria-hidden="true">' + (r == null ? '' : ok ? '&#x2714;' : '&#x1F512;') + '</span></div>').join('') +
+            '</div></details>';
+    }
     function htmlLigneEd(e) {
         const ec = ecartsDe(e);
         const v = vivant.eds[e.pseudo.toLowerCase()];
@@ -9042,6 +9397,7 @@
             (ec.length ? '<ul class="wzm-gecarts">' + ec.map(x => '<li><span class="wzm-pt ' + (PASTILLE[x.k] || 'gris') + '"></span>' + esc(texteEcart(x)) + '</li>').join('') + '</ul>' : '') +
             htmlZonesEd(e, v) +
             (roles ? '<details class="wzm-plier" data-plier="roles"' + ((opts.plie || {}).roles ? '' : ' open') + '><summary class="wzm-sec2">' + esc(t('gRoles')) + '</summary>' + roles + '</details>' : '') +
+            htmlPermsEd(v) +
             (ro ? '<div class="wzm-ligne"><button type="button" class="wzm-btn" data-g="relireUn">' + esc(t('liveReloadOne')) + '</button></div>' +
                 (e.note ? '<p class="wzm-aide">' + esc(e.note) + '</p>' : '') + '</div>' : '') +
             (ro ? '' : '<div class="wzm-sec2">' + esc(t('roleNew')) + '</div>' +
@@ -9176,6 +9532,7 @@
         });
         sur('[data-g="relireUn"]', () => { delete zonesExactes[e.pseudo.toLowerCase()]; relireChezWaze(e.pseudo).then(() => chargerZonesExactes(e.pseudo)); });
         chargerZonesExactes(e.pseudo);
+        chargerSeuils(paysReg);
         const zone = i => (zonesExactes[e.pseudo.toLowerCase()] || [])[Number(i)];
         sur('[data-zvoir]', ev => {
             const i = Number(ev.currentTarget.dataset.zvoir), z = zone(i);
