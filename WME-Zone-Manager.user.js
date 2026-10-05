@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.34.06
+// @version      2.35.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -34,11 +34,11 @@
 // @grant        GM_getResourceText
 // @grant        unsafeWindow
 // @resource     TURF https://cdnjs.cloudflare.com/ajax/libs/Turf.js/7.4.0/turf.min.js#sha256=5db5dda50210fa0f25394672383ba4a2e6fcde3c9e95ae0e21d62d327fc66d05
-// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
-// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
-// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_eu.b64#sha256=d32a80b9de9d6277e275d9ad4422db6c008734b7257fa07a226328044f94684d
-// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
-// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/973064b5c78a4f86588b700d7214b463568c6ad5/donnees/donnees_am.b64#sha256=5663b1888fe65c990b39df5565e7fe383e2a46738c7d025ce734a83e078904e5
+// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
+// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
+// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_eu.b64#sha256=f58a9e5b57f8b4d211a435f81452b929c3dd630a7a8b002dcdbfc11cf4c52a09
+// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
+// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/8dcdc990ca51ceb3c1c8bb37c78b35022e50a1f8/donnees/donnees_am.b64#sha256=f1d64372d390ae42b8af814ca18870d762a0339950ea3fadc4505b83dbc54e0e
 // @connect      data.geopf.fr
 // @connect      geo.api.gouv.fr
 // @connect      geoportale.istat.it
@@ -58,6 +58,10 @@
 // @connect      services2.arcgis.com
 // @connect      geo.abs.gov.au
 // @connect      wms.ign.gob.ar
+// @connect      wfdservices.ypeka.gr
+// @connect      inspire.lechnerkozpont.hu
+// @connect      ags.iplan.gov.il
+// @connect      mapas.ide.uy
 // @connect      servicodados.ibge.gov.br
 // @connect      gaia.inegi.org.mx
 // @connect      services1.arcgis.com
@@ -429,6 +433,43 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            lvl_jp_ken: 'Préfectures',
+            lvl_jp_shikuchoson: 'Municipalités',
+            searchPhJP: 'Nom (japonais) ou code…',
+            unit_JP: 'préfectures',
+            lvl_pr_municipio: 'Municipios',
+            lvl_pr_barrio: 'Barrios',
+            searchPhPR: 'Nom ou code…',
+            unit_PR: 'municipios',
+            lvl_uy_depto: 'Départements',
+            lvl_uy_municipio: 'Municipios',
+            searchPhUY: 'Nom ou code…',
+            unit_UY: 'départements',
+            lvl_dk_region: 'Régions',
+            lvl_dk_kommune: 'Communes (kommuner)',
+            searchPhDK: 'Nom ou code…',
+            unit_DK: 'régions',
+            lvl_hu_megye: 'Comitats (vármegyék)',
+            lvl_hu_jaras: 'Districts (járások)',
+            lvl_hu_telepules: 'Communes (települések)',
+            searchPhHU: 'Nom ou code…',
+            unit_HU: 'comitats (vármegyék)',
+            lvl_mt_distrett: 'Districts',
+            lvl_mt_kunsill: 'Conseils locaux (kunsilli lokali)',
+            searchPhMT: 'Nom ou code…',
+            unit_MT: 'districts',
+            lvl_il_machoz: 'Districts (mehozot)',
+            lvl_il_nafa: 'Sous-districts (nafot)',
+            lvl_il_rashut: 'Autorités locales',
+            searchPhIL: 'Nom (hébreu ou anglais) ou code…',
+            unit_IL: 'districts (mehozot)',
+            lvl_gr_perifereia: 'Régions (periféries)',
+            lvl_gr_enotita: 'Unités régionales (nomes)',
+            lvl_gr_dimos: 'Dèmes (communes)',
+            lvl_gr_de: 'Unités municipales',
+            lvl_gr_koinotita: 'Communautés locales',
+            searchPhGR: 'Nom (grec ou latin) ou code…',
+            unit_GR: 'unités régionales',
             titlesMore: 'Titres communautaires (LC, GC, CC, CPC, Booster) : passer en version large pour les modifier',
             wideOn: 'Version large : liste à gauche, fiche à droite',
             wideOff: 'Version compacte',
@@ -905,6 +946,43 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            lvl_jp_ken: 'Prefectures',
+            lvl_jp_shikuchoson: 'Municipalities',
+            searchPhJP: 'Name (Japanese) or code…',
+            unit_JP: 'prefectures',
+            lvl_pr_municipio: 'Municipios',
+            lvl_pr_barrio: 'Barrios',
+            searchPhPR: 'Name or code…',
+            unit_PR: 'municipios',
+            lvl_uy_depto: 'Departments',
+            lvl_uy_municipio: 'Municipalities',
+            searchPhUY: 'Name or code…',
+            unit_UY: 'departments',
+            lvl_dk_region: 'Regions',
+            lvl_dk_kommune: 'Municipalities (kommuner)',
+            searchPhDK: 'Name or code…',
+            unit_DK: 'regions',
+            lvl_hu_megye: 'Counties (vármegyék)',
+            lvl_hu_jaras: 'Districts (járások)',
+            lvl_hu_telepules: 'Settlements (települések)',
+            searchPhHU: 'Name or code…',
+            unit_HU: 'counties (vármegyék)',
+            lvl_mt_distrett: 'Districts',
+            lvl_mt_kunsill: 'Local councils',
+            searchPhMT: 'Name or code…',
+            unit_MT: 'districts',
+            lvl_il_machoz: 'Districts (mehozot)',
+            lvl_il_nafa: 'Sub-districts (nafot)',
+            lvl_il_rashut: 'Local authorities',
+            searchPhIL: 'Name (Hebrew or English) or code…',
+            unit_IL: 'districts (mehozot)',
+            lvl_gr_perifereia: 'Regions (periferies)',
+            lvl_gr_enotita: 'Regional units',
+            lvl_gr_dimos: 'Municipalities (dimoi)',
+            lvl_gr_de: 'Municipal units',
+            lvl_gr_koinotita: 'Local communities',
+            searchPhGR: 'Name (Greek or Latin) or code…',
+            unit_GR: 'regional units',
             titlesMore: 'Community titles (LC, GC, CC, CPC, Booster): switch to the wide view to edit them',
             wideOn: 'Wide view: list on the left, card on the right',
             wideOff: 'Compact view',
@@ -1381,6 +1459,43 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            lvl_jp_ken: 'Präfekturen',
+            lvl_jp_shikuchoson: 'Gemeinden',
+            searchPhJP: 'Name (japanisch) oder Code…',
+            unit_JP: 'Präfekturen',
+            lvl_pr_municipio: 'Municipios',
+            lvl_pr_barrio: 'Barrios',
+            searchPhPR: 'Name oder Code…',
+            unit_PR: 'Municipios',
+            lvl_uy_depto: 'Departamentos',
+            lvl_uy_municipio: 'Gemeinden',
+            searchPhUY: 'Name oder Code…',
+            unit_UY: 'Departamentos',
+            lvl_dk_region: 'Regionen',
+            lvl_dk_kommune: 'Kommunen',
+            searchPhDK: 'Name oder Code…',
+            unit_DK: 'Regionen',
+            lvl_hu_megye: 'Komitate (Vármegyék)',
+            lvl_hu_jaras: 'Kreise (Járások)',
+            lvl_hu_telepules: 'Gemeinden (Települések)',
+            searchPhHU: 'Name oder Code…',
+            unit_HU: 'Komitate',
+            lvl_mt_distrett: 'Distrikte',
+            lvl_mt_kunsill: 'Gemeinderäte',
+            searchPhMT: 'Name oder Code…',
+            unit_MT: 'Distrikte',
+            lvl_il_machoz: 'Bezirke (Mehozot)',
+            lvl_il_nafa: 'Unterbezirke (Nafot)',
+            lvl_il_rashut: 'Kommunalbehörden',
+            searchPhIL: 'Name (hebräisch oder englisch) oder Code…',
+            unit_IL: 'Bezirke',
+            lvl_gr_perifereia: 'Regionen (Periferien)',
+            lvl_gr_enotita: 'Regionalbezirke',
+            lvl_gr_dimos: 'Gemeinden (Dimi)',
+            lvl_gr_de: 'Gemeindebezirke',
+            lvl_gr_koinotita: 'Ortsgemeinschaften',
+            searchPhGR: 'Name (griechisch oder lateinisch) oder Code…',
+            unit_GR: 'Regionalbezirke',
             titlesMore: 'Community-Titel (LC, GC, CC, CPC, Booster): zur breiten Ansicht wechseln, um sie zu bearbeiten',
             wideOn: 'Breite Ansicht: Liste links, Karte rechts',
             wideOff: 'Kompakte Ansicht',
@@ -1857,6 +1972,43 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            lvl_jp_ken: 'Prefecturas',
+            lvl_jp_shikuchoson: 'Municipios',
+            searchPhJP: 'Nombre (japonés) o código…',
+            unit_JP: 'prefecturas',
+            lvl_pr_municipio: 'Municipios',
+            lvl_pr_barrio: 'Barrios',
+            searchPhPR: 'Nombre o código…',
+            unit_PR: 'municipios',
+            lvl_uy_depto: 'Departamentos',
+            lvl_uy_municipio: 'Municipios',
+            searchPhUY: 'Nombre o código…',
+            unit_UY: 'departamentos',
+            lvl_dk_region: 'Regiones',
+            lvl_dk_kommune: 'Municipios (kommuner)',
+            searchPhDK: 'Nombre o código…',
+            unit_DK: 'regiones',
+            lvl_hu_megye: 'Condados (vármegyék)',
+            lvl_hu_jaras: 'Distritos (járások)',
+            lvl_hu_telepules: 'Localidades (települések)',
+            searchPhHU: 'Nombre o código…',
+            unit_HU: 'condados',
+            lvl_mt_distrett: 'Distritos',
+            lvl_mt_kunsill: 'Consejos locales',
+            searchPhMT: 'Nombre o código…',
+            unit_MT: 'distritos',
+            lvl_il_machoz: 'Distritos (mehozot)',
+            lvl_il_nafa: 'Subdistritos (nafot)',
+            lvl_il_rashut: 'Autoridades locales',
+            searchPhIL: 'Nombre (hebreo o inglés) o código…',
+            unit_IL: 'distritos',
+            lvl_gr_perifereia: 'Regiones (periferias)',
+            lvl_gr_enotita: 'Unidades regionales',
+            lvl_gr_dimos: 'Municipios (dimos)',
+            lvl_gr_de: 'Unidades municipales',
+            lvl_gr_koinotita: 'Comunidades locales',
+            searchPhGR: 'Nombre (griego o latino) o código…',
+            unit_GR: 'unidades regionales',
             titlesMore: 'Títulos comunitarios (LC, GC, CC, CPC, Booster): pasar a la vista amplia para editarlos',
             wideOn: 'Vista amplia: lista a la izquierda, ficha a la derecha',
             wideOff: 'Vista compacta',
@@ -2333,6 +2485,43 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            lvl_jp_ken: 'Prefetture',
+            lvl_jp_shikuchoson: 'Comuni',
+            searchPhJP: 'Nome (giapponese) o codice…',
+            unit_JP: 'prefetture',
+            lvl_pr_municipio: 'Municipios',
+            lvl_pr_barrio: 'Barrios',
+            searchPhPR: 'Nome o codice…',
+            unit_PR: 'municipios',
+            lvl_uy_depto: 'Dipartimenti',
+            lvl_uy_municipio: 'Comuni',
+            searchPhUY: 'Nome o codice…',
+            unit_UY: 'dipartimenti',
+            lvl_dk_region: 'Regioni',
+            lvl_dk_kommune: 'Comuni (kommuner)',
+            searchPhDK: 'Nome o codice…',
+            unit_DK: 'regioni',
+            lvl_hu_megye: 'Contee (vármegyék)',
+            lvl_hu_jaras: 'Distretti (járások)',
+            lvl_hu_telepules: 'Comuni (települések)',
+            searchPhHU: 'Nome o codice…',
+            unit_HU: 'contee',
+            lvl_mt_distrett: 'Distretti',
+            lvl_mt_kunsill: 'Consigli locali',
+            searchPhMT: 'Nome o codice…',
+            unit_MT: 'distretti',
+            lvl_il_machoz: 'Distretti (mehozot)',
+            lvl_il_nafa: 'Sottodistretti (nafot)',
+            lvl_il_rashut: 'Autorità locali',
+            searchPhIL: 'Nome (ebraico o inglese) o codice…',
+            unit_IL: 'distretti',
+            lvl_gr_perifereia: 'Regioni (periferie)',
+            lvl_gr_enotita: 'Unità regionali',
+            lvl_gr_dimos: 'Comuni (dimi)',
+            lvl_gr_de: 'Unità municipali',
+            lvl_gr_koinotita: 'Comunità locali',
+            searchPhGR: 'Nome (greco o latino) o codice…',
+            unit_GR: 'unità regionali',
             titlesMore: 'Titoli della comunità (LC, GC, CC, CPC, Booster): passa alla vista larga per modificarli',
             wideOn: 'Vista larga: elenco a sinistra, scheda a destra',
             wideOff: 'Vista compatta',
@@ -2809,6 +2998,43 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            lvl_jp_ken: 'Prefeituras',
+            lvl_jp_shikuchoson: 'Municípios',
+            searchPhJP: 'Nome (japonês) ou código…',
+            unit_JP: 'prefeituras',
+            lvl_pr_municipio: 'Municípios',
+            lvl_pr_barrio: 'Barrios',
+            searchPhPR: 'Nome ou código…',
+            unit_PR: 'municípios',
+            lvl_uy_depto: 'Departamentos',
+            lvl_uy_municipio: 'Municípios',
+            searchPhUY: 'Nome ou código…',
+            unit_UY: 'departamentos',
+            lvl_dk_region: 'Regiões',
+            lvl_dk_kommune: 'Municípios (kommuner)',
+            searchPhDK: 'Nome ou código…',
+            unit_DK: 'regiões',
+            lvl_hu_megye: 'Condados (vármegyék)',
+            lvl_hu_jaras: 'Distritos (járások)',
+            lvl_hu_telepules: 'Localidades (települések)',
+            searchPhHU: 'Nome ou código…',
+            unit_HU: 'condados',
+            lvl_mt_distrett: 'Distritos',
+            lvl_mt_kunsill: 'Conselhos locais',
+            searchPhMT: 'Nome ou código…',
+            unit_MT: 'distritos',
+            lvl_il_machoz: 'Distritos (mehozot)',
+            lvl_il_nafa: 'Subdistritos (nafot)',
+            lvl_il_rashut: 'Autoridades locais',
+            searchPhIL: 'Nome (hebraico ou inglês) ou código…',
+            unit_IL: 'distritos',
+            lvl_gr_perifereia: 'Regiões (periferias)',
+            lvl_gr_enotita: 'Unidades regionais',
+            lvl_gr_dimos: 'Municípios (dimos)',
+            lvl_gr_de: 'Unidades municipais',
+            lvl_gr_koinotita: 'Comunidades locais',
+            searchPhGR: 'Nome (grego ou latino) ou código…',
+            unit_GR: 'unidades regionais',
             titlesMore: 'Títulos da comunidade (LC, GC, CC, CPC, Booster): mude para a visão ampla para editá-los',
             wideOn: 'Visão ampla: lista à esquerda, ficha à direita',
             wideOff: 'Visão compacta',
@@ -3285,6 +3511,43 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            lvl_jp_ken: 'Prefeituras',
+            lvl_jp_shikuchoson: 'Municípios',
+            searchPhJP: 'Nome (japonês) ou código…',
+            unit_JP: 'prefeituras',
+            lvl_pr_municipio: 'Municípios',
+            lvl_pr_barrio: 'Barrios',
+            searchPhPR: 'Nome ou código…',
+            unit_PR: 'municípios',
+            lvl_uy_depto: 'Departamentos',
+            lvl_uy_municipio: 'Municípios',
+            searchPhUY: 'Nome ou código…',
+            unit_UY: 'departamentos',
+            lvl_dk_region: 'Regiões',
+            lvl_dk_kommune: 'Municípios (kommuner)',
+            searchPhDK: 'Nome ou código…',
+            unit_DK: 'regiões',
+            lvl_hu_megye: 'Condados (vármegyék)',
+            lvl_hu_jaras: 'Distritos (járások)',
+            lvl_hu_telepules: 'Localidades (települések)',
+            searchPhHU: 'Nome ou código…',
+            unit_HU: 'condados',
+            lvl_mt_distrett: 'Distritos',
+            lvl_mt_kunsill: 'Conselhos locais',
+            searchPhMT: 'Nome ou código…',
+            unit_MT: 'distritos',
+            lvl_il_machoz: 'Distritos (mehozot)',
+            lvl_il_nafa: 'Subdistritos (nafot)',
+            lvl_il_rashut: 'Autoridades locais',
+            searchPhIL: 'Nome (hebraico ou inglês) ou código…',
+            unit_IL: 'distritos',
+            lvl_gr_perifereia: 'Regiões (periferias)',
+            lvl_gr_enotita: 'Unidades regionais',
+            lvl_gr_dimos: 'Municípios (dimos)',
+            lvl_gr_de: 'Unidades municipais',
+            lvl_gr_koinotita: 'Comunidades locais',
+            searchPhGR: 'Nome (grego ou latino) ou código…',
+            unit_GR: 'unidades regionais',
             titlesMore: 'Títulos da comunidade (LC, GC, CC, CPC, Booster): mude para a vista larga para os editar',
             wideOn: 'Vista larga: lista à esquerda, ficha à direita',
             wideOff: 'Vista compacta',
@@ -3761,6 +4024,43 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            lvl_jp_ken: 'מחוזות (פרפקטורות)',
+            lvl_jp_shikuchoson: 'רשויות',
+            searchPhJP: 'שם (יפנית) או קוד…',
+            unit_JP: 'מחוזות',
+            lvl_pr_municipio: 'מוניסיפיוס',
+            lvl_pr_barrio: 'באריוס',
+            searchPhPR: 'שם או קוד…',
+            unit_PR: 'מוניסיפיוס',
+            lvl_uy_depto: 'מחוזות (דפרטמנטוס)',
+            lvl_uy_municipio: 'רשויות',
+            searchPhUY: 'שם או קוד…',
+            unit_UY: 'מחוזות',
+            lvl_dk_region: 'אזורים',
+            lvl_dk_kommune: 'רשויות (קומונות)',
+            searchPhDK: 'שם או קוד…',
+            unit_DK: 'אזורים',
+            lvl_hu_megye: 'מחוזות (vármegyék)',
+            lvl_hu_jaras: 'נפות (járások)',
+            lvl_hu_telepules: 'יישובים (települések)',
+            searchPhHU: 'שם או קוד…',
+            unit_HU: 'מחוזות',
+            lvl_mt_distrett: 'מחוזות',
+            lvl_mt_kunsill: 'מועצות מקומיות',
+            searchPhMT: 'שם או קוד…',
+            unit_MT: 'מחוזות',
+            lvl_il_machoz: 'מחוזות',
+            lvl_il_nafa: 'נפות',
+            lvl_il_rashut: 'רשויות מקומיות',
+            searchPhIL: 'שם (עברית או אנגלית) או קוד…',
+            unit_IL: 'מחוזות',
+            lvl_gr_perifereia: 'אזורים (פריפריות)',
+            lvl_gr_enotita: 'יחידות אזוריות',
+            lvl_gr_dimos: 'רשויות (דימוי)',
+            lvl_gr_de: 'יחידות עירוניות',
+            lvl_gr_koinotita: 'קהילות מקומיות',
+            searchPhGR: 'שם (יווני או לטיני) או קוד…',
+            unit_GR: 'יחידות אזוריות',
             titlesMore: 'תארים קהילתיים (LC, GC, CC, CPC, Booster): עברו לתצוגה הרחבה כדי לערוך אותם',
             wideOn: 'תצוגה רחבה: רשימה משמאל, כרטיס מימין',
             wideOff: 'תצוגה מצומצמת',
@@ -4157,7 +4457,7 @@
         const bin = Uint8Array.from(atob(DONNEES_AM), c => c.charCodeAt(0));
         return JSON.parse(await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     })().catch(e => { _donneesAm = null; throw e; }));
-    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO']);
+    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO', 'UY']);
     const blocIntegre = pays => pays === 'CA' ? donneesCa() : BLOC_AM.has(pays) ? donneesAm() : donneesEu();
     function geomCompacte(ps) {
         const anneau = a => { const o = []; let x = 0, y = 0; for (let i = 0; i < a.length; i += 2) { x += a[i]; y += a[i + 1]; o.push([x / 1000, y / 1000]); } return o; };
@@ -4187,6 +4487,14 @@
             prets() { return this._prep || (this._prep = (this.preparer ? this.preparer() : Promise.resolve()).catch(e => { this._prep = null; throw e; })); },
             async pages(niveau, params) {
                 await this.prets();
+                // Serveur qui refuse resultOffset/resultRecordCount (iplan, 06/10/2026) : une seule requête. Il rend aussi
+                // [x, y, 0, null] malgré returnZ/returnM=false : ramené en 2D (un null casse les calculs de géométrie).
+                if (this.sansPagination) {
+                    const plat = c => Array.isArray(c[0]) ? c.map(plat) : c.slice(0, 2);
+                    const l = (await getJSON1Essais(this, this.url(niveau, params))).features || [];
+                    for (const f of l) if (f.geometry && f.geometry.coordinates) f.geometry.coordinates = plat(f.geometry.coordinates);
+                    return l;
+                }
                 const out = [], pas = Number(this.parPage || 2000);
                 for (let o = 0; o < 100 * pas; o += pas) {
                     const j = await getJSON1Essais(this, this.url(niveau, Object.assign({}, params, { resultOffset: String(o), resultRecordCount: String(pas) })));
@@ -5463,6 +5771,170 @@
         precises: precisesParApi(function (niveau, c) { return 'https://gaia.inegi.org.mx/wscatgeo/v2/geo/' + (niveau === 'mx_entidad' ? 'mgee/' + c : 'mgem/' + c.slice(0, 2) + '/' + c.slice(2)); }),
     });
     // =====================================================================
+    //  GRÈCE — ΥΠΕΝ (ministère de l'Environnement), WFS GeoServer, CC BY 4.0 (data.gov.gr) : 14 periféries et 75 unités
+    //  régionales (maille) INTÉGRÉES (le WFS ne simplifie pas : 12,9 et 14,6 Mo), 326 dèmes, 1 035 unités municipales
+    //  et 6 131 communautés en direct. Code `kalcode` hiérarchique sous l'unité régionale (dème 0101 ⇒ unité 01).
+    //  ⚠️ Dèmes du programme Kallikratis (2011), d'AVANT Kleisthenis (2019) : Corfou, Lesbos, Céphalonie… ne sont pas
+    //  scindés (326 au lieu de 332). Noms en capitales sans accents ⇒ minuscules + translittération latine (ELOT 743
+    //  simplifiée) pour chercher sans clavier grec. WME : code FIPS « GR ».
+    // =====================================================================
+    const GR_DIGR = [['ου', 'ou'], ['αυ', 'av'], ['ευ', 'ev'], ['ηυ', 'iv'], ['αι', 'ai'], ['ει', 'ei'], ['οι', 'oi'], ['γγ', 'ng'], ['γκ', 'gk'], ['μπ', 'mp'], ['ντ', 'nt'], ['τσ', 'ts'], ['τζ', 'tz']];
+    const GR_LAT = { α: 'a', β: 'v', γ: 'g', δ: 'd', ε: 'e', ζ: 'z', η: 'i', θ: 'th', ι: 'i', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: 'x', ο: 'o', π: 'p', ρ: 'r', σ: 's', ς: 's', τ: 't', υ: 'y', φ: 'f', χ: 'ch', ψ: 'ps', ω: 'o' };
+    const majMots = s => s.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    function grNom(s) {
+        const g = majMots(String(s || '').toLowerCase());
+        let x = g.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        for (const [a, b] of GR_DIGR) x = x.split(a).join(b);
+        x = [...x].map(c => GR_LAT[c] !== undefined ? GR_LAT[c] : c).join('');
+        return g + ' / ' + majMots(x);
+    }
+    const GR_WFS = 'https://wfdservices.ypeka.gr/geoserver/WFD_geodata_50K/wfs';
+    const GR = fournisseurWfs({
+        id: 'gr-ypen', prefixe: 'gr', pays: 'GR', stockable: n => n === 'gr_koinotita' || n === 'gr_de',
+        source: 'ΥΠΕΝ — Διοικητικά όρια (Kallikratis)', licence: 'CC BY 4.0',
+        maille: 'gr_enotita', libCode: '', placeholder: 'searchPhGR',
+        wfs: GR_WFS, geom: 'geom', emprisePays: [19.3, 34.7, 29.7, 41.8],
+        niveaux: {
+            gr_perifereia: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            gr_enotita: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            gr_dimos: { couche: 'WFD_geodata_50K:kallikratikoi_dimoi', code: 'kalcode', nom: p => grNom(p.lektiko), nomIndex: 'lektiko', cleIndex: a => grNom(a.lektiko), zmin: 7, tuile: 0.5, dep: p => String(p.kalcode || '').slice(0, 2) },
+            gr_de: { couche: 'WFD_geodata_50K:dimotikes_enotites', code: 'kalcode', nom: p => grNom(p.lektiko), nomIndex: 'lektiko', cleIndex: a => grNom(a.lektiko), zmin: 9, tuile: 0.25, dep: p => String(p.kalcode || '').slice(0, 2) },
+            gr_koinotita: { couche: 'WFD_geodata_50K:dimotikes_topikes_koinotites', code: 'kalcode', nom: p => grNom(p.lektiko), nomIndex: 'lektiko', cleIndex: a => grNom(a.lektiko), zmin: 12, tuile: 0.1, dep: p => String(p.kalcode || '').slice(0, 2) },
+        },
+    });
+    // =====================================================================
+    //  HONGRIE — Lechner Tudásközpont, unités administratives INSPIRE 2025, WFS GeoServer, « no conditions to access and
+    //  use » : 20 vármegyék (maille, Budapest comprise), 197 járások (dont les 23 arrondissements de Budapest ; les 175
+    //  kistérségek, supprimées en 2013, sont écartées), 3 177 települések. Une seule couche, filtrée par namespace.
+    //  Le comitat se lit dans le code NUTS 3 à 3 chiffres (shn « HU213… », nuts_code « HU120… »). ⚠️ Millésime dans
+    //  l'URL (AU.2025). WME : code FIPS « HU ».
+    // =====================================================================
+    const HU_AU = 'AU.2025:AdministrativeUnits.2025';
+    const huMegye = x => 'HU' + String(x || '').slice(2, 5) + '0000000';
+    const HU = fournisseurWfs({
+        id: 'hu-lechner', prefixe: 'hu', pays: 'HU', stockable: n => n === 'hu_telepules',
+        source: 'Lechner Tudásközpont — INSPIRE AU 2025', licence: 'no conditions to access and use (INSPIRE)',
+        maille: 'hu_megye', libCode: 'KSH', placeholder: 'searchPhHU',
+        wfs: 'https://inspire.lechnerkozpont.hu/geoserver/AU.2025/ows', geom: 'geom', emprisePays: [16.1, 45.7, 22.9, 48.6],
+        niveaux: {
+            hu_megye: { couche: HU_AU, where: "namespace='HU.AU.CY'", code: 'shn', nom: 'namn', zmin: 0, tout: true },
+            hu_jaras: { couche: HU_AU, where: "namespace='HU.AU.SR' AND desn='Járás'", code: 'shn', nom: 'label', zmin: 7, tuile: 0.5, dep: p => huMegye(p.shn) },
+            hu_telepules: { couche: HU_AU, where: "namespace='HU.AU.ST'", code: 'shn', nom: 'namn', zmin: 10, tuile: 0.25, dep: p => huMegye(p.nuts_code) },
+        },
+    });
+    // =====================================================================
+    //  MALTE — Planning Authority, unités administratives INSPIRE (hale»connect), CC BY 4.0 : 6 districts (maille ; leur
+    //  numéro est dans le code du conseil, MT0 + île + DISTRICT + n°, vérifié sur les 68 ; réunion des conseils) et 68
+    //  kunsilli lokali, TOUT INTÉGRÉ (outils/donnees_eu.py). Noms sans les signes maltais (ġ, ħ, ż). WME : FIPS « MT ».
+    // =====================================================================
+    const MT = fournisseurArcgis({
+        id: 'mt-pa', prefixe: 'mt', pays: 'MT', stockable: () => false,
+        source: 'Planning Authority — INSPIRE Administrative Units', licence: 'CC BY 4.0',
+        maille: 'mt_distrett', libCode: 'LAU', placeholder: 'searchPhMT', emprisePays: [14.1, 35.7, 14.7, 36.1],
+        niveaux: {
+            mt_distrett: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            mt_kunsill: { couche: '', code: '', nom: '', zmin: 9, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  ISRAËL — Administration de la planification (iplan), ArcGIS « gvulot_retzef », CC BY (data.gov.il) : 6 mehozot
+    //  (maille) INTÉGRÉS (la couche des districts n'a que des lignes : réunion des autorités par Machoz), 15 nafot et
+    //  285 autorités locales en direct (411 polygones, réunis par code CR_PNIM ; les « sans juridiction » comprises).
+    //  Le serveur refuse la pagination (`sansPagination`) et rend du XYZM (returnZ/M=false). Sous-district ⇒ district par
+    //  point intérieur. ⚠️ Jérusalem-Est et le Golan inclus, Cisjordanie exclue (limites de l'État). WME : FIPS « IS ».
+    // =====================================================================
+    const IL_GV = 'https://ags.iplan.gov.il/arcgisiplan/rest/services/PlanningPublic/gvulot_retzef/MapServer/';
+    const IL = fournisseurArcgis({
+        id: 'il-iplan', prefixe: 'il', pays: 'IL', stockable: () => false, sansPagination: true,
+        source: 'Israel Planning Administration — gvulot_retzef', licence: 'CC BY',
+        maille: 'il_machoz', libCode: '', placeholder: 'searchPhIL', emprisePays: [34.2, 29.4, 35.9, 33.4],
+        url(niveau, params) {
+            const n = this.niveaux[niveau];
+            const q = new URLSearchParams(Object.assign({ outSR: '4326', f: 'geojson', outFields: n.champs || '*', returnZ: 'false', returnM: 'false' }, params));
+            if (!q.get('where') && !q.get('geometry')) q.set('where', '1=1');
+            return n.couche + '/query?' + q.toString();
+        },
+        niveaux: {
+            il_machoz: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            il_nafa: { couche: IL_GV + '4', code: 'Id', nom: 'Nafa', champs: 'Id,Nafa', codeTexte: false, zmin: 0, tout: true, tol: 0.002, parInterieur: 'il_machoz' },
+            il_rashut: { couche: IL_GV + '1', code: 'CR_PNIM', nom: p => p.Muni_Heb + (p.Muni_Eng ? ' / ' + p.Muni_Eng : ''), nomIndex: 'Muni_Heb', alt: 'Muni_Eng',
+                champs: 'CR_PNIM,Muni_Heb,Muni_Eng,Machoz', zmin: 7, tout: true, tol: 0.0005, dep: p => String(p.Machoz || '') },
+        },
+    });
+    // =====================================================================
+    //  JAPON — MLIT 国土数値情報 N03 (CC BY 4.0, « 出典：「国土数値情報（行政区域データ）」（国土交通省）を加工して作成 »),
+    //  copie ArcGIS publique d'Esri Japan (millésime 2026, copie tierce) : 47 préfectures (maille) INTÉGRÉES (réunion
+    //  des municipalités par les 2 premiers chiffres du code), 1 905 municipalités et arrondissements en direct (code
+    //  N03_007 à 5 chiffres, un objet par code). Noms en japonais seulement (pas de romanisation dans la source) ; les
+    //  préfectures portent aussi leur nom latin. WME : code FIPS « JA ».
+    // =====================================================================
+    const jpNom = p => [p.N03_003, p.N03_004, p.N03_005].map(x => String(x || '').trim()).filter(Boolean).join(' ');
+    const JP = fournisseurArcgis({
+        id: 'jp-mlit', prefixe: 'jp', pays: 'JP', stockable: n => n === 'jp_shikuchoson',
+        source: '国土数値情報（行政区域データ）— MLIT, via Esri Japan', licence: 'CC BY 4.0',
+        maille: 'jp_ken', libCode: 'JIS', placeholder: 'searchPhJP', emprisePays: [122.9, 24.0, 146.0, 45.6],
+        niveaux: {
+            jp_ken: { couche: '', code: '', nom: '', zmin: 0, integre: true, dessus: true },
+            jp_shikuchoson: { couche: 'https://services.arcgis.com/wlVTGRSYTzAbjjiC/arcgis/rest/services/ADMIN_CITY_2026_VIEW/FeatureServer/0',
+                code: 'N03_007', nom: jpNom, nomIndex: 'N03_004', champsIndex: 'N03_003,N03_005', cleIndex: jpNom,
+                champs: 'N03_007,N03_003,N03_004,N03_005', zmin: 8, tuile: 0.5, dep: p => String(p.N03_007 || '').slice(0, 2) },
+        },
+    });
+    // =====================================================================
+    //  PORTO RICO — US Census Bureau, TIGERweb 500K (ACS 2025), domaine public : 78 municipios (maille ; comtés du
+    //  Census, STATE 72) et 901 barrios (county subdivisions). Mêmes services que les États-Unis, mais WME traite Porto
+    //  Rico comme un PAYS (FIPS « RQ ») : il lui faut son propre fournisseur.
+    // =====================================================================
+    const PR_TIGER = 'https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2025/';  // = US_TIGER, déclaré plus bas
+    const PR = fournisseurArcgis({
+        id: 'pr-census', prefixe: 'pr', pays: 'PR', stockable: n => n === 'pr_barrio',
+        source: 'U.S. Census Bureau — TIGERweb (cartographic boundaries 500K)', licence: 'Public domain',
+        maille: 'pr_municipio', libCode: 'FIPS', placeholder: 'searchPhPR', emprisePays: [-67.95, 17.88, -65.2, 18.53],
+        niveaux: {
+            pr_municipio: { couche: PR_TIGER + 'State_County/MapServer/11', where: "STATE='72'", code: 'GEOID', nom: 'BASENAME', champs: 'GEOID,BASENAME', zmin: 0, tout: true },
+            pr_barrio: { couche: PR_TIGER + 'Places_CouSub_ConCity_SubMCD/MapServer/7', where: "STATE='72'", code: 'GEOID', nom: 'BASENAME', champs: 'GEOID,STATE,COUNTY,BASENAME',
+                zmin: 9, tuile: 0.25, dep: p => '72' + String(p.COUNTY || '') },
+        },
+    });
+    // =====================================================================
+    //  URUGUAY — IDE Uruguay, WFS GeoServer, Licencia de Datos Abiertos (loi 19.355) : 19 départements (maille)
+    //  INTÉGRÉS (le WFS ne simplifie pas ; Rincón de Artigas et l'île Brasilera, contestés, écartés) et 136 municipios
+    //  en direct (ils ne couvrent pas tout le pays). Rattachement par le nom du département. WME : code FIPS « UY ».
+    // =====================================================================
+    const UY_DEP = { ARTIGAS: 'UY-AR', CANELONES: 'UY-CA', CERRO_LARGO: 'UY-CL', COLONIA: 'UY-CO', DURAZNO: 'UY-DU', FLORES: 'UY-FS', FLORIDA: 'UY-FD',
+        LAVALLEJA: 'UY-LA', MALDONADO: 'UY-MA', MONTEVIDEO: 'UY-MO', PAYSANDU: 'UY-PA', RIO_NEGRO: 'UY-RN', RIVERA: 'UY-RV', ROCHA: 'UY-RO',
+        SALTO: 'UY-SA', SAN_JOSE: 'UY-SJ', SORIANO: 'UY-SO', TACUAREMBO: 'UY-TA', TREINTA_Y_TRES: 'UY-TT' };
+    const uyDep = p => { const d = sansAccents(String(p.depto || '')).toUpperCase().replace(/ /g, '_'); return UY_DEP[d] || ''; };
+    const UY = fournisseurWfs({
+        id: 'uy-ide', prefixe: 'uy', pays: 'UY', stockable: () => false,
+        source: 'IDE Uruguay', licence: 'Licencia de Datos Abiertos (Uruguay)',
+        maille: 'uy_depto', libCode: 'ISO', placeholder: 'searchPhUY',
+        wfs: 'https://mapas.ide.uy/geoserver-vectorial/ows', geom: 'wkb_geometry', emprisePays: [-58.5, -35.1, -53.0, -30.0],
+        niveaux: {
+            uy_depto: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+            uy_municipio: { couche: 'ideuy:municipios_20250507', code: 'cod_muni', nom: p => casseTitreEs(p.municipio), nomIndex: 'municipio', cleIndex: a => casseTitreEs(a.municipio),
+                zmin: 0, tout: true, dep: uyDep },
+        },
+    });
+    // =====================================================================
+    //  DANEMARK — Klimadatastyrelsen, DAGI (« Vilkår for brug af frie geografiske data », usage commercial permis avec
+    //  attribution), copie ArcGIS publique de Geoinfo (distributeur Esri danois ; la source officielle Datafordeler
+    //  demande un compte) : 5 regioner (maille) et 98 kommuner (Christiansø, hors découpage communal, écartée).
+    //  Le parent d'une kommune est un identifiant interne (regionLokalid) ⇒ table vers le regionskode. WME : FIPS « DA ».
+    // =====================================================================
+    const DK_GI = 'https://services-eu1.arcgis.com/ralETAUbDxi38gnU/arcgis/rest/services/';
+    const DK_REG = { 389098: '1081', 389101: '1082', 389102: '1083', 389099: '1084', 389100: '1085' };
+    const DK = fournisseurArcgis({
+        id: 'dk-dagi', prefixe: 'dk', pays: 'DK', stockable: () => false,
+        source: 'Klimadatastyrelsen — DAGI, via Geoinfo', licence: 'Vilkår for brug af frie geografiske data',
+        maille: 'dk_region', libCode: '', placeholder: 'searchPhDK', emprisePays: [8.0, 54.5, 15.2, 57.8],
+        niveaux: {
+            dk_region: { couche: DK_GI + 'dagi_regionsinddeling/FeatureServer/28', code: 'regionskode', nom: 'navn', champs: 'regionskode,navn', zmin: 0, tout: true, tol: 0.002 },
+            dk_kommune: { couche: DK_GI + 'dagi_kommuneinddeling/FeatureServer/8', where: 'udenforKommuneinddeling=0', code: 'kommunekode', nom: 'navn',
+                champs: 'kommunekode,navn,regionLokalid', zmin: 0, tout: true, tol: 0.0005, dep: p => DK_REG[p.regionLokalid] || '' },
+        },
+    });
+    // =====================================================================
     //  ROUMANIE — ANCPI : 42 județe INTÉGRÉS (data.gov.ro, 2024, CC BY 4.0 ; publiés seulement en Shapefile Stereo70,
     //  convertis par outils/donnees_eu.py : leur export reste ce contour simplifié), 3 186 UAT en direct (ArcGIS
     //  d'ANCPI, CC BY 4.0, le serveur simplifie), rattachées à leur județ par point intérieur. Noms en CAPITALES
@@ -5580,7 +6052,7 @@
         },
     });
     const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
-    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, BR, MX, AR, CL, CO, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
+    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GR, HU, MT, IL, JP, DK, PR, BR, MX, AR, CL, CO, UY, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
     // =====================================================================
     //  NIGERIA — GRID3 (avec l'OSGOF), ArcGIS Online, CC BY 4.0 : 37 États (36 + FCT ; maille, code postal « LA »),
@@ -5616,7 +6088,7 @@
         },
     });
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
-    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
+    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['GR', 'Ελλάδα'], ['HU', 'Magyarország'], ['MT', 'Malta'], ['IL', 'ישראל / Israel'], ['JP', '日本 / Japan'], ['DK', 'Danmark'], ['PR', 'Puerto Rico'], ['UY', 'Uruguay'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
     const DONNEES_MONDE = GM_getResourceText('donnees_monde');   // @resource (outils/publier.py)
     // </DONNEES_MONDE>
