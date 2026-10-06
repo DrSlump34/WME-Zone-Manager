@@ -53,6 +53,49 @@
 | Moldova | raions and municipalities (built in) | OCHA/HDX COD-AB (CC BY-IGO) |
 | Indonesia | provinces, regencies and cities — built in, 2020 edition | OCHA/HDX COD-AB (CC BY-IGO) |
 | Thailand | provinces (changwat), districts (amphoe) — built in; Thai and Latin names | OCHA/HDX COD-AB, Royal Thai Survey Department (CC BY-IGO) |
+| Afghanistan | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Armenia | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Azerbaijan | 1 level (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Bangladesh | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Belarus | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Belize | 1 level (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Bhutan | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Cambodia | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Costa Rica | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Cuba | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Dominican Republic | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Ecuador | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| El Salvador | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Georgia | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Guyana | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Haiti | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Honduras | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Iran | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Iraq | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Jamaica | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Kazakhstan | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Kuwait | 1 level (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Kyrgyzstan | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Laos | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Lebanon | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Maldives | 1 level (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Mongolia | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Myanmar | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Nepal | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Nicaragua | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Oman | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Pakistan | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Palestine | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Papua New Guinea | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Qatar | 1 level (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Saudi Arabia | 1 level (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Sri Lanka | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Suriname | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Syria | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Timor-Leste | 3 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| United Arab Emirates | 1 level (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Vanuatu | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Yemen | 2 levels (built in, generic “level 1, 2, 3” labels) | OCHA/HDX COD-AB (CC BY-IGO) |
 | Australia | states and territories, local government areas (LGA), suburbs and localities | ABS ASGS Edition 3 (CC BY 4.0) |
 | New Zealand | regions, territorial authorities, wards | Stats NZ (CC BY 4.0) |
 | Brazil | states (UF), municipalities (municípios) — built in, exact outline from IBGE on export | IBGE (public data, Law 12.527/2011) |
@@ -81,7 +124,7 @@
 | Africa (52 other countries, incl. Western Sahara as a separate unit) | regions or provinces, districts or departments | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Mauritius (incl. Rodrigues) | districts, villages and towns | official data, built into the script |
 
-That is **115 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
+That is **158 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
 
 ## The area workshop
 
@@ -184,6 +227,49 @@ Script: MIT licence.
 | Moldavie | raions et municipalités (intégrés) | OCHA/HDX COD-AB (CC BY-IGO) |
 | Indonésie | provinces, kabupaten et kota — intégrés, millésime 2020 | OCHA/HDX COD-AB (CC BY-IGO) |
 | Thaïlande | provinces (changwat), districts (amphoe) — intégrés ; noms thaïs et latins | OCHA/HDX COD-AB, Royal Thai Survey Department (CC BY-IGO) |
+| Afghanistan | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Arabie saoudite | 1 niveau (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Arménie | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Azerbaïdjan | 1 niveau (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Bangladesh | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Belize | 1 niveau (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Bhoutan | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Biélorussie | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Cambodge | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Costa Rica | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Cuba | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Guyana | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Géorgie | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Haïti | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Honduras | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Irak | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Iran | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Jamaïque | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Kazakhstan | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Kirghizistan | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Koweït | 1 niveau (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Laos | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Liban | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Maldives | 1 niveau (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Mongolie | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Myanmar | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Nicaragua | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Népal | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Oman | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Pakistan | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Palestine | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Papouasie-Nouvelle-Guinée | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Qatar | 1 niveau (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| République dominicaine | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Salvador | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Sri Lanka | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Suriname | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Syrie | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Timor oriental | 3 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Vanuatu | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Yémen | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Émirats arabes unis | 1 niveau (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
+| Équateur | 2 niveaux (intégrés, libellés génériques « niveau 1, 2, 3 ») | OCHA/HDX COD-AB (CC BY-IGO) |
 | Australie | états et territoires, collectivités locales (LGA), localités | ABS ASGS Edition 3 (CC BY 4.0) |
 | Nouvelle-Zélande | régions, autorités territoriales, circonscriptions (wards) | Stats NZ (CC BY 4.0) |
 | Brésil | États (UF), communes (municípios) — intégrés, contour exact demandé à l’IBGE pour l’export | IBGE (données publiques, loi 12.527/2011) |
@@ -212,7 +298,7 @@ Script: MIT licence.
 | Afrique (52 autres pays, Sahara occidental comme entité à part) | régions ou provinces, districts ou départements | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Maurice (Rodrigues comprise) | districts, villages et villes | données officielles, intégrées au script |
 
-Soit **115 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
+Soit **158 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
 
 ## L’atelier de zones
 

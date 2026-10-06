@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.38.00
+// @version      2.39.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -34,13 +34,14 @@
 // @grant        GM_getResourceText
 // @grant        unsafeWindow
 // @resource     TURF https://cdnjs.cloudflare.com/ajax/libs/Turf.js/7.4.0/turf.min.js#sha256=5db5dda50210fa0f25394672383ba4a2e6fcde3c9e95ae0e21d62d327fc66d05
-// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
-// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
-// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_eu.b64#sha256=fef933f34b105465d6f58857d23458f0b7dee45b76b0247eaf34863f9a7af2e4
-// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
-// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_am.b64#sha256=7582e889a2add920c8df4a7c73b2deb0e4914039cbf91016e77546c8edfaaa79
-// @resource     donnees_as    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_as.b64#sha256=3c6ed106c11b9790aafaef5e83a7cd84ea7202b436bfdb3aba31f90745c0e81f
-// @resource     donnees_ua    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_ua.b64#sha256=2277e17d3191ed755dbd112d90e962ded0094aba9e53ceb0341906ee06019dc8
+// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
+// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
+// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_eu.b64#sha256=fef933f34b105465d6f58857d23458f0b7dee45b76b0247eaf34863f9a7af2e4
+// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
+// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_am.b64#sha256=b2cb228427fc06aed0b7e4848782666c64da0f9fa4f29aecf70c0ab8e75ee327
+// @resource     donnees_as    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_as.b64#sha256=3a270aa2983c5d84998a91e8cb0de68e8449fbc5d05a1835606eda0a3dca1a74
+// @resource     donnees_mo    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_mo.b64#sha256=8303421fd67324ded50f2aa6867b96dcb1d1f95d2a8be9086cd3853e648f5ece
+// @resource     donnees_ua    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_ua.b64#sha256=2277e17d3191ed755dbd112d90e962ded0094aba9e53ceb0341906ee06019dc8
 // @connect      data.geopf.fr
 // @connect      geo.api.gouv.fr
 // @connect      geoportale.istat.it
@@ -435,6 +436,10 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            lvl_cod_l1: 'Niveau 1 : régions, provinces… (OCHA)',
+            lvl_cod_l2: 'Niveau 2 : districts, communes… (OCHA)',
+            lvl_cod_l3: 'Niveau 3 : communes, sous-districts… (OCHA)',
+            searchPhCOD: 'Nom ou code OCHA…',
             lvl_pa_provincia: 'Provinces',
             lvl_pa_distrito: 'Districts',
             lvl_pa_corregimiento: 'Corregimientos',
@@ -1055,6 +1060,10 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            lvl_cod_l1: 'Level 1: regions, provinces… (OCHA)',
+            lvl_cod_l2: 'Level 2: districts, municipalities… (OCHA)',
+            lvl_cod_l3: 'Level 3: municipalities, sub-districts… (OCHA)',
+            searchPhCOD: 'Name or OCHA code…',
             lvl_pa_provincia: 'Provinces',
             lvl_pa_distrito: 'Districts',
             lvl_pa_corregimiento: 'Corregimientos',
@@ -1675,6 +1684,10 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            lvl_cod_l1: 'Ebene 1: Regionen, Provinzen… (OCHA)',
+            lvl_cod_l2: 'Ebene 2: Distrikte, Gemeinden… (OCHA)',
+            lvl_cod_l3: 'Ebene 3: Gemeinden, Unterbezirke… (OCHA)',
+            searchPhCOD: 'Name oder OCHA-Code…',
             lvl_pa_provincia: 'Provinzen',
             lvl_pa_distrito: 'Distrikte',
             lvl_pa_corregimiento: 'Gemeindebezirke (corregimientos)',
@@ -2295,6 +2308,10 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            lvl_cod_l1: 'Nivel 1: regiones, provincias… (OCHA)',
+            lvl_cod_l2: 'Nivel 2: distritos, municipios… (OCHA)',
+            lvl_cod_l3: 'Nivel 3: municipios, subdistritos… (OCHA)',
+            searchPhCOD: 'Nombre o código OCHA…',
             lvl_pa_provincia: 'Provincias',
             lvl_pa_distrito: 'Distritos',
             lvl_pa_corregimiento: 'Corregimientos (Panamá)',
@@ -2915,6 +2932,10 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            lvl_cod_l1: 'Livello 1: regioni, province… (OCHA)',
+            lvl_cod_l2: 'Livello 2: distretti, comuni… (OCHA)',
+            lvl_cod_l3: 'Livello 3: comuni, sottodistretti… (OCHA)',
+            searchPhCOD: 'Nome o codice OCHA…',
             lvl_pa_provincia: 'Province',
             lvl_pa_distrito: 'Distretti',
             lvl_pa_corregimiento: 'Corregimientos (Panamá)',
@@ -3535,6 +3556,10 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            lvl_cod_l1: 'Nível 1: regiões, províncias… (OCHA)',
+            lvl_cod_l2: 'Nível 2: distritos, municípios… (OCHA)',
+            lvl_cod_l3: 'Nível 3: municípios, subdistritos… (OCHA)',
+            searchPhCOD: 'Nome ou código OCHA…',
             lvl_pa_provincia: 'Províncias',
             lvl_pa_distrito: 'Distritos',
             lvl_pa_corregimiento: 'Corregimentos',
@@ -4155,6 +4180,10 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            lvl_cod_l1: 'Nível 1: regiões, províncias… (OCHA)',
+            lvl_cod_l2: 'Nível 2: distritos, concelhos… (OCHA)',
+            lvl_cod_l3: 'Nível 3: concelhos, subdistritos… (OCHA)',
+            searchPhCOD: 'Nome ou código OCHA…',
             lvl_pa_provincia: 'Províncias',
             lvl_pa_distrito: 'Distritos',
             lvl_pa_corregimiento: 'Corregimentos',
@@ -4775,6 +4804,10 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            lvl_cod_l1: 'רמה 1: אזורים, מחוזות… (OCHA)',
+            lvl_cod_l2: 'רמה 2: נפות, רשויות… (OCHA)',
+            lvl_cod_l3: 'רמה 3: רשויות, תת־נפות… (OCHA)',
+            searchPhCOD: 'שם או קוד OCHA…',
             lvl_pa_provincia: 'פרובינציות',
             lvl_pa_distrito: 'נפות',
             lvl_pa_corregimiento: 'קורחימיינטוס',
@@ -5319,15 +5352,22 @@
     // <DONNEES_AS>
     const DONNEES_AS = GM_getResourceText('donnees_as');   // @resource (outils/publier.py)
     // </DONNEES_AS>
+    // <DONNEES_MO>
+    const DONNEES_MO = GM_getResourceText('donnees_mo');   // @resource (outils/publier.py)
+    // </DONNEES_MO>
     // <DONNEES_UA>
     const DONNEES_UA = GM_getResourceText('donnees_ua');   // @resource (outils/publier.py)
     // </DONNEES_UA>
     const decoderBloc = async b64 => JSON.parse(await new Response(new Blob([Uint8Array.from(atob(b64), c => c.charCodeAt(0))]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
-    let _donneesAs = null, _donneesUa = null;
+    let _donneesAs = null, _donneesUa = null, _donneesMo = null;
+    const donneesMo = () => _donneesMo || (_donneesMo = decoderBloc(DONNEES_MO).catch(e => { _donneesMo = null; throw e; }));
     const donneesAs = () => _donneesAs || (_donneesAs = decoderBloc(DONNEES_AS).catch(e => { _donneesAs = null; throw e; }));
     const donneesUa = () => _donneesUa || (_donneesUa = decoderBloc(DONNEES_UA).catch(e => { _donneesUa = null; throw e; }));
-    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO', 'UY', 'PY', 'BO', 'VE', 'PA', 'GT', 'PE']), BLOC_AS = new Set(['TR', 'MY', 'VN', 'PH', 'ID', 'TH']);
-    const blocIntegre = pays => pays === 'CA' ? donneesCa() : pays === 'UA' ? donneesUa() : BLOC_AM.has(pays) ? donneesAm() : BLOC_AS.has(pays) ? donneesAs() : donneesEu();
+    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO', 'UY', 'PY', 'BO', 'VE', 'PA', 'GT', 'PE', 'EC', 'DO', 'CR', 'SV', 'HN', 'NI', 'CU', 'HT', 'JM', 'BZ', 'GY', 'SR']);
+    const BLOC_AS = new Set(['TR', 'MY', 'VN', 'PH', 'ID', 'TH', 'PK', 'BD', 'LK', 'NP', 'MM', 'KH', 'LA', 'BT', 'MV', 'TL', 'PG', 'VU']);
+    // Moyen-Orient, Caucase, Asie centrale et Biélorussie (06/10/2026).
+    const BLOC_MO = new Set(['MN', 'KZ', 'KG', 'AF', 'GE', 'AM', 'AZ', 'IR', 'IQ', 'SY', 'LB', 'SA', 'YE', 'OM', 'AE', 'QA', 'KW', 'PS', 'BY']);
+    const blocIntegre = pays => pays === 'CA' ? donneesCa() : pays === 'UA' ? donneesUa() : BLOC_AM.has(pays) ? donneesAm() : BLOC_AS.has(pays) ? donneesAs() : BLOC_MO.has(pays) ? donneesMo() : donneesEu();
     function geomCompacte(ps) {
         const anneau = a => { const o = []; let x = 0, y = 0; for (let i = 0; i < a.length; i += 2) { x += a[i]; y += a[i + 1]; o.push([x / 1000, y / 1000]); } return o; };
         const polys = ps.map(p => p.map(anneau));
@@ -7022,6 +7062,65 @@
         },
     });
     // =====================================================================
+    //  43 PAYS PAR FICHIER OCHA/HDX COD-AB (CC BY-IGO), 06/10/2026 — Amériques, Asie du Sud et du Sud-Est, Océanie,
+    //  Moyen-Orient, Caucase, Asie centrale, Biélorussie. Tout intégré (outils/donnees_eu.py, table COD). Niveaux
+    //  GÉNÉRIQUES cod_l1..cod_l3 aux libellés communs, comme les pays GAUL : un libellé propre par pays et par langue
+    //  coûterait ~900 traductions. Noms : alphabet local + latin quand la source les donne (« بيروت / Beirut »).
+    //  Écartés : Chine (Waze absent ; Taïwan rangé dedans), Russie (géométrie GADM, licence non commerciale ; Crimée
+    //  rattachée), Ouzbékistan, Tadjikistan, Bahreïn, Fidji, Salomon (HDX n'a que le contour du pays).
+    // =====================================================================
+    const PAYS_COD = [
+        ['EC', 2, 'Ecuador'],
+        ['DO', 3, 'República Dominicana'],
+        ['CR', 3, 'Costa Rica'],
+        ['SV', 3, 'El Salvador'],
+        ['HN', 2, 'Honduras'],
+        ['NI', 2, 'Nicaragua'],
+        ['CU', 2, 'Cuba'],
+        ['HT', 3, 'Haïti'],
+        ['JM', 2, 'Jamaica'],
+        ['BZ', 1, 'Belize'],
+        ['GY', 2, 'Guyana'],
+        ['SR', 2, 'Suriname'],
+        ['PK', 3, 'Pakistan'],
+        ['BD', 3, 'বাংলাদেশ / Bangladesh'],
+        ['LK', 3, 'ශ්\u200dරී ලංකාව / Sri Lanka'],
+        ['NP', 3, 'नेपाल / Nepal'],
+        ['MM', 3, 'မြန်မာ / Myanmar'],
+        ['KH', 3, 'កម្ពុជា / Cambodia'],
+        ['LA', 2, 'ລາວ / Laos'],
+        ['BT', 2, 'Bhutan'],
+        ['MV', 1, 'Maldives'],
+        ['TL', 3, 'Timor-Leste'],
+        ['PG', 3, 'Papua New Guinea'],
+        ['VU', 2, 'Vanuatu'],
+        ['MN', 2, 'Монгол / Mongolia'],
+        ['KZ', 2, 'Қазақстан / Kazakhstan'],
+        ['KG', 2, 'Кыргызстан / Kyrgyzstan'],
+        ['AF', 2, 'افغانستان / Afghanistan'],
+        ['GE', 2, 'საქართველო / Georgia'],
+        ['AM', 2, 'Հայաստան / Armenia'],
+        ['AZ', 1, 'Azərbaycan'],
+        ['IR', 2, 'ایران / Iran'],
+        ['IQ', 3, 'العراق / Iraq'],
+        ['SY', 3, 'سوريا / Syria'],
+        ['LB', 2, 'لبنان / Lebanon'],
+        ['SA', 1, 'السعودية / Saudi Arabia'],
+        ['YE', 2, 'اليمن / Yemen'],
+        ['OM', 2, 'عُمان / Oman'],
+        ['AE', 1, 'الإمارات / UAE'],
+        ['QA', 1, 'قطر / Qatar'],
+        ['KW', 1, 'الكويت / Kuwait'],
+        ['PS', 2, 'فلسطين / Palestine'],
+        ['BY', 2, 'Беларусь / Belarus'],
+    ];
+    const FOURNISSEURS_COD = Object.fromEntries(PAYS_COD.map(([iso, n, nom]) => [iso, fournisseurArcgis({
+        id: iso.toLowerCase() + '-cod', prefixe: iso.toLowerCase(), pays: iso, stockable: () => false,
+        source: 'OCHA/HDX COD-AB — ' + nom, licence: 'CC BY-IGO',
+        maille: 'cod_l1', libCode: 'COD', placeholder: 'searchPhCOD',
+        niveaux: Object.fromEntries([1, 2, 3].slice(0, n).map(k => ['cod_l' + k, { couche: '', code: '', nom: '', zmin: k === 1 ? 0 : k === 2 ? 7 : 9, integre: true, exactIntegre: true, dessus: k === 1 && n > 1 }])),
+    })]));
+    // =====================================================================
     //  ROUMANIE — ANCPI : 42 județe INTÉGRÉS (data.gov.ro, 2024, CC BY 4.0 ; publiés seulement en Shapefile Stereo70,
     //  convertis par outils/donnees_eu.py : leur export reste ce contour simplifié), 3 186 UAT en direct (ArcGIS
     //  d'ANCPI, CC BY 4.0, le serveur simplifie), rattachées à leur județ par point intérieur. Noms en CAPITALES
@@ -7139,7 +7238,7 @@
         },
     });
     const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
-    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GR, HU, MT, IL, JP, DK, PR, UA, TR, MY, VN, PH, MK, AL, MD, ID, TH, BR, MX, AR, CL, CO, UY, PY, BO, VE, PA, GT, PE, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
+    const FOURNISSEURS = { ...FOURNISSEURS_COD, FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GR, HU, MT, IL, JP, DK, PR, UA, TR, MY, VN, PH, MK, AL, MD, ID, TH, BR, MX, AR, CL, CO, UY, PY, BO, VE, PA, GT, PE, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
     // =====================================================================
     //  NIGERIA — GRID3 (avec l'OSGOF), ArcGIS Online, CC BY 4.0 : 37 États (36 + FCT ; maille, code postal « LA »),
@@ -7175,7 +7274,7 @@
         },
     });
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
-    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['GR', 'Ελλάδα'], ['HU', 'Magyarország'], ['MT', 'Malta'], ['IL', 'ישראל / Israel'], ['JP', '日本 / Japan'], ['DK', 'Danmark'], ['PR', 'Puerto Rico'], ['UY', 'Uruguay'], ['UA', 'Україна / Ukraine'], ['TR', 'Türkiye'], ['MY', 'Malaysia'], ['PY', 'Paraguay'], ['BO', 'Bolivia'], ['VE', 'Venezuela'], ['VN', 'Việt Nam'], ['PH', 'Pilipinas / Philippines'], ['MK', 'Северна Македонија / North Macedonia'], ['PA', 'Panamá'], ['GT', 'Guatemala'], ['PE', 'Perú'], ['AL', 'Shqipëri'], ['MD', 'Moldova'], ['ID', 'Indonesia'], ['TH', 'ประเทศไทย / Thailand'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
+    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['GR', 'Ελλάδα'], ['HU', 'Magyarország'], ['MT', 'Malta'], ['IL', 'ישראל / Israel'], ['JP', '日本 / Japan'], ['DK', 'Danmark'], ['PR', 'Puerto Rico'], ['UY', 'Uruguay'], ['UA', 'Україна / Ukraine'], ['TR', 'Türkiye'], ['MY', 'Malaysia'], ['PY', 'Paraguay'], ['BO', 'Bolivia'], ['VE', 'Venezuela'], ['VN', 'Việt Nam'], ['PH', 'Pilipinas / Philippines'], ['MK', 'Северна Македонија / North Macedonia'], ['PA', 'Panamá'], ['GT', 'Guatemala'], ['PE', 'Perú'], ['AL', 'Shqipëri'], ['MD', 'Moldova'], ['ID', 'Indonesia'], ['TH', 'ประเทศไทย / Thailand'], ['EC', 'Ecuador'], ['DO', 'República Dominicana'], ['CR', 'Costa Rica'], ['SV', 'El Salvador'], ['HN', 'Honduras'], ['NI', 'Nicaragua'], ['CU', 'Cuba'], ['HT', 'Haïti'], ['JM', 'Jamaica'], ['BZ', 'Belize'], ['GY', 'Guyana'], ['SR', 'Suriname'], ['PK', 'Pakistan'], ['BD', 'বাংলাদেশ / Bangladesh'], ['LK', 'ශ්\u200dරී ලංකාව / Sri Lanka'], ['NP', 'नेपाल / Nepal'], ['MM', 'မြန်မာ / Myanmar'], ['KH', 'កម្ពុជា / Cambodia'], ['LA', 'ລາວ / Laos'], ['BT', 'Bhutan'], ['MV', 'Maldives'], ['TL', 'Timor-Leste'], ['PG', 'Papua New Guinea'], ['VU', 'Vanuatu'], ['MN', 'Монгол / Mongolia'], ['KZ', 'Қазақстан / Kazakhstan'], ['KG', 'Кыргызстан / Kyrgyzstan'], ['AF', 'افغانستان / Afghanistan'], ['GE', 'საქართველო / Georgia'], ['AM', 'Հայաստան / Armenia'], ['AZ', 'Azərbaycan'], ['IR', 'ایران / Iran'], ['IQ', 'العراق / Iraq'], ['SY', 'سوريا / Syria'], ['LB', 'لبنان / Lebanon'], ['SA', 'السعودية / Saudi Arabia'], ['YE', 'اليمن / Yemen'], ['OM', 'عُمان / Oman'], ['AE', 'الإمارات / UAE'], ['QA', 'قطر / Qatar'], ['KW', 'الكويت / Kuwait'], ['PS', 'فلسطين / Palestine'], ['BY', 'Беларусь / Belarus'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
     const DONNEES_MONDE = GM_getResourceText('donnees_monde');   // @resource (outils/publier.py)
     // </DONNEES_MONDE>
