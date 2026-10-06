@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.37.00
+// @version      2.38.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -34,13 +34,13 @@
 // @grant        GM_getResourceText
 // @grant        unsafeWindow
 // @resource     TURF https://cdnjs.cloudflare.com/ajax/libs/Turf.js/7.4.0/turf.min.js#sha256=5db5dda50210fa0f25394672383ba4a2e6fcde3c9e95ae0e21d62d327fc66d05
-// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
-// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
-// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_eu.b64#sha256=fee96a30c249937347d6f96013f165e1529bf9735728feef281d1d34bdc0b906
-// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
-// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_am.b64#sha256=bcad58f9e7a216336580b28344c43dec1a9ca3a1fb79ee5e198af30fc122f1d2
-// @resource     donnees_as    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_as.b64#sha256=b2d520048c4baf1e7aabe30150e415f0a13843a39a0cf4dea5ca42fd56dd38f3
-// @resource     donnees_ua    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/59460fdf66c67dd50cb591ab36ba6d463185c48c/donnees/donnees_ua.b64#sha256=2277e17d3191ed755dbd112d90e962ded0094aba9e53ceb0341906ee06019dc8
+// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
+// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
+// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_eu.b64#sha256=fef933f34b105465d6f58857d23458f0b7dee45b76b0247eaf34863f9a7af2e4
+// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
+// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_am.b64#sha256=7582e889a2add920c8df4a7c73b2deb0e4914039cbf91016e77546c8edfaaa79
+// @resource     donnees_as    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_as.b64#sha256=3c6ed106c11b9790aafaef5e83a7cd84ea7202b436bfdb3aba31f90745c0e81f
+// @resource     donnees_ua    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/c73d9a818d5f179e2a44565c538a9d1a37d977e6/donnees/donnees_ua.b64#sha256=2277e17d3191ed755dbd112d90e962ded0094aba9e53ceb0341906ee06019dc8
 // @connect      data.geopf.fr
 // @connect      geo.api.gouv.fr
 // @connect      geoportale.istat.it
@@ -435,6 +435,36 @@
             loadTiles: (a, b) => 'tuiles ' + a + ' / ' + b,
             loadDraw: 'Préparation de l’affichage…',
             loadPending: n => n + ' en cours',
+            lvl_pa_provincia: 'Provinces',
+            lvl_pa_distrito: 'Districts',
+            lvl_pa_corregimiento: 'Corregimientos',
+            unit_PA: 'provinces',
+            lvl_gt_departamento: 'Départements',
+            lvl_gt_municipio: 'Communes (municipios)',
+            unit_GT: 'départements',
+            lvl_pe_departamento: 'Régions (departamentos)',
+            lvl_pe_provincia: 'Provinces',
+            lvl_pe_distrito: 'Districts',
+            unit_PE: 'régions',
+            lvl_al_qark: 'Préfectures (qarqe)',
+            lvl_al_bashki: 'Communes (bashki)',
+            lvl_al_njesi: 'Unités administratives',
+            unit_AL: 'préfectures (qarqe)',
+            lvl_md_raion: 'Raions et municipalités',
+            unit_MD: 'raions',
+            lvl_id_provinsi: 'Provinces (provinsi)',
+            lvl_id_kabupaten: 'Kabupaten et kota',
+            unit_ID: 'provinces',
+            lvl_th_changwat: 'Provinces (changwat)',
+            lvl_th_amphoe: 'Districts (amphoe)',
+            unit_TH: 'provinces',
+            searchPhPA: 'Nom ou code…',
+            searchPhGT: 'Nom ou code…',
+            searchPhPE: 'Nom ou code…',
+            searchPhAL: 'Nom ou code…',
+            searchPhMD: 'Nom ou code…',
+            searchPhID: 'Nom ou code…',
+            searchPhTH: 'Nom ou code…',
             lvl_ua_oblast: 'Oblasts',
             lvl_ua_raion: 'Raïons',
             lvl_ua_hromada: 'Hromadas (communes)',
@@ -1025,6 +1055,36 @@
             loadTiles: (a, b) => 'tiles ' + a + ' / ' + b,
             loadDraw: 'Preparing the display…',
             loadPending: n => n + ' pending',
+            lvl_pa_provincia: 'Provinces',
+            lvl_pa_distrito: 'Districts',
+            lvl_pa_corregimiento: 'Corregimientos',
+            unit_PA: 'provinces',
+            lvl_gt_departamento: 'Departments',
+            lvl_gt_municipio: 'Municipalities',
+            unit_GT: 'departments',
+            lvl_pe_departamento: 'Regions (departamentos)',
+            lvl_pe_provincia: 'Provinces',
+            lvl_pe_distrito: 'Districts',
+            unit_PE: 'regions',
+            lvl_al_qark: 'Counties (qarqe)',
+            lvl_al_bashki: 'Municipalities (bashki)',
+            lvl_al_njesi: 'Administrative units',
+            unit_AL: 'counties (qarqe)',
+            lvl_md_raion: 'Raions and municipalities',
+            unit_MD: 'raions',
+            lvl_id_provinsi: 'Provinces (provinsi)',
+            lvl_id_kabupaten: 'Regencies and cities',
+            unit_ID: 'provinces',
+            lvl_th_changwat: 'Provinces (changwat)',
+            lvl_th_amphoe: 'Districts (amphoe)',
+            unit_TH: 'provinces',
+            searchPhPA: 'Name or code…',
+            searchPhGT: 'Name or code…',
+            searchPhPE: 'Name or code…',
+            searchPhAL: 'Name or code…',
+            searchPhMD: 'Name or code…',
+            searchPhID: 'Name or code…',
+            searchPhTH: 'Name or code…',
             lvl_ua_oblast: 'Oblasts',
             lvl_ua_raion: 'Raions',
             lvl_ua_hromada: 'Hromadas',
@@ -1615,6 +1675,36 @@
             loadTiles: (a, b) => 'Kacheln ' + a + ' / ' + b,
             loadDraw: 'Anzeige wird vorbereitet…',
             loadPending: n => n + ' laufend',
+            lvl_pa_provincia: 'Provinzen',
+            lvl_pa_distrito: 'Distrikte',
+            lvl_pa_corregimiento: 'Gemeindebezirke (corregimientos)',
+            unit_PA: 'Provinzen',
+            lvl_gt_departamento: 'Departamentos',
+            lvl_gt_municipio: 'Gemeinden',
+            unit_GT: 'Departamentos',
+            lvl_pe_departamento: 'Regionen (departamentos)',
+            lvl_pe_provincia: 'Provinzen',
+            lvl_pe_distrito: 'Distrikte',
+            unit_PE: 'Regionen',
+            lvl_al_qark: 'Qarqe (Kreise)',
+            lvl_al_bashki: 'Gemeinden (bashki)',
+            lvl_al_njesi: 'Verwaltungseinheiten',
+            unit_AL: 'Qarqe',
+            lvl_md_raion: 'Rajons und Munizipien',
+            unit_MD: 'Rajons',
+            lvl_id_provinsi: 'Provinzen (provinsi)',
+            lvl_id_kabupaten: 'Regierungsbezirke und Städte',
+            unit_ID: 'Provinzen',
+            lvl_th_changwat: 'Provinzen (changwat)',
+            lvl_th_amphoe: 'Bezirke (amphoe)',
+            unit_TH: 'Provinzen',
+            searchPhPA: 'Name oder Code…',
+            searchPhGT: 'Name oder Code…',
+            searchPhPE: 'Name oder Code…',
+            searchPhAL: 'Name oder Code…',
+            searchPhMD: 'Name oder Code…',
+            searchPhID: 'Name oder Code…',
+            searchPhTH: 'Name oder Code…',
             lvl_ua_oblast: 'Oblaste',
             lvl_ua_raion: 'Rajone',
             lvl_ua_hromada: 'Hromadas (Gemeinden)',
@@ -2205,6 +2295,36 @@
             loadTiles: (a, b) => 'teselas ' + a + ' / ' + b,
             loadDraw: 'Preparando la visualización…',
             loadPending: n => n + ' en curso',
+            lvl_pa_provincia: 'Provincias',
+            lvl_pa_distrito: 'Distritos',
+            lvl_pa_corregimiento: 'Corregimientos (Panamá)',
+            unit_PA: 'provincias',
+            lvl_gt_departamento: 'Departamentos',
+            lvl_gt_municipio: 'Municipios',
+            unit_GT: 'departamentos',
+            lvl_pe_departamento: 'Regiones (departamentos)',
+            lvl_pe_provincia: 'Provincias',
+            lvl_pe_distrito: 'Distritos',
+            unit_PE: 'regiones',
+            lvl_al_qark: 'Condados (qarqe)',
+            lvl_al_bashki: 'Municipios (bashki)',
+            lvl_al_njesi: 'Unidades administrativas',
+            unit_AL: 'condados',
+            lvl_md_raion: 'Raiones y municipios',
+            unit_MD: 'raiones',
+            lvl_id_provinsi: 'Provincias (provinsi)',
+            lvl_id_kabupaten: 'Regencias y ciudades',
+            unit_ID: 'provincias',
+            lvl_th_changwat: 'Provincias (changwat)',
+            lvl_th_amphoe: 'Distritos (amphoe)',
+            unit_TH: 'provincias',
+            searchPhPA: 'Nombre o código…',
+            searchPhGT: 'Nombre o código…',
+            searchPhPE: 'Nombre o código…',
+            searchPhAL: 'Nombre o código…',
+            searchPhMD: 'Nombre o código…',
+            searchPhID: 'Nombre o código…',
+            searchPhTH: 'Nombre o código…',
             lvl_ua_oblast: 'Óblasts',
             lvl_ua_raion: 'Raiones',
             lvl_ua_hromada: 'Hromadas (municipios)',
@@ -2795,6 +2915,36 @@
             loadTiles: (a, b) => 'tasselli ' + a + ' / ' + b,
             loadDraw: 'Preparazione della visualizzazione…',
             loadPending: n => n + ' in corso',
+            lvl_pa_provincia: 'Province',
+            lvl_pa_distrito: 'Distretti',
+            lvl_pa_corregimiento: 'Corregimientos (Panamá)',
+            unit_PA: 'province',
+            lvl_gt_departamento: 'Dipartimenti',
+            lvl_gt_municipio: 'Comuni',
+            unit_GT: 'dipartimenti',
+            lvl_pe_departamento: 'Regioni (departamentos)',
+            lvl_pe_provincia: 'Province',
+            lvl_pe_distrito: 'Distretti',
+            unit_PE: 'regioni',
+            lvl_al_qark: 'Prefetture (qarqe)',
+            lvl_al_bashki: 'Comuni (bashki)',
+            lvl_al_njesi: 'Unità amministrative',
+            unit_AL: 'prefetture',
+            lvl_md_raion: 'Distretti e municipi',
+            unit_MD: 'distretti',
+            lvl_id_provinsi: 'Province (provinsi)',
+            lvl_id_kabupaten: 'Reggenze e città',
+            unit_ID: 'province',
+            lvl_th_changwat: 'Province (changwat)',
+            lvl_th_amphoe: 'Distretti (amphoe)',
+            unit_TH: 'province',
+            searchPhPA: 'Nome o codice…',
+            searchPhGT: 'Nome o codice…',
+            searchPhPE: 'Nome o codice…',
+            searchPhAL: 'Nome o codice…',
+            searchPhMD: 'Nome o codice…',
+            searchPhID: 'Nome o codice…',
+            searchPhTH: 'Nome o codice…',
             lvl_ua_oblast: 'Oblast',
             lvl_ua_raion: 'Rajon',
             lvl_ua_hromada: 'Hromady (comuni)',
@@ -3385,6 +3535,36 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'Preparando a exibição…',
             loadPending: n => n + ' em andamento',
+            lvl_pa_provincia: 'Províncias',
+            lvl_pa_distrito: 'Distritos',
+            lvl_pa_corregimiento: 'Corregimentos',
+            unit_PA: 'províncias',
+            lvl_gt_departamento: 'Departamentos',
+            lvl_gt_municipio: 'Municípios',
+            unit_GT: 'departamentos',
+            lvl_pe_departamento: 'Regiões (departamentos)',
+            lvl_pe_provincia: 'Províncias',
+            lvl_pe_distrito: 'Distritos',
+            unit_PE: 'regiões',
+            lvl_al_qark: 'Condados (qarqe)',
+            lvl_al_bashki: 'Municípios (bashki)',
+            lvl_al_njesi: 'Unidades administrativas',
+            unit_AL: 'condados',
+            lvl_md_raion: 'Raions e municípios',
+            unit_MD: 'distritos (raions)',
+            lvl_id_provinsi: 'Províncias (provinsi)',
+            lvl_id_kabupaten: 'Regências e cidades',
+            unit_ID: 'províncias',
+            lvl_th_changwat: 'Províncias (changwat)',
+            lvl_th_amphoe: 'Distritos (amphoe)',
+            unit_TH: 'províncias',
+            searchPhPA: 'Nome ou código…',
+            searchPhGT: 'Nome ou código…',
+            searchPhPE: 'Nome ou código…',
+            searchPhAL: 'Nome ou código…',
+            searchPhMD: 'Nome ou código…',
+            searchPhID: 'Nome ou código…',
+            searchPhTH: 'Nome ou código…',
             lvl_ua_oblast: 'Óblasts',
             lvl_ua_raion: 'Raiões',
             lvl_ua_hromada: 'Hromadas (municípios)',
@@ -3975,6 +4155,36 @@
             loadTiles: (a, b) => 'blocos ' + a + ' / ' + b,
             loadDraw: 'A preparar a apresentação…',
             loadPending: n => n + ' em curso',
+            lvl_pa_provincia: 'Províncias',
+            lvl_pa_distrito: 'Distritos',
+            lvl_pa_corregimiento: 'Corregimentos',
+            unit_PA: 'províncias',
+            lvl_gt_departamento: 'Departamentos',
+            lvl_gt_municipio: 'Municípios',
+            unit_GT: 'departamentos',
+            lvl_pe_departamento: 'Regiões (departamentos)',
+            lvl_pe_provincia: 'Províncias',
+            lvl_pe_distrito: 'Distritos',
+            unit_PE: 'regiões',
+            lvl_al_qark: 'Condados (qarqe)',
+            lvl_al_bashki: 'Municípios (bashki)',
+            lvl_al_njesi: 'Unidades administrativas',
+            unit_AL: 'condados',
+            lvl_md_raion: 'Raions e municípios',
+            unit_MD: 'distritos (raions)',
+            lvl_id_provinsi: 'Províncias (provinsi)',
+            lvl_id_kabupaten: 'Regências e cidades',
+            unit_ID: 'províncias',
+            lvl_th_changwat: 'Províncias (changwat)',
+            lvl_th_amphoe: 'Distritos (amphoe)',
+            unit_TH: 'províncias',
+            searchPhPA: 'Nome ou código…',
+            searchPhGT: 'Nome ou código…',
+            searchPhPE: 'Nome ou código…',
+            searchPhAL: 'Nome ou código…',
+            searchPhMD: 'Nome ou código…',
+            searchPhID: 'Nome ou código…',
+            searchPhTH: 'Nome ou código…',
             lvl_ua_oblast: 'Óblasts',
             lvl_ua_raion: 'Raiões',
             lvl_ua_hromada: 'Hromadas (municípios)',
@@ -4565,6 +4775,36 @@
             loadTiles: (a, b) => 'אריחים ' + a + ' / ' + b,
             loadDraw: 'מכין את התצוגה…',
             loadPending: n => n + ' בתהליך',
+            lvl_pa_provincia: 'פרובינציות',
+            lvl_pa_distrito: 'נפות',
+            lvl_pa_corregimiento: 'קורחימיינטוס',
+            unit_PA: 'פרובינציות',
+            lvl_gt_departamento: 'מחוזות (דפרטמנטוס)',
+            lvl_gt_municipio: 'רשויות',
+            unit_GT: 'מחוזות',
+            lvl_pe_departamento: 'אזורים (דפרטמנטוס)',
+            lvl_pe_provincia: 'פרובינציות',
+            lvl_pe_distrito: 'נפות',
+            unit_PE: 'אזורים',
+            lvl_al_qark: 'מחוזות (qarqe)',
+            lvl_al_bashki: 'רשויות (bashki)',
+            lvl_al_njesi: 'יחידות מנהליות',
+            unit_AL: 'מחוזות',
+            lvl_md_raion: 'נפות ועיריות',
+            unit_MD: 'נפות',
+            lvl_id_provinsi: 'פרובינציות (provinsi)',
+            lvl_id_kabupaten: 'נפות וערים',
+            unit_ID: 'פרובינציות',
+            lvl_th_changwat: 'פרובינציות (changwat)',
+            lvl_th_amphoe: 'מחוזות (amphoe)',
+            unit_TH: 'פרובינציות',
+            searchPhPA: 'שם או קוד…',
+            searchPhGT: 'שם או קוד…',
+            searchPhPE: 'שם או קוד…',
+            searchPhAL: 'שם או קוד…',
+            searchPhMD: 'שם או קוד…',
+            searchPhID: 'שם או קוד…',
+            searchPhTH: 'שם או קוד…',
             lvl_ua_oblast: 'מחוזות (אובלסטים)',
             lvl_ua_raion: 'נפות (ראיונים)',
             lvl_ua_hromada: 'קהילות (הרומדות)',
@@ -5086,7 +5326,7 @@
     let _donneesAs = null, _donneesUa = null;
     const donneesAs = () => _donneesAs || (_donneesAs = decoderBloc(DONNEES_AS).catch(e => { _donneesAs = null; throw e; }));
     const donneesUa = () => _donneesUa || (_donneesUa = decoderBloc(DONNEES_UA).catch(e => { _donneesUa = null; throw e; }));
-    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO', 'UY', 'PY', 'BO', 'VE']), BLOC_AS = new Set(['TR', 'MY', 'VN', 'PH']);
+    const BLOC_AM = new Set(['BR', 'MX', 'AR', 'CL', 'CO', 'UY', 'PY', 'BO', 'VE', 'PA', 'GT', 'PE']), BLOC_AS = new Set(['TR', 'MY', 'VN', 'PH', 'ID', 'TH']);
     const blocIntegre = pays => pays === 'CA' ? donneesCa() : pays === 'UA' ? donneesUa() : BLOC_AM.has(pays) ? donneesAm() : BLOC_AS.has(pays) ? donneesAs() : donneesEu();
     function geomCompacte(ps) {
         const anneau = a => { const o = []; let x = 0, y = 0; for (let i = 0; i < a.length; i += 2) { x += a[i]; y += a[i + 1]; o.push([x / 1000, y / 1000]); } return o; };
@@ -6687,6 +6927,101 @@
         },
     });
     // =====================================================================
+    //  PANAMA — OCHA/HDX COD-AB, CC BY-IGO : 13 provinces (comarcas comprises), 76 distritos, 594 corregimientos, intégrés.
+    //  Service officiel sans licence écrite ⇒ repli OCHA/HDX (choix de l'auteur, 06/10/2026). WME : FIPS « PM ».
+    // =====================================================================
+    const PA = fournisseurArcgis({
+        id: 'pa-cod', prefixe: 'pa', pays: 'PA', stockable: () => false,
+        source: 'OCHA COD-AB (Panamá)', licence: 'CC BY-IGO',
+        maille: 'pa_provincia', libCode: '', placeholder: 'searchPhPA', emprisePays: [-83.1, 7.1, -77.1, 9.7],
+        niveaux: {
+            pa_provincia: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            pa_distrito: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+            pa_corregimiento: { couche: '', code: '', nom: '', zmin: 9, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  GUATEMALA — OCHA/HDX COD-AB, CC BY-IGO : 22 departamentos, 342 municipios, intégrés.
+    //  Service officiel sans licence écrite ⇒ repli OCHA/HDX (choix de l'auteur, 06/10/2026). WME : FIPS « GT ».
+    // =====================================================================
+    const GT = fournisseurArcgis({
+        id: 'gt-cod', prefixe: 'gt', pays: 'GT', stockable: () => false,
+        source: 'OCHA COD-AB (Guatemala)', licence: 'CC BY-IGO',
+        maille: 'gt_departamento', libCode: '', placeholder: 'searchPhGT', emprisePays: [-92.3, 13.7, -88.2, 17.9],
+        niveaux: {
+            gt_departamento: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            gt_municipio: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  PÉROU — OCHA/HDX COD-AB, CC BY-IGO : 25 régions (departamentos), 196 provinces, 1 873 districts, intégrés.
+    //  Service officiel sans licence écrite ⇒ repli OCHA/HDX (choix de l'auteur, 06/10/2026). (le GEOSERVIDOR du MINAM n'affiche aucune licence). WME : FIPS « PE ».
+    // =====================================================================
+    const PE = fournisseurArcgis({
+        id: 'pe-cod', prefixe: 'pe', pays: 'PE', stockable: () => false,
+        source: 'OCHA COD-AB (Perú)', licence: 'CC BY-IGO',
+        maille: 'pe_departamento', libCode: '', placeholder: 'searchPhPE', emprisePays: [-81.4, -18.4, -68.6, 0.0],
+        niveaux: {
+            pe_departamento: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            pe_provincia: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+            pe_distrito: { couche: '', code: '', nom: '', zmin: 9, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  ALBANIE — OCHA/HDX COD-AB 2019, CC BY-IGO : réforme de 2015, 12 qarqe, 61 bashki, 374 njësi administrative,
+    //  intégrés ; noms albanais. Service officiel sans licence écrite ⇒ repli OCHA/HDX (choix de l'auteur, 06/10/2026). (INSTAT ne publie pas de licence). WME : FIPS « AL ».
+    // =====================================================================
+    const AL = fournisseurArcgis({
+        id: 'al-cod', prefixe: 'al', pays: 'AL', stockable: () => false,
+        source: 'OCHA COD-AB (Shqipëri, 2019)', licence: 'CC BY-IGO',
+        maille: 'al_qark', libCode: '', placeholder: 'searchPhAL', emprisePays: [19.2, 39.6, 21.1, 42.7],
+        niveaux: {
+            al_qark: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            al_bashki: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+            al_njesi: { couche: '', code: '', nom: '', zmin: 9, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  MOLDAVIE — OCHA/HDX COD-AB, CC BY-IGO : 37 raions et municipalités (Gagaouzie, Chișinău, Bălți et rive gauche du
+    //  Dniestr comprises), intégrés. Service officiel sans licence écrite ⇒ repli OCHA/HDX (choix de l'auteur, 06/10/2026). WME : FIPS « MD ».
+    // =====================================================================
+    const MD = fournisseurArcgis({
+        id: 'md-cod', prefixe: 'md', pays: 'MD', stockable: () => false,
+        source: 'OCHA COD-AB (Moldova)', licence: 'CC BY-IGO',
+        maille: 'md_raion', libCode: '', placeholder: 'searchPhMD', emprisePays: [26.6, 45.4, 30.2, 48.5],
+        niveaux: {
+            md_raion: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  INDONÉSIE — OCHA/HDX COD-AB, CC BY-IGO : 34 provinsi et 522 kabupaten/kota, intégrés. ⚠️ Millésime 2020 : AVANT les
+    //  4 provinces de Papouasie (2022). Les 7 000 kecamatan (117 Mo à la source) ne sont pas intégrés. Service officiel sans licence écrite ⇒ repli OCHA/HDX (choix de l'auteur, 06/10/2026).
+    //  WME : FIPS « ID ».
+    // =====================================================================
+    const ID = fournisseurArcgis({
+        id: 'id-cod', prefixe: 'id', pays: 'ID', stockable: () => false,
+        source: 'OCHA COD-AB (Indonesia, 2020)', licence: 'CC BY-IGO',
+        maille: 'id_provinsi', libCode: '', placeholder: 'searchPhID', emprisePays: [94.9, -11.1, 141.1, 6.1],
+        niveaux: {
+            id_provinsi: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            id_kabupaten: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
+    //  THAÏLANDE — OCHA/HDX COD-AB (Royal Thai Survey Department, 2022), CC BY-IGO : 77 changwat (Bangkok compris) et
+    //  928 amphoe/khet, intégrés ; noms thaïs + latins. Les tambon (247 Mo à la source) ne sont pas intégrés. Service officiel sans licence écrite ⇒ repli OCHA/HDX (choix de l'auteur, 06/10/2026).
+    //  (GISTDA : « License not specified »). WME : FIPS « TH ».
+    // =====================================================================
+    const TH = fournisseurArcgis({
+        id: 'th-cod', prefixe: 'th', pays: 'TH', stockable: () => false,
+        source: 'OCHA COD-AB (Royal Thai Survey Department)', licence: 'CC BY-IGO',
+        maille: 'th_changwat', libCode: '', placeholder: 'searchPhTH', emprisePays: [97.3, 5.6, 105.7, 20.5],
+        niveaux: {
+            th_changwat: { couche: '', code: '', nom: '', zmin: 0, integre: true, exactIntegre: true, dessus: true },
+            th_amphoe: { couche: '', code: '', nom: '', zmin: 7, integre: true, exactIntegre: true },
+        },
+    });
+    // =====================================================================
     //  ROUMANIE — ANCPI : 42 județe INTÉGRÉS (data.gov.ro, 2024, CC BY 4.0 ; publiés seulement en Shapefile Stereo70,
     //  convertis par outils/donnees_eu.py : leur export reste ce contour simplifié), 3 186 UAT en direct (ArcGIS
     //  d'ANCPI, CC BY 4.0, le serveur simplifie), rattachées à leur județ par point intérieur. Noms en CAPITALES
@@ -6804,7 +7139,7 @@
         },
     });
     const AFRIQUE = { AO: 'AGO', BF: 'BFA', BI: 'BDI', BJ: 'BEN', BW: 'BWA', CD: 'COD', CF: 'CAF', CG: 'COG', CI: 'CIV', CM: 'CMR', CV: 'CPV', DJ: 'DJI', DZ: 'DZA', EG: 'EGY', EH: 'ESH', ER: 'ERI', ET: 'ETH', GA: 'GAB', GH: 'GHA', GM: 'GMB', GN: 'GIN', GQ: 'GNQ', GW: 'GNB', KE: 'KEN', KM: 'COM', LR: 'LBR', LS: 'LSO', LY: 'LBY', MA: 'MAR', MG: 'MDG', ML: 'MLI', MR: 'MRT', MW: 'MWI', MZ: 'MOZ', NA: 'NAM', NE: 'NER', NG: 'NGA', RW: 'RWA', SC: 'SYC', SD: 'SDN', SL: 'SLE', SN: 'SEN', SO: 'SOM', SS: 'SSD', ST: 'STP', SZ: 'SWZ', TD: 'TCD', TG: 'TGO', TN: 'TUN', TZ: 'TZA', UG: 'UGA', ZA: 'ZAF', ZM: 'ZMB', ZW: 'ZWE' };
-    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GR, HU, MT, IL, JP, DK, PR, UA, TR, MY, VN, PH, MK, BR, MX, AR, CL, CO, UY, PY, BO, VE, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
+    const FOURNISSEURS = { FR, IT, MU, PT, ES, RO, SK, IS, EE, SI, FI, CZ, BG, CY, LT, LV, NO, SE, PL, AU, NZ, GR, HU, MT, IL, JP, DK, PR, UA, TR, MY, VN, PH, MK, AL, MD, ID, TH, BR, MX, AR, CL, CO, UY, PY, BO, VE, PA, GT, PE, GB, IE, LI, CH, NL, AT, DE, LU, BE, US, CA };
     for (const [i2, i3] of Object.entries(AFRIQUE)) FOURNISSEURS[i2] = fournisseurGaul(i2, i3);
     // =====================================================================
     //  NIGERIA — GRID3 (avec l'OSGOF), ArcGIS Online, CC BY 4.0 : 37 États (36 + FCT ; maille, code postal « LA »),
@@ -6840,7 +7175,7 @@
         },
     });
     // La France d'abord (le registre de référence), puis l'ordre alphabétique des noms locaux.
-    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['GR', 'Ελλάδα'], ['HU', 'Magyarország'], ['MT', 'Malta'], ['IL', 'ישראל / Israel'], ['JP', '日本 / Japan'], ['DK', 'Danmark'], ['PR', 'Puerto Rico'], ['UY', 'Uruguay'], ['UA', 'Україна / Ukraine'], ['TR', 'Türkiye'], ['MY', 'Malaysia'], ['PY', 'Paraguay'], ['BO', 'Bolivia'], ['VE', 'Venezuela'], ['VN', 'Việt Nam'], ['PH', 'Pilipinas / Philippines'], ['MK', 'Северна Македонија / North Macedonia'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
+    const PAYS = [['FR', 'France'], ['BE', 'België / Belgique'], ['DE', 'Deutschland'], ['ES', 'España'], ['RO', 'România'], ['SK', 'Slovensko'], ['IS', 'Ísland'], ['EE', 'Eesti'], ['SI', 'Slovenija'], ['FI', 'Suomi / Finland'], ['BG', 'България'], ['CY', 'Κύπρος'], ['LT', 'Lietuva'], ['NO', 'Norge'], ['SE', 'Sverige'], ['PL', 'Polska'], ['GR', 'Ελλάδα'], ['HU', 'Magyarország'], ['MT', 'Malta'], ['IL', 'ישראל / Israel'], ['JP', '日本 / Japan'], ['DK', 'Danmark'], ['PR', 'Puerto Rico'], ['UY', 'Uruguay'], ['UA', 'Україна / Ukraine'], ['TR', 'Türkiye'], ['MY', 'Malaysia'], ['PY', 'Paraguay'], ['BO', 'Bolivia'], ['VE', 'Venezuela'], ['VN', 'Việt Nam'], ['PH', 'Pilipinas / Philippines'], ['MK', 'Северна Македонија / North Macedonia'], ['PA', 'Panamá'], ['GT', 'Guatemala'], ['PE', 'Perú'], ['AL', 'Shqipëri'], ['MD', 'Moldova'], ['ID', 'Indonesia'], ['TH', 'ประเทศไทย / Thailand'], ['AU', 'Australia'], ['BR', 'Brasil'], ['MX', 'México'], ['AR', 'Argentina'], ['CL', 'Chile'], ['CO', 'Colombia'], ['NZ', 'New Zealand / Aotearoa'], ['LV', 'Latvija'], ['CZ', 'Česko'], ['GB', 'United Kingdom'], ['IE', 'Éire / Ireland'], ['IT', 'Italia'], ['LU', 'Lëtzebuerg / Luxembourg'], ['LI', 'Liechtenstein'], ['MU', 'Mauritius'], ['NL', 'Nederland'], ['AT', 'Österreich'], ['PT', 'Portugal'], ['CH', 'Schweiz / Suisse / Svizzera'], ['US', 'United States'], ['CA', 'Canada'], ['AO', 'Angola'], ['BF', 'Burkina Faso'], ['BI', 'Burundi'], ['BJ', 'Bénin'], ['BW', 'Botswana'], ['CD', 'République démocratique du Congo'], ['CF', 'République centrafricaine'], ['CG', 'République du Congo'], ['CI', "Côte d'Ivoire"], ['CM', 'Cameroun'], ['CV', 'Cap-Vert'], ['DJ', 'Djibouti'], ['DZ', 'Algérie'], ['EG', 'Égypte'], ['EH', 'Sahara occidental'], ['ER', 'Érythrée'], ['ET', 'Éthiopie'], ['GA', 'Gabon'], ['GH', 'Ghana'], ['GM', 'Gambie'], ['GN', 'Guinée'], ['GQ', 'Guinée équatoriale'], ['GW', 'Guinée-Bissau'], ['KE', 'Kenya'], ['KM', 'Comores'], ['LR', 'Liberia'], ['LS', 'Lesotho'], ['LY', 'Libye'], ['MA', 'Maroc'], ['MG', 'Madagascar'], ['ML', 'Mali'], ['MR', 'Mauritanie'], ['MW', 'Malawi'], ['MZ', 'Mozambique'], ['NA', 'Namibie'], ['NE', 'Niger'], ['NG', 'Nigeria'], ['RW', 'Rwanda'], ['SC', 'Seychelles'], ['SD', 'Soudan'], ['SL', 'Sierra Leone'], ['SN', 'Sénégal'], ['SO', 'Somalie'], ['SS', 'Soudan du Sud'], ['ST', 'Sao Tomé-et-Principe'], ['SZ', 'Eswatini'], ['TD', 'Tchad'], ['TG', 'Togo'], ['TN', 'Tunisie'], ['TZ', 'Tanzanie'], ['UG', 'Ouganda'], ['ZA', 'Afrique du Sud'], ['ZM', 'Zambie'], ['ZW', 'Zimbabwe']];
     // <DONNEES_MONDE>
     const DONNEES_MONDE = GM_getResourceText('donnees_monde');   // @resource (outils/publier.py)
     // </DONNEES_MONDE>

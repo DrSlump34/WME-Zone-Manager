@@ -49,6 +49,10 @@
 | Viet Nam | the 34 provinces of 2025 (built in) | OCHA/HDX COD-AB, GSO (CC BY-IGO) |
 | Philippines | regions, provinces, cities and municipalities — built in, 2018 boundaries | OCHA/HDX COD-AB, NAMRIA and PSA (CC BY-IGO) |
 | North Macedonia | statistical regions, municipalities (built in); Macedonian and English names | OCHA/HDX COD-AB (CC BY-IGO) |
+| Albania | counties (qarqe), municipalities (bashki), administrative units — built in | OCHA/HDX COD-AB 2019 (CC BY-IGO) |
+| Moldova | raions and municipalities (built in) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Indonesia | provinces, regencies and cities — built in, 2020 edition | OCHA/HDX COD-AB (CC BY-IGO) |
+| Thailand | provinces (changwat), districts (amphoe) — built in; Thai and Latin names | OCHA/HDX COD-AB, Royal Thai Survey Department (CC BY-IGO) |
 | Australia | states and territories, local government areas (LGA), suburbs and localities | ABS ASGS Edition 3 (CC BY 4.0) |
 | New Zealand | regions, territorial authorities, wards | Stats NZ (CC BY 4.0) |
 | Brazil | states (UF), municipalities (municípios) — built in, exact outline from IBGE on export | IBGE (public data, Law 12.527/2011) |
@@ -61,6 +65,9 @@
 | Paraguay | departments, districts — built in | OCHA/HDX COD-AB, INE (CC BY-IGO) |
 | Bolivia | departments, provinces, municipalities — built in | OCHA/HDX COD-AB, MDRyT (CC BY-IGO) |
 | Venezuela | states, municipalities, parishes (parroquias) — built in | OCHA/HDX COD-AB, INE (CC BY-IGO) |
+| Panama | provinces, districts, corregimientos — built in | OCHA/HDX COD-AB (CC BY-IGO) |
+| Guatemala | departments, municipalities — built in | OCHA/HDX COD-AB (CC BY-IGO) |
+| Peru | regions, provinces, districts — built in | OCHA/HDX COD-AB (CC BY-IGO) |
 | Slovakia | regions, districts, municipalities | ÚGKK ZBGIS (CC BY 4.0) |
 | Slovenia | statistical regions, municipalities, settlements | GURS (CC BY 4.0) |
 | Romania | counties, municipalities (UAT) | ANCPI (CC BY 4.0) |
@@ -74,7 +81,7 @@
 | Africa (52 other countries, incl. Western Sahara as a separate unit) | regions or provinces, districts or departments | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Mauritius (incl. Rodrigues) | districts, villages and towns | official data, built into the script |
 
-That is **108 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
+That is **115 countries**. The managers registry, the survey of managed areas and the area tools also work in **any other country**; only the official boundaries are missing there. WZM recognises the country under the centre of the map, even zoomed out.
 
 ## The area workshop
 
@@ -173,6 +180,10 @@ Script: MIT licence.
 | Viêt Nam | les 34 provinces de 2025 (intégrées) | OCHA/HDX COD-AB, GSO (CC BY-IGO) |
 | Philippines | régions, provinces, villes et municipalités — intégrées, limites de 2018 | OCHA/HDX COD-AB, NAMRIA et PSA (CC BY-IGO) |
 | Macédoine du Nord | régions statistiques, municipalités (intégrées) ; noms macédoniens et anglais | OCHA/HDX COD-AB (CC BY-IGO) |
+| Albanie | préfectures (qarqe), communes (bashki), unités administratives — intégrées | OCHA/HDX COD-AB 2019 (CC BY-IGO) |
+| Moldavie | raions et municipalités (intégrés) | OCHA/HDX COD-AB (CC BY-IGO) |
+| Indonésie | provinces, kabupaten et kota — intégrés, millésime 2020 | OCHA/HDX COD-AB (CC BY-IGO) |
+| Thaïlande | provinces (changwat), districts (amphoe) — intégrés ; noms thaïs et latins | OCHA/HDX COD-AB, Royal Thai Survey Department (CC BY-IGO) |
 | Australie | états et territoires, collectivités locales (LGA), localités | ABS ASGS Edition 3 (CC BY 4.0) |
 | Nouvelle-Zélande | régions, autorités territoriales, circonscriptions (wards) | Stats NZ (CC BY 4.0) |
 | Brésil | États (UF), communes (municípios) — intégrés, contour exact demandé à l’IBGE pour l’export | IBGE (données publiques, loi 12.527/2011) |
@@ -185,6 +196,9 @@ Script: MIT licence.
 | Paraguay | départements, districts — intégrés | OCHA/HDX COD-AB, INE (CC BY-IGO) |
 | Bolivie | départements, provinces, communes (municipios) — intégrés | OCHA/HDX COD-AB, MDRyT (CC BY-IGO) |
 | Venezuela | États, communes (municipios), paroisses (parroquias) — intégrés | OCHA/HDX COD-AB, INE (CC BY-IGO) |
+| Panama | provinces, districts, corregimientos — intégrés | OCHA/HDX COD-AB (CC BY-IGO) |
+| Guatemala | départements, communes (municipios) — intégrés | OCHA/HDX COD-AB (CC BY-IGO) |
+| Pérou | régions, provinces, districts — intégrés | OCHA/HDX COD-AB (CC BY-IGO) |
 | Slovaquie | régions, districts, communes | ÚGKK ZBGIS (CC BY 4.0) |
 | Slovénie | régions statistiques, communes, localités | GURS (CC BY 4.0) |
 | Roumanie | départements (județe), communes (UAT) | ANCPI (CC BY 4.0) |
@@ -198,7 +212,7 @@ Script: MIT licence.
 | Afrique (52 autres pays, Sahara occidental comme entité à part) | régions ou provinces, districts ou départements | FAO GAUL 2024/2025 (CC BY 4.0) |
 | Maurice (Rodrigues comprise) | districts, villages et villes | données officielles, intégrées au script |
 
-Soit **108 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
+Soit **115 pays**. Le registre des gestionnaires, le recensement des zones gérées et les outils de zone fonctionnent aussi dans **tout autre pays** : seul le découpage officiel y manque. WZM reconnaît le pays sous le centre de la carte, même dézoomé.
 
 ## L’atelier de zones
 
