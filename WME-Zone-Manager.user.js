@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.39.06
+// @version      2.39.07
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -323,6 +323,7 @@
             regDiscard: 'Abandonner mes changements',
             regDiscardConfirm: 'Confirmer : tout abandonner et relire',
             regNotFound: 'Sujet introuvable, ou dans une catégorie qui ne vous est pas ouverte : vérifiez le lien.',
+            regDeleted: 'Ce sujet du registre a été supprimé sur Discuss : collez le lien du registre en vigueur dans le champ du sujet du registre (onglet Scripts).',
             regCreateAsk: (t) => 'Le sujet « ' + t + ' » ne contient pas de registre. Cliquez à nouveau sur « Enregistrer » dans les 10 s pour l’y créer.',
             regImportAsk: (f, n, q, p) => 'Remplacer le registre par « ' + f + ' » (' + n + ' éditeurs, mis à jour le ' + q + ' par ' + p + ') ? À l’enregistrement, ce que d’autres ont saisi depuis sera perdu.',
             regImportYes: 'Remplacer',
@@ -947,6 +948,7 @@
             regDiscard: 'Discard my changes',
             regDiscardConfirm: 'Confirm: discard everything and reload',
             regNotFound: 'Topic not found, or in a category not open to you: check the link.',
+            regDeleted: 'This registry topic was deleted on Discuss: paste the link of the current registry in the registry topic field (Scripts tab).',
             regCreateAsk: (t) => 'The topic “' + t + '” holds no registry. Click “Save” again within 10 s to create it there.',
             regImportAsk: (f, n, q, p) => 'Replace the registry with “' + f + '” (' + n + ' editors, updated on ' + q + ' by ' + p + ')? On saving, what others entered since will be lost.',
             regImportYes: 'Replace',
@@ -1571,6 +1573,7 @@
             regDiscard: 'Meine Änderungen verwerfen',
             regDiscardConfirm: 'Bestätigen: alles verwerfen und neu laden',
             regNotFound: 'Thema nicht gefunden oder in einer für Sie nicht offenen Kategorie: prüfen Sie den Link.',
+            regDeleted: 'Dieses Registerthema wurde auf Discuss gelöscht: Fügen Sie den Link des aktuellen Registers in das Feld für das Registerthema ein (Tab Skripte).',
             regCreateAsk: (t) => 'Das Thema „' + t + '“ enthält kein Register. Klicken Sie innerhalb von 10 s erneut auf „Speichern“, um es dort anzulegen.',
             regImportAsk: (f, n, q, p) => 'Register durch „' + f + '“ ersetzen (' + n + ' Editoren, aktualisiert am ' + q + ' von ' + p + ')? Beim Speichern geht verloren, was andere seitdem eingetragen haben.',
             regImportYes: 'Ersetzen',
@@ -2195,6 +2198,7 @@
             regDiscard: 'Descartar mis cambios',
             regDiscardConfirm: 'Confirmar: descartar todo y recargar',
             regNotFound: 'Tema no encontrado, o en una categoría que no le está abierta: compruebe el enlace.',
+            regDeleted: 'Este tema del registro se eliminó en Discuss: pegue el enlace del registro vigente en el campo del tema del registro (pestaña Scripts).',
             regCreateAsk: (t) => 'El tema «' + t + '» no contiene registro. Pulse de nuevo «Guardar» antes de 10 s para crearlo allí.',
             regImportAsk: (f, n, q, p) => '¿Sustituir el registro por «' + f + '» (' + n + ' editores, actualizado el ' + q + ' por ' + p + ')? Al guardar, se perderá lo que otros hayan introducido desde entonces.',
             regImportYes: 'Sustituir',
@@ -2819,6 +2823,7 @@
             regDiscard: 'Annulla le mie modifiche',
             regDiscardConfirm: 'Conferma: annulla tutto e ricarica',
             regNotFound: 'Argomento non trovato, o in una categoria non aperta a te: controlla il link.',
+            regDeleted: 'Questo argomento del registro è stato eliminato su Discuss: incolla il link del registro in vigore nel campo dell’argomento del registro (scheda Script).',
             regCreateAsk: (t) => 'L’argomento «' + t + '» non contiene un registro. Clicca di nuovo «Salva» entro 10 s per crearlo lì.',
             regImportAsk: (f, n, q, p) => 'Sostituire il registro con «' + f + '» (' + n + ' editor, aggiornato il ' + q + ' da ' + p + ')? Al salvataggio andrà perso ciò che altri hanno inserito da allora.',
             regImportYes: 'Sostituisci',
@@ -3443,6 +3448,7 @@
             regDiscard: 'Descartar minhas alterações',
             regDiscardConfirm: 'Confirmar: descartar tudo e recarregar',
             regNotFound: 'Tópico não encontrado, ou em uma categoria não aberta a você: verifique o link.',
+            regDeleted: 'Este tópico do registro foi excluído no Discuss: cole o link do registro em vigor no campo do tópico do registro (aba Scripts).',
             regCreateAsk: (t) => 'O tópico “' + t + '” não contém registro. Clique de novo em “Salvar” em até 10 s para criá-lo ali.',
             regImportAsk: (f, n, q, p) => 'Substituir o registro por “' + f + '” (' + n + ' editores, atualizado em ' + q + ' por ' + p + ')? Ao salvar, o que outros inseriram desde então será perdido.',
             regImportYes: 'Substituir',
@@ -4067,6 +4073,7 @@
             regDiscard: 'Descartar as minhas alterações',
             regDiscardConfirm: 'Confirmar: descartar tudo e recarregar',
             regNotFound: 'Tópico não encontrado, ou numa categoria que não lhe está aberta: verifique a ligação.',
+            regDeleted: 'Este tópico do registo foi eliminado no Discuss: cole a ligação do registo em vigor no campo do tópico do registo (separador Scripts).',
             regCreateAsk: (t) => 'O tópico «' + t + '» não contém registo. Clique outra vez em «Guardar» nos 10 s seguintes para o criar lá.',
             regImportAsk: (f, n, q, p) => 'Substituir o registo por «' + f + '» (' + n + ' editores, atualizado a ' + q + ' por ' + p + ')? Ao guardar, perde-se o que outros introduziram entretanto.',
             regImportYes: 'Substituir',
@@ -4691,6 +4698,7 @@
             regDiscard: 'בטל את השינויים שלי',
             regDiscardConfirm: 'אישור: לבטל הכול ולטעון מחדש',
             regNotFound: 'הנושא לא נמצא, או שהוא בקטגוריה שאינה פתוחה לכם: בדקו את הקישור.',
+            regDeleted: 'נושא הרשם הזה נמחק ב-Discuss: הדביקו את הקישור לרשם הפעיל בשדה נושא הרשם (לשונית Scripts).',
             regCreateAsk: (t) => 'הנושא „' + t + '” אינו מכיל רשם. לחצו שוב על „שמירה” תוך 10 שניות כדי ליצור אותו שם.',
             regImportAsk: (f, n, q, p) => 'להחליף את הרשם ב־„' + f + '” (' + n + ' עורכים, עודכן ב־' + q + ' על ידי ' + p + ')? בשמירה יאבד מה שאחרים הזינו מאז.',
             regImportYes: 'החלפה',
@@ -9358,7 +9366,9 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
             // 404 : sujet introuvable (lien mal saisi) OU caché à ce compte. Rien n'est perdu ici : on n'arrive pas
             // jusqu'ici avec des changements en attente (refusé plus haut, sauf abandon voulu).
             if (pr !== paysReg) return;
-            if (/HTTP 40[34]/.test(e.message)) { registre = null; regMeta = { topic, acces: false, sale: false, changements: [] }; ecrireRegLocal(); msgGest(/404/.test(e.message) ? t('regNotFound') : t('roNoAccess')); }
+            // 410 : sujet SUPPRIMÉ (lien resté sur un doublon effacé, vu le 12/10/2026) — même traitement que 404, sans
+            // garder l'ancien registre en cache : il s'affichait « en lecture seule » comme si le compte n'avait pas le droit.
+            if (/HTTP 4(03|04|10)/.test(e.message)) { registre = null; regMeta = { topic, acces: false, sale: false, changements: [] }; ecrireRegLocal(); msgGest(/410/.test(e.message) ? t('regDeleted') : /404/.test(e.message) ? t('regNotFound') : t('roNoAccess')); }
             else msgGest(t('regErr', errTxt(e.message)));
         }
         rendreGest();
