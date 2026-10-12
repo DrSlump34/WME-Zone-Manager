@@ -157,9 +157,9 @@ That is **158 countries**. The managers registry, the survey of managed areas an
 
 | | |
 |---|---|
-| ![Area workshop: four Tuscan provinces combined and widened by 5 km](captures/wzm-2.20.05-1-atelier.jpg) | ![Managers registry compared with Waze](captures/wzm-2.20.05-2-registre.jpg) |
+| ![Area workshop: four Tuscan provinces combined and widened by 5 km](captures/wzm-2.39.06-1-atelier.jpg) | ![Managers registry compared with Waze](captures/wzm-2.39.06-2-registre.jpg) |
 | *Area workshop: four provinces combined, widened by 5 km, ready for the Waze form* | *Managers registry, compared with what Waze applies (usernames blurred)* |
-| ![Editor card: its area at Waze, framed on the visible part of the map](captures/wzm-2.20.05-3-fiche-editeur.jpg) | ![Set-up assistant: a registry already exists in this category](captures/wzm-2.20.05-4-assistant.jpg) |
+| ![Editor card: its area at Waze, framed on the visible part of the map](captures/wzm-2.39.06-3-fiche-editeur.jpg) | ![Set-up assistant: last step, the link to give to the other Champs](captures/wzm-2.39.06-4-assistant.jpg) |
 | *Editor card: areas at Waze, provinces covered, suggested type* | *Set-up assistant: it finds the registry already in the category* |
 
 ## Install
@@ -331,9 +331,9 @@ Soit **158 pays**. Le registre des gestionnaires, le recensement des zones gér�
 
 | | |
 |---|---|
-| ![Atelier : quatre provinces toscanes réunies et élargies de 5 km](captures/wzm-2.20.05-1-atelier.jpg) | ![Registre des gestionnaires comparé à Waze](captures/wzm-2.20.05-2-registre.jpg) |
+| ![Atelier : quatre provinces toscanes réunies et élargies de 5 km](captures/wzm-2.39.06-1-atelier.jpg) | ![Registre des gestionnaires comparé à Waze](captures/wzm-2.39.06-2-registre.jpg) |
 | *Atelier : quatre provinces réunies, élargies de 5 km, prêtes pour le formulaire Waze* | *Registre des gestionnaires, comparé à ce que Waze applique (pseudos floutés)* |
-| ![Fiche d’un éditeur : sa zone chez Waze, cadrée sur la partie visible de la carte](captures/wzm-2.20.05-3-fiche-editeur.jpg) | ![Assistant : un registre existe déjà dans cette catégorie](captures/wzm-2.20.05-4-assistant.jpg) |
+| ![Fiche d’un éditeur : sa zone chez Waze, cadrée sur la partie visible de la carte](captures/wzm-2.39.06-3-fiche-editeur.jpg) | ![Assistant : dernière étape, le lien à donner aux autres Champs](captures/wzm-2.39.06-4-assistant.jpg) |
 | *Fiche d’un éditeur : zones chez Waze, provinces couvertes, type proposé* | *Assistant de mise en place : il trouve le registre déjà présent dans la catégorie* |
 
 ## Installation
