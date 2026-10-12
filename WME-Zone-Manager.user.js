@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.39.05
+// @version      2.39.06
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -8493,6 +8493,14 @@
 #wzm-fab-btn{background:none;border:none;padding:0;margin:0;cursor:inherit;display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:0;border-radius:50%}
 #wzm-fab-btn.actif{background:#e3f2fd}
 #wzm-fab-btn:focus-visible{outline:2px solid var(--wzm-blue);outline-offset:2px}
+/* WME Studio, thème sombre : ses variables, toujours avec un repli. Sans Studio, ou en thème clair, ces règles ne s'appliquent pas. */
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar { color: var(--wme-studio-text, #e8eaed); }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar :is(p,td,th,li,label,b,strong,bdi,dd,dt):not([class]) { color: inherit; }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar :is([class*="hint"],[class*="note"],[class*="-ver"],[class*="foot"],[class*="links"],[class*="meta"],[class*="-lbl"]) { color: var(--wme-studio-text-secondary, #b6c0ca); }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar :is(h2,[class*="-sec"]:not(button),[class*="sb-on"]) { color: #64b5f6; }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar :is([class*="btn-neutral"],[class*="btn-sec"],[class*="chip"],[class*="help-hdr"],[class*="aide-h"],[class*="hist-row"],kbd,select,input:not([type=checkbox]):not([type=radio])) { background: var(--wme-studio-input, #3a3f44); color: var(--wme-studio-text, #e8eaed); border-color: var(--wme-studio-border, #4a5056); }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar :is([class*="help-hdr"],[class*="aide-h"]).on { background: var(--wme-studio-hover, #454b52); color: var(--wme-studio-text, #e8eaed); }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar :is([class*="help-body"],[class*="aide-c"]) { color: var(--wme-studio-text, #e8eaed); }
 #wzm-sidebar{padding:10px 12px;font-family:'Rubik','Open Sans',sans-serif;font-size:12px;color:var(--wzm-text)}
 #wzm-sidebar h2{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--wzm-blue);margin:0 0 8px}
 #wzm-sidebar h2 .wzm-ver{font-size:11px;font-weight:400;color:var(--wzm-grey)}
@@ -8920,12 +8928,24 @@
     // La fenêtre ne va JAMAIS sur la colonne des boutons de carte, à droite (charte commune, comme WPEU/WRP/WCT ; rappelé
     // par l'auteur le 03/10/2026) : c'est là que vit le bouton qui l'ouvre. Bornes MESURÉES à chaque geste — bord de la
     // carte, pied de page, colonne de boutons — avec un repli prudent si l'un manque.
+    // WME Studio, mode flottant : l'en-tête n'est plus une barre au-dessus de la carte, c'est un îlot posé
+    // dessus, que l'éditeur peut déplacer. On le mesure pour que la fenêtre ne le recouvre pas (bouton
+    // « Enregistrer » compris). Sans Studio, ou en mode Standard, les bornes ne changent pas.
+    function sousEnteteStudio(z) {
+        if (document.documentElement.dataset.wmeStudioCompact !== 'on') return z;
+        const t = document.getElementById('app-head');
+        const r = t && t.getBoundingClientRect();
+        if (!r || !r.width || !r.height || r.right <= z.gauche || r.left >= z.droite) return z;
+        if (r.top + r.height / 2 < window.innerHeight / 2) z.haut = Math.max(z.haut, Math.round(r.bottom) + 6);
+        else z.bas = Math.min(z.bas, Math.round(r.top) - 6);
+        return z;
+    }
     function bornesCarte() {
         const carte = document.getElementById('WazeMap'), pied = document.querySelector('.wz-map-ol-footer');
         const btns = document.querySelector('.overlay-buttons-container.top') || document.querySelector('.overlay-buttons-container');
         const r = carte ? carte.getBoundingClientRect() : { left: 0, top: 40, right: window.innerWidth, bottom: window.innerHeight };
         const rb = btns ? btns.getBoundingClientRect() : null;
-        return { gauche: Math.round(r.left) + 6, haut: Math.round(r.top) + 6, droite: Math.round(rb && rb.width ? rb.left - 8 : r.right - 8), bas: Math.round(pied ? pied.getBoundingClientRect().top - 6 : r.bottom - 6) };
+        return sousEnteteStudio({ gauche: Math.round(r.left) + 6, haut: Math.round(r.top) + 6, droite: Math.round(rb && rb.width ? rb.left - 8 : r.right - 8), bas: Math.round(pied ? pied.getBoundingClientRect().top - 6 : r.bottom - 6) });
     }
     // Position retenue d'une session à l'autre (par défaut, contre la colonne de boutons), toujours ramenée dans les bornes.
     function placer(x0, y0) {
