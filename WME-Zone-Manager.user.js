@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.39.07
+// @version      2.39.08
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -8343,7 +8343,7 @@
         if (gen !== genSurvol) return;
         const e = ll && entiteSous(ll);
         if (!e) { cacherFiche(); return; }
-        if (!fiche) { fiche = document.createElement('div'); fiche.id = 'wzm-fiche'; fiche.setAttribute('role', 'tooltip'); document.body.appendChild(fiche); }
+        if (!fiche) { fiche = document.createElement('div'); fiche.id = 'wzm-fiche'; fiche.setAttribute('role', 'tooltip'); coucheWzm().appendChild(fiche); }
         const pris = estChoisi(e.id);
         fiche.dir = isRTL() ? 'rtl' : 'ltr';
         fiche.innerHTML = '<b><bdi>' + esc(e.nom) + '</bdi></b> <small>' + esc(infoCodes(e)) + ' · ' + esc(t('lvl_' + e.niveau)) + '</small><br><span class="wzm-f-act' + (pris ? ' pris' : '') + '">' + esc(t(pris ? 'hovRemove' : 'hovAdd')) + '</span>';
@@ -8897,12 +8897,30 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
             '<div class="wzm-src">' + esc(fournisseur().source) + ' — ' + esc(fournisseur().licence) + '</div></div>' +
             '<div data-onglet="gest" id="wzm-gest"></div></div>';
     }
+    // Les éléments flottants de Zone Manager vivent dans une COUCHE posée dans la zone de carte de WME
+    // (.edit-area-main, niveau 1), pas sur <body> : sur la page, ils recouvraient le panneau « Calques » de WME,
+    // empilé au niveau 2 de cette zone (mesuré le 15/10/2026 ; aucun z-index posé sur <body> ne passe dessous
+    // sans passer sous la carte). La couche est de taille nulle : elle ne prend aucun clic, et ses enfants gardent
+    // leurs z-index entre eux. Les boîtes modales et les messages restent sur <body>, au-dessus de tout.
+    // Sans cette zone (WME changé), repli sur <body>. Même règle que WBC 0.16.08.
+    function coucheWzm() {
+        const zone = document.querySelector('div.edit-area-main');
+        if (!zone) return document.body;
+        let c = document.getElementById('wzm-couche');
+        if (!c) {
+            c = document.createElement('div');
+            c.id = 'wzm-couche';
+            c.style.cssText = 'position:absolute;top:0;left:0;width:0;height:0;z-index:1';
+        }
+        if (c.parentElement !== zone) zone.appendChild(c);
+        return c;
+    }
     function construireFenetre() {
         ov = document.createElement('div');
         ov.id = 'wzm-ov'; ov.dir = isRTL() ? 'rtl' : 'ltr';
         ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', SCRIPT_NAME);
         ov.innerHTML = htmlFenetre();
-        document.body.appendChild(ov);
+        coucheWzm().appendChild(ov);
         const q = s => ov.querySelector(s);
         q('[data-act="close"]').addEventListener('click', () => ouvrirFenetre(false));
         ov.querySelectorAll('.wzm-onglet').forEach(b => b.addEventListener('click', () => {
