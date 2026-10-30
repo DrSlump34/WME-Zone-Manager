@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.39.08
+// @version      2.40.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -34,14 +34,14 @@
 // @grant        GM_getResourceText
 // @grant        unsafeWindow
 // @resource     TURF https://cdnjs.cloudflare.com/ajax/libs/Turf.js/7.4.0/turf.min.js#sha256=5db5dda50210fa0f25394672383ba4a2e6fcde3c9e95ae0e21d62d327fc66d05
-// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
-// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
-// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_eu.b64#sha256=fef933f34b105465d6f58857d23458f0b7dee45b76b0247eaf34863f9a7af2e4
-// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
-// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_am.b64#sha256=b2cb228427fc06aed0b7e4848782666c64da0f9fa4f29aecf70c0ab8e75ee327
-// @resource     donnees_as    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_as.b64#sha256=3a270aa2983c5d84998a91e8cb0de68e8449fbc5d05a1835606eda0a3dca1a74
-// @resource     donnees_mo    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_mo.b64#sha256=8303421fd67324ded50f2aa6867b96dcb1d1f95d2a8be9086cd3853e648f5ece
-// @resource     donnees_ua    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122adc113455efdf2b7b03d8336c9bf48d07f8/donnees/donnees_ua.b64#sha256=2277e17d3191ed755dbd112d90e962ded0094aba9e53ceb0341906ee06019dc8
+// @resource     donnees_es    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122ad/donnees/donnees_es.b64#sha256=b237b02bf048418f4f0793e50986f6503999a3dd0877846aa042f6169d3aae77
+// @resource     donnees_monde https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122ad/donnees/donnees_monde.b64#sha256=a73fef582907b72544c8c04d3efbbf7c52a06ff5198ccebf79d5343f311f76d1
+// @resource     donnees_eu    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122ad/donnees/donnees_eu.b64#sha256=fef933f34b105465d6f58857d23458f0b7dee45b76b0247eaf34863f9a7af2e4
+// @resource     donnees_ca    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122ad/donnees/donnees_ca.b64#sha256=20d21d47c42a394cda1108bb48d073b533a2149cbc0a17a2cfcf887e4cf5185f
+// @resource     donnees_am    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122ad/donnees/donnees_am.b64#sha256=b2cb228427fc06aed0b7e4848782666c64da0f9fa4f29aecf70c0ab8e75ee327
+// @resource     donnees_as    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122ad/donnees/donnees_as.b64#sha256=3a270aa2983c5d84998a91e8cb0de68e8449fbc5d05a1835606eda0a3dca1a74
+// @resource     donnees_mo    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122ad/donnees/donnees_mo.b64#sha256=8303421fd67324ded50f2aa6867b96dcb1d1f95d2a8be9086cd3853e648f5ece
+// @resource     donnees_ua    https://raw.githubusercontent.com/DrSlump34/WME-Zone-Manager/96122ad/donnees/donnees_ua.b64#sha256=2277e17d3191ed755dbd112d90e962ded0094aba9e53ceb0341906ee06019dc8
 // @connect      data.geopf.fr
 // @connect      geo.api.gouv.fr
 // @connect      geoportale.istat.it
@@ -186,6 +186,9 @@
             searchPh: 'Nom, code postal ou code INSEE…', noResult: 'Aucun résultat.',
             drawStart: 'Commencer un tracé', drawHint: 'Cliquez les sommets sur la carte, double-cliquez pour finir.',
             drawn: n => 'Tracé ' + n,
+            wktLabel: 'Ou collez un WKT (POLYGON ou MULTIPOLYGON, longitude puis latitude) :', wktImport: 'Importer le WKT', wktNamed: n => 'WKT ' + n,
+            wktDone: (p, v) => 'WKT importé : ' + p + ' polygone(s), ' + v + ' sommets.', wktEmpty: 'Collez d’abord un WKT.', wktType: 'Seuls POLYGON et MULTIPOLYGON sont acceptés.',
+            wktSyntax: 'WKT illisible : vérifiez les parenthèses et les virgules.', wktSrid: n => 'Projection SRID=' + n + ' non prise en charge : WGS 84 (4326) attendu.', wktCoords: 'Coordonnées hors bornes : longitude puis latitude en degrés (WGS 84) attendues.', wktRing: 'Un anneau a moins de trois sommets.',
             step2: 'Ma zone', listEmpty: 'Vide pour l’instant.', remove: 'Retirer', center: 'Centrer', clear: 'Vider',
             bufferLabel: 'Élargir de', km: 'km',
             summary: (n, a) => n + ' élément(s) · ' + a + ' km²', composing: 'Calcul…',
@@ -811,6 +814,9 @@
             searchPh: 'Name, postcode or INSEE code…', noResult: 'No result.',
             drawStart: 'Start drawing', drawHint: 'Click the corners on the map, double-click to finish.',
             drawn: n => 'Drawing ' + n,
+            wktLabel: 'Or paste a WKT (POLYGON or MULTIPOLYGON, longitude then latitude):', wktImport: 'Import the WKT', wktNamed: n => 'WKT ' + n,
+            wktDone: (p, v) => 'WKT imported: ' + p + ' polygon(s), ' + v + ' vertices.', wktEmpty: 'Paste a WKT first.', wktType: 'Only POLYGON and MULTIPOLYGON are accepted.',
+            wktSyntax: 'Unreadable WKT: check the parentheses and commas.', wktSrid: n => 'Projection SRID=' + n + ' not supported: WGS 84 (4326) expected.', wktCoords: 'Coordinates out of range: longitude then latitude in degrees (WGS 84) expected.', wktRing: 'A ring has fewer than three vertices.',
             step2: 'My zone', listEmpty: 'Empty for now.', remove: 'Remove', center: 'Center', clear: 'Clear',
             bufferLabel: 'Widen by', km: 'km',
             summary: (n, a) => n + ' item(s) · ' + a + ' km²', composing: 'Computing…',
@@ -1436,6 +1442,9 @@
             searchPh: 'Name, Postleitzahl oder INSEE-Code…', noResult: 'Kein Ergebnis.',
             drawStart: 'Zeichnung beginnen', drawHint: 'Klicken Sie die Eckpunkte auf der Karte, Doppelklick zum Beenden.',
             drawn: n => 'Zeichnung ' + n,
+            wktLabel: 'Oder fügen Sie ein WKT ein (POLYGON oder MULTIPOLYGON, Länge vor Breite):', wktImport: 'WKT importieren', wktNamed: n => 'WKT ' + n,
+            wktDone: (p, v) => 'WKT importiert: ' + p + ' Polygon(e), ' + v + ' Eckpunkte.', wktEmpty: 'Fügen Sie zuerst ein WKT ein.', wktType: 'Nur POLYGON und MULTIPOLYGON werden angenommen.',
+            wktSyntax: 'WKT nicht lesbar: Klammern und Kommas prüfen.', wktSrid: n => 'Projektion SRID=' + n + ' nicht unterstützt: WGS 84 (4326) erwartet.', wktCoords: 'Koordinaten außerhalb des Bereichs: Länge vor Breite in Grad (WGS 84) erwartet.', wktRing: 'Ein Ring hat weniger als drei Eckpunkte.',
             step2: 'Meine Zone', listEmpty: 'Noch leer.', remove: 'Entfernen', center: 'Zentrieren', clear: 'Leeren',
             bufferLabel: 'Erweitern um', km: 'km',
             summary: (n, a) => n + ' Element(e) · ' + a + ' km²', composing: 'Wird berechnet…',
@@ -2061,6 +2070,9 @@
             searchPh: 'Nombre, código postal o código INSEE…', noResult: 'Sin resultados.',
             drawStart: 'Empezar un dibujo', drawHint: 'Haga clic en los vértices sobre el mapa, doble clic para terminar.',
             drawn: n => 'Dibujo ' + n,
+            wktLabel: 'O pegue un WKT (POLYGON o MULTIPOLYGON, longitud y luego latitud):', wktImport: 'Importar el WKT', wktNamed: n => 'WKT ' + n,
+            wktDone: (p, v) => 'WKT importado: ' + p + ' polígono(s), ' + v + ' vértices.', wktEmpty: 'Pegue primero un WKT.', wktType: 'Solo se aceptan POLYGON y MULTIPOLYGON.',
+            wktSyntax: 'WKT ilegible: revise los paréntesis y las comas.', wktSrid: n => 'Proyección SRID=' + n + ' no admitida: se espera WGS 84 (4326).', wktCoords: 'Coordenadas fuera de rango: se espera longitud y luego latitud en grados (WGS 84).', wktRing: 'Un anillo tiene menos de tres vértices.',
             step2: 'Mi zona', listEmpty: 'Vacía por ahora.', remove: 'Quitar', center: 'Centrar', clear: 'Vaciar',
             bufferLabel: 'Ampliar', km: 'km',
             summary: (n, a) => n + ' elemento(s) · ' + a + ' km²', composing: 'Calculando…',
@@ -2686,6 +2698,9 @@
             searchPh: 'Nome, CAP o codice INSEE…', noResult: 'Nessun risultato.',
             drawStart: 'Inizia un disegno', drawHint: 'Clicca i vertici sulla mappa, doppio clic per finire.',
             drawn: n => 'Disegno ' + n,
+            wktLabel: 'Oppure incolla un WKT (POLYGON o MULTIPOLYGON, longitudine poi latitudine):', wktImport: 'Importa il WKT', wktNamed: n => 'WKT ' + n,
+            wktDone: (p, v) => 'WKT importato: ' + p + ' poligono/i, ' + v + ' vertici.', wktEmpty: 'Incolla prima un WKT.', wktType: 'Sono accettati solo POLYGON e MULTIPOLYGON.',
+            wktSyntax: 'WKT illeggibile: controlla parentesi e virgole.', wktSrid: n => 'Proiezione SRID=' + n + ' non supportata: atteso WGS 84 (4326).', wktCoords: 'Coordinate fuori intervallo: attese longitudine poi latitudine in gradi (WGS 84).', wktRing: 'Un anello ha meno di tre vertici.',
             step2: 'La mia zona', listEmpty: 'Vuota per ora.', remove: 'Togli', center: 'Centra', clear: 'Svuota',
             bufferLabel: 'Allarga di', km: 'km',
             summary: (n, a) => n + ' elemento/i · ' + a + ' km²', composing: 'Calcolo…',
@@ -3311,6 +3326,9 @@
             searchPh: 'Nome, CEP ou código INSEE…', noResult: 'Nenhum resultado.',
             drawStart: 'Começar um desenho', drawHint: 'Clique nos vértices no mapa, clique duplo para terminar.',
             drawn: n => 'Desenho ' + n,
+            wktLabel: 'Ou cole um WKT (POLYGON ou MULTIPOLYGON, longitude e depois latitude):', wktImport: 'Importar o WKT', wktNamed: n => 'WKT ' + n,
+            wktDone: (p, v) => 'WKT importado: ' + p + ' polígono(s), ' + v + ' vértices.', wktEmpty: 'Cole primeiro um WKT.', wktType: 'Só são aceitos POLYGON e MULTIPOLYGON.',
+            wktSyntax: 'WKT ilegível: verifique os parênteses e as vírgulas.', wktSrid: n => 'Projeção SRID=' + n + ' não suportada: esperado WGS 84 (4326).', wktCoords: 'Coordenadas fora dos limites: esperadas longitude e depois latitude em graus (WGS 84).', wktRing: 'Um anel tem menos de três vértices.',
             step2: 'Minha zona', listEmpty: 'Vazia por enquanto.', remove: 'Remover', center: 'Centralizar', clear: 'Limpar',
             bufferLabel: 'Ampliar em', km: 'km',
             summary: (n, a) => n + ' item(ns) · ' + a + ' km²', composing: 'Calculando…',
@@ -3936,6 +3954,9 @@
             searchPh: 'Nome, código postal ou código INSEE…', noResult: 'Sem resultados.',
             drawStart: 'Começar um desenho', drawHint: 'Clique nos vértices no mapa, duplo clique para terminar.',
             drawn: n => 'Desenho ' + n,
+            wktLabel: 'Ou cole um WKT (POLYGON ou MULTIPOLYGON, longitude e depois latitude):', wktImport: 'Importar o WKT', wktNamed: n => 'WKT ' + n,
+            wktDone: (p, v) => 'WKT importado: ' + p + ' polígono(s), ' + v + ' vértices.', wktEmpty: 'Cole primeiro um WKT.', wktType: 'Só são aceites POLYGON e MULTIPOLYGON.',
+            wktSyntax: 'WKT ilegível: verifique os parênteses e as vírgulas.', wktSrid: n => 'Projeção SRID=' + n + ' não suportada: esperado WGS 84 (4326).', wktCoords: 'Coordenadas fora dos limites: esperadas longitude e depois latitude em graus (WGS 84).', wktRing: 'Um anel tem menos de três vértices.',
             step2: 'A minha zona', listEmpty: 'Vazia por agora.', remove: 'Retirar', center: 'Centrar', clear: 'Esvaziar',
             bufferLabel: 'Alargar', km: 'km',
             summary: (n, a) => n + ' elemento(s) · ' + a + ' km²', composing: 'A calcular…',
@@ -4561,6 +4582,9 @@
             searchPh: 'שם, מיקוד או קוד INSEE…', noResult: 'אין תוצאות.',
             drawStart: 'התחלת שרטוט', drawHint: 'יש ללחוץ על הקודקודים במפה, לחיצה כפולה לסיום.',
             drawn: n => 'שרטוט ' + n,
+            wktLabel: 'או הדביקו WKT (POLYGON או MULTIPOLYGON, קו אורך ואחריו קו רוחב):', wktImport: 'ייבוא ה-WKT', wktNamed: n => 'WKT ' + n,
+            wktDone: (p, v) => 'WKT יובא: ' + p + ' מצולעים, ' + v + ' קודקודים.', wktEmpty: 'יש להדביק קודם WKT.', wktType: 'מתקבלים רק POLYGON ו-MULTIPOLYGON.',
+            wktSyntax: 'WKT לא קריא: יש לבדוק סוגריים ופסיקים.', wktSrid: n => 'הטלה SRID=' + n + ' אינה נתמכת: נדרש WGS 84 (4326).', wktCoords: 'קואורדינטות מחוץ לטווח: נדרשים קו אורך ואחריו קו רוחב במעלות (WGS 84).', wktRing: 'לטבעת יש פחות משלושה קודקודים.',
             step2: 'האזור שלי', listEmpty: 'ריק בינתיים.', remove: 'הסרה', center: 'מרכוז', clear: 'ניקוי',
             bufferLabel: 'הרחבה ב־', km: 'ק״מ',
             summary: (n, a) => n + ' פריטים · ' + a + ' קמ״ר', composing: 'מחשב…',
@@ -7575,6 +7599,57 @@
         throw new Error('géométrie ' + g.type);
     }
     const nbSommets = g => (g.type === 'Polygon' ? [g.coordinates] : g.coordinates).reduce((s, p) => s + p.reduce((u, r) => u + r.length, 0), 0);
+    // Lit un WKT collé : POLYGON ou MULTIPOLYGON, en longitude latitude comme le formulaire de Waze. Tolère le préfixe
+    // EWKT « SRID=4326; », les coordonnées Z/M (ignorées) et les anneaux non refermés (refermés). Rend la géométrie
+    // GeoJSON ; l'erreur porte une clé de traduction (wktType, wktSyntax…), affichée dans la langue du script.
+    function deWKT(txt) {
+        const err = (k, a) => Object.assign(new Error(k), { cle: k, arg: a });
+        let s = String(txt || '').trim();
+        if (!s) throw err('wktEmpty');
+        const srid = /^SRID\s*=\s*(\d+)\s*;/i.exec(s);
+        if (srid) {
+            if (srid[1] !== '4326') throw err('wktSrid', srid[1]);
+            s = s.slice(srid[0].length).trim();
+        }
+        const m = /^(MULTIPOLYGON|POLYGON)\s*(?:ZM|Z|M)?\s*(\([\s\S]*\))$/i.exec(s);
+        if (!m) throw err(/^\w+/.test(s) && !/^(MULTI)?POLYGON\b/i.test(s) ? 'wktType' : 'wktSyntax');
+        // Découpé en UN appel natif (parenthèses, virgules, nombres) : lu caractère par caractère, un WKT de 350 Ko
+        // figeait WME 8 s dans le bac à sable de Tampermonkey (40 ms en Node — mesuré le 30/10/2026).
+        const jetons = m[2].match(/[(),]|[^\s(),]+/g);
+        let i = 0;
+        // Liste entre parenthèses : sous-listes, ou points « x y [z [m]] » séparés par des virgules.
+        const liste = () => {
+            i++;
+            const out = [];
+            for (;;) {
+                if (jetons[i] === '(') out.push(liste());
+                else {
+                    const nb = [];
+                    while (i < jetons.length && jetons[i] !== ',' && jetons[i] !== '(' && jetons[i] !== ')') nb.push(Number(jetons[i++]));
+                    if (nb.length < 2 || nb.length > 4 || nb.some(v => !isFinite(v))) throw err('wktSyntax');
+                    out.push([nb[0], nb[1]]);
+                }
+                if (jetons[i] === ',') { i++; continue; }
+                if (jetons[i] === ')') { i++; return out; }
+                throw err('wktSyntax');
+            }
+        };
+        const tout = liste();
+        if (i !== jetons.length) throw err('wktSyntax');
+        const estPoint = p => Array.isArray(p) && typeof p[0] === 'number';
+        const anneau = r => {
+            if (!Array.isArray(r) || !r.length || !r.every(estPoint)) throw err('wktSyntax');
+            for (const [x, y] of r) if (Math.abs(x) > 180 || Math.abs(y) > 90) throw err('wktCoords');
+            const o = r.slice(), a = o[0], z = o[o.length - 1];
+            if (a[0] !== z[0] || a[1] !== z[1]) o.push(a.slice());
+            if (o.length < 4) throw err('wktRing');
+            return o;
+        };
+        const poly = p => { if (!Array.isArray(p) || !p.length) throw err('wktSyntax'); return p.map(anneau); };
+        if (m[1].toUpperCase() === 'POLYGON') return { type: 'Polygon', coordinates: poly(tout) };
+        const ps = tout.map(poly);
+        return ps.length === 1 ? { type: 'Polygon', coordinates: ps[0] } : { type: 'MultiPolygon', coordinates: ps };
+    }
 
     // =====================================================================
     //  WORKER — Turf hors du bac à sable (mesuré : le calcul y est ~20 fois plus lent)
@@ -8021,13 +8096,27 @@
         if (o1 !== o2 && o3 !== o4) return true;
         return (o1 === 0 && surSegment(p1, p2, q1)) || (o2 === 0 && surSegment(p1, p2, q2)) || (o3 === 0 && surSegment(q1, q2, p1)) || (o4 === 0 && surSegment(q1, q2, p2));
     }
+    // Les segments du trou sont rangés dans une grille sur son emprise : un WKT collé (9 147 sommets, 8 trous de 60 à
+    // 900 sommets sous un contour de 5 317) passait 2 s ici en Node et plus de 7 s dans WME, à chaque dessin (30/10/2026).
     function trouLibre(trou, contour) {
         let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
         for (const c of trou) { if (c[0] < x0) x0 = c[0]; if (c[0] > x1) x1 = c[0]; if (c[1] < y0) y0 = c[1]; if (c[1] > y1) y1 = c[1]; }
+        const k = Math.max(1, Math.ceil(Math.sqrt(trou.length))), cw = (x1 - x0) / k || 1, ch = (y1 - y0) / k || 1;
+        const cx = x => Math.min(k - 1, Math.max(0, Math.floor((x - x0) / cw))), cy = y => Math.min(k - 1, Math.max(0, Math.floor((y - y0) / ch)));
+        const grille = new Map();
+        for (let i = 0; i < trou.length - 1; i++) {
+            const p = trou[i], q = trou[i + 1];
+            for (let gx = cx(Math.min(p[0], q[0])); gx <= cx(Math.max(p[0], q[0])); gx++) for (let gy = cy(Math.min(p[1], q[1])); gy <= cy(Math.max(p[1], q[1])); gy++) {
+                const id = gx * k + gy; let l = grille.get(id); if (!l) grille.set(id, l = []); l.push(i);
+            }
+        }
         for (let j = 0; j < contour.length - 1; j++) {
             const a = contour[j], b = contour[j + 1];
             if (Math.max(a[0], b[0]) < x0 || Math.min(a[0], b[0]) > x1 || Math.max(a[1], b[1]) < y0 || Math.min(a[1], b[1]) > y1) continue;
-            for (let i = 0; i < trou.length - 1; i++) if (segmentsSeTouchent(a, b, trou[i], trou[i + 1])) return false;
+            for (let gx = cx(Math.min(a[0], b[0])); gx <= cx(Math.max(a[0], b[0])); gx++) for (let gy = cy(Math.min(a[1], b[1])); gy <= cy(Math.max(a[1], b[1])); gy++) {
+                const l = grille.get(gx * k + gy);
+                if (l) for (const i of l) if (segmentsSeTouchent(a, b, trou[i], trou[i + 1])) return false;
+            }
         }
         return true;
     }
@@ -8372,7 +8461,7 @@
             try { ll = await sdk.Map.getLonLatFromPixel({ x: ev.clientX, y: ev.clientY }); } catch (e) { }
             if (modeQuiActif()) {
                 if (!ll) return;
-                quiIci = quiGereIci(ll); quiSurvol = ''; ouvertEd = ''; rendreGest(); dessinerGest();
+                quiIci = quiGereIci(ll); quiSurvol = ''; ouvertEd = quiOuvert = ''; rendreGest(); dessinerGest();
                 setTimeout(async () => { try { await sdk.Editing.clearSelection(); } catch (x) { } }, 60);
                 return;
             }
@@ -8396,6 +8485,25 @@
             selection.push({ id: 'trace:' + Date.now(), niveau: 'trace', code: '', nom: t('drawn', nbTraces), geom: g, source: 'trace', trace: true });
             changerSelection(); message('');
         } catch (e) { message(t('errCalc', errTxt(e.message))); }
+    }
+
+    // Un WKT collé entre dans la sélection comme un tracé : même liste, même composition, même export.
+    // Les pièces d'un MULTIPOLYGON collé peuvent se chevaucher : on les réunit ici, car la composition rend une
+    // entité seule telle quelle.
+    async function importerWKT() {
+        const champ = ov.querySelector('#wzm-wkt');
+        let g;
+        try {
+            g = deWKT(champ.value);
+            if (g.type === 'MultiPolygon') g = (await calcul('union', g.coordinates.map(c => ({ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: c } })))).geometry;
+        }
+        catch (e) { message(e.cle ? t(e.cle, e.arg) : t('errCalc', errTxt(e.message))); champ.focus(); return; }
+        nbTraces++;
+        selection.push({ id: 'wkt:' + Date.now(), niveau: 'trace', code: '', nom: t('wktNamed', nbTraces), geom: g, source: 'wkt', trace: true });
+        champ.value = '';
+        changerSelection();
+        message(t('wktDone', g.type === 'Polygon' ? 1 : g.coordinates.length, nombre(nbSommets(g))));
+        centrer(g).catch(() => { });
     }
 
     // Recherche au fil de la frappe (anti-rebond), comme le champ commune de WBC.
@@ -8548,6 +8656,8 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
 .wzm-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--wzm-blue-btn);color:#fff;font-size:11px;letter-spacing:0}
 .wzm-ligne{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:5px 0}
 .wzm-ligne>label{font-weight:600}
+#wzm-ov textarea.wzm-champ2{box-sizing:border-box;display:block;width:100%;margin:4px 0 6px;padding:4px 8px;font:11px Consolas,'Courier New',monospace;color:var(--wzm-text);background:var(--wzm-bg);border:1px solid var(--wzm-border);border-radius:6px;resize:vertical;text-align:left}
+#wzm-ov textarea.wzm-champ2:focus{background:#fff;border-color:var(--wzm-blue)}
 #wzm-ov select.wzm-champ2,#wzm-ov input.wzm-champ2{box-sizing:border-box;height:26px;margin:0;padding:2px 8px;font:12px 'Rubik','Open Sans',sans-serif;color:var(--wzm-text);background:var(--wzm-bg);border:1px solid var(--wzm-border);border-radius:6px}
 #wzm-ov select.wzm-champ2:focus,#wzm-ov input.wzm-champ2:focus{background:#fff;border-color:var(--wzm-blue)}
 #wzm-niveau{flex:1;min-width:0}
@@ -8881,7 +8991,9 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
             '<div class="wzm-modes" role="radiogroup" aria-label="' + esc(t('step1')) + '">' + mode('carte', '&#x1F5B1;&#xFE0F;', t('modeMap')) + mode('cherche', '&#x1F50D;', t('modeSearch')) + mode('trace', '&#x270F;&#xFE0F;', t('modeDraw')) + '</div>' +
             '<div class="wzm-choix" data-pour="carte"><p class="wzm-aide" id="wzm-aide-carte"></p></div>' +
             '<div class="wzm-choix" data-pour="cherche"><input type="search" class="wzm-champ2" id="wzm-q" placeholder="' + esc(t('searchPh')) + '" aria-label="' + esc(t('searchPh')) + '" autocomplete="off" spellcheck="false"><ul class="wzm-sugg" id="wzm-sugg" hidden></ul></div>' +
-            '<div class="wzm-choix" data-pour="trace"><p class="wzm-aide">' + esc(t('drawHint')) + '</p><button type="button" class="wzm-btn" data-act="tracer">&#x270F;&#xFE0F; ' + esc(t('drawStart')) + '</button></div>' +
+            '<div class="wzm-choix" data-pour="trace"><p class="wzm-aide">' + esc(t('drawHint')) + '</p><button type="button" class="wzm-btn" data-act="tracer">&#x270F;&#xFE0F; ' + esc(t('drawStart')) + '</button>' +
+                '<label class="wzm-aide" for="wzm-wkt">' + esc(t('wktLabel')) + '</label><textarea class="wzm-champ2" id="wzm-wkt" rows="3" dir="ltr" spellcheck="false" autocomplete="off" placeholder="POLYGON ((2.35 48.85, 2.36 48.85, 2.36 48.86, 2.35 48.85))"></textarea>' +
+                '<button type="button" class="wzm-btn" data-act="wkt">&#x1F4E5; ' + esc(t('wktImport')) + '</button></div>' +
             etape(2, t('step2')) +
             '<div class="wzm-chips" id="wzm-chips"></div>' +
             '<div class="wzm-resume" id="wzm-resume" role="status"></div>' +
@@ -8937,6 +9049,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
         nv.addEventListener('change', () => { opts.niveau = nv.value; ecrireOpts(); majFenetre(); chargerVue(); if (opts.mode === 'cherche') chercher(); });
         q('#wzm-q').addEventListener('input', planifierRecherche);
         q('[data-act="tracer"]').addEventListener('click', tracer);
+        q('[data-act="wkt"]').addEventListener('click', importerWKT);
         const km = q('#wzm-km'); km.value = opts.km || 0;
         km.addEventListener('change', () => { opts.km = Math.max(0, Number(km.value) || 0); km.value = opts.km; ecrireOpts(); planifierApercu(); });
         q('[data-act="vider"]').addEventListener('click', () => { selection = []; changerSelection(); message(''); });
@@ -9001,7 +9114,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
         if (!ov) construireFenetre();
         ov.classList.toggle('open', !!ouvrir);
         if (ouvrir) placer();
-        if (!ouvrir) { cacherFiche(); genVue++; vue.clear(); dessinerEntites(); }
+        if (!ouvrir) { cacherFiche(); genVue++; vue.clear(); dessinerEntites(); dessinerGest(); }
         majFab();
         // L'onglet Gestionnaires n'était dessiné qu'au clic sur son onglet : ouvert d'emblée sur lui, il restait vide
         // jusqu'à un aller-retour par Zones (signalé par l'auteur le 04/10/2026).
@@ -9110,6 +9223,8 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
     let vivant = { q: '', eds: {} };              // pseudo minuscule → { id, rang, ed91, zones, codes }
     let ficheAMontrer = false;   // vrai juste après un clic qui déplie une fiche
     let ouvertEd = '', filtreGest = 'tous', chercheGest = '', modeQui = false, quiIci = null;
+    // Fiche ouverte depuis un résultat de « Qui gère ici ? » : elle part avec la recherche quand on la vide.
+    let quiOuvert = '';
     // Le droit d'écrire n'est PAS un mot de passe de WZM : c'est Discuss qui le tranche, côté serveur, pour la
     // session de l'éditeur. Un compte qui ne voit plus la catégorie du registre (rôle de Champ perdu) ne peut
     // ni le lire ni l'écrire — par WZM comme par le forum ; un compte qui la voit reçoit can_edit du serveur.
@@ -9203,7 +9318,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
         paysPropose = null; paysRefuse = '';
         paysReg = p; paysRegNom = nom;
         registre = null; regMeta = { topic: 0, postId: 0, version: 0, lu: '', sale: false, changements: [] };
-        vivant = { q: '', eds: {} }; zonesExactes = {}; zoneFocus = null; ouvertEd = ''; modeQui = false; quiIci = null;
+        vivant = { q: '', eds: {} }; zonesExactes = {}; zoneFocus = null; ouvertEd = quiOuvert = ''; modeQui = false; quiIci = null;
         importEnAttente = null; dernierMsgGest = '';
         lireRegLocal();
         majChampRegistre();
@@ -9719,6 +9834,9 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
         requestAnimationFrame(() => { gestPrevu = false; dessinerGestMaintenant(); });
     }
     function dessinerGestMaintenant() {
+        // Les zones des éditeurs n'ont de sens qu'avec l'onglet Gestionnaires sous les yeux : fenêtre fermée ou onglet
+        // Zones, les deux couches se vident (elles restaient sur la carte sans moyen de les retirer — l'auteur, 30/10/2026).
+        if (!ouvert() || (opts.onglet || 'zones') !== 'gest') { dessiner(L_GEST, []); dessiner(L_FOCUS, []); return; }
         const feats = [];
         const montrer = ouvertEd ? [ouvertEd] : (quiIci || []).map(x => x.pseudo);
         const plusieurs = montrer.length > 1;
@@ -10173,7 +10291,8 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
                 (progres ? '<div class="wzm-barre" id="wzm-gbarre" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="' + esc(t('liveReload')) + '"><i></i></div><div class="wzm-barre-txt"></div>' : '') +
                 '<div class="wzm-ligne wzm-ligne-etat"><span class="wzm-etat">' + esc(vq) + '</span><span class="wzm-ronds">' + rond('relire', 'relire', t('liveReload'), relectureEnCours ? ' disabled' : '') +
                 '<button type="button" class="wzm-rond" data-g="recComparer" title="' + esc(t('cmpBtn')) + '" aria-label="' + esc(t('cmpBtn')) + '"' + (recensement && recensement.en ? ' disabled' : '') + '>&#x1F50E;</button></span></div>' + htmlComparaison() +
-                '<div class="wzm-ligne"><button type="button" class="wzm-btn wzm-btn-ico" data-g="qui" aria-pressed="' + modeQui + '">' + svg('qui') + esc(t('whoHere')) + '</button></div>' +
+                '<div class="wzm-ligne"><button type="button" class="wzm-btn wzm-btn-ico" data-g="qui" aria-pressed="' + modeQui + '">' + svg('qui') + esc(t('whoHere')) + '</button>' +
+                (quiIci || (quiOuvert && ouvertEd === quiOuvert) ? '<button type="button" class="wzm-btn" data-g="quivider">&#x2715; ' + esc(t('clear')) + '</button>' : '') + '</div>' +
                 (modeQui ? '<p class="wzm-aide">' + esc(t('whoHint')) + '</p>' + (quiIci ? '<div class="wzm-qui">' + (quiIci.length ? quiIci.map((x, k) => '<button type="button" class="wzm-chip' + (x.inscrit ? '' : ' trace') + '" data-ouvrir="' + esc(x.pseudo) + '" data-survol="' + esc(x.pseudo) + '"><span>' + (quiIci.length > 1 ? '<i class="wzm-coul" style="background:' + COULEURS_QUI[k % COULEURS_QUI.length] + '"></i>' : '') + '<bdi>' + esc(x.pseudo) + '</bdi>' + (x.rang ? ' <small>L' + x.rang + '</small>' : '') + (x.pays ? ' <span title="' + esc(t('whoCountry')) + '">&#x1F310;</span>' : '') + '</span></button>').join(' ') : '<span class="wzm-vide2">' + esc(t('whoNobody')) + '</span>') + '</div>' : '') : '') +
                 '<div class="wzm-etape"><span class="wzm-num">&#x1F465;</span>' + esc(t('gEditors', registre.editeurs.length)) + '</div>' +
                 '<div class="wzm-ligne"><input type="search" class="wzm-champ2" id="wzm-gq" aria-label="' + esc(t('gSearchPh')) + '" placeholder="' + esc(t('gSearchPh')) + '" value="' + esc(chercheGest) + '" style="flex:1;min-width:0">' +
@@ -10412,8 +10531,10 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
             b.addEventListener('focus', () => { quiSurvol = b.dataset.survol; dessinerGest(); });
             b.addEventListener('blur', () => { quiSurvol = ''; dessinerGest(); });
         });
-        sur('[data-g="qui"]', () => { quiSurvol = ''; modeQui = !modeQui; quiIci = null; if (modeQui) ouvertEd = ''; rendreGest(); dessinerGest(); });
-        sur('[data-ouvrir]', ev => { quiSurvol = ''; ouvertEd = ev.currentTarget.dataset.ouvrir; ficheAMontrer = true; rendreGest(); dessinerGest(); });
+        const viderQui = () => { quiSurvol = ''; quiIci = null; if (quiOuvert && ouvertEd === quiOuvert) { ouvertEd = ''; zoneFocus = null; } quiOuvert = ''; };
+        sur('[data-g="qui"]', () => { viderQui(); modeQui = !modeQui; if (modeQui) ouvertEd = ''; rendreGest(); dessinerGest(); });
+        sur('[data-g="quivider"]', () => { viderQui(); rendreGest(); dessinerGest(); });
+        sur('[data-ouvrir]', ev => { quiSurvol = ''; ouvertEd = quiOuvert = ev.currentTarget.dataset.ouvrir; ficheAMontrer = true; rendreGest(); dessinerGest(); });
         sur('.wzm-gtete', ev => { const ps = ev.currentTarget.dataset.ed; ouvertEd = ouvertEd === ps ? '' : ps; ficheAMontrer = !!ouvertEd; zoneFocus = null; dernierMsgGest = ''; rendreGest(); dessinerGest(); });
         // La recherche redessine l'onglet entier (le focus et le curseur reviennent dans le champ) : l'ancien
         // rebranchage partiel oubliait la mise en vue de la fiche, la zone en évidence et le survol (audit du 03/10/2026).
