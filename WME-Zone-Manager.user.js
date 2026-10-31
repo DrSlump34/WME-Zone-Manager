@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.41.01
+// @version      2.42.01
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -286,6 +286,10 @@
             gNoEditor: (p) => 'Aucun éditeur « ' + p + ' » chez Waze.',
             ec_aucuneZone: 'Le registre lui donne un rôle en vigueur, mais Waze ne lui applique plus aucune zone. Rôles retirés ? Passez-les à « Retiré ».',
             ecRoleSansZone: (r, c) => 'Le registre dit « ' + r + ' » en vigueur, mais Waze ne lui applique aucune zone sur ' + c + '. Rôle retiré ? Passez-le à « Retiré ». Zone perdue ? Redemandez-la.',
+            roleEnd: 'Fin (rôle temporaire)',
+            roleLabelPh: 'Libellé du rôle (facultatif)',
+            roleUntil: d => 'jusqu\'au ' + d,
+            ecTempoEchu: (r, d) => 'Le rôle « ' + r + ' » a pris fin le ' + d + '. Passez-le à « À retirer », puis à « Retiré » quand Waze l\'a retiré.',
             ec_nonDocumentee: 'Zone non documentée : aucune demande retrouvée.',
             ec_inactif: 'Absent : aucune édition depuis plus de 90 jours, et détient des zones.',
             ecAbsent: n => 'Absent : aucune édition depuis ' + n + ' jours, et détient des zones.',
@@ -914,6 +918,10 @@
             gNoEditor: (p) => 'No editor “' + p + '” at Waze.',
             ec_aucuneZone: 'The registry gives them a role in force, but Waze applies no area of theirs any more. Roles removed? Set them to “Removed”.',
             ecRoleSansZone: (r, c) => 'The registry says “' + r + '” is in force, but Waze applies no area of theirs over ' + c + '. Role removed? Set it to “Removed”. Area lost? Request it again.',
+            roleEnd: 'End (temporary role)',
+            roleLabelPh: 'Role label (optional)',
+            roleUntil: d => 'until ' + d,
+            ecTempoEchu: (r, d) => 'The role “' + r + '” ended on ' + d + '. Set it to “To remove”, then to “Removed” once Waze has removed it.',
             ec_nonDocumentee: 'Undocumented area: no request found.',
             ec_inactif: 'Away: no edit for more than 90 days, and holds areas.',
             ecAbsent: n => 'Away: no edit for ' + n + ' days, and holds areas.',
@@ -1542,6 +1550,10 @@
             gNoEditor: (p) => 'Kein Editor „' + p + '“ bei Waze.',
             ec_aucuneZone: 'Das Register nennt eine Rolle in Kraft, aber Waze wendet kein Gebiet mehr an. Rollen entzogen? Auf „Entfernt“ setzen.',
             ecRoleSansZone: (r, c) => 'Laut Register ist „' + r + '“ in Kraft, aber Waze wendet kein Gebiet über ' + c + ' an. Rolle entzogen? Auf „Entfernt“ setzen. Gebiet verloren? Neu beantragen.',
+            roleEnd: 'Ende (befristete Rolle)',
+            roleLabelPh: 'Bezeichnung der Rolle (optional)',
+            roleUntil: d => 'bis ' + d,
+            ecTempoEchu: (r, d) => 'Die Rolle „' + r + '“ ist am ' + d + ' abgelaufen. Auf „Zu entfernen“ setzen, dann auf „Entfernt“, sobald Waze sie entzogen hat.',
             ec_nonDocumentee: 'Undokumentiertes Gebiet: kein Antrag gefunden.',
             ec_inactif: 'Abwesend: seit über 90 Tagen keine Bearbeitung, und hält Gebiete.',
             ecAbsent: n => 'Abwesend: seit ' + n + ' Tagen keine Bearbeitung, und hält Gebiete.',
@@ -2170,6 +2182,10 @@
             gNoEditor: (p) => 'Ningún editor «' + p + '» en Waze.',
             ec_aucuneZone: 'El registro le da un rol en vigor, pero Waze ya no le aplica ninguna zona. ¿Roles retirados? Páselos a «Retirado».',
             ecRoleSansZone: (r, c) => 'El registro dice «' + r + '» en vigor, pero Waze no le aplica ninguna zona sobre ' + c + '. ¿Rol retirado? Páselo a «Retirado». ¿Zona perdida? Vuelva a solicitarla.',
+            roleEnd: 'Fin (rol temporal)',
+            roleLabelPh: 'Nombre del rol (opcional)',
+            roleUntil: d => 'hasta el ' + d,
+            ecTempoEchu: (r, d) => 'El rol «' + r + '» terminó el ' + d + '. Páselo a «A retirar» y luego a «Retirado» cuando Waze lo haya retirado.',
             ec_nonDocumentee: 'Zona sin documentar: no se encontró solicitud.',
             ec_inactif: 'Ausente: ninguna edición desde hace más de 90 días, y tiene zonas.',
             ecAbsent: n => 'Ausente: ninguna edición desde hace ' + n + ' días, y tiene zonas.',
@@ -2798,6 +2814,10 @@
             gNoEditor: (p) => 'Nessun editor «' + p + '» su Waze.',
             ec_aucuneZone: 'Il registro gli dà un ruolo in vigore, ma Waze non gli applica più alcuna zona. Ruoli rimossi? Impostali su «Rimosso».',
             ecRoleSansZone: (r, c) => 'Il registro dice «' + r + '» in vigore, ma Waze non gli applica alcuna zona su ' + c + '. Ruolo rimosso? Impostalo su «Rimosso». Zona persa? Richiedila di nuovo.',
+            roleEnd: 'Fine (ruolo temporaneo)',
+            roleLabelPh: 'Nome del ruolo (facoltativo)',
+            roleUntil: d => 'fino al ' + d,
+            ecTempoEchu: (r, d) => 'Il ruolo «' + r + '» è scaduto il ' + d + '. Impostalo su «Da rimuovere», poi su «Rimosso» quando Waze lo avrà rimosso.',
             ec_nonDocumentee: 'Zona non documentata: nessuna richiesta trovata.',
             ec_inactif: 'Assente: nessuna modifica da oltre 90 giorni, e detiene zone.',
             ecAbsent: n => 'Assente: nessuna modifica da ' + n + ' giorni, e detiene zone.',
@@ -3426,6 +3446,10 @@
             gNoEditor: (p) => 'Nenhum editor “' + p + '” no Waze.',
             ec_aucuneZone: 'O registro lhe dá uma função em vigor, mas o Waze não lhe aplica mais nenhuma área. Funções removidas? Passe-as para “Removida”.',
             ecRoleSansZone: (r, c) => 'O registro diz “' + r + '” em vigor, mas o Waze não lhe aplica nenhuma área em ' + c + '. Função removida? Passe-a para “Removida”. Área perdida? Peça de novo.',
+            roleEnd: 'Fim (função temporária)',
+            roleLabelPh: 'Nome da função (opcional)',
+            roleUntil: d => 'até ' + d,
+            ecTempoEchu: (r, d) => 'A função “' + r + '” terminou em ' + d + '. Passe-a para “A remover” e depois para “Removida” quando o Waze a tiver removido.',
             ec_nonDocumentee: 'Área não documentada: nenhuma solicitação encontrada.',
             ec_inactif: 'Ausente: nenhuma edição há mais de 90 dias, e detém áreas.',
             ecAbsent: n => 'Ausente: nenhuma edição há ' + n + ' dias, e detém áreas.',
@@ -4054,6 +4078,10 @@
             gNoEditor: (p) => 'Nenhum editor «' + p + '» no Waze.',
             ec_aucuneZone: 'O registo dá-lhe uma função em vigor, mas o Waze já não lhe aplica nenhuma área. Funções retiradas? Passe-as a «Retirada».',
             ecRoleSansZone: (r, c) => 'O registo diz «' + r + '» em vigor, mas o Waze não lhe aplica nenhuma área em ' + c + '. Função retirada? Passe-a a «Retirada». Área perdida? Peça-a de novo.',
+            roleEnd: 'Fim (função temporária)',
+            roleLabelPh: 'Nome da função (facultativo)',
+            roleUntil: d => 'até ' + d,
+            ecTempoEchu: (r, d) => 'A função «' + r + '» terminou em ' + d + '. Passe-a a «A retirar» e depois a «Retirada» quando o Waze a tiver retirado.',
             ec_nonDocumentee: 'Área não documentada: nenhum pedido encontrado.',
             ec_inactif: 'Ausente: nenhuma edição há mais de 90 dias, e detém áreas.',
             ecAbsent: n => 'Ausente: nenhuma edição há ' + n + ' dias, e detém áreas.',
@@ -4682,6 +4710,10 @@
             gNoEditor: (p) => 'אין עורך „' + p + '” ב־Waze.',
             ec_aucuneZone: 'לפי הרשם יש לו תפקיד בתוקף, אך Waze כבר אינו מחיל עליו אזור. התפקידים הוסרו? העבירו ל„הוסר”.',
             ecRoleSansZone: (r, c) => 'לפי הרשם „' + r + '” בתוקף, אך Waze אינו מחיל עליו אזור ב־' + c + '. התפקיד הוסר? העבירו ל„הוסר”. האזור אבד? בקשו אותו שוב.',
+            roleEnd: 'סיום (תפקיד זמני)',
+            roleLabelPh: 'שם התפקיד (רשות)',
+            roleUntil: d => 'עד ' + d,
+            ecTempoEchu: (r, d) => 'התפקיד „' + r + '” הסתיים ב־' + d + '. העבירו ל„להסרה”, ואז ל„הוסר” לאחר ש־Waze הסיר אותו.',
             ec_nonDocumentee: 'אזור לא מתועד: לא נמצאה בקשה.',
             ec_inactif: 'נעדר: אין עריכות יותר מ־90 ימים, ומחזיק אזורים.',
             ecAbsent: n => 'נעדר: אין עריכות כבר ' + n + ' ימים, ומחזיק אזורים.',
@@ -7727,7 +7759,7 @@
             // Départements (ou toute autre maille) : une fois, puis « couverture » zone par zone — ceux couverts
             // à 5 % au moins, sinon celui qui porte la plus grande part de la zone (une zone AM).
             deps(liste) { self.D = liste.map(d => ({ code: d.code, f: turf.feature(d.geom), bb: turf.bbox(d.geom), aire: turf.area(d.geom) })); return self.D.length; },
-            couverture(geoms) {
+            couverture(geoms, minAire) {
                 return geoms.map(g => {
                     const z = turf.feature(g), bb = turf.bbox(z), parts = {};
                     for (const d of self.D || []) {
@@ -7739,7 +7771,10 @@
                     // 5 % du département (et non 20 %) : mesuré le 03/10/2026, le lobe Nord-Isère d’une zone réelle couvre 718 km²
                     // = 9,1 % de l'Isère et était ignoré (carré rouge à tort) ; le débordement d’une autre zone, 183 km² =
                     // 2,3 %, reste ignoré. La part de la ZONE ne départage pas (8,8 % contre 8,2 %).
-                    const fort = Object.keys(parts).filter(c => parts[c].pd >= 0.05).sort();
+                    // minAire (m²) : un COULOIR (WKT d'un MapRaid, tampon de 3 km autour des chemins) ne couvre jamais 5 % d'un
+                    // département qu'il traverse : il compte alors dès qu'il y entre de minAire (2.42.01, mesuré le 31/10/2026 :
+                    // le WOW XV ne donnait que 23 départements, sans l'Yonne, la Nièvre, le Cher, l'Indre, le Gard…).
+                    const fort = Object.keys(parts).filter(c => parts[c].pd >= 0.05 || (minAire > 0 && parts[c].a >= minAire)).sort();
                     if (fort.length) return fort;
                     const ks = Object.keys(parts);
                     return ks.length ? [ks.reduce((m, c) => parts[c].a > parts[m].a ? c : m)] : [];
@@ -9533,7 +9568,12 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
     const LS_VIVANT = 'wzm.vivant.v1';           // relecture Waze en cache : { q, eds }
     const MARQUE = '<!-- wzm:registre -->';
     const STATUTS = ['vigueur', 'demande', 'aretirer', 'retire'];
-    const TYPES = ['AM', 'SM', 'RM', 'CM', '?'];
+    const TYPES = ['AM', 'SM', 'RM', 'CM', 'MapRaid', 'Temporaire', '?'];
+    // Rôles TEMPORAIRES (2.42.00, demande de l'auteur, 31/10/2026 : participants du WOW XV, droits du 16/11 au 05/12) :
+    // ils portent une date de fin (`fin`, AAAA-MM-JJ) et ne disent rien du type des zones permanentes de l'éditeur.
+    const TEMPO = new Set(['MapRaid', 'Temporaire']);
+    const finValide = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : undefined;
+    const aujourdhui = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
     // Nature d'une zone Waze, à préciser zone par zone quand aucune demande ne l'explique (demande de l'auteur,
     // 03/10/2026). Rangée dans le registre : editeurs[i].zones = { <empreinte>: { type, maj } }.
     const TYPES_ZONE = ['AM', 'SM', 'RM', 'CM', 'Mentorat', 'MapRaid', 'Temporaire'];
@@ -9566,7 +9606,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
     function typeDeZone(e, emp, codes) {
         const saisi = e.zones && e.zones[emp] && e.zones[emp].type;
         if (saisi) return { type: saisi, deduit: false, propose: !!e.zones[emp].propose };
-        const r = e.roles.find(r => r.type !== '?' && r.statut !== 'retire' && r.codes.some(c => (codes || []).includes(c)));
+        const r = e.roles.find(r => r.type !== '?' && !TEMPO.has(r.type) && r.statut !== 'retire' && r.codes.some(c => (codes || []).includes(c)));
         return r ? { type: r.type, deduit: true } : null;
     }
     const JOURNAL_MAX = 300;
@@ -9692,6 +9732,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
                 statut: STATUTS.includes(x.statut) ? x.statut : 'vigueur', demande: txt(x.demande), note: txt(x.note),
                 pays: typeof x.pays === 'string' && /^[A-Z]{2}$/.test(x.pays) ? x.pays : undefined,
                 titres: titresValides(x.titres).length ? titresValides(x.titres) : undefined,
+                fin: finValide(x.fin),
             }));
             const ed = Object.assign({}, e, { pseudo: txt(e.pseudo).trim(), roles, note: txt(e.note) });
             if (e.zones && typeof e.zones === 'object') {
@@ -10104,7 +10145,10 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
         const enVigueur = e.roles.filter(r => r.statut === 'vigueur');
         // Un droit de CM « pays entier » n'a, par nature, aucune zone chez Waze : il ne compte pas ici.
         if (enVigueur.some(r => !r.pays) && !v.zones.length) out.push({ k: 'aucuneZone' });
-        for (const r of enVigueur) if (r.codes.length && v.zones.length && !r.codes.some(c => vivants.has(c))) out.push({ k: 'roleSansZone', r });
+        // Un rôle temporaire (MapRaid…) se juge sur sa date de fin, pas sur les zones : l'éditeur garde les siennes
+        // dans les mêmes départements, et les droits d'un MapRaid ne sont pas forcément une zone chez Waze.
+        for (const r of enVigueur) if (!TEMPO.has(r.type) && r.codes.length && v.zones.length && !r.codes.some(c => vivants.has(c))) out.push({ k: 'roleSansZone', r });
+        for (const r of e.roles) if (TEMPO.has(r.type) && r.fin && (r.statut === 'vigueur' || r.statut === 'demande') && r.fin < aujourdhui()) out.push({ k: 'tempoEchu', r });
         // Une zone Waze sans type (ni saisi, ni déduit d'un rôle typé) est à qualifier. Une zone dont le retrait est
         // demandé n'a pas à l'être. Les empreintes manquent dans un cache antérieur à 2.01.07 : on attend la relecture.
         if (v.emp) {
@@ -10117,7 +10161,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
         const absence = v.derniere && v.derniere !== 'jamais' ? joursDepuis(v.derniere) : null;
         if (v.zones.length && (absence !== null ? absence > SEUIL_ABSENCE : v.ed91 === 0)) out.push({ k: 'inactif', jours: absence });
         for (const r of e.roles.filter(r => r.statut === 'aretirer')) out.push({ k: r.pays || r.codes.some(c => vivants.has(c)) || (!r.codes.length && v.zones.length) ? 'retraitAttente' : 'retraitFait', r });
-        for (const r of e.roles.filter(r => r.statut === 'demande')) if (r.codes.some(c => vivants.has(c))) out.push({ k: 'demandeAccordee', r });
+        for (const r of e.roles.filter(r => r.statut === 'demande' && !TEMPO.has(r.type))) if (r.codes.some(c => vivants.has(c))) out.push({ k: 'demandeAccordee', r });
         return out;
     }
 
@@ -10248,10 +10292,11 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
     // gardait une pastille verte sur deux et ignorait la grise, sans rapport avec ce que la ligne affichait (audit du
     // 03/10/2026). « inactif » n'a pas de rond dans la ligne (la pastille des jours, rouge, le porte) ; dans la fiche,
     // il est rouge — il y était invisible (classe « absent » disparue avec le sablier).
-    const PASTILLE = { aucuneZone: 'rouge', roleSansZone: 'rouge', introuvable: 'rouge', inactif: 'rouge', retraitAttente: 'orange', nonDocumentee: 'gris', retraitFait: 'vert', demandeAccordee: 'vert' };
+    const PASTILLE = { aucuneZone: 'rouge', roleSansZone: 'rouge', introuvable: 'rouge', inactif: 'rouge', retraitAttente: 'orange', nonDocumentee: 'gris', retraitFait: 'vert', demandeAccordee: 'vert', tempoEchu: 'orange' };
     function texteEcart(x) {
         switch (x.k) {
             case 'roleSansZone': return t('ecRoleSansZone', (x.r.type === '?' ? '' : x.r.type + ' ') + x.r.libelle, x.r.codes.join(', '));
+            case 'tempoEchu': return t('ecTempoEchu', libType(x.r.type) + ' ' + x.r.libelle, dateLocale(x.r.fin));
             case 'nonDocumentee': return x.n ? t('ecSansType', x.n) : t('ec_nonDocumentee');
             case 'inactif': return x.jours !== null && x.jours !== undefined ? t('ecAbsent', nombre(x.jours)) : t('ec_inactif');
             case 'retraitAttente': case 'retraitFait': case 'demandeAccordee': return t('ec_' + x.k, (x.r.type === '?' ? '' : x.r.type + ' ') + x.r.libelle);
@@ -10785,7 +10830,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
         // zone par zone, juste au-dessus. On ne les montre plus ; ceux « à retirer » ou « demandés » restent.
         // … sauf s'ils sont EN ÉCART : masqués, leur carré rouge restait sans moyen de les corriger (un éditeur réel, deux « Aveyron »
         // de l'amorce portant le code 15 du Cantal — vu dans WME le 03/10/2026).
-        const roles = e.roles.map((r, i) => r.type === '?' && r.statut === 'vigueur' && !ec.some(x => x.r === r) ? '' : '<div class="wzm-grole"><span class="wzm-gtype">' + esc(r.type) + '</span><span class="wzm-glib" title="' + esc(r.note || '') + '">' + (r.pays ? '&#x1F310; ' : '') + '<button type="button" class="wzm-glib-voir" data-rvoir="' + i + '" aria-pressed="' + !!(roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) + '" title="' + esc(t('roleView')) + '"><bdi' + (r.pays ? ' data-court="' + esc(FIPS_ISO[r.pays] || r.pays) + '"' : '') + '>' + esc(libRole(r)) + '</bdi></button>' + (r.codes.length ? ' <small>' + esc(r.codes.join(', ')) + '</small>' : '') + '</span>' + htmlTitres('r', i, r.titres || [], ro) + (!r.pays ? '<button type="button" class="wzm-btn" data-ratelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button>' : '') +
+        const roles = e.roles.map((r, i) => r.type === '?' && r.statut === 'vigueur' && !ec.some(x => x.r === r) ? '' : '<div class="wzm-grole"><span class="wzm-gtype">' + esc(libType(r.type)) + '</span><span class="wzm-glib" title="' + esc(r.note || '') + '">' + (r.pays ? '&#x1F310; ' : '') + '<button type="button" class="wzm-glib-voir" data-rvoir="' + i + '" aria-pressed="' + !!(roleFocus && roleFocus.pseudo === e.pseudo && roleFocus.id === (r.id || i)) + '" title="' + esc(t('roleView')) + '"><bdi' + (r.pays ? ' data-court="' + esc(FIPS_ISO[r.pays] || r.pays) + '"' : '') + '>' + esc(libRole(r)) + '</bdi></button>' + (r.codes.length ? ' <small>' + esc(r.codes.join(', ')) + '</small>' : '') + (r.fin ? ' <small>' + esc(t('roleUntil', dateLocale(r.fin))) + '</small>' : '') + '</span>' + htmlTitres('r', i, r.titres || [], ro) + (!r.pays ? '<button type="button" class="wzm-btn" data-ratelier="' + i + '" title="' + esc(t('zToWorkshopTip')) + '">&#x2795; ' + esc(t('zToWorkshop')) + '</button>' : '') +
             // Le lien vient du wiki (retouchable à la main) : seul un https:// devient cliquable — un « javascript: »
             // s'exécuterait avec la session Waze du gestionnaire (audit du 03/10/2026).
             (/^https:\/\//i.test(r.demande) ? '<a href="' + esc(r.demande) + '" target="_blank" rel="noopener noreferrer" title="' + esc(t('gRequest') + (r.ticket ? ' · ' + r.ticket : '')) + '" aria-label="' + esc(t('gRequest')) + '">&#x1F517;</a>' : r.demande ? '<span class="wzm-lien-brut" title="' + esc(r.demande) + '">&#x1F517;&#xFE0E;</span>' : '') + statut(r, i) +
@@ -10804,8 +10849,10 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
                 (e.note ? '<p class="wzm-aide">' + esc(e.note) + '</p>' : '') + '</div>' : '') +
             (ro ? '' : '<div class="wzm-sec2">' + esc(t('roleNew')) + '</div>' +
             (selection.length
-                ? '<div class="wzm-ligne"><select class="wzm-champ2" id="wzm-gtype" aria-label="' + esc(t('roleType')) + '">' + TYPES.filter(x => x !== '?').map(x => '<option>' + x + '</option>').join('') + '</select>' +
-                  '<button type="button" class="wzm-btn" data-g="roleZone">' + esc(t('roleFromZone')) + '</button></div>'
+                ? '<div class="wzm-ligne"><select class="wzm-champ2" id="wzm-gtype" aria-label="' + esc(t('roleType')) + '">' + TYPES.filter(x => x !== '?').map(x => '<option value="' + x + '">' + esc(libType(x)) + '</option>').join('') + '</select>' +
+                  '<input type="date" class="wzm-champ2" id="wzm-gfin" aria-label="' + esc(t('roleEnd')) + '" title="' + esc(t('roleEnd')) + '">' +
+                  '<button type="button" class="wzm-btn" data-g="roleZone">' + esc(t('roleFromZone')) + '</button></div>' +
+                  '<div class="wzm-ligne"><input type="text" class="wzm-champ2" id="wzm-glibelle" maxlength="80" style="flex:1;min-width:0" aria-label="' + esc(t('roleLabelPh')) + '" placeholder="' + esc(t('roleLabelPh')) + '"></div>'
                 : '<p class="wzm-aide">' + esc(t('roleNeedZone')) + '</p>') +
             '<div class="wzm-sec2">' + esc(t('roleCountryLbl')) + '</div><div class="wzm-ligne"><select class="wzm-champ2" id="wzm-gpays" aria-label="' + esc(t('roleCountryLbl')) + '" style="flex:1;min-width:0">' + optionsPaysCM() + '</select>' +
             '<button type="button" class="wzm-btn" data-g="rolePays"' + (mondeListe ? '' : ' disabled') + '>' + esc(t('roleCountryBtn')) + '</button></div><p class="wzm-aide">' + esc(t('roleCountryHelp')) + '</p>' +
@@ -10914,7 +10961,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
             const r = e.roles.splice(Number(b.dataset.supprRole), 1)[0];
             changer(tEn('chRoleDel', e.pseudo, r.type + ' ' + r.libelle));
         });
-        sur('[data-g="roleZone"]', () => roleDepuisZone(e, q('#wzm-gtype').value));
+        sur('[data-g="roleZone"]', () => roleDepuisZone(e, q('#wzm-gtype').value, (q('#wzm-gfin') || {}).value, (q('#wzm-glibelle') || {}).value));
         sur('[data-g="rolePays"]', () => rolePays(e, (q('#wzm-gpays') || {}).value));
         sur('[data-ratelier]', async ev => {
             const r = e.roles[Number(ev.currentTarget.dataset.ratelier)];
@@ -11075,17 +11122,30 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
         changer(tEn('chRoleAdd', e.pseudo, 'CM ' + r.libelle));
     }
     // Un rôle depuis la zone de l'atelier : ses entités donnent le libellé et les départements.
-    function roleDepuisZone(e, type) {
+    async function roleDepuisZone(e, type, fin, lib) {
         if (!selection.length) return;
         const maillesDe = s => {
             const fg = Object.values(FOURNISSEURS).find(x => x.generique && x.id === s.source), n = fg && fg.niveaux[s.niveau];
             if (!n) return null;
             return s.niveau === fg.maille || n.codeMaille ? [s.code] : n.dessus ? [] : (s.dep ? String(s.dep).split(/,\s*/) : []);
         };
-        const codes = [...new Set(selection.flatMap(s => maillesDe(s) || (s.niveau === 'departement' || s.niveau === 'provincia' || s.niveau === 'citta_metropolitana' || s.niveau === 'district' || s.niveau === 'distrito' || s.niveau === 'provincia_es' ? [s.code] : s.niveau === 'region' || s.niveau === 'regione' || s.niveau === 'comunidad' ? [] : s.niveau === 'municipio' ? [String(s.code).slice(0, 2)] : s.niveau === 'freguesia' ? [String(s.code).slice(0, 2)] : (s.dep ? String(s.dep).split(/,\s*/) : []))))].filter(Boolean).sort();
+        // Un tracé ou un WKT importé n'a pas de maille : ses départements se calculent sur sa géométrie (2.42.00 ;
+        // sans eux, « Qui gère ici ? » ne retrouvait pas le rôle).
+        const traces = selection.filter(s => s.trace && s.geom);
+        let codesTraces = [];
+        if (traces.length) {
+            msgGest(t('loading'));
+            try {
+                await chargerDepartements();
+                const geoms = traces.flatMap(s => s.geom.type === 'MultiPolygon' ? s.geom.coordinates.map(c => ({ type: 'Polygon', coordinates: c })) : [s.geom]);
+                codesTraces = (await calcul('couverture', await calcul('simplifier', geoms, 0.0005), 1e6)).flat();
+            } catch (err) { msgGest(t('liveErr', errTxt(err.message))); return; }
+        }
+        const codes = [...new Set(codesTraces.concat(selection.filter(s => !s.trace).flatMap(s => maillesDe(s) || (s.niveau === 'departement' || s.niveau === 'provincia' || s.niveau === 'citta_metropolitana' || s.niveau === 'district' || s.niveau === 'distrito' || s.niveau === 'provincia_es' ? [s.code] : s.niveau === 'region' || s.niveau === 'regione' || s.niveau === 'comunidad' ? [] : s.niveau === 'municipio' ? [String(s.code).slice(0, 2)] : s.niveau === 'freguesia' ? [String(s.code).slice(0, 2)] : (s.dep ? String(s.dep).split(/,\s*/) : [])))))].filter(Boolean).sort();
         const noms = selection.map(s => s.nom);
         const libelle = (noms.length > 3 ? noms.slice(0, 3).join(' + ') + ' +' + (noms.length - 3) : noms.join(' + ')) + (Number(opts.km) ? ' (+' + opts.km + ' km)' : '');
-        const r = { id: 'r' + Date.now().toString(36), type, libelle: libelle.slice(0, 80), codes, statut: 'demande', date: new Date().toISOString().slice(0, 10), demande: '', ticket: '', note: '' };
+        const r = { id: 'r' + Date.now().toString(36), type, libelle: (String(lib || '').trim() || libelle).slice(0, 80), codes, statut: 'demande', date: new Date().toISOString().slice(0, 10), demande: '', ticket: '', note: '' };
+        if (TEMPO.has(type) && finValide(fin)) r.fin = fin;
         if (!garde()) return;
         e.roles.push(r);
         changer(tEn('chRoleAdd', e.pseudo, type + ' ' + r.libelle));
