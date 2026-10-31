@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.41.00
+// @version      2.41.01
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -8623,11 +8623,11 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
 html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar :is([class*="help-hdr"],[class*="aide-h"]).on { background: var(--wme-studio-hover, #454b52); color: var(--wme-studio-text, #e8eaed); }
 html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sidebar :is([class*="help-body"],[class*="aide-c"]) { color: var(--wme-studio-text, #e8eaed); }
 #wzm-sidebar{padding:10px 12px;font-family:'Rubik','Open Sans',sans-serif;font-size:12px;color:var(--wzm-text)}
-#wzm-sidebar h2{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--wzm-blue);margin:0 0 8px}
+#wzm-sidebar h2{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#1976d2;margin:0 0 8px}
 #wzm-sidebar h2 .wzm-ver{font-size:11px;font-weight:400;color:var(--wzm-grey)}
 #wzm-sidebar :focus-visible,#wzm-ov :focus-visible{outline:2px solid var(--wzm-blue);outline-offset:1px}
 .wzm-hint{font-size:11px;color:var(--wzm-text2);line-height:1.6;margin:0 0 8px}
-.wzm-sec{font-size:11px;font-weight:700;color:var(--wzm-blue);text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+.wzm-sec{font-size:11px;font-weight:700;color:#1976d2;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
 .wzm-champ{display:flex;flex-direction:column;gap:3px;margin:8px 0 4px;font-weight:600;font-size:12px}
 .wzm-champ select,.wzm-champ input{box-sizing:border-box;width:100%;max-width:100%;min-width:0;height:26px;padding:1px 4px;font:12px 'Rubik','Open Sans',sans-serif}
 .wzm-btn{display:inline-flex;align-items:center;gap:5px;height:auto;min-height:24px;padding:3px 10px;margin:0;border:none;border-radius:50px;font:600 11px 'Rubik','Open Sans',sans-serif;cursor:pointer;white-space:nowrap;background:#dde3ea;color:var(--wzm-text)}
@@ -8657,7 +8657,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
 #wzm-corps{overflow:auto;padding:4px 12px 10px}
 #wzm-ov.replie #wzm-corps{display:none}
 .wzm-intro{font-size:11px;color:var(--wzm-text2);line-height:1.5;margin:6px 0 2px}
-.wzm-etape{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--wzm-blue);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px}
+.wzm-etape{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:#1976d2;text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px}
 .wzm-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--wzm-blue-btn);color:#fff;font-size:11px;letter-spacing:0}
 .wzm-ligne{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:5px 0}
 .wzm-ligne>label{font-weight:600}
@@ -9159,7 +9159,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
         ov.querySelectorAll('[data-act="form"],[data-act="dl"],[data-act="cp"],[data-act="vider"]').forEach(b => { b.disabled = vide; });
     }
 
-    // >>> DSX-DOCK 1.0.3 — rangement partagé des boutons de carte des scripts de DrSlump34.
+    // >>> DSX-DOCK 1.0.4 — rangement partagé des boutons de carte des scripts de DrSlump34.
     // Copie IDENTIQUE dans chaque script (source : Projets/DSX-Dock/dsx-dock.js ; contrôle :
     // node Projets/DSX-Dock/verifier-copies.js). Ne pas modifier ici : modifier la source, puis recopier.
     //
@@ -9173,7 +9173,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
     //  - Le VRAI élément est déplacé, jamais recréé : ses écouteurs suivent.
     //  - Priorité pour rester visible : actif, puis épinglé (📌 dans le panneau), puis ordre d'arrivée.
     const dsxDock = (() => {
-        const V = '1.0.3';
+        const V = '1.0.4';
         const cmp = (a, b) => {
             const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number);
             for (let i = 0; i < 3; i++) { const d = (x[i] || 0) - (y[i] || 0); if (d) return d < 0 ? -1 : 1; }
@@ -9186,14 +9186,14 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
         const ecrireEpingles = a => { try { localStorage.setItem(CLE_EPINGLES, JSON.stringify(a)); } catch (e) { } };
         const langue = () => { const l = String(document.documentElement.lang || navigator.language || 'en').toLowerCase(); return l.startsWith('pt') ? (l.includes('br') ? 'pt-BR' : 'pt') : (l.startsWith('iw') ? 'he' : l.slice(0, 2)); };
         const TXT = {
-            en: { plus: n => n + ' more script button' + (n > 1 ? 's' : ''), titre: 'Other script buttons', epingler: 'Keep in the column', desepingler: 'Stop keeping in the column', aide: 'Right-click a button in the column to unpin it.' },
-            fr: { plus: n => n + ' autre' + (n > 1 ? 's' : '') + ' bouton' + (n > 1 ? 's' : '') + ' de script', titre: 'Autres boutons de scripts', epingler: 'Garder dans la colonne', desepingler: 'Ne plus garder dans la colonne', aide: 'Clic droit sur un bouton de la colonne pour le désépingler.' },
-            de: { plus: n => n + ' weitere Skript-Schaltfläche' + (n > 1 ? 'n' : ''), titre: 'Weitere Skript-Schaltflächen', epingler: 'In der Leiste behalten', desepingler: 'Nicht mehr in der Leiste behalten', aide: 'Rechtsklick auf eine Schaltfläche der Leiste, um sie zu lösen.' },
-            es: { plus: n => n + ' botón' + (n > 1 ? 'es' : '') + ' de script más', titre: 'Otros botones de scripts', epingler: 'Mantener en la columna', desepingler: 'Dejar de mantener en la columna', aide: 'Clic derecho en un botón de la columna para desanclarlo.' },
-            it: { plus: n => 'Altri ' + n + ' pulsanti di script', titre: 'Altri pulsanti di script', epingler: 'Tieni nella colonna', desepingler: 'Non tenere più nella colonna', aide: 'Clic destro su un pulsante della colonna per sganciarlo.' },
-            'pt-BR': { plus: n => 'Mais ' + n + ' botão' + (n > 1 ? 'ões' : '') + ' de script', titre: 'Outros botões de scripts', epingler: 'Manter na coluna', desepingler: 'Deixar de manter na coluna', aide: 'Clique com o botão direito num botão da coluna para desafixá-lo.' },
-            pt: { plus: n => 'Mais ' + n + ' botão' + (n > 1 ? 'ões' : '') + ' de script', titre: 'Outros botões de scripts', epingler: 'Manter na coluna', desepingler: 'Deixar de manter na coluna', aide: 'Clique com o botão direito num botão da coluna para o desafixar.' },
-            he: { plus: n => 'עוד ' + n + ' כפתורי סקריפטים', titre: 'כפתורי סקריפטים נוספים', epingler: 'להשאיר בעמודה', desepingler: 'להפסיק להשאיר בעמודה', aide: 'לחיצה ימנית על כפתור בעמודה מבטלת את ההצמדה.' },
+            en: { plus: n => n + ' more script button' + (n > 1 ? 's' : ''), titre: 'Other script buttons', epingler: 'Keep in the column', desepingler: 'Stop keeping in the column', aide: 'Right-click a button in the column to pin or unpin it.' },
+            fr: { plus: n => n + ' autre' + (n > 1 ? 's' : '') + ' bouton' + (n > 1 ? 's' : '') + ' de script', titre: 'Autres boutons de scripts', epingler: 'Garder dans la colonne', desepingler: 'Ne plus garder dans la colonne', aide: 'Clic droit sur un bouton de la colonne pour l\'épingler ou le désépingler.' },
+            de: { plus: n => n + ' weitere Skript-Schaltfläche' + (n > 1 ? 'n' : ''), titre: 'Weitere Skript-Schaltflächen', epingler: 'In der Leiste behalten', desepingler: 'Nicht mehr in der Leiste behalten', aide: 'Rechtsklick auf eine Schaltfläche der Leiste, um sie anzuheften oder zu lösen.' },
+            es: { plus: n => n + ' botón' + (n > 1 ? 'es' : '') + ' de script más', titre: 'Otros botones de scripts', epingler: 'Mantener en la columna', desepingler: 'Dejar de mantener en la columna', aide: 'Clic derecho en un botón de la columna para anclarlo o desanclarlo.' },
+            it: { plus: n => n > 1 ? 'Altri ' + n + ' pulsanti di script' : 'Un altro pulsante di script', titre: 'Altri pulsanti di script', epingler: 'Tieni nella colonna', desepingler: 'Non tenere più nella colonna', aide: 'Clic destro su un pulsante della colonna per agganciarlo o sganciarlo.' },
+            'pt-BR': { plus: n => 'Mais ' + n + ' botão' + (n > 1 ? 'ões' : '') + ' de script', titre: 'Outros botões de scripts', epingler: 'Manter na coluna', desepingler: 'Deixar de manter na coluna', aide: 'Clique com o botão direito num botão da coluna para fixá-lo ou desafixá-lo.' },
+            pt: { plus: n => 'Mais ' + n + ' botão' + (n > 1 ? 'ões' : '') + ' de script', titre: 'Outros botões de scripts', epingler: 'Manter na coluna', desepingler: 'Deixar de manter na coluna', aide: 'Clique com o botão direito num botão da coluna para o fixar ou desafixar.' },
+            he: { plus: n => n > 1 ? 'עוד ' + n + ' כפתורי סקריפטים' : 'עוד כפתור סקריפט אחד', titre: 'כפתורי סקריפטים נוספים', epingler: 'להשאיר בעמודה', desepingler: 'להפסיק להשאיר בעמודה', aide: 'לחיצה ימנית על כפתור בעמודה מצמידה אותו או מבטלת את ההצמדה.' },
         };
         const tx = () => TXT[langue()] || TXT.en;
 
@@ -9203,6 +9203,8 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
    une rangee flexible, et le bouton de PEU s'y affichait APRES son nom (signale par l'auteur, 31/10). */
 .overlay-buttons-container [data-dsx-dock], #dsx-panneau [data-dsx-dock] { order: 0 !important; }
 .overlay-buttons-container #dsx-plus { order: 1000 !important; }
+.overlay-buttons-container [data-dsx-epingle="1"] { position: relative; }
+.overlay-buttons-container [data-dsx-epingle="1"]::after { content: '\\1F4CC'; position: absolute; top: -5px; left: -5px; font-size: 13px; line-height: 1; pointer-events: none; }
 #dsx-plus { position: relative; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; min-height: 0; margin: 0; padding: 0; border: none; border-radius: 50%; background: #fff; color: #37474f; font: 700 20px/1 Rubik, 'Open Sans', sans-serif; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
 #dsx-plus:hover, #dsx-plus[aria-expanded="true"] { box-shadow: 0 3px 10px rgba(0,0,0,.4); background: #e3f2fd; }
 #dsx-plus:focus-visible { outline: 2px solid #1976d2; outline-offset: 2px; }
@@ -9210,7 +9212,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
 #dsx-plus .dsx-compte { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; box-sizing: border-box; padding: 0 4px; border: 2px solid #fff; border-radius: 50px; background: #1976d2; color: #fff; font: 700 10px/14px Rubik, sans-serif; }
 #dsx-panneau { position: fixed; z-index: 10040; min-width: 220px; max-height: calc(100vh - 16px); overflow: auto; box-sizing: border-box; padding: 8px; background: #fff; border: 1px solid #dde3ea; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.22), 0 2px 8px rgba(0,0,0,.12); font: 12px Rubik, 'Open Sans', sans-serif; color: #2d3748; }
 #dsx-panneau[hidden] { display: none !important; }
-#dsx-panneau .dsx-titre { margin: 0 4px 6px; font-size: 11px; font-weight: 700; color: #2196f3; text-transform: uppercase; letter-spacing: .05em; }
+#dsx-panneau .dsx-titre { margin: 0 4px 6px; font-size: 11px; font-weight: 700; color: #1976d2; text-transform: uppercase; letter-spacing: .05em; }
 #dsx-panneau .dsx-ligne { display: flex; align-items: center; gap: 8px; padding: 4px; border-radius: 8px; }
 #dsx-panneau .dsx-ligne:hover { background: #f5f7f9; }
 #dsx-panneau .dsx-ligne > :first-child { flex-shrink: 0; margin: 0 !important; }
@@ -9222,6 +9224,9 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
 html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-panneau { background: var(--wme-studio-surface, #2b2f33); color: var(--wme-studio-text, #e8eaed); border-color: var(--wme-studio-border, #4a5056); }
 html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-panneau .dsx-ligne:hover { background: var(--wme-studio-hover, #454b52); }
 html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-panneau .dsx-aide { color: var(--wme-studio-text-secondary, #b6c0ca); }
+/* Anneau de focus lisible sur fond sombre (#1976d2 n'y faisait que 2,93:1). */
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) :is(#dsx-panneau :focus-visible, #dsx-plus:focus-visible) { outline-color: #64b5f6; }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-panneau .dsx-titre { color: #64b5f6; }
 `;
 
         let ordre = 0;
@@ -9268,15 +9273,29 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
                         const cible = el.matches('button') ? el : (el.querySelector('button') || el);
                         fermerPanneau();
                         cible.click();
-                    } else if (el.contains(ev.target)) {
-                        fermerPanneau();
                     }
                 });
                 document.body.appendChild(p);
                 // Un bouton rangé qui devient actif doit revenir dans la colonne.
                 new MutationObserver(() => { if (!enCours) planifier(); }).observe(p, { attributes: true, attributeFilter: ['data-dsx-actif'], subtree: true });
             }
+            if (p.getAttribute('data-dsx-v') !== V && proprio()) mettreANiveau(p);
             return p;
+        }
+
+        // Le panneau est partagé : il a pu être créé par la copie PLUS ANCIENNE d'un autre script, chargé
+        // avant (mesuré le 31/10 : un panneau de la 1.0.3 sous un rangement 1.0.4). On lui ajoute ce que la
+        // version apporte, sans rien doubler de ce qu'il a déjà (son écouteur de clic reste le sien).
+        function mettreANiveau(p) {
+            p.setAttribute('data-dsx-v', V);
+            const titre = p.querySelector('.dsx-titre');
+            if (titre) { titre.id = 'dsx-titre'; p.setAttribute('aria-labelledby', 'dsx-titre'); }
+            // Le bouton rangé lui-même : le panneau se ferme AVANT son action, en phase de capture — le
+            // script peut arrêter la propagation de son clic, et le panneau restait alors ouvert.
+            p.addEventListener('click', ev => {
+                const ligne = ev.target.closest('.dsx-ligne');
+                if (ligne && ligne.firstElementChild && ligne.firstElementChild.contains(ev.target)) fermerPanneau();
+            }, true);
         }
 
         function placerPanneau() {
@@ -9304,9 +9323,11 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
         function fermerPanneau() {
             const p = document.getElementById('dsx-panneau');
             if (!p || p.hidden) return;
+            // Le focus était dans le panneau : il revient à « ⋯ », pas au <body>.
+            const avaitFocus = p.contains(document.activeElement);
             p.hidden = true;
             const b = document.getElementById('dsx-plus');
-            if (b) { b.setAttribute('aria-expanded', 'false'); }
+            if (b) { b.setAttribute('aria-expanded', 'false'); if (avaitFocus && !b.hidden) b.focus(); }
         }
 
         // Le calcul : la place entre le haut de la colonne et la colonne du bas (règle, zoom), moins
@@ -9317,12 +9338,11 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
             if (!haut) return;
             enCours = true;
             try {
-                if (!document.getElementById('dsx-style')) {
-                    const st = document.createElement('style');
-                    st.id = 'dsx-style';
-                    st.textContent = STYLE;
-                    document.head.appendChild(st);
-                }
+                // La feuille est celle du module qui range : un script plus ancien chargé avant avait posé
+                // la sienne, et la 1.0.4 rangeait avec la feuille de la 1.0.3 (épingle invisible, mesuré le 31/10).
+                let st = document.getElementById('dsx-style');
+                if (!st) { st = document.createElement('style'); st.id = 'dsx-style'; document.head.appendChild(st); }
+                if (st.getAttribute('data-dsx-v') !== V) { st.textContent = STYLE; st.setAttribute('data-dsx-v', V); }
                 const p = panneau(), liste = p.querySelector('.dsx-liste');
                 const t = tx();
                 p.querySelector('.dsx-titre').textContent = t.titre;
@@ -9335,6 +9355,11 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
                 items.sort((a, b) => rang(a) - rang(b));
                 const epingles = lireEpingles();
                 const prio = el => el.getAttribute('data-dsx-actif') === '1' ? 0 : (epingles.includes(el.getAttribute('data-dsx-dock')) ? 1 : 2);
+                // L'épingle se voit sur le bouton, dans la colonne comme dans le panneau.
+                for (const el of items) {
+                    const v = epingles.includes(el.getAttribute('data-dsx-dock')) ? '1' : '0';
+                    if (el.getAttribute('data-dsx-epingle') !== v) el.setAttribute('data-dsx-epingle', v);
+                }
 
                 const cs = getComputedStyle(haut);
                 const ecart = parseFloat(cs.rowGap) || parseFloat(cs.gap) || 12;
@@ -9425,20 +9450,22 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
                 html.setAttribute('data-dsx-dock-proprio', moi);
             }
             window.addEventListener('resize', planifier);
-            document.addEventListener('keydown', ev => { if (ev.key === 'Escape') fermerPanneau(); });
+            // En capture : les copies plus anciennes ferment aussi sur Échap, sans rendre le focus ; la nôtre passe avant.
+            window.addEventListener('keydown', ev => { if (ev.key === 'Escape') fermerPanneau(); }, true);
             document.addEventListener('click', ev => {
                 const p = document.getElementById('dsx-panneau');
                 if (p && !p.hidden && !p.contains(ev.target) && ev.target.id !== 'dsx-plus') fermerPanneau();
             }, true);
-            // Clic droit sur un bouton épinglé de la colonne : on le désépingle.
+            // Clic droit sur un bouton de la colonne : on l'épingle, ou on le désépingle. Il n'agissait que
+            // sur un bouton DÉJÀ épinglé : ailleurs, le menu du navigateur s'ouvrait (signalé par l'auteur,
+            // 31/10/2026).
             document.addEventListener('contextmenu', ev => {
                 const el = ev.target.closest && ev.target.closest('.overlay-buttons-container [data-dsx-dock]');
                 if (!el || !proprio()) return;
+                ev.preventDefault();
                 const id = el.getAttribute('data-dsx-dock');
                 const a = lireEpingles();
-                if (!a.includes(id)) return;
-                ev.preventDefault();
-                ecrireEpingles(a.filter(x => x !== id));
+                ecrireEpingles(a.includes(id) ? a.filter(x => x !== id) : a.concat([id]));
                 planifier();
             });
             // WME reconstruit parfois sa colonne : on se rebranche, et on range.
@@ -11234,44 +11261,43 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
     const _vmBandeau = j => {
         const ident = 'vm-' + _vmHx(_VM_URL).toString(36);
         if (document.getElementById(ident)) return;
-        const l = ((location.pathname.match(/^\/([a-z]{2})(-[A-Za-z]{2})?\//) || [])[1] || (navigator.language || 'en').slice(0, 2)).toLowerCase();
+        // pt-BR a son entrée : le portugais d'Europe « arranca » se lisait mal au Brésil.
+    const lm = location.pathname.match(/^\/([a-z]{2})(-[A-Za-z]{2})?\//), l0 = (lm ? lm[1] + (lm[2] || '') : (navigator.language || 'en')).toLowerCase();
+    const l = l0.startsWith('pt-br') ? 'pt-br' : l0.slice(0, 2);
         const n = String(SCRIPT_NAME), v = String(VERSION), m = j.min;
         const T = {
-            fr: { retiree: `${n} v${v} est retirée : une version corrigée est publiée (v${m} ou plus récente). Le script ne démarre pas tant qu’il n’est pas mis à jour (Tampermonkey ▸ Rechercher des mises à jour).`,
-                  modifiee: `${n} v${v} ne correspond pas au code publié (copie modifiée ou abîmée). Le script ne démarre pas : réinstallez-le depuis sa page officielle.`,
-                  source: `${n} a besoin de Tampermonkey pour vérifier son code : il ne démarre pas avec ce gestionnaire de scripts.`,
-                  inconnue: `${n} v${v} n’est pas une version publiée. Le script ne démarre pas : installez-le depuis sa page officielle.`,
-                  maj: 'Mettre à jour', page: 'Page officielle' },
+            fr: { retiree: `${n} v${v} est retirée\u00a0: une version corrigée est publiée (v${m} ou plus récente). Le script ne démarre pas tant qu’il n’est pas mis à jour (Tampermonkey ▸ Rechercher des mises à jour).`,
+                  modifiee: `${n} v${v} ne correspond pas au code publié (copie modifiée ou abîmée). Le script ne démarre pas\u00a0: réinstallez-le depuis sa page officielle.`,
+                  inconnue: `${n} v${v} n’est pas une version publiée. Le script ne démarre pas\u00a0: installez-le depuis sa page officielle.`,
+                  maj: 'Mettre à jour', page: 'Page officielle', fermer: 'Fermer' },
             en: { retiree: `${n} v${v} has been withdrawn: a fixed version is published (v${m} or later). The script will not start until it is updated (Tampermonkey ▸ Check for updates).`,
                   modifiee: `${n} v${v} does not match the published code (modified or damaged copy). The script will not start: reinstall it from its official page.`,
-                  source: `${n} needs Tampermonkey to check its code: it will not start with this script manager.`,
                   inconnue: `${n} v${v} is not a published version. The script will not start: install it from its official page.`,
-                  maj: 'Update', page: 'Official page' },
+                  maj: 'Update', page: 'Official page', fermer: 'Close' },
             it: { retiree: `${n} v${v} è stata ritirata: è pubblicata una versione corretta (v${m} o successiva). Lo script non si avvia finché non viene aggiornato (Tampermonkey ▸ Cerca aggiornamenti).`,
                   modifiee: `${n} v${v} non corrisponde al codice pubblicato (copia modificata o danneggiata). Lo script non si avvia: reinstallalo dalla sua pagina ufficiale.`,
-                  source: `${n} ha bisogno di Tampermonkey per verificare il proprio codice: non si avvia con questo gestore di script.`,
                   inconnue: `${n} v${v} non è una versione pubblicata. Lo script non si avvia: installalo dalla sua pagina ufficiale.`,
-                  maj: 'Aggiorna', page: 'Pagina ufficiale' },
+                  maj: 'Aggiorna', page: 'Pagina ufficiale', fermer: 'Chiudi' },
             de: { retiree: `${n} v${v} wurde zurückgezogen: eine korrigierte Version ist veröffentlicht (v${m} oder neuer). Das Skript startet erst nach dem Update (Tampermonkey ▸ Nach Updates suchen).`,
                   modifiee: `${n} v${v} entspricht nicht dem veröffentlichten Code (veränderte oder beschädigte Kopie). Das Skript startet nicht: von der offiziellen Seite neu installieren.`,
-                  source: `${n} braucht Tampermonkey, um seinen Code zu prüfen: mit diesem Skriptmanager startet es nicht.`,
                   inconnue: `${n} v${v} ist keine veröffentlichte Version. Das Skript startet nicht: von der offiziellen Seite installieren.`,
-                  maj: 'Aktualisieren', page: 'Offizielle Seite' },
+                  maj: 'Aktualisieren', page: 'Offizielle Seite', fermer: 'Schließen' },
             es: { retiree: `${n} v${v} ha sido retirada: hay una versión corregida publicada (v${m} o posterior). El script no se inicia hasta que se actualice (Tampermonkey ▸ Buscar actualizaciones).`,
-                  modifiee: `${n} v${v} no coincide con el código publicado (copia modificada o dañada). El script no se inicia: reinstálalo desde su página oficial.`,
-                  source: `${n} necesita Tampermonkey para verificar su código: no se inicia con este gestor de scripts.`,
-                  inconnue: `${n} v${v} no es una versión publicada. El script no se inicia: instálalo desde su página oficial.`,
-                  maj: 'Actualizar', page: 'Página oficial' },
+                  modifiee: `${n} v${v} no coincide con el código publicado (copia modificada o dañada). El script no se inicia: reinstálelo desde su página oficial.`,
+                  inconnue: `${n} v${v} no es una versión publicada. El script no se inicia: instálelo desde su página oficial.`,
+                  maj: 'Actualizar', page: 'Página oficial', fermer: 'Cerrar' },
             pt: { retiree: `${n} v${v} foi retirada: há uma versão corrigida publicada (v${m} ou mais recente). O script não arranca enquanto não for atualizado (Tampermonkey ▸ Procurar atualizações).`,
                   modifiee: `${n} v${v} não corresponde ao código publicado (cópia modificada ou danificada). O script não arranca: reinstale-o a partir da página oficial.`,
-                  source: `${n} precisa do Tampermonkey para verificar o seu código: não arranca com este gestor de scripts.`,
                   inconnue: `${n} v${v} não é uma versão publicada. O script não arranca: instale-o a partir da página oficial.`,
-                  maj: 'Atualizar', page: 'Página oficial' },
+                  maj: 'Atualizar', page: 'Página oficial', fermer: 'Fechar' },
+            'pt-br': { retiree: `${n} v${v} foi retirada: há uma versão corrigida publicada (v${m} ou mais recente). O script não inicia até ser atualizado (Tampermonkey ▸ Procurar atualizações).`,
+                  modifiee: `${n} v${v} não corresponde ao código publicado (cópia modificada ou danificada). O script não inicia: reinstale-o pela página oficial.`,
+                  inconnue: `${n} v${v} não é uma versão publicada. O script não inicia: instale-o pela página oficial.`,
+                  maj: 'Atualizar', page: 'Página oficial', fermer: 'Fechar' },
             he: { retiree: `${n} v${v} הוסרה: פורסמה גרסה מתוקנת (v${m} ומעלה). הסקריפט לא יופעל עד שיעודכן (Tampermonkey ▸ חיפוש עדכונים).`,
                   modifiee: `${n} v${v} אינו תואם לקוד שפורסם (עותק ששונה או נפגם). הסקריפט לא יופעל: התקינו אותו מחדש מהדף הרשמי.`,
-                  source: `${n} זקוק ל-Tampermonkey כדי לאמת את הקוד שלו: הוא לא יופעל עם מנהל הסקריפטים הזה.`,
                   inconnue: `${n} v${v} אינה גרסה שפורסמה. הסקריפט לא יופעל: התקינו אותו מהדף הרשמי.`,
-                  maj: 'עדכון', page: 'הדף הרשמי' },
+                  maj: 'עדכון', page: 'הדף הרשמי', fermer: 'סגירה' },
         };
         const L = T[l] || T.en;
         const d = document.createElement('div');
@@ -11284,7 +11310,7 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-pan
         const a = document.createElement('a'); a.href = _VM_MAJ; a.target = '_blank'; a.rel = 'noopener';
         a.textContent = (j.motif === 'retiree' ? L.maj : L.page) + ' ↗';
         a.style.cssText = 'display:inline-block;margin-top:6px;padding:3px 10px;border-radius:50px;background:#c62828;color:#fff;text-decoration:none';
-        const x = document.createElement('button'); x.type = 'button'; x.textContent = '×'; x.setAttribute('aria-label', 'OK');
+        const x = document.createElement('button'); x.type = 'button'; x.textContent = '×'; x.setAttribute('aria-label', L.fermer || 'Close');
         x.style.cssText = 'position:absolute;top:2px;inset-inline-end:6px;border:0;background:none;color:#b71c1c;font-size:16px;cursor:pointer';
         x.onclick = () => d.remove();
         d.appendChild(a); d.appendChild(x);
