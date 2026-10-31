@@ -9,7 +9,7 @@
 // @name:he      WME Zone Manager
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNNC41IDggTDExIDMuNSBMMTkuNSA2LjUgTDIwLjUgMTUgTDEzIDIwLjUgTDQgMTcgWicgZmlsbD0nI2ZiOGMwMCcgc3Ryb2tlPScjZTY1MTAwJyBzdHJva2Utd2lkdGg9JzEuNCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjxnIGZpbGw9JyNmZmYnIHN0cm9rZT0nIzQ1NWE2NCcgc3Ryb2tlLXdpZHRoPScxLjYnPjxjaXJjbGUgY3g9JzQuNScgY3k9JzgnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzExJyBjeT0nMy41JyByPScyLjEnLz48Y2lyY2xlIGN4PScxOS41JyBjeT0nNi41JyByPScyLjEnLz48Y2lyY2xlIGN4PScyMC41JyBjeT0nMTUnIHI9JzIuMScvPjxjaXJjbGUgY3g9JzEzJyBjeT0nMjAuNScgcj0nMi4xJy8+PGNpcmNsZSBjeD0nNCcgY3k9JzE3JyByPScyLjEnLz48L2c+PC9zdmc+
 // @namespace    https://github.com/DrSlump34
-// @version      2.40.00
+// @version      2.41.00
 // @description  Administrative boundaries on the WME map, zones built from several areas or drawn by hand, widened by a few km, and exported (WKT ready for the Waze area request form, GeoJSON, KML, GPX, CSV, POLY).
 // @description:fr Découpage administratif sur la carte WME, zones composées de plusieurs entités ou tracées à la main, élargies de quelques km, et exportées (WKT prêt pour le formulaire de demande de zone, GeoJSON, KML, GPX, CSV, POLY).
 // @description:de Verwaltungsgrenzen auf der WME-Karte, Zonen aus mehreren Gebieten oder von Hand gezeichnet, um einige km erweitert und exportiert (WKT fertig für das Waze-Antragsformular, GeoJSON, KML, GPX, CSV, POLY).
@@ -109,6 +109,11 @@
 
 (function _wmeIntegre() {
     'use strict';
+
+    // Tampermonkey exécute le script dans un `with` posé sur un Proxy : chaque lecture d'un global y
+    // traverse le Proxy, 250 fois plus lentement dans une boucle chaude (mesuré le 31/10/2026 sur WME
+    // Magic Wand : 9 s par clic contre 0,4 s). Liés ici une fois, ces globaux deviennent des variables locales.
+    const Math = globalThis.Math, Number = globalThis.Number, Date = globalThis.Date;
 
     const SCRIPT_ID = 'wme-zone-manager';
     const SCRIPT_NAME = 'WME Zone Manager';
@@ -9154,20 +9159,340 @@ html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #wzm-sid
         ov.querySelectorAll('[data-act="form"],[data-act="dl"],[data-act="cp"],[data-act="vider"]').forEach(b => { b.disabled = vide; });
     }
 
+    // >>> DSX-DOCK 1.0.3 — rangement partagé des boutons de carte des scripts de DrSlump34.
+    // Copie IDENTIQUE dans chaque script (source : Projets/DSX-Dock/dsx-dock.js ; contrôle :
+    // node Projets/DSX-Dock/verifier-copies.js). Ne pas modifier ici : modifier la source, puis recopier.
+    //
+    // Chaque script pose son bouton dans la colonne de droite de WME, et à sept ils débordaient sur la
+    // règle, Street View et le zoom (constaté le 31/10/2026). Ce module garde visibles les boutons qui
+    // tiennent, et range les autres derrière un bouton « ⋯ » qui les montre dans un panneau.
+    //  - Il ne parle que par le DOM : les scripts tournent chacun dans leur bac à sable.
+    //  - Un bouton se déclare par ses attributs : data-dsx-dock (identifiant), data-dsx-nom (libellé),
+    //    data-dsx-actif="1" quand son script est en cours d'usage (jamais rangé alors).
+    //  - Le module de la version la plus récente range ; les autres se taisent (attributs sur <html>).
+    //  - Le VRAI élément est déplacé, jamais recréé : ses écouteurs suivent.
+    //  - Priorité pour rester visible : actif, puis épinglé (📌 dans le panneau), puis ordre d'arrivée.
+    const dsxDock = (() => {
+        const V = '1.0.3';
+        const cmp = (a, b) => {
+            const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number);
+            for (let i = 0; i < 3; i++) { const d = (x[i] || 0) - (y[i] || 0); if (d) return d < 0 ? -1 : 1; }
+            return 0;
+        };
+        const moi = Math.random().toString(36).slice(2);
+        const proprio = () => document.documentElement.getAttribute('data-dsx-dock-proprio') === moi;
+        const CLE_EPINGLES = 'dsx.dock.epingles';
+        const lireEpingles = () => { try { const a = JSON.parse(localStorage.getItem(CLE_EPINGLES) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } };
+        const ecrireEpingles = a => { try { localStorage.setItem(CLE_EPINGLES, JSON.stringify(a)); } catch (e) { } };
+        const langue = () => { const l = String(document.documentElement.lang || navigator.language || 'en').toLowerCase(); return l.startsWith('pt') ? (l.includes('br') ? 'pt-BR' : 'pt') : (l.startsWith('iw') ? 'he' : l.slice(0, 2)); };
+        const TXT = {
+            en: { plus: n => n + ' more script button' + (n > 1 ? 's' : ''), titre: 'Other script buttons', epingler: 'Keep in the column', desepingler: 'Stop keeping in the column', aide: 'Right-click a button in the column to unpin it.' },
+            fr: { plus: n => n + ' autre' + (n > 1 ? 's' : '') + ' bouton' + (n > 1 ? 's' : '') + ' de script', titre: 'Autres boutons de scripts', epingler: 'Garder dans la colonne', desepingler: 'Ne plus garder dans la colonne', aide: 'Clic droit sur un bouton de la colonne pour le désépingler.' },
+            de: { plus: n => n + ' weitere Skript-Schaltfläche' + (n > 1 ? 'n' : ''), titre: 'Weitere Skript-Schaltflächen', epingler: 'In der Leiste behalten', desepingler: 'Nicht mehr in der Leiste behalten', aide: 'Rechtsklick auf eine Schaltfläche der Leiste, um sie zu lösen.' },
+            es: { plus: n => n + ' botón' + (n > 1 ? 'es' : '') + ' de script más', titre: 'Otros botones de scripts', epingler: 'Mantener en la columna', desepingler: 'Dejar de mantener en la columna', aide: 'Clic derecho en un botón de la columna para desanclarlo.' },
+            it: { plus: n => 'Altri ' + n + ' pulsanti di script', titre: 'Altri pulsanti di script', epingler: 'Tieni nella colonna', desepingler: 'Non tenere più nella colonna', aide: 'Clic destro su un pulsante della colonna per sganciarlo.' },
+            'pt-BR': { plus: n => 'Mais ' + n + ' botão' + (n > 1 ? 'ões' : '') + ' de script', titre: 'Outros botões de scripts', epingler: 'Manter na coluna', desepingler: 'Deixar de manter na coluna', aide: 'Clique com o botão direito num botão da coluna para desafixá-lo.' },
+            pt: { plus: n => 'Mais ' + n + ' botão' + (n > 1 ? 'ões' : '') + ' de script', titre: 'Outros botões de scripts', epingler: 'Manter na coluna', desepingler: 'Deixar de manter na coluna', aide: 'Clique com o botão direito num botão da coluna para o desafixar.' },
+            he: { plus: n => 'עוד ' + n + ' כפתורי סקריפטים', titre: 'כפתורי סקריפטים נוספים', epingler: 'להשאיר בעמודה', desepingler: 'להפסיק להשאיר בעמודה', aide: 'לחיצה ימנית על כפתור בעמודה מבטלת את ההצמדה.' },
+        };
+        const tx = () => TXT[langue()] || TXT.en;
+
+        const STYLE = `
+/* Certains scripts imposent un order CSS a leur bouton (PEU 100, WNA 99) : inscrits, c'est le dock qui
+   decide de leur rang, et « ⋯ » reste le dernier de la colonne. Dans le panneau aussi : chaque ligne est
+   une rangee flexible, et le bouton de PEU s'y affichait APRES son nom (signale par l'auteur, 31/10). */
+.overlay-buttons-container [data-dsx-dock], #dsx-panneau [data-dsx-dock] { order: 0 !important; }
+.overlay-buttons-container #dsx-plus { order: 1000 !important; }
+#dsx-plus { position: relative; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; min-height: 0; margin: 0; padding: 0; border: none; border-radius: 50%; background: #fff; color: #37474f; font: 700 20px/1 Rubik, 'Open Sans', sans-serif; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+#dsx-plus:hover, #dsx-plus[aria-expanded="true"] { box-shadow: 0 3px 10px rgba(0,0,0,.4); background: #e3f2fd; }
+#dsx-plus:focus-visible { outline: 2px solid #1976d2; outline-offset: 2px; }
+#dsx-plus[hidden] { display: none !important; }
+#dsx-plus .dsx-compte { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; box-sizing: border-box; padding: 0 4px; border: 2px solid #fff; border-radius: 50px; background: #1976d2; color: #fff; font: 700 10px/14px Rubik, sans-serif; }
+#dsx-panneau { position: fixed; z-index: 10040; min-width: 220px; max-height: calc(100vh - 16px); overflow: auto; box-sizing: border-box; padding: 8px; background: #fff; border: 1px solid #dde3ea; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.22), 0 2px 8px rgba(0,0,0,.12); font: 12px Rubik, 'Open Sans', sans-serif; color: #2d3748; }
+#dsx-panneau[hidden] { display: none !important; }
+#dsx-panneau .dsx-titre { margin: 0 4px 6px; font-size: 11px; font-weight: 700; color: #2196f3; text-transform: uppercase; letter-spacing: .05em; }
+#dsx-panneau .dsx-ligne { display: flex; align-items: center; gap: 8px; padding: 4px; border-radius: 8px; }
+#dsx-panneau .dsx-ligne:hover { background: #f5f7f9; }
+#dsx-panneau .dsx-ligne > :first-child { flex-shrink: 0; margin: 0 !important; }
+#dsx-panneau .dsx-nom { flex: 1; min-width: 0; padding: 0; border: none; background: none; text-align: start; font: 600 12px Rubik, 'Open Sans', sans-serif; color: inherit; cursor: pointer; }
+#dsx-panneau .dsx-epingle { width: 26px; height: 26px; min-height: 0; padding: 0; border: none; border-radius: 50%; background: none; cursor: pointer; opacity: .45; font-size: 13px; }
+#dsx-panneau .dsx-epingle[aria-pressed="true"], #dsx-panneau .dsx-epingle:hover { opacity: 1; background: #e3f2fd; }
+#dsx-panneau :focus-visible { outline: 2px solid #1976d2; outline-offset: 1px; }
+#dsx-panneau .dsx-aide { margin: 6px 4px 0; font-size: 11px; color: #566372; }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-panneau { background: var(--wme-studio-surface, #2b2f33); color: var(--wme-studio-text, #e8eaed); border-color: var(--wme-studio-border, #4a5056); }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-panneau .dsx-ligne:hover { background: var(--wme-studio-hover, #454b52); }
+html:is([data-wme-studio-theme="dark"],[data-wme-studio-theme="black"]) #dsx-panneau .dsx-aide { color: var(--wme-studio-text-secondary, #b6c0ca); }
+`;
+
+        let ordre = 0;
+        let enCours = false;
+
+        function plus(haut) {
+            let b = document.getElementById('dsx-plus');
+            if (!b) {
+                b = document.createElement('button');
+                b.id = 'dsx-plus';
+                b.type = 'button';
+                b.setAttribute('aria-haspopup', 'true');
+                b.setAttribute('aria-expanded', 'false');
+                b.setAttribute('aria-controls', 'dsx-panneau');
+                b.innerHTML = '&#x22EF;<span class="dsx-compte"></span>';
+                b.addEventListener('click', ev => { ev.stopPropagation(); basculerPanneau(); });
+            }
+            if (b.parentElement !== haut) haut.appendChild(b);
+            return b;
+        }
+
+        function panneau() {
+            let p = document.getElementById('dsx-panneau');
+            if (!p) {
+                p = document.createElement('div');
+                p.id = 'dsx-panneau';
+                p.setAttribute('role', 'dialog');
+                p.hidden = true;
+                p.innerHTML = '<p class="dsx-titre"></p><div class="dsx-liste"></div><p class="dsx-aide"></p>';
+                p.addEventListener('click', ev => {
+                    const ep = ev.target.closest('.dsx-epingle');
+                    const ligne = ev.target.closest('.dsx-ligne');
+                    if (!ligne) return;
+                    const el = ligne.firstElementChild;
+                    if (ep) {
+                        const id = el.getAttribute('data-dsx-dock');
+                        const a = lireEpingles();
+                        ecrireEpingles(a.includes(id) ? a.filter(x => x !== id) : a.concat([id]));
+                        planifier();
+                        return;
+                    }
+                    if (ev.target.closest('.dsx-nom')) {
+                        // Le libellé déclenche le vrai bouton du script, puis le panneau se ferme.
+                        const cible = el.matches('button') ? el : (el.querySelector('button') || el);
+                        fermerPanneau();
+                        cible.click();
+                    } else if (el.contains(ev.target)) {
+                        fermerPanneau();
+                    }
+                });
+                document.body.appendChild(p);
+                // Un bouton rangé qui devient actif doit revenir dans la colonne.
+                new MutationObserver(() => { if (!enCours) planifier(); }).observe(p, { attributes: true, attributeFilter: ['data-dsx-actif'], subtree: true });
+            }
+            return p;
+        }
+
+        function placerPanneau() {
+            const p = document.getElementById('dsx-panneau'), b = document.getElementById('dsx-plus');
+            if (!p || p.hidden || !b) return;
+            const r = b.getBoundingClientRect();
+            const rtl = getComputedStyle(document.body).direction === 'rtl';
+            const w = p.offsetWidth, h = p.offsetHeight;
+            const x = rtl ? r.right + 8 : r.left - 8 - w;
+            const y = Math.max(8, Math.min(r.top, window.innerHeight - h - 8));
+            p.style.left = Math.max(8, x) + 'px';
+            p.style.top = y + 'px';
+        }
+
+        function basculerPanneau() { const p = panneau(); if (p.hidden) ouvrirPanneau(); else fermerPanneau(); }
+        function ouvrirPanneau() {
+            const p = panneau();
+            p.hidden = false;
+            const b = document.getElementById('dsx-plus');
+            if (b) b.setAttribute('aria-expanded', 'true');
+            placerPanneau();
+            const premier = p.querySelector('.dsx-nom');
+            if (premier) premier.focus();
+        }
+        function fermerPanneau() {
+            const p = document.getElementById('dsx-panneau');
+            if (!p || p.hidden) return;
+            p.hidden = true;
+            const b = document.getElementById('dsx-plus');
+            if (b) { b.setAttribute('aria-expanded', 'false'); }
+        }
+
+        // Le calcul : la place entre le haut de la colonne et la colonne du bas (règle, zoom), moins
+        // ce qu'occupent les boutons qui ne sont pas les nôtres ; le pas d'un bouton vient de la mesure.
+        function ranger() {
+            if (!proprio() || enCours) return;
+            const haut = document.querySelector('.overlay-buttons-container.top') || document.querySelector('.overlay-buttons-container');
+            if (!haut) return;
+            enCours = true;
+            try {
+                if (!document.getElementById('dsx-style')) {
+                    const st = document.createElement('style');
+                    st.id = 'dsx-style';
+                    st.textContent = STYLE;
+                    document.head.appendChild(st);
+                }
+                const p = panneau(), liste = p.querySelector('.dsx-liste');
+                const t = tx();
+                p.querySelector('.dsx-titre').textContent = t.titre;
+                p.querySelector('.dsx-aide').textContent = t.aide;
+                // Un script qui a repris (ou reconstruit) son bouton laisse une ligne vide : on la retire.
+                for (const l of [...liste.children]) if (!l.firstElementChild || !l.firstElementChild.hasAttribute('data-dsx-dock')) l.remove();
+                const items = [...document.querySelectorAll('[data-dsx-dock]')].filter(el => el.id !== 'dsx-plus');
+                for (const el of items) if (!el.hasAttribute('data-dsx-ordre')) el.setAttribute('data-dsx-ordre', String(Date.now() * 100 + (ordre++ % 100)));
+                const rang = el => Number(el.getAttribute('data-dsx-ordre')) || 0;
+                items.sort((a, b) => rang(a) - rang(b));
+                const epingles = lireEpingles();
+                const prio = el => el.getAttribute('data-dsx-actif') === '1' ? 0 : (epingles.includes(el.getAttribute('data-dsx-dock')) ? 1 : 2);
+
+                const cs = getComputedStyle(haut);
+                const ecart = parseFloat(cs.rowGap) || parseFloat(cs.gap) || 12;
+                const rh = haut.getBoundingClientRect();
+                const bas = document.querySelector('.overlay-buttons-container.bottom');
+                const rb = bas && bas.getBoundingClientRect();
+                const limite = (rb && rb.height && rb.top > rh.top + 40 ? rb.top : window.innerHeight) - 8;
+                let occupe = 0;
+                for (const c of haut.children) {
+                    if (c.id === 'dsx-plus' || c.hasAttribute('data-dsx-dock')) continue;
+                    const r = c.getBoundingClientRect();
+                    if (r.height) occupe += r.height + ecart;
+                }
+                const pas = 40 + ecart;
+                const place = Math.max(0, Math.floor((limite - rh.top - occupe + ecart) / pas));
+                let visibles;
+                if (items.length <= place) visibles = new Set(items);
+                else {
+                    const n = Math.max(0, place - 1);      // une place pour « ⋯ »
+                    const choix = items.slice().sort((a, b) => prio(a) - prio(b) || rang(a) - rang(b));
+                    visibles = new Set(choix.filter((el, i) => i < n || prio(el) === 0));
+                }
+                // Appliquer en ne déplaçant que ce qui doit bouger (les déplacements réveillent les
+                // observateurs des scripts).
+                const b = plus(haut);
+                for (const el of items) {
+                    if (visibles.has(el)) {
+                        const ligne = el.parentElement && el.parentElement.classList.contains('dsx-ligne') ? el.parentElement : null;
+                        if (el.parentElement !== haut) haut.insertBefore(el, b);
+                        if (ligne) ligne.remove();
+                    } else if (!(el.parentElement && el.parentElement.classList.contains('dsx-ligne'))) {
+                        const ligne = document.createElement('div');
+                        ligne.className = 'dsx-ligne';
+                        ligne.appendChild(el);
+                        ligne.insertAdjacentHTML('beforeend', '<button type="button" class="dsx-nom"></button><button type="button" class="dsx-epingle">&#x1F4CC;</button>');
+                        liste.appendChild(ligne);
+                    }
+                }
+                // Lignes dans l'ordre d'arrivée, libellés et état des épingles à jour.
+                for (const el of items.filter(x => !visibles.has(x))) {
+                    const ligne = el.parentElement;
+                    liste.appendChild(ligne);
+                    ligne.querySelector('.dsx-nom').textContent = el.getAttribute('data-dsx-nom') || el.getAttribute('data-dsx-dock');
+                    const ep = ligne.querySelector('.dsx-epingle');
+                    const on = epingles.includes(el.getAttribute('data-dsx-dock'));
+                    ep.setAttribute('aria-pressed', String(on));
+                    ep.title = on ? t.desepingler : t.epingler;
+                    ep.setAttribute('aria-label', ep.title);
+                }
+                const caches = items.length - visibles.size;
+                b.hidden = caches === 0;
+                if (b.nextElementSibling) haut.appendChild(b);
+                b.querySelector('.dsx-compte').textContent = String(caches);
+                b.title = t.plus(caches);
+                b.setAttribute('aria-label', b.title);
+                if (!caches) fermerPanneau(); else placerPanneau();
+            } finally {
+                // Les mutations faites ici reviennent par l'observateur : on les laisse passer.
+                setTimeout(() => { enCours = false; }, 0);
+            }
+        }
+
+        let prevu = false;
+        function planifier() {
+            if (prevu) return;
+            prevu = true;
+            setTimeout(() => { prevu = false; ranger(); }, 60);
+        }
+
+        let observe = null;
+        function brancher() {
+            const haut = document.querySelector('.overlay-buttons-container.top') || document.querySelector('.overlay-buttons-container');
+            if (!haut || observe === haut) return;
+            observe = haut;
+            new MutationObserver(() => { if (!enCours) planifier(); }).observe(haut, { childList: true, attributes: true, attributeFilter: ['data-dsx-actif', 'data-dsx-dock'], subtree: true });
+        }
+
+        // La mise en route attend la PREMIÈRE inscription d'un bouton : charger le script ne touche à rien
+        // (ni écouteur, ni minuterie, ni attribut sur <html>) tant qu'il ne pose pas de bouton. Le banc de
+        // démarrage de WCT évalue le script sans DOM complet, et il avait raison de le refuser.
+        let demarre = false;
+        function demarrer() {
+            if (demarre) return;
+            demarre = true;
+            const html = document.documentElement;
+            if (!html.getAttribute('data-dsx-dock-v') || cmp(V, html.getAttribute('data-dsx-dock-v')) > 0) {
+                html.setAttribute('data-dsx-dock-v', V);
+                html.setAttribute('data-dsx-dock-proprio', moi);
+            }
+            window.addEventListener('resize', planifier);
+            document.addEventListener('keydown', ev => { if (ev.key === 'Escape') fermerPanneau(); });
+            document.addEventListener('click', ev => {
+                const p = document.getElementById('dsx-panneau');
+                if (p && !p.hidden && !p.contains(ev.target) && ev.target.id !== 'dsx-plus') fermerPanneau();
+            }, true);
+            // Clic droit sur un bouton épinglé de la colonne : on le désépingle.
+            document.addEventListener('contextmenu', ev => {
+                const el = ev.target.closest && ev.target.closest('.overlay-buttons-container [data-dsx-dock]');
+                if (!el || !proprio()) return;
+                const id = el.getAttribute('data-dsx-dock');
+                const a = lireEpingles();
+                if (!a.includes(id)) return;
+                ev.preventDefault();
+                ecrireEpingles(a.filter(x => x !== id));
+                planifier();
+            });
+            // WME reconstruit parfois sa colonne : on se rebranche, et on range.
+            setInterval(() => { brancher(); if (proprio()) planifier(); }, 2000);
+        }
+
+        return {
+            // À appeler après avoir posé (ou reposé) son bouton dans la colonne.
+            inscrire: (el, id, nom) => {
+                demarrer();
+                el.setAttribute('data-dsx-dock', id);
+                el.setAttribute('data-dsx-nom', nom);
+                brancher();
+                planifier();
+            },
+            // Un script en cours d'usage garde son bouton visible.
+            actif: (el, oui) => {
+                if (!el) return;
+                demarrer();
+                const v = oui ? '1' : '0';
+                // Rien si l'état ne change pas : un script peut le redire deux fois par seconde (WCT).
+                if (el.getAttribute('data-dsx-actif') === v) return;
+                el.setAttribute('data-dsx-actif', v);
+                planifier();
+            },
+        };
+    })();
+    // <<< DSX-DOCK
+
     // Bouton de carte : celui de WBC — cercle blanc de 40 px dans la colonne native, avant WCT, reposé
     // si WME reconstruit la colonne (c'est un accès au script).
     function poserFab() {
         const cont = document.querySelector('.overlay-buttons-container.top') || document.querySelector('.overlay-buttons-container');
-        if (!cont || cont.querySelector('#wzm-fab-wrap')) return;
+        if (!cont) return;
+        // ⚠️ Le bouton peut être RANGÉ par DSX-Dock dans le panneau « ⋯ » : il est alors à sa place. Sans ce
+        // test, ne pas le trouver dans la colonne suffisait à le détruire et à en recréer un (PEU, WNA : vu le 31/10).
+        const deja = document.getElementById('wzm-fab-wrap');
+        if (deja && (deja.parentElement === cont || deja.closest('#dsx-panneau'))) return;
         const vieux = document.getElementById('wzm-fab-wrap'); if (vieux) vieux.remove();
         const wrap = document.createElement('div'); wrap.id = 'wzm-fab-wrap';
         wrap.innerHTML = '<button type="button" id="wzm-fab-btn" title="' + esc(SCRIPT_NAME + ' — ' + t('tipFab')) + '" aria-label="' + esc(SCRIPT_NAME + ' — ' + t('tipFab')) + '">' + icone(26) + '</button>';
         wrap.querySelector('button').addEventListener('click', ev => { ev.stopPropagation(); ouvrirFenetre(!ouvert()); });
         const wct = cont.querySelector('#wct-fab-wrap');
         if (wct) cont.insertBefore(wrap, wct); else cont.appendChild(wrap);
+        // Rangé par DSX-Dock avec les boutons des autres scripts (« ⋯ » si la colonne déborde).
+        dsxDock.inscrire(wrap, SCRIPT_ID, SCRIPT_NAME);
         majFab();
     }
-    const majFab = () => { const b = document.getElementById('wzm-fab-btn'); if (b) { b.classList.toggle('actif', ouvert()); b.setAttribute('aria-expanded', String(ouvert())); } };
+    // Fenêtre ouverte : le bouton ne passe jamais derrière « ⋯ ».
+    const majFab = () => {
+        const b = document.getElementById('wzm-fab-btn');
+        if (b) { b.classList.toggle('actif', ouvert()); b.setAttribute('aria-expanded', String(ouvert())); }
+        dsxDock.actif(document.getElementById('wzm-fab-wrap'), ouvert());
+    };
 
     // =====================================================================
     //  V2 — GESTIONNAIRES ET REGISTRE (décisions de l'auteur, 03/10/2026)
